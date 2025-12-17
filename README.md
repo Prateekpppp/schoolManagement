@@ -1,1 +1,1 @@
-# schoolManagement testing
+# schoolManagement

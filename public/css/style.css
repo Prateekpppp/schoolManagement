@@ -1,0 +1,829 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Custom background color class */
+.bg-primary-green {
+    background-color: #0c0339 !important;
+    color: #fff;
+}
+/* global button style  */
+
+/* Header part css */
+.bg-primary-green {
+        background-color: #0c0339;
+    }
+
+    .custom-toggler {
+        background: none;
+        border: none;
+        width: 30px;
+        height: 30px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .toggler-icon,
+    .toggler-icon::before,
+    .toggler-icon::after {
+        width: 20px;
+        height: 2px;
+        background-color: white;
+        transition: 0.3s;
+    }
+
+    .toggler-icon {
+        display: block;
+        position: relative;
+    }
+
+    .toggler-icon::before,
+    .toggler-icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+    }
+
+    .toggler-icon::before {
+        top: -6px;
+    }
+
+    .toggler-icon::after {
+        top: 6px;
+    }
+
+    .custom-toggler.active .toggler-icon {
+        background-color: transparent;
+    }
+
+    .custom-toggler.active .toggler-icon::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    .custom-toggler.active .toggler-icon::after {
+        transform: rotate(-45deg);
+        top: 0;
+    }
+
+    .offcanvas {
+        width: 250px !important;
+    }
+
+    .hover-bg-light:hover {
+        background-color: #f8f9fa;
+    }
+
+    /* Account Panel Styles */
+    .account-offcanvas {
+        width: 350px !important;
+    }
+
+    .menu-item:hover {
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+/* Navbar css */
+/* Navbar base styles */
+.nav-link {
+    background: #fff;
+    color: #4a148c;
+    border: 1px solid #ddd;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    background: #f5f5f5;
+    color: #2e0854;
+}
+
+.nav-link.active {
+    background: #fff !important;      
+    color: #0c9971 !important;        
+    border-color: #0c9971;
+}
+
+.nav-link > span {
+    margin-right: 6px;
+}
+
+/* Hide scrollbar but allow scroll */
+.custom-scrollbar {
+    -ms-overflow-style: none;    
+    scrollbar-width: none;       
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    display: none;               
+}
+
+/* Container */
+.layout-container {
+    display: flex;
+    flex-direction: row;
+    /* min-height: 100vh; */
+}
+
+/* Common Layout Section */
+.layout-section {
+    padding-top: 15px;
+    overflow-y: auto;
+}
+
+/* Left Sidebar */
+.layout-sidebar-left {
+    flex: 0 0 25%;
+    max-width: 350px;
+    background-color: #f8f9fa;
+    padding-left: 25px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+/* Center Content */
+.layout-content-center {
+    flex: 1;
+    background-color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* padding-bottom: 20px; */
+}
+
+/* Right Sidebar */
+.layout-sidebar-right {
+    flex: 0 0 25%;
+    max-width: 400px;
+    background-color: #f8f9fa;   
+    padding-left: 5px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+    .layout-sidebar-left,
+    .layout-sidebar-right {
+        display: none !important;
+    }
+
+    .layout-content-center {
+        padding-left: 1px !important;
+        padding-right: 1px !important;
+         margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+
+/* index page */
+.btn-tab {
+    color: #282828;
+    background: none;
+    border: none;
+    padding: 0.35rem 0.35rem;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.btn-tab.active {
+    color: rgb(11, 155, 114);
+    font-weight: 600;
+}
+
+/* Uniform Image Sizes for Tabs */
+.tab-img {
+    height: 180px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+/* Basic Card Cleanup */
+.card {
+    margin: 0.25rem !important;
+    padding: 0 !important;
+}
+
+.card-body {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/*Scrollable Game Wrapper */
+.all_games {
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.all_games::-webkit-scrollbar,
+.providers_slider::-webkit-scrollbar,
+.cards_slider::-webkit-scrollbar {
+    display: none;
+}
+
+.providers_slider,
+.cards_slider {
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    gap: 0.25rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Minimize space between col-4 columns within sliders */
+.providers_slider .row,
+.cards_slider .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.providers_slider .col-4,
+.cards_slider .col-4 {
+    padding-left: 0.05rem !important; 
+    padding-right: 0.05rem !important;
+}
+
+/*Card-Slide/Other Components */
+.card-slide {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.provider-img {
+    height: 50px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.card-game-img {
+    height: 175px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Specific overrides  */
+.card .card-body:has(.providers_slider),
+.card .card-body:has(.cards_slider) {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 576px) {
+    
+    .tab-img {
+        height: 130px;
+        width: 110px;
+    }
+
+    .card-game-img {
+        height: 130px;
+        width: 100%;
+    }
+
+    .provider-img {
+        height: 40px;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding-left: 0.1rem !important;
+        padding-right: 0.1rem !important;
+        padding-top: 0.1rem !important;
+        margin: 0 !important;
+    }
+
+    .layout-content-center.p-1 {
+        padding: 0.25rem !important;
+    }
+
+    .card {
+        margin-left: 0.25rem !important;
+        margin-right: 0.25rem !important;
+    }
+
+    .card-body {
+        padding: 0.1rem 0.1rem !important;
+    }
+
+    .all_games,
+    .providers_slider,
+    .cards_slider {
+        padding-left: 0.1rem !important;
+        padding-right: 0.1rem !important;
+        gap: 0.1rem !important;
+    }
+
+    /* minimize column spacing on mobile */
+    .providers_slider .col-4,
+    .cards_slider .col-4 {
+        padding-left: 0.0rem !important;
+        padding-right: 0.0rem !important;
+    }
+
+    /* minimize on mobile for specific sections */
+    .card .card-body:has(.providers_slider),
+    .card .card-body:has(.cards_slider) {
+        padding-left: 0.0rem !important;
+        padding-right: 0.0rem !important;
+    }
+}
+/* for all 1,X,2 design */
+.odds-table tbody tr td {
+    vertical-align: middle;
+}
+
+.match-layout {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.match-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    min-width: 65px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.match-status small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    display: block;
+}
+
+.match-status.live {
+    color: #28a745; 
+}
+
+.match-status.today {
+    color: #0d6efd; 
+}
+
+.match-status.tomorrow {
+    color: #fd7e14; 
+}
+
+.right-side {
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 0.9rem;
+}
+
+.sport_box .odd-btn {
+    max-width: 100%;
+}
+
+.bet-head {
+    display: inline-block;
+    width: 3.4rem;
+    padding: 0.6rem 0rem;
+    background: #91c9f5;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    transition: 0.2s;
+    text-align: center;
+    font-size: 11px;
+    flex: 1;
+    max-width: 90px;
+}
+
+.odd-btn {
+    display: inline-block;
+    width: 3.4rem;
+    padding: 0.6rem 0rem;
+    /* border: 1px solid #dee2e6; */
+    /* border-radius: 6px; */
+    background: #91c9f5;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+    /* font-size: 11px; */
+    flex: 1;
+    /* margin: 0 0.1rem; */
+    max-width: 90px;
+}
+
+.odd-btn.lay {
+    background: #e9a9dc;
+}
+
+.odd-btn small {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #333;
+}
+
+.odd-btn:hover {
+    /* background: #91c9f5; */
+    opacity: 0.5;
+}
+
+.back2,.back3,.lay2,.lay3{
+    display: none;
+}
+
+.odd_change{
+    background: yellow;
+}
+
+/* Indian game ka */
+main {
+    /* height: 100vh; */
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
+}
+
+.container.indian-card-container {
+    max-width: 100%;
+    padding-bottom: 30px;
+}
+
+/* Scrollbar */
+.scrollbar-thin {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-bar-logo-indian {
+    height: 40px;
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+/* 🔹 Provider button  */
+.provider-btn {
+    display: inline-block;
+    padding: 0.5rem;           
+    border-radius: 0.5rem;    
+    flex-shrink: 0;
+    background-color: #d1d2d3; 
+    border: 1px solid #b1b1b1; 
+    transition: 0.3s;
+}
+.provider-btn:hover {
+    background-color: #70f57b; 
+}
+
+/* 🔹 Main image banner */
+.main-image-banner {
+    height: 180px;
+}
+.main-image {
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 0.5rem;
+}
+
+/* 🔹 Game image grid */
+.game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.game-image:hover {
+    transform: scale(1.05);
+}
+/* Account- deposit page */
+ .account-deposit {
+        background-color: #f8fafc;
+    }
+
+    .account-deposit .badge {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .account-deposit .deposit-card {
+        background-color: #fff;
+    }
+
+    .account-deposit .input-group-text {
+        background-color: #f1f5f9;
+        color: #000;
+        font-weight: 500;
+        border-radius: 0.375rem;
+        border: 1px solid #ced4da;
+    }
+
+    .account-deposit .form-control::placeholder {
+        color: #adb5bd;
+    }
+
+    .account-deposit .btn-success {
+        background-color: #059669;
+        border: none;
+        font-weight: 600;
+    }
+
+    .account-deposit .btn-success:hover {
+        background-color: #047857;
+    }
+/* Account- withdrawal page */
+ .withdraw-badge {
+    background-color: #0c9971;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .withdraw-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+
+  .amount-label {
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .amount-input-group {
+    margin-bottom: 30px;
+  }
+
+  .amount-input-group .form-control {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    font-size: 16px;
+  }
+
+  .amount-input-group .input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .payment-method-section {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .payment-method-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .payment-method-subtitle {
+    font-size: 14px;
+    color: #888;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: #0c9971;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .bottom-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .bottom-btn {
+    background-color: #0c9971;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    min-width: 180px;
+    text-align: center;
+  }
+
+  .breadcrumb-nav {
+    color: #0c9971;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .breadcrumb-nav span:last-child {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .breadcrumb-arrow {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+  }
+
+  @media (max-width: 576px) {
+    .bottom-buttons {
+      flex-direction: column;
+    }
+    
+    .bottom-btn {
+      min-width: 100%;
+    }
+    
+    .withdraw-card {
+      padding: 20px;
+    }
+  }
+/* Footer page css */
+  .footer-icon {
+    width: 140px;
+    height: 45px;
+    object-fit: contain;
+    filter: invert(1); 
+    transition: transform 0.3s ease;
+  }
+
+  .footer-icon:hover {
+    transform: scale(1.05);
+  }
+
+  .gaming-curacao {
+    max-width: 120px;
+    margin: 10px auto 10px;
+    display: block;
+  }
+
+  .copyright {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    padding: 10px 0 10px;
+  }
+
+  /* gap between icons */
+  .footer-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* padding-left: 30px;   
+    padding-right: 30px; */
+  }
+
+  @media (min-width: 576px) {
+    .footer-icon-wrapper {
+      margin-bottom: 10px;
+      /* padding-left: 40px;
+      padding-right: 40px; */
+    }
+  }
+
+.table-light th {
+  background: #fc7600;
+  color: white;
+}
+
+#liveChart, #backupChart {
+    max-height: 300px;
+}
+
+@media screen and (max-width: 767px) {
+    .odd-btn.back2 {
+        display: none;
+    }
+    .odd-btn.back3 {
+        display: none;
+    }
+    .odd-btn.lay2 {
+        display: none;
+    }
+    .odd-btn.lay3 {
+        display: none;
+    }
+    
+    #liveChart, #backupChart {
+        max-height: 115px;
+    }
+}
+
+
+.account_btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    box-shadow: #0552cc 0px 3px 2px 0px;
+    border-radius: 0.4rem;
+    border-bottom: 2px solid #fff;
+    background: #0552cc;
+}
+
+.bet-btns button,.bet-btns a {
+  font-size: 12px;
+  text-align: center;
+  /* margin: 1px 2px; */
+  width: 100%;
+  height: 100%;
+  color: #000;
+  cursor: pointer;
+  padding: 0.5rem;
+  /* border-width: 1px;
+  border-style: solid;
+  border-color: #fc7600;
+  border-image: initial; */
+  background: #fff;
+  background-color: #fff;
+  font-weight: bold;
+  /* border-radius: 4px; */
+}
+
+
+/* font for tablet and desktop */
+
+h3,h4,h5 {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* font sizes for mobile */
+
+
+
+.table th {
+  /* background: #0c0339; */
+  background: #fff;
+  color: #0c0339;
+}
+
+.bi-arrow-repeat {
+    /* Define the transition property, duration, and easing */
+    transition: transform 0.5s ease-in-out;
+}
+
+.bi-arrow-repeat.rotated {
+    /* The final state after the class is added */
+    transform: rotate(180deg);
+}
+
+.table-header {
+    border-bottom: #0c0339 0.2rem solid;
+}
+.table-header th {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #000 !important;
+    min-width: max-content;
+}
+
+.table-body td {
+    min-width: max-content;
+}
