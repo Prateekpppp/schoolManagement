@@ -22,7 +22,7 @@
       margin: 0;
       font-family: 'Poppins', sans-serif;
       /* background: linear-gradient(135deg, #060e06d4, #193e16); */
-      background: #0d6efd;
+      background: #ec0cce;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -65,7 +65,7 @@
     }
 
     .btn-login {
-      background-color: #0d6efd;
+      background-color: #ec0cce;
       color: white;
       font-weight: 600;
       border-radius: 10px;
@@ -111,6 +111,7 @@
     </form>
   </div>
 
+  @include('includes.app_toast')
   @include('includes.app_toast')
 @if (request()->session()->get('code')=='304')
 

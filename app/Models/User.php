@@ -2,47 +2,31 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
-class User extends Authenticatable
+class User extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    //
+    
+    public static function getCurrentUser($key=NULL,$value=NULL){
+        if($key != NULL && $value != NULL){
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+            return static::where($key, $value)->first();
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        }
+        
+        $userData = Session::get('username');
+        if(!empty($userData)){
+            return static::where('username', $userData)->first();
+        } else if($userData = Session::get('admin_username')){
+            return static::where('username', $userData)->first();
+        } else{
+            return False;
+            // return response()->json([
+            //     'message'=>'User Not Found',
+            //     'code'=>'404'
+            // ]);
+        }
     }
 }
