@@ -1,4 +1,4 @@
-# schoolManagement
+# Project Setup instructions
 # git clone ............. 
 # git checkout branch name
 # cp .env.example .env 
