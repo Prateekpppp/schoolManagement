@@ -79,36 +79,36 @@
                               <div class="col-12 mb-25">
                                  <div class="it-contact-input-box">
                                     <label>Name*</label>
-                                    <input type="text" placeholder="Name">
+                                    <input name="name" type="text" placeholder="Name">
                                  </div>
                               </div>
                               <div class="col-12 mb-25">
                                  <div class="it-contact-input-box">
                                     <label>Email Address*</label>
-                                    <input type="email" placeholder="Email">
+                                    <input name="email" type="email" placeholder="Email">
                                  </div>
                               </div>
                               <div class="col-12 mb-25">
                                  <div class="it-contact-input-box">
                                     <label>Phone*</label>
-                                    <input type="text" placeholder="Phone">
+                                    <input name="phone" type="text" minlength="10" maxlength="10" placeholder="Phone">
                                  </div>
                               </div>
                               <div class="col-12 mb-25">
                                  <div class="it-contact-input-box">
                                     <label>Subject*</label>
-                                    <input type="text" placeholder="Subject">
+                                    <input name="subject" type="text" placeholder="Subject">
                                  </div>
                               </div>
                               <div class="col-12 mb-25">
                                  <div class="it-contact-textarea-box">
                                     <label>Message</label>
-                                    <textarea placeholder="Message"></textarea>
+                                    <textarea name="message" placeholder="Message"></textarea>
                                  </div>
                               </div>
                            </div>
                         </form>
-                        <button type="submit" class="it-btn">
+                        <button type="button" class="it-btn submitForm">
                            <span>
                            Send Message
                               <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
@@ -127,5 +127,19 @@
          </div>
       </div>
       <!-- contact-area-end -->
+
+@endsection
+
+@section('inner_js')
+
+<script>
+
+   $('.submitForm').on('click',function(e){
+      e.preventDefault();
+      let data = new FormData($('form')[0]);
+      callAjaxFormData('post',"{{route('user.post.submitContactForm')}}",data,ajaxResponse);
+   });
+
+</script>
 
 @endsection

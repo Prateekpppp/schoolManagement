@@ -34,7 +34,7 @@
          </div>
          <div class="itoffcanvas__logo">
             <a href="index.php">
-               <img src="assets/img/logo.png" class="w-50" alt="">
+               <img src="{{asset('storage/').$appdata->logo}}" class="w-50" alt="">
             </a>
          </div>
          <div class="itoffcanvas__text">

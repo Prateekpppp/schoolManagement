@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="{{ asset('assets') }}/css/magnific-popup.css">
 <link rel="stylesheet" href="{{ asset('assets') }}/css/spacing.css">
 <link rel="stylesheet" href="{{ asset('assets') }}/css/main.css">
+<link rel="stylesheet" href="{{ asset('css') }}/app_style.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">

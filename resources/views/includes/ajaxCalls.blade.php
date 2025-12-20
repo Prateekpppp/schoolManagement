@@ -130,28 +130,5 @@
 
 
     
-    function submitForm(formParntClassname){
-        let form = $('.submitForm').parents(`.${formParntClassname}`).find('form');
-        let formData = new FormData(form[0]);
-        // console.log('formData------',formData);
-        
-        let url = $(form).attr('data-url');
-        
-        formData.append('previous_url', '{{url()->previous()}}');
-
-        callApiFormData('post', `{{url('/admin')}}/${url}`, formData, ajaxResponseModal);
-    }
-    
-    function submitFormGlobal(btn,user_uid){
-        let form = $(btn).parents('.formParntClassname').find('form');
-
-        let formData = new FormData(form[0]);
-        formData.append('m_key', $(form).attr('data-m_key'));
-        formData.append('user_uid', user_uid);
-        formData.append('admin_uid', user_uid);
-        formData.append('previous_url', '{{url()->current()}}');
-
-        callApiFormData('post', `{{url('/admin')}}/createModelData`, formData, ajaxResponseModal);
-    }
 
 </script>

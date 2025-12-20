@@ -19,18 +19,22 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="new-added-form">
+                        <form class="form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Title *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input name="title" type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Address *</label>
+                                    <input name="address" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Logo</label>
                                     <input type="file" name="logo" class="form-control-file">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
-                                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                    <button type="button" class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
                                     <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                 </div>
                             </div>
@@ -38,4 +42,18 @@
                     </div>
                 </div>
                 <!-- Add Job End Here -->
+@endsection
+
+@section('inner_js')
+
+<script>
+    
+    $('.submitForm').on('click',function(e){
+        e.preventDefault();
+        let data = new FormData($(this).parents('form')[0]);
+        callAjaxFormData('post',"{{route('admin.post.updateAppdata')}}",data,ajaxResponse);
+    });
+
+</script>
+
 @endsection

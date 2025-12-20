@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Appdata;
 
 class CustomSessionMiddleware
 {
@@ -20,6 +21,8 @@ class CustomSessionMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
+        $appdata = Appdata::where('status',1)->first();
+        View::share('appdata',$appdata);
         return $next($request);
     }
 }

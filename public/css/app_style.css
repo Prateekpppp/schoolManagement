@@ -1,0 +1,40 @@
+/* light theme */
+
+    /* border color: #1a1a1a; */
+    /* content_box background color: #fff */
+    /* normal text color: #000 */
+    /* special text color: #929391 */
+
+
+a {
+    text-decoration: none;
+}
+
+.form-control:focus, input:focus {
+    box-shadow: none;
+}
+
+.app_toast {
+    opacity: 1;
+    position: fixed;
+    top: 5%;
+    right: -100%;
+    min-width: 200px;
+    max-width: 250px;
+    z-index: 999;
+    transition: all 0.4s;
+}
+
+.app_toast .toast_div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.job-box {
+  border: 2px dotted #28a745;
+  padding: 20px;
+  border-radius: 10px;
+  background: #fffafa;
+}

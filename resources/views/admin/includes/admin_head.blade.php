@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="{{ asset('css') }}/select2.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/datepicker.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/style.css">
+<link rel="stylesheet" href="{{ asset('css') }}/app_style.css">
 
 <!-- Google Fonts: Montserrat -->
 {{-- <link rel="stylesheet" href="{{ asset('css') }}/Montserrat_font.css"> --}}

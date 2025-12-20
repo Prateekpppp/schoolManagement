@@ -36,6 +36,10 @@
                                     <a href="{{route('admin.addJobs')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Add Jobs</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.applicants')}}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Applicants</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

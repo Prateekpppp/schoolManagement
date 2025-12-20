@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDataController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\AppdataController;
 
 
 // Admin routes
@@ -38,9 +40,12 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         Route::get('/', [AdminDataController::class,'index'])->name('admin.index');
         
-        Route::get('/jobs', function () {
-            return view('admin.pages.jobs');
-        })->name('admin.jobs');
+
+        Route::get('/jobs', [JobController::class,'jobs'])->name('admin.jobs');
+        
+        Route::get('/allJobs', [JobController::class,'allJobs'])->name('admin.get.allJobs');
+        
+        Route::get('/applicants', [ApplicantController::class,'applicants'])->name('admin.applicants');
         
         Route::get('/addJobs', function () {
             return view('admin.pages.addJobs');
@@ -49,6 +54,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/setting', function () {
             return view('admin.pages.setting');
         })->name('admin.setting');
+
+        Route::post('/updateAppdata', [AppdataController::class,'updateAppdata'])->name('admin.post.updateAppdata')->withoutMiddleware([VerifyCsrfToken::class]);
 
         // Post Requests
 

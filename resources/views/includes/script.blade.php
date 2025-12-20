@@ -5,7 +5,7 @@
             if(response.response_code == 200){
                 responseToast(response.message,'bg-success');
                 setTimeout(() => {
-                        window.location.href = '{{url()->current()}}';
+                        window.location.href = response.redirect;
                 }, 1000);
             } else{
                 responseToast(response.message,'bg-warning');

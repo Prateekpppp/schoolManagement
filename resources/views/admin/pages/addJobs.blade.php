@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Experience *</label>
-                                    <select name="english_level" class="select2">
+                                    <select name="experience" class="select2">
                                         <option value="">Please Select</option>
                                         <option value="1">1 year</option>
                                         <option value="2">2 year</option>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Working Hours</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input name="working_hours" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-12 form-group">
                                     <label>Description</label>

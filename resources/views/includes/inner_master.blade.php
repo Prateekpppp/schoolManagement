@@ -84,3 +84,8 @@
       </div>
       <!-- cta-area-end -->
 @endsection
+
+    @section('js')
+    
+    @yield('inner_js')
+    @endsection

@@ -39,60 +39,81 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Roll</label>
-                                            </div>
-                                        </th>
-                                        <th>Photo</th>
-                                        <th>Name</th>
+                                        <th>Title</th>
+                                        <th>Salary</th>
+                                        <th>Openings</th>
+                                        <th>Education</th>
+                                        <th>Experience</th>
+                                        <th>English Level</th>
                                         <th>Gender</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Parents</th>
-                                        <th>Address</th>
-                                        <th>Date Of Birth</th>
-                                        <th>Phone</th>
-                                        <th>E-mail</th>
-                                        <th></th>
+                                        <th>Working Hours</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">#0021</label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><img src="images/student2.png" alt="student"></td>
-                                        <td>Mark Willy</td>
-                                        <td>Male</td>
-                                        <td>2</td>
-                                        <td>A</td>
-                                        <td>Jack Sparrow </td>
-                                        <td>TA-107 Newyork</td>
-                                        <td>02/05/2001</td>
-                                        <td>+ 123 9988568</td>
-                                        <td>kazifahim93@gmail.com</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tbody class="tdata">
+                                    @if(count($jobs) == 0)
+                                        <tr>
+                                            <td colspan="11" class="text-center">No Data Found</td>
+                                        </tr>
+                                    @else
+                                    @foreach ($jobs as $job)
+                                        <tr>
+                                            <td>{{$job->title}}</td>
+                                            <td>{{$job->salary}}</td>
+                                            <td>{{$job->openings}}</td>
+                                            <td>{{$job->education}}</td>
+                                            <td>{{$job->experience}}</td>
+                                            <td>{{$job->english_level}}</td>
+                                            <td>{{$job->gender ? 'Male' : 'Female'}}</td>
+                                            <td>{{$job->working_hours}}</td>
+                                            <td>{{$job->description}}</td>
+                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            <td>{{$job->created_at}}</td>
+                                        </tr>
+                                        
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
                 <!-- Student Table Area End Here -->
+@endsection
+
+
+@section('inner_js')
+
+<script>
+
+    function appendData(response){
+        let rows = '';
+        console.log(response);
+        
+        response.data.forEach(function(job){
+            rows += `<tr>
+                <td>${job.title}</td>
+                <td>${job.salary}</td>
+                <td>${job.openings}</td>
+                <td>${job.education}</td>
+                <td>${job.experience}</td>
+                <td>${job.english_level}</td>
+                <td>${job.gender ? 'Male' : 'Female'}</td>
+                <td>${job.working_hours}</td>
+                <td>${job.description}</td>
+                <td>${job.status ? 'Active' : 'Inactive'}</td>
+                <td>${job.created_at}</td>
+            </tr>`;
+        });  
+        $('.tdata').html(rows);
+    }
+
+    $(document).ready(function(){
+        
+        callAjaxFormData('get',"{{route('admin.get.allJobs')}}",null,appendData);
+    });
+</script>
+
 @endsection

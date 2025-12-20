@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('dob');
+            $table->string('dob')->nullable();
+            $table->tinyInteger('gender')->default(1);
             $table->string('uploads');
             $table->timestamps();
             $table->json('additional_data')->nullable();
