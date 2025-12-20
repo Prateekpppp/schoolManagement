@@ -65,7 +65,7 @@
                </div>
                <div class="col-xl-3 col-lg-5 col-md-5">
                   <div class="it-cta-button text-md-end">
-                     <a class="it-btn-white yellow-bg" href="contact.php">
+                     <a class="it-btn-white yellow-bg" href="{{route('user.contact')}}">
                         <span>
                            Contact Us
                            <svg width="17" height="14" viewBox="0 0 17 14" fill="none"

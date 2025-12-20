@@ -38,7 +38,7 @@
         if(response.redirect){
             window.location.href = response.redirect;
         }
-        if(response.code==200){
+        if(response.response_code==200){
             responseToast(response.message,'bg-success');
         } else{
             responseToast(response.message,'bg-warning');

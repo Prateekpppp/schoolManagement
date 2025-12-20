@@ -1,6 +1,6 @@
-@extends('admin.master')
+@extends('admin.inner_master')
 
-@section('body')
+@section('inner_body')
     
                 <!-- Dashboard summery Start Here -->
                 <div class="row gutters-20">

@@ -16,7 +16,7 @@
                   <div class="it-about-2-thumb-wrap d-flex justify-content-between">
                      <div class="it-about-2-thumb p-relative ">
                         <!-- <img src="assets/img/team/team-1-4.png" alt="" width="100%"> -->
-                         <img src="assets/img/team/team-1-4.png" alt="" style="width:100%; height:400px; object-fit:cover;">
+                         <img src="{{asset('assets')}}/avatar.png" alt="" style="width:100%; height:400px; object-fit:cover;">
 
                         <div class="it-about-2-shape-1 d-none d-xxl-block">
                            <!-- <img src="assets/img/about/shape-2-1.png" alt="" > -->

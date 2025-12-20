@@ -13,7 +13,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/female.png" alt="">
+                           <img src="{{asset('assets')}}/img/female.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mrs. Anjali Verma</h5>
@@ -41,7 +41,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/male.png" alt="">
+                           <img src="{{asset('assets')}}/img/male.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mr. Suresh Patel</h5>
@@ -69,7 +69,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/male.png" alt="">
+                           <img src="{{asset('assets')}}/img/male.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mr. Rajesh Sharma</h5>
@@ -97,7 +97,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/male.png" alt="">
+                           <img src="{{asset('assets')}}/img/male.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mr. Amit Singh</h5>
@@ -125,7 +125,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/female.png" alt="">
+                           <img src="{{asset('assets')}}/img/female.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mrs. Neha Gupta</h5>
@@ -153,7 +153,7 @@
                   <div class="it-testimonial-5-item p-relative z-index">
                      <div class="it-testimonial-3-author-box d-flex align-items-center mb-20">
                         <div class="it-testimonial-3-avata">
-                           <img src="{{asset('assets')}}/male.png" alt="">
+                           <img src="{{asset('assets')}}/img/male.png" alt="">
                         </div>
                         <div class="it-testimonial-3-author-info">
                            <h5>Mr. Anant Singh</h5>
