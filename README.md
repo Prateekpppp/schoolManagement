@@ -1,5 +1,5 @@
 # Project Setup instructions
-# git clone ............. 
+# git clone https://github.com/Prateekpppp/schoolManagement.git
 # git checkout branch name
 # cp .env.example .env 
 # composer update 
