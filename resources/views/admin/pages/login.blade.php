@@ -6,7 +6,7 @@
         <div class="login-page-content">
             <div class="login-box">
                 <div class="item-logo">
-                    <img src="{{asset('assets')}}/admin/logo.png" alt="logo">
+                    <img src="{{asset('storage/').$appdata->logo}}" alt="logo">
                 </div>
                 <form class="login-form" action="{{route('admin.auth.login')}}" method="POST">
                   @csrf
