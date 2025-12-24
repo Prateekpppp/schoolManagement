@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('subject');
-            $table->string('message');
-            $table->timestamps();
+            $table->string('subject')->nullable();
+            $table->string('message')->nullable();
             $table->json('additional_data')->nullable();
+            $table->timestamps();
         });
     }
 

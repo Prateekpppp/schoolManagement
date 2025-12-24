@@ -12,7 +12,7 @@
                         </div>
                         <div class="it-footer-top-text">
                            <span>Address:</span>
-                           <a href="javascript:void(0)">Germination mission school , Aurangabad , Bihar , 824114</a>
+                           <a href="javascript:void(0)">{{$appdata->address ?? 'Germination mission school , Aurangabad , Bihar , 824114'}}</a>
                         </div>
                      </div>
                   </div>
@@ -23,8 +23,8 @@
                         </div>
                         <div class="it-footer-top-text">
                            <span>Phone:</span>
-                           <a href="tel:8709187574">8709187574, </a>
-                           <a href="tel:7903213204">7903213204</a>
+                           <a href="tel:{{ $appdata->phone ?? '8709187574' }}">{{ $appdata->phone ?? '8709187574' }}</a>
+                           {{-- <a href="tel:7903213204">7903213204</a> --}}
                         </div>
                      </div>
                   </div>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="it-footer-top-text">
                            <span>Email:</span>
-                           <a href="mailto:info@germinationmissionschool.com">info@germinationmi<br>ssionschool.com</a>
+                           <a href="mailto:{{ $appdata->email ?? 'info@germinationmissionschool.com' }}">{{ $appdata->email ?? 'info@germinationmissionschool.com' }}</a>
                         </div>
                      </div>
                   </div>

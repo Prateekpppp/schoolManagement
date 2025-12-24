@@ -5,7 +5,13 @@
             if(response.response_code == 200){
                 responseToast(response.message,'bg-success');
                 setTimeout(() => {
+                    if(response.redirect){
+                        
                         window.location.href = response.redirect;
+                    } else{
+                        
+                        window.location.href = '{{url()->current()}}';
+                    }
                 }, 1000);
             } else{
                 responseToast(response.message,'bg-warning');
@@ -68,41 +74,76 @@
 
 
 
-  function startOtpCountdown(button) {
+    function startOtpCountdown(button) {
 
-    $(button).prop('disabled', true).text(`Retry in ${data.otpTimeLeft}s`);
-
-    data.otpTimer = setInterval(() => {
-      data.otpTimeLeft--;
-
-      if (data.otpTimeLeft > 0) {
         $(button).prop('disabled', true).text(`Retry in ${data.otpTimeLeft}s`);
-      } else {
-        data.otpTimeLeft = 60;
-        if (!otpVerified) {
-        localStorage.setItem('user_otp', 0);
-        // if (!localStorage.getItem('user_otp') || localStorage.getItem('user_otp') != data.phone) {
-          $(button).prop('disabled', false).text('Get OTP');
+
+        data.otpTimer = setInterval(() => {
+        data.otpTimeLeft--;
+
+        if (data.otpTimeLeft > 0) {
+            $(button).prop('disabled', true).text(`Retry in ${data.otpTimeLeft}s`);
+        } else {
+            data.otpTimeLeft = 60;
+            if (!otpVerified) {
+            localStorage.setItem('user_otp', 0);
+            // if (!localStorage.getItem('user_otp') || localStorage.getItem('user_otp') != data.phone) {
+            $(button).prop('disabled', false).text('Get OTP');
+            }
+            clearInterval(data.otpTimer);
         }
-        clearInterval(data.otpTimer);
-      }
-    }, 1000);
+        }, 1000);
 
-  }
+    }
 
-  
-  $('input[name="search"], input[type="search"]').on('keyup', function() {
     
-      var searchText = $(this).val().toLowerCase(); 
-
-      $('table tbody tr').filter(function() {
+    $('input[name="search"], input[type="search"]').on('keyup', function() {
         
-          $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
-      });
-  });
+        var searchText = $(this).val().toLowerCase(); 
+
+        $('table tbody tr').filter(function() {
+            
+            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+        });
+    });
+    
+    $('.contact_admin').on('click',function(e){
+        e.preventDefault();
+        responseToast('Please contact to admin.','bg-warning');
+    });
+
+    $('.reset_form').on('click',function(){
+        $(this).closest('form')[0].reset();
+    });
+    
+    function scrollToElement(element){
+        $(element).parent().append('<div class="input_error text-danger"></div>');
+        $(element).get(0).scrollIntoView({behavior: 'smooth'});
+        $(element).focus();
+        $(element).siblings('.input_error').html(`${$(element).siblings('label').text()}`);
+        setTimeout(() => {
+            $('.submitForm').removeClass('disabled');
+            $(element).siblings('.input_error').remove();
+        }, 2000);
+    }
+
+    $('.submitForm').on('click',function(e){
+        $(this).addClass('disabled');
+        e.preventDefault();
+        let exitLoop = true;
+        let requiredInputs = $('.required');
+        $(requiredInputs).each(function(){
+            if($(this).val() == ''){
+                ajaxResponseModal(`Please Enter ${$(this).attr('name')}`);
+                exitLoop = false;
+                scrollToElement($(this));
+                return false;
+            }
+            
+        });
+        if(exitLoop){
+            submitForm($(this).parents('form'));
+        }
+    });
   
-  $('.contact_admin').on('click',function(e){
-    e.preventDefault();
-      responseToast('Please contact to admin.','bg-warning');
-  });
 </script>

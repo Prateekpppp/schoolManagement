@@ -27,23 +27,79 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Staff</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.staff')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Staff</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Class</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.classes')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.addClass')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Class</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Section</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.classSections')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Section</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.addClassSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.students')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.addStudent')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Jobs</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.jobs')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Jobs</a>
+                                    <a href="{{route('admin.pages.jobs')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Jobs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.addJobs')}}" class="nav-link"><i
+                                    <a href="{{route('admin.pages.addJobs')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Add Jobs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.applicants')}}" class="nav-link"><i
+                                    <a href="{{route('admin.pages.applicants')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Applicants</a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Gallery</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.gallery')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.addGallery')}}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Add Gallery</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.setting')}}" class="nav-link"><i
+                            <a href="{{route('admin.pages.setting')}}" class="nav-link"><i
                                     class="flaticon-settings"></i><span>Account</span></a>
                         </li>
                     </ul>

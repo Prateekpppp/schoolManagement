@@ -16,8 +16,13 @@ return new class extends Migration
             $table->string('admin_username');
             $table->string('title');
             $table->string('logo');
+            $table->string('director_name');
+            $table->string('contact_person');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->json('additional_data')->nullable();
             $table->timestamps();
         });
     }

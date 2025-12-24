@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Account Setting</h3>
+                                <h3>Add Gallery Images</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
@@ -21,17 +21,9 @@
                         </div>
                         <form class="form">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Title </label>
-                                    <input value="{{$appdata->title ?? 'Germination mission school'}}" name="title" type="text" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Address </label>
-                                    <input value="{{$appdata->address ?? 'Germination mission school , Aurangabad , Bihar , 824114'}}" name="address" type="text" placeholder="" class="form-control">
-                                </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Logo</label>
-                                    <input type="file" name="logo" class="form-control-file">
+                                    <label class="text-dark-medium">Upload Image</label>
+                                    <input type="file" name="image[]" class="form-control-file" multiple>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="button" class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
@@ -48,10 +40,9 @@
 
 <script>
     
-
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.updateAppdata')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createGallery')}}",data,ajaxResponseModal);
     }
 
 </script>

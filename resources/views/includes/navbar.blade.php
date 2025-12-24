@@ -6,18 +6,18 @@
                   <div class="it-header-2-top-left">
                      <ul class="text-center text-sm-start">
                         <li class="d-xl-inline-block">
-                           <a href="tel:8757845682">
+                           <a href="tel:{{ $appdata->phone ?? '8709187574' }}">
                               <span>
                                  <i class="fa-light fa-phone-volume text-white"></i>
                               </span>
-                               +91 87091875774 , 79032 13204
+                               {{ $appdata->phone ?? '8709187574' }}
                            </a>
                         </li>
                         <li class="d-xl-inline-block">
-                           <a href="mailto:pacargoinfo@gmail.com">
+                           <a href="mailto:{{ $appdata->email ?? 'info@germinationmissionschool.com' }}">
                               <span>
                                  <i class="fa-light fa-envelope-open-text text-white"></i>
-                              </span>info@germinationmissionschool.com
+                              </span>{{ $appdata->email ?? 'info@germinationmissionschool.com' }}
                            </a>
                         </li>
                        
@@ -52,7 +52,7 @@
                <div class="row align-items-center">
                   <div class="col-xl-2 col-6">
                      <div class="it-header-5-logo">
-                        <a href="{{route('user.index')}}"><img src="assets/img/logo.png" width="110" class="p-2 rounded"></a>
+                        <a href="{{route('user.index')}}"><img src="{{isset($appdata->logo) ? asset('storage/').$appdata->logo : '/assets/logo.png' }}" width="110" class="p-2 rounded"></a>
                      </div>
                   </div>
                   <div class="col-xl-7 d-none d-xl-block">

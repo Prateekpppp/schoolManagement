@@ -18,10 +18,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('dob')->nullable();
+            $table->string('age')->nullable();
+            // 1 = male, 2 = female, 3 = others
             $table->tinyInteger('gender')->default(1);
             $table->string('uploads');
-            $table->timestamps();
+            $table->tinyInteger('status')->default(1)->nullable();
             $table->json('additional_data')->nullable();
+            $table->timestamps();
         });
     }
 

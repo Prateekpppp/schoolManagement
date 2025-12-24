@@ -15,16 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('salary');
-            $table->integer('openings')->nullable();;
+            $table->integer('openings')->nullable();
             $table->string('education');
             $table->string('experience');
-            $table->string('english_level')->nullable();;
+            $table->string('english_level')->nullable();
             $table->tinyInteger('gender');
             $table->string('work_type')->nullable();
-            $table->string('working_hours')->nullable();;
-            $table->string('description')->nullable();;
-            $table->timestamps();
+            $table->string('working_hours')->nullable();
+            $table->string('description')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -18,14 +18,16 @@ class AppdataController extends Controller
             if (!empty($request->allFiles())) {
                 $file = $request->file('logo');
                 $request->logo = '/img/'.time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->logo, 'public'); // Store in 'public/uploads'
+                $filePath = $file->storeAs('', $request->logo, 'public'); 
 
                 $appdata->logo = $request->logo;
+            } else{
+                $appdata->logo = null;
             }
             
             $appdata->save();
             return response()->json([
-                'redirect'=> url(),
+                // 'redirect'=> url(),
                 'message'=> 'Data updated successfully',
                 'response_code'=> '200',
             ]);

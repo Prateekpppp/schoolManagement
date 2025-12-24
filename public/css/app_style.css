@@ -21,7 +21,9 @@ a {
     right: -100%;
     min-width: 200px;
     max-width: 250px;
-    z-index: 999;
+    padding: 0.2rem 0.9rem;
+    border-radius: 0.41rem;
+    z-index: 99999;
     transition: all 0.4s;
 }
 
@@ -37,4 +39,10 @@ a {
   padding: 20px;
   border-radius: 10px;
   background: #fffafa;
+}
+
+.disabled {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.4 !important;
 }

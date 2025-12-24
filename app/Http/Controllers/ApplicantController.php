@@ -19,7 +19,7 @@ class ApplicantController extends Controller
         if (!empty($request->allFiles())) {
             $file = $request->file('uploads');
             $request->uploads = '/uploads/'.time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('', $request->uploads, 'public'); // Store in 'public/uploads'
+            $filePath = $file->storeAs('', $request->uploads, 'public'); 
 
             $applicant->uploads = $request->uploads;
         } else{
