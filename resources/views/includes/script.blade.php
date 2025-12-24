@@ -134,7 +134,8 @@
         let requiredInputs = $('.required');
         $(requiredInputs).each(function(){
             if($(this).val() == ''){
-                ajaxResponseModal(`Please Enter ${$(this).attr('name')}`);
+                
+                responseToast(`Please Enter ${$(this).attr('name')}`);
                 exitLoop = false;
                 scrollToElement($(this));
                 return false;

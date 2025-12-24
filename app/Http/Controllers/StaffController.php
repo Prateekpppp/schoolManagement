@@ -42,6 +42,7 @@ class StaffController extends Controller
     }
 
     public function createStaff(Request $request){
+        // dd($request->all());
         try {
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
@@ -62,7 +63,7 @@ class StaffController extends Controller
             $staff->blood_group = $request->blood_group;
             $staff->class = $request->class;
             $staff->section = $request->section;
-            $staff->subject = $request->subject;
+            // $staff->subject = $request->subject;
             $staff->status = 1;
             $staff->save();
 

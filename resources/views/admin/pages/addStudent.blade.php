@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone</label>
-                                    <input name="phone" type="text" placeholder="" class="form-control">
+                                    <input name="phone" minlength="10" maxlength="10"type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>E-Mail</label>

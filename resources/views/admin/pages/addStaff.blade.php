@@ -31,15 +31,15 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone *</label>
-                                    <input name="phone" type="text" placeholder="" class="form-control required">
+                                    <input name="phone" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Email *</label>
                                     <input name="email" type="text" placeholder="" class="form-control required">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group required">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
-                                    <select class="select2">
+                                    <select name="gender" class="select2 required">
                                         <option value="">Please Select Gender *</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
@@ -47,8 +47,8 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Religion *</label>
-                                    <select name="religion" class="select2">
+                                    <label>Religion </label>
+                                    <select name="religion" class="select2 ">
                                         <option value="">Please Select Religion *</option>
                                         <option value="Hindu">Hindu</option>
                                         <option value="Islam">Islam</option>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Blood Group *</label>
-                                    <select name="blood_group" class="select2">
+                                    <select name="blood_group" class="select2 required">
                                         <option value="">Please Select Group *</option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class *</label>
-                                    <select name="class" class="select2">
+                                    <select name="class" class="select2 required">
                                         <option value="">Please Select Class *</option>
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->class_name}}</option>
@@ -80,16 +80,16 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section *</label>
-                                    <select class="select2">
+                                    <select name="section" class="select2 required">
                                         <option value="">Please Select Section *</option>
                                         @foreach($sections as $class)
-                                            <option value="{{$class->id}}">{{$class->class_name}}</option>
+                                            <option value="{{$class->id}}">{{$class->section_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Address</label>
-                                    <input name="address" type="text" placeholder="" class="form-control">
+                                    <input name="address" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
