@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDataController;
 use App\Http\Controllers\AppdataController;
+use App\Http\Controllers\DatasessionController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
@@ -45,6 +46,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         })->name('admin.logout');
 
         Route::get('/', [AdminDataController::class,'index'])->name('admin.index');
+
+        Route::get('/dataSession', [DatasessionController::class,'dataSession'])->name('admin.pages.dataSession');
+        
+        Route::get('/allDatasession', [DatasessionController::class,'allDatasession'])->name('admin.get.allDatasession');
+        
+        Route::get('/addDatasession', [DatasessionController::class,'addDatasession'])->name('admin.pages.addDatasession');
+        
+        Route::post('/createDatasession', [DatasessionController::class,'createDatasession'])->name('admin.post.createDatasession')->withoutMiddleware([VerifyCsrfToken::class]);        
 
         Route::get('/staff', [StaffController::class,'staff'])->name('admin.pages.staff');
         

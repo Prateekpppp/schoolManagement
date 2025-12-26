@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('datasessions', function (Blueprint $table) {
             $table->id();
-            $table->string('class_name');
-            $table->string('fee_id');
-            $table->json('sections')->nullable();
+            $table->string('session_name');
+            $table->json('classes')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('datasessions');
     }
 };

@@ -30,10 +30,10 @@
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Session</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.classSections')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Session</a>
+                                    <a href="{{route('admin.pages.dataSession')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Session</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.addClassSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Session</a>
+                                    <a href="{{route('admin.pages.addDatasession')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Session</a>
                                 </li>
                             </ul>
                         </li>

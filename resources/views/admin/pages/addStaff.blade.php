@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
-                                    <select name="gender" class="select2 required">
+                                    <select name="gender" multiple class="select2 required">
                                         <option value="">Please Select Gender *</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
