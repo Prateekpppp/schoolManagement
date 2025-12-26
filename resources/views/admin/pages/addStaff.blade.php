@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Teacher</h3>
+                                <h3>Personal Details</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"

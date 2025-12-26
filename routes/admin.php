@@ -16,6 +16,7 @@ use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\BannerController;
 
 
 // Admin routes
@@ -93,6 +94,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
             return view('admin.pages.setting');
         })->name('admin.pages.setting');
 
+        Route::get('/banner', [BannerController::class,'banner'])->name('admin.pages.banner');
+        
+        Route::get('/allBanner', [BannerController::class,'allBanner'])->name('admin.get.allBanner');
+        
+        Route::get('/addBanner', [BannerController::class,'addBanner'])->name('admin.pages.addBanner');
+        
+        Route::post('/createBanner', [BannerController::class,'createBanner'])->name('admin.post.createBanner')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         Route::get('/gallery', [GalleryController::class,'gallery'])->name('admin.pages.gallery');
         
         Route::get('/allGallery', [GalleryController::class,'allGallery'])->name('admin.get.allGallery');

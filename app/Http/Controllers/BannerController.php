@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Gallery;
+use App\Models\Banner;
 
-class GalleryController extends Controller
+class BannerController extends Controller
 {
     //
-    public function gallery(){
-        $galleries = Gallery::where('status',1)->get();
-        return view('admin.pages.gallery',compact('galleries'));
+    public function banner(){
+        $banners = Banner::where('status',1)->get();
+        return view('admin.pages.banner',compact('banners'));
     }
 
-    public function allGallery(){
+    public function allBanner(){
         try {
-            $galleries = Gallery::where('status',1)->get();
+            $banners = Banner::where('status',1)->get();
             return response()->json([
-                'data'=>$galleries,
+                'data'=>$banners,
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){
@@ -28,21 +28,21 @@ class GalleryController extends Controller
         }
     }
 
-    public function addGallery(){
-        return view('admin.pages.addGallery');
+    public function addBanner(){
+        return view('admin.pages.addBanner');
     }
 
-    public function createGallery(Request $request){
+    public function createBanner(Request $request){
         try{
             if ($request->file('image')) {
                 $imageNames = [];
 
                 foreach($request->file('image') as $image){
-                    $imageName = 'gallery/'.time().rand(000,111) . '_' . $image->getClientOriginalName();
+                    $imageName = 'banner/'.time().rand(000,111) . '_' . $image->getClientOriginalName();
                     $filePath = $image->storeAs('', $imageName, 'public_uploads');
                     $imageNames[] = $imageName;
                     
-                    $gallery = new Gallery();
+                    $gallery = new Banner();
                     $gallery->image = $imageName;
                     $gallery->status = 1;
                     $gallery->save();
@@ -52,7 +52,7 @@ class GalleryController extends Controller
             }
 
             return response()->json([
-                'message'=>'Gallery images added successfully',
+                'message'=>'Banner images added successfully',
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){

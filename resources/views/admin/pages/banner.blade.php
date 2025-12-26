@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Gallery</h3>
+                                <h3>All Banners</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -48,12 +48,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($galleries) && count($galleries) == 0)
+                                    @if(!isset($banners) && count($banners) == 0)
                                         <tr>
                                             <td colspan="11" class="text-center">No Data Found</td>
                                         </tr>
                                     @else
-                                    @foreach ($galleries as $key=>$job)
+                                    @foreach ($banners as $key=>$job)
                                         <tr>
                                             {{-- <td>{{$key+1}}</td> --}}
                                             <td>
@@ -85,7 +85,7 @@
         response.data.forEach(function(job){
             rows += `<tr>
                         <td>
-                            <img src="{{asset('storage/')}}${job.photo}" alt="photo" width="50px" height="50px">
+                            <img src="{{asset('/')}}${job.photo}" alt="photo" width="50px" height="50px">
                         </td>
                         <td>${job.status ? 'Active' : 'Inactive'}</td>
             </tr>`;
@@ -95,7 +95,7 @@
 
     // $(document).ready(function(){
         
-    //     callAjaxFormData('get',"{{route('admin.get.allClasses')}}",null,appendData);
+    //     callAjaxFormData('get',"{{route('admin.get.allBanner')}}",null,appendData);
     // });
 </script>
 

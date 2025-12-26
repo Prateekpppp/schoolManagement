@@ -13,19 +13,43 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('photo')->nullable();
+            // photo size limit 2mb 150x150(in jquery)
+            // student details
+
+            // first 3 digits of school _456758 unique, show on admission form with reed only
+            $table->string('enrollment_no')->unique();
+            $table->string('admission_no')->unique();
             $table->string('name');
-            $table->string('gender');
             $table->string('dob');
-            $table->string('father_name');
-            $table->string('mother_name');
+            $table->string('gender');
+            $table->string('phone')->nullable();
             $table->string('religion');
             $table->string('blood_group')->nullable();
-            $table->string('phone');
+            $table->string('caste');
+            $table->string('city');
+            $table->string('state');
+            $table->string('address');
+            $table->string('photo');
             $table->string('email');
-            $table->text('address');
+            $table->string('password');
+
+            // class details
             $table->string('class');
             $table->string('section');
+            $table->string('roll_no')->unique();
+
+            // sibling option in form
+            // parent details
+            $table->string('father_name');
+            $table->string('father_phone');
+            $table->string('father_occupation');
+            $table->string('mother_name');
+            $table->string('mother_phone');
+            $table->string('father_name');
+            $table->string('parent_email');
+            $table->string('parent_password');
+            $table->string('id_proof_front');
+            $table->string('id_proof_back');
             $table->boolean('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();

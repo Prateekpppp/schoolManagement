@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('class_name');
-            $table->string('fee_id');
+            $table->string('image');
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('banners');
     }
 };

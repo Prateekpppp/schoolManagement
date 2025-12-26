@@ -99,11 +99,15 @@
 
 
 
-
+               @if(isset($banners) && count($banners) > 0)
+               @foreach($banners as $banner)
+                  <div> <img data-u="image" src="{{asset('/').$banner->image}}" /> </div>
+               @endforeach
+               @else
                <div> <img data-u="image" src="assets/img/ban1.png" /> </div>
                <div> <img data-u="image" src="assets/img/ban2.png" /> </div>
                <div> <img data-u="image" src="assets/img/ban3.png" /> </div>
-
+               @endif
 
 
 
@@ -334,28 +338,50 @@
             <div class="row">
 
                <!-- LEFT : EVENTS -->
-               <div class="col-lg-9">
+               <div class="col-lg-9 flex flex-col items-center">
                   <div class="owl-carousel owl-theme event-carousel">
 
-                     <!-- Event Card -->
-                     <div class="event-card">
-                        <img src="assets/img/faq/thumb-1.jpg" alt="">
-                     </div>
+                     @if(!isset($galleries) && count($galleries) == 0)
+                        <!-- Event Card -->
+                        <div class="event-card">
+                           <img src="assets/img/faq/thumb-1.jpg" alt="">
+                        </div>
 
-                     <div class="event-card">
-                        <img src="assets/img/faq/thumb-2.jpg" alt="">
-                     </div>
+                        <div class="event-card">
+                           <img src="assets/img/faq/thumb-2.jpg" alt="">
+                        </div>
 
-                     <div class="event-card">
-                        <img src="assets/img/faq/thumb-3.jpg" alt="">
-                     </div>
+                        <div class="event-card">
+                           <img src="assets/img/faq/thumb-3.jpg" alt="">
+                        </div>
 
-                     <div class="event-card">
-                        <img src="assets/img/faq/thumb-4.jpg" alt="">
-                     </div>
+                        <div class="event-card">
+                           <img src="assets/img/faq/thumb-4.jpg" alt="">
+                        </div>
 
-                     <!-- Copy more cards -->
+                        <!-- Copy more cards -->
+                     @else
+                     @foreach ($galleries as $key=>$job)
+                        <div class="event-card">
+                           <img src="{{asset('/').$job->image}}" alt="">
+                        </div>
+                           
+                     @endforeach
+                     @endif
+
                   </div>
+                  <a class="it-btn-white yellow-bg" href="{{route('user.gallery')}}">
+                        <span>
+                           View All
+                           <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11 1.24023L16 7.24023L11 13.2402" stroke="currentcolor" stroke-width="1.5"
+                                 stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M1 7.24023H16" stroke="currentcolor" stroke-width="1.5" stroke-miterlimit="10"
+                                 stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
+                        </span>
+                     </a>
                </div>
 
                <!-- RIGHT : LATEST NEWS -->
@@ -395,7 +421,7 @@
                </div>
                <div class="col-xl-3 col-lg-5 col-md-5">
                   <div class="it-cta-button text-md-end">
-                     <a class="it-btn-white yellow-bg" href="contact.php">
+                     <a class="it-btn-white yellow-bg" href="{{route('user.contact')}}">
                         <span>
                            Contact Us
                            <svg width="17" height="14" viewBox="0 0 17 14" fill="none"

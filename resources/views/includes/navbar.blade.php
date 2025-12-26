@@ -78,6 +78,7 @@
                               <li><a href="{{route('user.ourteam')}}">Our Team</a></li>
                               <li><a href="{{route('user.testimonial')}}">Testimonial</a></li>
                               <li><a href="{{route('user.career')}}">Career</a></li>
+                              <li><a href="{{route('user.gallery')}}">Gallery</a></li>
                               
                               
                               

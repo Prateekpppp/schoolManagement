@@ -44,8 +44,8 @@ class StudentController extends Controller
          
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = '/students/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public'); 
+                $request->photo = 'students/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
 
             } else{
                 $request->photo = null;

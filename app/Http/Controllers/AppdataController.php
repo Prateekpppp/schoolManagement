@@ -17,8 +17,8 @@ class AppdataController extends Controller
 
             if (!empty($request->allFiles())) {
                 $file = $request->file('logo');
-                $request->logo = '/img/'.time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->logo, 'public'); 
+                $request->logo = 'img/'.time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('', $request->logo, 'public_uploads'); 
 
                 $appdata->logo = $request->logo;
             } else{

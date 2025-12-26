@@ -30,6 +30,13 @@ return [
 
     'disks' => [
 
+        'public_uploads' => [
+            'driver' => 'local',
+            'root' => public_path('/'), // This points directly to the public/uploads folder
+            'url' => env('APP_URL'),
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

@@ -5,8 +5,8 @@
     <div class="login-page-wrap">
         <div class="login-page-content">
             <div class="login-box">
-                <div class="item-logo">
-                    <img src="{{asset('storage/').$appdata->logo}}" alt="logo">
+                <div class="item-logo flex justify-center">
+                    <img src="{{asset('storage/').$appdata->logo}}" alt="logo" width="100px">
                 </div>
                 <form class="login-form" action="{{route('admin.auth.login')}}" method="POST">
                   @csrf
