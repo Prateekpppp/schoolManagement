@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Appdata;
+use App\Models\Datasession;
 
 class CustomAdminSessionMiddleware
 {
@@ -22,6 +23,9 @@ class CustomAdminSessionMiddleware
     {
         $appdata = Appdata::where('status',1)->first();
         View::share('appdata',$appdata);
+        
+        $dataSession = Datasession::where('status',1)->get();
+        View::share('dataSession',$dataSession);
 
         return $next($request);
     }

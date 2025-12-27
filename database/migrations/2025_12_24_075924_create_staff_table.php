@@ -19,12 +19,18 @@ return new class extends Migration
             $table->string('email');
             $table->string('gender');
             $table->text('address');
-            $table->string('subject');
             $table->string('religion')->nullable();
             $table->string('blood_group')->nullable();
+            $table->string('salery');
+            $table->string('joining_date');
+            $table->string('subject');
             $table->string('class')->nullable();
             $table->string('section')->nullable();
-            // status = 0 = inactive, 1 = teacher, 2 = principal, 3 = liberarian, 4 = others
+            $table->string('id_proof_front');
+            $table->string('id_proof_back');
+            $table->string('other_document');
+            $table->string('qualification');
+            // status = 0 = inactive, 1 = teacher, 2 = staff, 3 = drivers, 4 = others
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();

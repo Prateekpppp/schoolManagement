@@ -1185,6 +1185,7 @@ h6 {
   overflow: hidden;
   position: relative;
   display: inline-block;
+  text-align: center;
   height: 44px;
   width: 100%;
   border: none;
@@ -1493,7 +1494,7 @@ ul {
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
 }
 .nav-bar-header-one {
-  background: linear-gradient(to right, #1e21d3, #1e21d3);
+  background: linear-gradient(to right, #ffa901, #ffa901);
   display: flex;
   justify-content: space-between;
   align-items: center;

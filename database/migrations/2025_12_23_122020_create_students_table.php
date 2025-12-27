@@ -19,18 +19,18 @@ return new class extends Migration
             // first 3 digits of school _456758 unique, show on admission form with reed only
             $table->string('enrollment_no')->unique();
             $table->string('admission_no')->unique();
+            $table->string('photo');
             $table->string('name');
             $table->string('dob');
             $table->string('gender');
             $table->string('phone')->nullable();
+            $table->string('email');
             $table->string('religion');
             $table->string('blood_group')->nullable();
             $table->string('caste');
             $table->string('city');
             $table->string('state');
             $table->string('address');
-            $table->string('photo');
-            $table->string('email');
             $table->string('password');
 
             // class details
@@ -45,7 +45,7 @@ return new class extends Migration
             $table->string('father_occupation');
             $table->string('mother_name');
             $table->string('mother_phone');
-            $table->string('father_name');
+            $table->string('mother_occupation');
             $table->string('parent_email');
             $table->string('parent_password');
             $table->string('id_proof_front');

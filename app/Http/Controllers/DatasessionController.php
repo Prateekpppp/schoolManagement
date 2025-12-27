@@ -50,4 +50,10 @@ class DatasessionController extends Controller
             ]);
         }
     }
+
+    public function changeSession(Request $request){
+
+        session(['session_name'=>$request->session_name]);
+        return redirect()->back();
+    }
 }

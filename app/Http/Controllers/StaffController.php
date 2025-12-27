@@ -61,6 +61,9 @@ class StaffController extends Controller
             $staff->address = $request->address;
             $staff->religion = $request->religion;
             $staff->blood_group = $request->blood_group;
+            $staff->salery = $request->salery;
+            $staff->joining_date = $request->joining_date;
+            $staff->subject = $request->subject;
             $staff->class = $request->class;
             $staff->section = $request->section;
             // $staff->subject = $request->subject;

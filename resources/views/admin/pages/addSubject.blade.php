@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Class</h3>
+                                <h3>Add New Subject</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -26,16 +26,16 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class Name *</label>
-                                    <input name="class_name" type="text" placeholder="" class="form-control required">
+                                    <label>Subject Name *</label>
+                                    <input name="subject" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section *</label>
-                                    <select name="sections[]" multiple class="select2 required">
-                                        <option value="">Please Select Section *</option>
-                                        @if(count($classSections) > 0)
-                                            @foreach($classSections as $section)
-                                                <option value="{{$section->id}}">{{$section->section_name}}</option>
+                                    <label>Class *</label>
+                                    <select name="class[]" multiple class="select2 required">
+                                        <option value="">Please Select Class *</option>
+                                        @if(count($classes) > 0)
+                                            @foreach($classes as $section)
+                                                <option value="{{$section->id}}">{{$section->class_name}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -61,7 +61,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createClass')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createSubject')}}",data,ajaxResponseModal);
     }
 
 </script>

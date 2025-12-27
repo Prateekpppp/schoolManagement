@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Classes</h3>
+                                <h3>All Subject</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -32,7 +32,7 @@
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <a href="{{route('admin.pages.addClass')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD CLASS</a>
+                                    <a href="{{route('admin.pages.addSubject')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD SUBJECT</a>
                                 </div>
                             </div>
                         </div>
@@ -40,26 +40,26 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Class</th>
+                                        <th>Subject</th>
                                         {{-- <th>Sections</th> --}}
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($classes) || count($classes) == 0)
+                                    @if(!isset($subject) || count($subject) == 0)
                                         <tr>
                                             <td colspan="11" class="text-center">No Data Found</td>
                                         </tr>
                                     @else
-                                    @foreach ($classes as $key=>$job)
+                                    @foreach ($subject as $key=>$job)
                                         <tr>
                                             {{-- <td>{{$key+1}}</td> --}}
-                                            <td>{{$job->class_name}}</td>
+                                            <td>{{$job->subject}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td data-id="{{$job->id}}">
-                                                <a href="{{route('admin.pages.manageClass',$job->id)}}">Manange</a>
+                                                <a href="{{route('admin.pages.manageSubject',$job->id)}}">Manange</a>
                                             </td>
                                         </tr>
                                         

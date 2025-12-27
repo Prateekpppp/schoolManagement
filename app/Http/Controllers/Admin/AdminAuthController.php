@@ -14,7 +14,7 @@ class AdminAuthController extends Controller
     public function login(Request $request){
         
         $user = User::where('username',$request->username)
-        ->whereIn('status', [0])
+        ->whereIn('status', [1])
         ->first();
         
         if(empty($user)){
@@ -26,7 +26,8 @@ class AdminAuthController extends Controller
 
         if(Hash::check($request->password,$user->password)){
             Session::put([
-                'admin_username'=>$user->username
+                'admin_username'=>$user->username,
+                'session_name'=> date('Y')
             ]);
             return redirect()->route('admin.index');
         } else{
