@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject')->unique();
-            $table->json('class');
+            // $table->json('class');
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();

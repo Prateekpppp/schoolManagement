@@ -9,36 +9,12 @@
                             <div class="item-title">
                                 <h3>Add New Subject</h3>
                             </div>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
                         </div>
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Subject Name *</label>
                                     <input name="subject" type="text" placeholder="" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class *</label>
-                                    <select name="class[]" multiple class="select2 required">
-                                        <option value="">Please Select Class *</option>
-                                        @if(count($classes) > 0)
-                                            @foreach($classes as $section)
-                                                <option value="{{$section->id}}">{{$section->class_name}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"

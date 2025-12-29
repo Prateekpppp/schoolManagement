@@ -35,9 +35,7 @@ class SubjectController extends Controller
     }
 
     public function createSubject(Request $request){
-        // dd($request->all());
-        $request->class = json_encode($request->class);
-        // dd($request->class);
+        
         try{
             if(!isset($request->id)){
                 // $class = Subject::create(
@@ -45,7 +43,7 @@ class SubjectController extends Controller
                 // );
                 $subject = new Subject();
                 $subject->subject = $request->subject;
-                $subject->class = $request->class;
+                // $subject->class = $request->class;
                 $subject->status = 1;
                 $subject->save();
             } else{
@@ -71,35 +69,35 @@ class SubjectController extends Controller
         }
     }
 
-    public function manageSubject(Request $request){
-        $subject = Subject::where('id',$request->id)->first();
-        $classes = [];
-        $subject->class = json_decode($subject->class);
-        // dd($subject->class);
-        foreach ($subject->class as $key => $value) {
-            $classes[$value] = Classes::where('id',$value)->first()->class_name;
-        }
-        $class = Classes::where('status',1)->get();
-        // dd($classes);
-        return view('admin.pages.manageSubject',compact('subject','class','classes'));
-    }
+    // public function manageSubject(Request $request){
+    //     $subject = Subject::where('id',$request->id)->first();
+    //     $classes = [];
+    //     $subject->class = json_decode($subject->class);
+    //     // dd($subject->class);
+    //     foreach ($subject->class as $key => $value) {
+    //         $classes[$value] = Classes::where('id',$value)->first()->class_name;
+    //     }
+    //     $class = Classes::where('status',1)->get();
+    //     // dd($classes);
+    //     return view('admin.pages.manageSubject',compact('subject','class','classes'));
+    // }
 
-    public function removeClass(Request $request){
-        // dd($request->all());
-        $subject = Subject::where('id',$request->subject_id)->first();
-        $class = json_decode($subject->class, true);
-        $class = array_diff($class, [$request->class_id]);
-        $class = json_encode($class);
-        // unset($cSections[$request->section_id]);
-        $subject->class = $class;
-        $subject->save();
+    // public function removeClass(Request $request){
+    //     // dd($request->all());
+    //     $subject = Subject::where('id',$request->subject_id)->first();
+    //     $class = json_decode($subject->class, true);
+    //     $class = array_diff($class, [$request->class_id]);
+    //     $class = json_encode($class);
+    //     // unset($cSections[$request->section_id]);
+    //     $subject->class = $class;
+    //     $subject->save();
         
-        return response()->json([
-            'redirect'=> $request->header('referer'),
-            'message'=>'Class Removed successfully',
-            'response_code'=>'200'
-        ]);
-        dd($cSections);
+    //     return response()->json([
+    //         'redirect'=> $request->header('referer'),
+    //         'message'=>'Class Removed successfully',
+    //         'response_code'=>'200'
+    //     ]);
+    //     dd($cSections);
 
-    }
+    // }
 }
