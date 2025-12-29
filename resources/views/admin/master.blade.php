@@ -20,6 +20,7 @@
     <script src="{{ asset('js') }}/jquery.counterup.min.js"></script>
     <script src="{{ asset('js') }}/moment.min.js"></script>
     <script src="{{ asset('js') }}/jquery.waypoints.min.js"></script>
+    <script src="{{ asset('js') }}/datepicker.min.js"></script>
     <script src="{{ asset('js') }}/jquery.scrollUp.min.js"></script>
     <script src="{{ asset('js') }}/fullcalendar.min.js"></script>
     <script src="{{ asset('js') }}/Chart.min.js"></script>

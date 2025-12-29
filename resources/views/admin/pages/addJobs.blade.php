@@ -65,6 +65,7 @@
                                         <option value="">Please Select</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
+                                        <option value="3">Both</option>
                                     </select>
                                     
                                 </div>

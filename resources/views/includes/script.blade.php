@@ -146,5 +146,12 @@
             submitForm($(this).parents('form'));
         }
     });
+
+    // js for form changes
+    $('select[name=class]').on('change',function(){
+        console.log('class changed');
+        
+        // callApi('post',"{{route('admin.post.remove_cSection')}}",data,ajaxResponseModal);
+    });
   
 </script>

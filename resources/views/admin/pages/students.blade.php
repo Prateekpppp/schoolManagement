@@ -39,18 +39,26 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>S. No.</th>
                                         <th>Photo</th>
+                                        <th>Enrollment No.</th>
+                                        <th>Admission No.</th>
                                         <th>Name</th>
+                                        <th>Date Of birth</th>
                                         <th>Gender</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Parents</th>
-                                        <th>Address</th>
-                                        <th>Date Of Birth</th>
+                                        {{-- <th>Religion</th> --}}
+                                        {{-- <th>Blood Group</th> --}}
+                                        {{-- <th>Caste</th> --}}
+                                        <th>City</th>
+                                        {{-- <th>State</th> --}}
+                                        {{-- <th>Address</th> --}}
                                         <th>Phone</th>
                                         <th>E-mail</th>
+                                        <th>Father's Name</th>
+                                        <th>Class</th>
+                                        <th>Section</th>
                                         <th>Status</th>
-                                        <th>Created At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -59,22 +67,25 @@
                                             <td colspan="11" class="text-center">No Data Found</td>
                                         </tr>
                                     @else
-                                    @foreach ($students as $job)
+                                    @foreach ($students as $k=>$job)
                                         <tr>
+                                            <td>{{$k+1}}</td>
                                             <td>
-                                                <img src="{{asset('storage/').$job->photo}}" alt="photo" width="50px" height="50px">
+                                                <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
                                             </td>
+                                            <td>{{$job->enrollment_no}}</td>
+                                            <td>{{$job->admission_no}}</td>
                                             <td>{{$job->name}}</td>
-                                            <td>{{$job->gender ? 'Male' : 'Female'}}</td>
-                                            <td>{{$job->class}}</td>
-                                            <td>{{$job->section}}</td>
-                                            <td>{{$job->parent}}</td>
-                                            <td>{{$job->address}}</td>
                                             <td>{{$job->dob}}</td>
+                                            <td>{{$job->gender ? 'Male' : 'Female'}}</td>
+                                            <td>{{$job->city}}</td>
                                             <td>{{$job->phone}}</td>
                                             <td>{{$job->email}}</td>
+                                            <td>{{$job->father_name}}</td>
+                                            <td>{{$job->class}}</td>
+                                            <td>{{$job->section}}</td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
-                                            <td>{{$job->created_at}}</td>
+                                            <td><i class="fas fa-cogs text-dark-pastel-green"></i></td>
                                         </tr>
                                         
                                     @endforeach
@@ -117,7 +128,7 @@
 
     $(document).ready(function(){
         
-        callAjaxFormData('get',"{{route('admin.get.allStudents')}}",null,appendData);
+        // callAjaxFormData('get',"{{route('admin.get.allStudents')}}",null,appendData);
     });
 </script>
 

@@ -84,28 +84,28 @@
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>City *</label>
+                            <input name="city" type="text" placeholder="" class="form-control required">
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>State *</label>
+                            <input name="state" type="text" placeholder="" class="form-control required">
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>Address *</label>
+                            <input name="address" type="text" placeholder="" class="form-control required">
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Phone *</label>
-                            <input name="phone" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
+                            <input name="phone" minlength="10" maxlength="10" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>E-Mail *</label>
                             <input name="email" type="email" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>City *</label>
-                            <input name="city" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>State *</label>
-                            <input name="state" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Address *</label>
-                            <input name="address" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Password *</label>
-                            <input name="password" minlength="10" maxlength="10"type="password" placeholder="" class="form-control required">
+                            <input name="password" type="password" placeholder="" class="form-control required">
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Sibling Enrolment No. </label>
-                            <input name="father_name" type="text" placeholder="" class="form-control">
+                            <input name="enrollment_no" type="text" placeholder="" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -178,31 +178,31 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Phone *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="father_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Occupation *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="father_occupation" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Name *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="mother_name" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Phone *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="mother_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Occupation *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="mother_occupation" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent E-Mail *</label>
-                            <input name="email" type="email" placeholder="" class="form-control required">
+                            <input name="parent_email" type="email" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent Password *</label>
-                            <input name="password" minlength="10" maxlength="10"type="password" placeholder="" class="form-control required">
+                            <input name="parent_password" type="password" placeholder="" class="form-control required">
                         </div>
                     </div>
                 </div>

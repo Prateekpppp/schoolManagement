@@ -24,7 +24,9 @@
                         <div class="it-footer-top-text">
                            <span>Phone:</span>
                            <a href="tel:{{ $appdata->phone ?? '8709187574' }}">{{ $appdata->phone ?? '8709187574' }}</a>
+                           <a href="tel:{{ 1 ?? '9973884174' }}">{{ 1 ?? '9973884174' }}</a>
                            {{-- <a href="tel:7903213204">7903213204</a> --}}
+                           {{-- 9973884174 --}}
                         </div>
                      </div>
                   </div>

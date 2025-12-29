@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('dob');
             $table->string('gender');
-            $table->string('phone')->nullable();
-            $table->string('email');
             $table->string('religion');
             $table->string('blood_group')->nullable();
             $table->string('caste');
             $table->string('city');
             $table->string('state');
             $table->string('address');
+            $table->string('phone')->nullable();
+            $table->string('email');
             $table->string('password');
 
             // class details

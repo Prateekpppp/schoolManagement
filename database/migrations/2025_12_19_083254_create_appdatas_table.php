@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('appdatas', function (Blueprint $table) {
             $table->id();
             $table->string('admin_username');
+            $table->string('school_code');
             $table->string('title');
             $table->string('logo');
             $table->string('director_name');

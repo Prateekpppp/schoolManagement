@@ -112,6 +112,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createStudent', [StudentController::class,'createStudent'])->name('admin.post.createStudent')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::post('/studentDetailByEnrollNo', [StudentController::class,'studentDetailByEnrollNo'])->name('admin.post.studentDetailByEnrollNo')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
         
         Route::get('/allJobs', [JobController::class,'allJobs'])->name('admin.get.allJobs');

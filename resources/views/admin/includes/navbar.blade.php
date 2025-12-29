@@ -4,7 +4,7 @@
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="{{route('admin.index')}}">
-                        <img src="{{asset('storage/').($appdata->logo ?? 'not_found' )}}" alt="logo" width="80px" height="80px">
+                        <img src="{{asset('/').($appdata->logo ?? 'not_found' )}}" alt="logo" width="80px" height="80px">
                     </a>
                 </div>
                  <div class="toggle-button sidebar-toggle">
@@ -81,7 +81,7 @@
                             <div class="item-content">
                                 <ul class="settings-list">
                                     @foreach($dataSession as $data)
-                                    <li><a href="{{route('admin.pages.changeSession',$data->session_name)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                    <li><a href="{{route('admin.pages.changeSession',$data->session_name)}}"><i class="flaticon-user"></i>{{$data->session_name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
