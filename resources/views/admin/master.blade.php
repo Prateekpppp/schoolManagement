@@ -22,6 +22,7 @@
     <script src="{{ asset('js') }}/jquery.waypoints.min.js"></script>
     <script src="{{ asset('js') }}/datepicker.min.js"></script>
     <script src="{{ asset('js') }}/jquery.scrollUp.min.js"></script>
+    <script src="{{ asset('js') }}/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js') }}/fullcalendar.min.js"></script>
     <script src="{{ asset('js') }}/Chart.min.js"></script>
     <script src="{{ asset('js') }}/tailwind.min.js"></script>

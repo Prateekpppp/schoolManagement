@@ -38,6 +38,10 @@
                                     <input name="email" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Address</label>
+                                    <input name="address" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
                                     <select name="gender" class="select2 required">
                                         <option value="">Please Select Gender *</option>
@@ -48,7 +52,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Religion </label>
-                                    <select name="religion" class="select2 ">
+                                    <select name="religion" class="select2">
                                         <option value="">Please Select Religion *</option>
                                         <option value="Hindu">Hindu</option>
                                         <option value="Islam">Islam</option>
@@ -69,9 +73,26 @@
                                         <option value="O-">O-</option>
                                     </select>
                                 </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Section *</label>
+                                    <select name="section" multiple class="select2 required">
+                                        <option value="">Please Select Section *</option>
+                                        @foreach($sections as $class)
+                                            <option value="{{$class->id}}">{{$class->section_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Salary</label>
+                                    <input name="salary" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Qualification</label>
+                                    <input name="qualification" type="text" placeholder="" class="form-control required">
+                                </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class *</label>
-                                    <select name="class" class="select2 required">
+                                    <select name="class" multiple class="select2 required">
                                         <option value="">Please Select Class *</option>
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->class_name}}</option>
@@ -79,22 +100,39 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section *</label>
-                                    <select name="section" class="select2 required">
-                                        <option value="">Please Select Section *</option>
-                                        @foreach($sections as $class)
-                                            <option value="{{$class->id}}">{{$class->section_name}}</option>
+                                    <label>Subject *</label>
+                                    <select name="subject" class="select2 required">
+                                        <option value="">Please Subject Class *</option>
+                                        @foreach($subject as $class)
+                                            <option value="{{$class->id}}">{{$class->subject}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Address</label>
-                                    <input name="address" type="text" placeholder="" class="form-control required">
+                                    <label>Joining Date</label>
+                                    <input name="joining_date" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
+                                    <label class="text-dark-medium">Upload Teacher Photo (150px X 150px)</label>
                                     <input name="photo" type="file" class="form-control-file">
                                 </div>
+                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                    <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
+                                    <input name="id_proof_front" type="file" class="form-control-file">
+                                </div>
+                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                    <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
+                                    <input name="id_proof_back" type="file" class="form-control-file">
+                                </div>
+                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                    <label class="text-dark-medium">Upload Document </label>
+                                    <input name="other_document" type="file" class="form-control-file">
+                                </div>
+                            </div>
+                            <div class="row">
+                                
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
                                         class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>

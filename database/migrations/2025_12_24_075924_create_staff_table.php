@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('photo')->nullable();
+            // $table->string('employ_code');
             $table->string('name');
             $table->string('phone');
             $table->string('email');
             $table->string('gender');
-            $table->text('address');
             $table->string('religion')->nullable();
             $table->string('blood_group')->nullable();
-            $table->string('salery');
+            $table->text('address');
+            $table->string('salary');
             $table->string('joining_date');
-            $table->string('subject');
+            $table->string('subject')->nullable();
             $table->string('class')->nullable();
             $table->string('section')->nullable();
             $table->string('id_proof_front');

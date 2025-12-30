@@ -110,7 +110,7 @@
                                             <td>{{$job}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td data-id="{{$key}}">
-                                                <a class_id="{{$class->id}}" section_id="{{$key}}" class="remove_cSection btn fw-btn-fill btn-gradient-yellow !bg-red-700 w-25" href="javascript:void(0)">Remove</a>
+                                                <a class_id="{{$class->id}}" section_id="{{$key}}" class="remove_cSection btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         
@@ -167,7 +167,7 @@
                                             <td>{{$job}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td data-id="{{$key}}">
-                                                <a class_id="{{$class->id}}" subject_id="{{$key}}" class="remove_cSubject btn fw-btn-fill btn-gradient-yellow !bg-red-700 w-25" href="javascript:void(0)">Remove</a>
+                                                <a class_id="{{$class->id}}" subject_id="{{$key}}" class="remove_cSubject btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         

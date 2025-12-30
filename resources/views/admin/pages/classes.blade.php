@@ -58,10 +58,10 @@
                                             <td>{{$job->class_name}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
-                                            <td data-id="{{$job->id}}">
+                                            <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow w-25">Edit</a>
-                                                    <a href="javascript:void(0)" data-model="Classes" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 w-25">Delete</a>
+                                                    <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    <a href="javascript:void(0)" data-model="Classes" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
 
                                                 </div>
                                             </td>

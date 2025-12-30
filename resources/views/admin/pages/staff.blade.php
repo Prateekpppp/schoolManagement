@@ -49,16 +49,18 @@
                                                 <label class="form-check-label">ID</label>
                                             </div>
                                         </th> --}}
+                                        <th>Emp. Code</th>
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>E-mail</th>
                                         <th>Gender</th>
                                         <th>Address</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
+                                        {{-- <th>Class</th>
+                                        <th>Section</th> --}}
                                         <th>Subject</th>
-                                        <th>Status</th>
+                                        <th>Joining Date</th>
+                                        {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -69,20 +71,21 @@
                                     @else
                                     @foreach ($staff as $key=>$job)
                                         <tr>
+                                            <td>{{'EMP_'.$job->id}}</td>
                                             {{-- <td>{{$key+1}}</td> --}}
                                             <td>
-                                                <img src="{{asset('storage/').$job->photo}}" alt="photo" width="50px" height="50px">
+                                                <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
                                             </td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->phone}}</td>
                                             <td>{{$job->email}}</td>
                                             <td>{{$job->gender ? 'Male' : 'Female'}}</td>
                                             <td>{{$job->address}}</td>
-                                            <td>{{$job->class}}</td>
-                                            <td>{{$job->section}}</td>
+                                            {{-- <td>{{$job->class}}</td>
+                                            <td>{{$job->section}}</td> --}}
                                             <td>{{$job->subject}}</td>
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
-                                            <td>{{$job->created_at}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
+                                            <td>{{$job->joining_date}}</td>
                                         </tr>
                                         
                                     @endforeach
@@ -127,7 +130,7 @@
 
     $(document).ready(function(){
         
-        callAjaxFormData('get',"{{route('admin.get.allStaff')}}",null,appendData);
+        // callAjaxFormData('get',"{{route('admin.get.allStaff')}}",null,appendData);
     });
 </script>
 

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="{{ asset('css') }}/flaticon.css">
 <link rel="stylesheet" href="{{ asset('css') }}/fullcalendar.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/animate.min.css">
+<link rel="stylesheet" href="{{ asset('css') }}/jquery.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/select2.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/datepicker.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/style.css">

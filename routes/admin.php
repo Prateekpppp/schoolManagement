@@ -126,6 +126,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createFeeHead', [FeeController::class,'createFeeHead'])->name('admin.post.createFeeHead')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::get('/generateFee', [FeeController::class,'generateFee'])->name('admin.pages.generateFee');
+        
+        Route::post('/assignFee', [FeeController::class,'assignFee'])->name('admin.post.assignFee')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/generatedFee', [FeeController::class,'generatedFee'])->name('admin.pages.generatedFee');
+        
+        Route::post('/collectFee', [FeeController::class,'collectFee'])->name('admin.post.collectFee')->withoutMiddleware([VerifyCsrfToken::class]);
+
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
         
         Route::get('/allJobs', [JobController::class,'allJobs'])->name('admin.get.allJobs');

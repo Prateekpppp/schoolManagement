@@ -2,3 +2,7 @@ a.btn:hover {
     color: #fff;
     line-height: unset;
 }
+
+.datepicker {
+    z-index: 999999;
+}

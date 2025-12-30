@@ -90,7 +90,7 @@
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
-                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Fee" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 w-25" href="javascript:void(0)">Remove</a>
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Fee" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         
