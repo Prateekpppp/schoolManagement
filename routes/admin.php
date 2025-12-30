@@ -19,6 +19,7 @@ use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\FeeController;
 
 
 // Admin routes
@@ -67,7 +68,9 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/addClassSection', [ClassSectionController::class,'addClassSection'])->name('admin.pages.addClassSection');
         
         Route::post('/createClassSection', [ClassSectionController::class,'createClassSection'])->name('admin.post.createClassSection')->withoutMiddleware([VerifyCsrfToken::class]);        
-
+        
+        Route::get('/editClassSection/{id}', [ClassSectionController::class,'editClassSection'])->name('admin.pages.editClassSection')->withoutMiddleware([VerifyCsrfToken::class]);        
+        
         // Classes Module
         Route::get('/classes', [ClassesController::class,'classes'])->name('admin.pages.classes');
         
@@ -80,6 +83,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/manageClass/{id}', [ClassesController::class,'manageClass'])->name('admin.pages.manageClass');
 
         Route::post('/remove_cSection', [ClassesController::class,'remove_cSection'])->name('admin.post.remove_cSection')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::post('/remove_cSubject', [ClassesController::class,'remove_cSubject'])->name('admin.post.remove_cSubject')->withoutMiddleware([VerifyCsrfToken::class]);
 
         // Subject Module
         Route::get('/subject', [SubjectController::class,'subject'])->name('admin.pages.subject');
@@ -90,7 +95,7 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createSubject', [SubjectController::class,'createSubject'])->name('admin.post.createSubject')->withoutMiddleware([VerifyCsrfToken::class]);        
 
-        Route::get('/manageSubject/{id}', [SubjectController::class,'manageSubject'])->name('admin.pages.manageSubject');
+        Route::get('/editSubject/{id}', [SubjectController::class,'editSubject'])->name('admin.pages.editSubject');
         
         Route::post('/removeClass', [SubjectController::class,'removeClass'])->name('admin.post.removeClass')->withoutMiddleware([VerifyCsrfToken::class]);
 
@@ -113,6 +118,13 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createStudent', [StudentController::class,'createStudent'])->name('admin.post.createStudent')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::post('/studentDetailByEnrollNo', [StudentController::class,'studentDetailByEnrollNo'])->name('admin.post.studentDetailByEnrollNo')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        // Fee Module
+        Route::get('/feeHead', [FeeController::class,'feeHead'])->name('admin.pages.feeHead');
+        
+        Route::get('/allFeeHead', [FeeController::class,'allFeeHead'])->name('admin.get.allFeeHead');
+        
+        Route::post('/createFeeHead', [FeeController::class,'createFeeHead'])->name('admin.post.createFeeHead')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
         
@@ -147,6 +159,10 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createGallery', [GalleryController::class,'createGallery'])->name('admin.post.createGallery')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::post('/updateAppdata', [AppdataController::class,'updateAppdata'])->name('admin.post.updateAppdata')->withoutMiddleware([VerifyCsrfToken::class]);
+
+
+        // delete operation
+        Route::post('/delete', [AppdataController::class,'delete'])->name('admin.post.delete')->withoutMiddleware([VerifyCsrfToken::class]);        
 
 
         // Post Requests

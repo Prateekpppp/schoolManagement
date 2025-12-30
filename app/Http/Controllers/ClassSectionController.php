@@ -34,12 +34,21 @@ class ClassSectionController extends Controller
 
     public function createClassSection(Request $request){
         try{
-            $section = new ClassSection();
-            $section->section_name = $request->section_name;
-            $section->status = 1;
-            $section->save();
+            // dd($request->id);
+            if(isset($request->id)){
+                ClassSection::updateOrCreate(
+                    ['id'=>$request->id],
+                    $request->all()
+                );
+            } else{
+                $section = new ClassSection();
+                $section->section_name = $request->section_name;
+                $section->status = 1;
+                $section->save();
+            }
 
             return response()->json([
+                'redirect'=> route('admin.pages.classSections'),
                 'message'=>'Class Section added successfully',
                 'response_code'=>'200'
             ]);
@@ -49,5 +58,10 @@ class ClassSectionController extends Controller
                 'response_code'=> '500',
             ]);
         }
+    }
+
+    public function editClassSection(Request $request){
+        $classSection = ClassSection::where('id',$request->id)->first();
+        return view('admin.pages.addClassSection',compact('classSection'));
     }
 }

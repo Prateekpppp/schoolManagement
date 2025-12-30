@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appdata;
+use App\Models\ClassSection;
+use App\Models\Classes;
 
 class AppdataController extends Controller
 {
@@ -37,5 +39,17 @@ class AppdataController extends Controller
                 'response_code'=> '101',
             ]);
         }
+    }
+
+    public function delete(Request $request){
+        $model = 'App\\Models\\' . $request->model;
+        $model = app($model);
+        $item = $model->where('id',$request->id)->delete();
+        return response()->json([
+            'redirect'=> $request->header('referer'),
+            'message'=> 'Data updated successfully',
+            'response_code'=> '200',
+        ]);
+        dd($model);
     }
 }

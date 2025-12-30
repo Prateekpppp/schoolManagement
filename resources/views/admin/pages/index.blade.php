@@ -416,3 +416,11 @@
                 </div>
                 <!-- Social Media End Here -->
 @endsection
+
+
+@section('inner_js')
+<script>
+    console.log('after');
+    
+</script>
+@endsection

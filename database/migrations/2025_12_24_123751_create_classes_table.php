@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('class_name')->unique();
             // $table->string('fee_id');
             $table->json('sections')->nullable();
+            $table->json('subject')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();

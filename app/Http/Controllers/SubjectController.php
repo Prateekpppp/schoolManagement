@@ -52,12 +52,14 @@ class SubjectController extends Controller
                     $request->all()
                 );
                 return response()->json([
+                    'redirect'=> route('admin.pages.subject'),
                     'message'=>'Subject Updated successfully',
                     'response_code'=>'200'
                 ]);
             }
 
             return response()->json([
+                'redirect'=> route('admin.pages.subject'),
                 'message'=>'Subject added successfully',
                 'response_code'=>'200'
             ]);
@@ -69,6 +71,10 @@ class SubjectController extends Controller
         }
     }
 
+    public function editSubject(Request $request){
+        $subject = Subject::where('id',$request->id)->first();
+        return view('admin.pages.addSubject',compact('subject'));
+    }
     // public function manageSubject(Request $request){
     //     $subject = Subject::where('id',$request->id)->first();
     //     $classes = [];

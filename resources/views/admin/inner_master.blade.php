@@ -34,6 +34,17 @@
     @section('js')
     
     <script src="{{ asset('js') }}/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // nav link active as url
+            let href = window.location.href;
+            let anchor = $(`a.nav-link[href="${href}"]`);
+            
+            anchor.addClass('menu-active');
+            anchor.parents('ul').addClass('sub-group-active');
+        });
+    </script>
     
     @yield('inner_js')
     @endsection

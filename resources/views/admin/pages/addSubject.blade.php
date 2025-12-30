@@ -7,14 +7,17 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Subject</h3>
+                                <h3>Update Subject</h3>
                             </div>
                         </div>
                         <form class="new-added-form">
+                            @if(isset($subject))
+                            <input type="hidden" name="id" value="{{$subject->id}}">
+                            @endif
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Subject Name *</label>
-                                    <input name="subject" type="text" placeholder="" class="form-control required">
+                                    <input value="{{(isset($subject) && !is_null($subject)) ? $subject->subject : ''}}" name="subject" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"

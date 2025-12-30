@@ -26,7 +26,7 @@
                         <div class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by ID ..." class="form-control">
+                                    <input name="search" type="text" placeholder="Search ..." class="form-control">
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
@@ -42,7 +42,7 @@
                                     <tr>
                                         <th>Class</th>
                                         {{-- <th>Sections</th> --}}
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -57,9 +57,13 @@
                                             {{-- <td>{{$key+1}}</td> --}}
                                             <td>{{$job->class_name}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td data-id="{{$job->id}}">
-                                                <a href="{{route('admin.pages.manageClass',$job->id)}}">Manange</a>
+                                                <div class="flex flex-row gap-2">
+                                                    <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow w-25">Edit</a>
+                                                    <a href="javascript:void(0)" data-model="Classes" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 w-25">Delete</a>
+
+                                                </div>
                                             </td>
                                         </tr>
                                         

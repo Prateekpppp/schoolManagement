@@ -99,6 +99,7 @@
     
     $('input[name="search"], input[type="search"]').on('keyup', function() {
         
+        
         var searchText = $(this).val().toLowerCase(); 
 
         $('table tbody tr').filter(function() {
@@ -154,4 +155,13 @@
         // callApi('post',"{{route('admin.post.remove_cSection')}}",data,ajaxResponseModal);
     });
   
+    $('.delete').on('click',function(){
+        let data = {};
+
+        data['id'] = $(this).attr('data-id');
+        data['model'] = $(this).attr('data-model');
+        let url = $(this).attr('data-href');
+        callApi('post',url,data,ajaxResponse);
+
+    });
 </script>
