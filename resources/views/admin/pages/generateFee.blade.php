@@ -67,7 +67,7 @@
                                         <tr>
                                             <td>
                                                 <div class="form-check">
-                                                    <input data-value="{{$job->id}}" type="checkbox" class="form-check-input">
+                                                    <input data-value="{{$job->id}}" type="checkbox" class="form-check-input checkOne">
                                                     <label class="form-check-label">{{$job->roll_no}}</label>
                                                 </div>
                                             </td>
@@ -158,16 +158,32 @@
 <script>
     let data = [];
     $('.checkAll').on('click', function(){
+        console.log('check status',$('.checkAll').is(':checked'));
+        
         let $checkboxes = $(this).parents('table').find('tbody').find('input[type=checkbox]');
         // $checkboxes.prop('checked', $('.checkAll').is(':checked'));
         
+        if($(this).is(':checked')){
+            $checkboxes.map(function(){
+                data.push($(this).attr('data-value'));
+            });
 
-        $checkboxes.map(function(){
-            console.log("$(this).attr('data-value')---",$(this).attr('data-value'));
+        } else{
+            data = [];
+        }
+
+        console.log('data--',data);
+        
+    });
+
+    $('.checkOne').on('click',function(){
+        if($(this).is(':checked')){
             data.push($(this).attr('data-value'));
-            // return $(this).attr('data-value');
-        });
 
+        } else{
+            data = data.filter(item => item != $(this).attr('data-value'));
+        }
+        console.log('data--',data);
         
     });
 
