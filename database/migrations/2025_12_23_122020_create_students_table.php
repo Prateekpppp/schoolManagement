@@ -50,6 +50,7 @@ return new class extends Migration
             $table->string('parent_password');
             $table->string('id_proof_front');
             $table->string('id_proof_back');
+            $table->string('qrcode')->nullable();
             $table->boolean('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
