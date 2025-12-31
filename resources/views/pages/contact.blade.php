@@ -107,19 +107,19 @@
                                  </div>
                               </div>
                            </div>
+                           <button type="button" class="it-btn submitForm">
+                              <span>
+                              Send Message
+                                 <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M11 1.24023L16 7.24023L11 13.2402" stroke="currentcolor" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M1 7.24023H16" stroke="currentcolor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                           </span>
+                        </button>
                         </form>
-                        <button type="button" class="it-btn submitForm">
-                           <span>
-                           Send Message
-                              <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11 1.24023L16 7.24023L11 13.2402" stroke="currentcolor" stroke-width="1.5"
-                                 stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M1 7.24023H16" stroke="currentcolor" stroke-width="1.5" stroke-miterlimit="10"
-                                 stroke-linecap="round" stroke-linejoin="round" />
-                             </svg>
-                        </span>
-                     </button>
                      </div>
                   </div>
                </div>
@@ -134,11 +134,11 @@
 
 <script>
 
-   $('.submitForm').on('click',function(e){
-      e.preventDefault();
+    function submitForm(form){
       let data = new FormData($('form')[0]);
       callAjaxFormData('post',"{{route('user.post.submitContactForm')}}",data,ajaxResponse);
-   });
+    }
+    
 
 </script>
 

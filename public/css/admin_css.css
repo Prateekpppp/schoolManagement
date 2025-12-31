@@ -6,3 +6,7 @@ a.btn:hover {
 .datepicker {
     z-index: 999999;
 }
+
+.card.height-auto .dropdown{
+    display: none !important;
+}

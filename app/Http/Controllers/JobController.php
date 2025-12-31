@@ -48,7 +48,7 @@ class JobController extends Controller
         // if($create){
             
             return response()->json([
-                'redirect'=> route('admin.jobs'),
+                'redirect'=> route('admin.pages.jobs'),
                 'response_code'=>'200',
                 'message'=>'Data updated successfully'
             ]);

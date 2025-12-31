@@ -17,7 +17,7 @@ return new class extends Migration
             // $table->string('employ_code');
             $table->string('name');
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('gender');
             $table->string('religion')->nullable();
             $table->string('blood_group')->nullable();

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_sections', function (Blueprint $table) {
+        Schema::create('transports', function (Blueprint $table) {
             $table->id();
-            $table->string('section_id');
-            $table->string('class_id');
+            $table->string('vehicle_no')->unique();
+            $table->string('driver');
+            $table->string('running_time');
+            // status => 0 = failed, 1 = processing, 2 = successful
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_sections');
+        Schema::dropIfExists('transports');
     }
 };

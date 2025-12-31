@@ -50,6 +50,7 @@
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Created At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -71,6 +72,12 @@
                                             <td>{{$job->description}}</td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>{{$job->created_at}}</td>
+                                            <td>
+                                                <div class="flex flex-row gap-2">
+                                                    <a href="javascript:void(0)" data-model="Job" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
+
+                                                </div>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach
@@ -112,7 +119,7 @@
 
     $(document).ready(function(){
         
-        callAjaxFormData('get',"{{route('admin.get.allJobs')}}",null,appendData);
+        // callAjaxFormData('get',"{{route('admin.get.allJobs')}}",null,appendData);
     });
 </script>
 

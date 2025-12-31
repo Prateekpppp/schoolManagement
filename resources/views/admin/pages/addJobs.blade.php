@@ -92,11 +92,10 @@
 
 <script>
     
-    $('.submitForm').on('click',function(e){
-        e.preventDefault();
-        let data = new FormData($(this).parents('form')[0]);
+    function submitForm(){
+        let data = new FormData($('form')[0]);
         callAjaxFormData('post',"{{route('admin.post.createJob')}}",data,ajaxResponse);
-    });
+    };
 
 </script>
 

@@ -72,6 +72,37 @@
                     </div>
                 </div>
                 <!-- Teacher Table Area End Here -->
+                <!-- Modal -->
+                <div class="modal fade" id="standard-modal" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New Section</h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="new-added-form">
+                                    <input type="hidden" name="id" value="">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12 form-group">
+                                            <label>Fee Paid *</label>
+                                            <input name="section" type="text" placeholder="" class="form-control required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="closeModel footer-btn bg-dark-low"
+                                    data-dismiss="modal">Close</button>
+                                <button type="button" class="submitForm footer-btn bg-linkedin">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 @endsection
 

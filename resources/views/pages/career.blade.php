@@ -29,6 +29,10 @@
                   <h2 class="it-section-title-3">WE ARE HIRING !!!</h2>
                </div>
                <div class="container mb-4 tdata">
+                  
+                  <div class="alert alert-danger" role="alert">
+                     No Jobs Found
+                  </div>
                   {{-- <div class="row align-items-center job-box">
 
                      <!-- LEFT : JOB DETAILS -->
@@ -83,6 +87,10 @@
          let appdata = response.appdata;
          console.log(response);
          
+         if(response.data.length == 0){
+            responseToast('No Jobs Found!');
+            return;
+         }
          response.data.forEach(function(job){
                rows += 
                   `
@@ -131,11 +139,10 @@
          $('.job_id').val($(this).attr('data-job_id'));
       });
 
-      $('.submitForm').on('click',function(e){
-         e.preventDefault();
-         let data = new FormData($(this).parents('form')[0]);
+      function submitForm(){
+         let data = new FormData($('form')[0]);
          callAjaxFormData('post',"{{route('user.post.applyNow')}}",data,ajaxResponse);
-      });
+      };
       
    </script>
 

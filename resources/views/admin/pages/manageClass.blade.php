@@ -2,7 +2,7 @@
 
 @section('inner_body')
 
-                <!-- Add New Teacher Area Start Here -->
+                <!-- Add New Class Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">

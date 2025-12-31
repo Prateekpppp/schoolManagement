@@ -16,10 +16,13 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ClassSectionController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\ContactController;
 
 
 // Admin routes
@@ -60,8 +63,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         Route::get('/changeSession/{session_name}', [DatasessionController::class,'changeSession'])->name('admin.pages.changeSession');
 
-        // classSections Module
-        Route::get('/classSections', [ClassSectionController::class,'classSections'])->name('admin.pages.classSections');
+        // Section Module
+        Route::get('/section', [SectionController::class,'section'])->name('admin.pages.section');
         
         Route::get('/allClassSections', [ClassSectionController::class,'allClassSections'])->name('admin.get.allClassSections');
         
@@ -136,6 +139,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/collectFee', [FeeController::class,'collectFee'])->name('admin.post.collectFee')->withoutMiddleware([VerifyCsrfToken::class]);
 
+        // Exam Module
+        Route::get('/examcreateExam', [ExamController::class,'exam'])->name('admin.pages.exam');
+        
+        Route::get('/allExam', [ExamController::class,'allExam'])->name('admin.get.allExam');
+        
+        Route::post('/createExam', [ExamController::class,'createExam'])->name('admin.post.createExam')->withoutMiddleware([VerifyCsrfToken::class]);        
+
+        // Job Module
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
         
         Route::get('/allJobs', [JobController::class,'allJobs'])->name('admin.get.allJobs');
@@ -147,6 +158,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createJob', [JobController::class,'createJob'])->name('admin.post.createJob')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::get('/applicants', [ApplicantController::class,'applicants'])->name('admin.pages.applicants');
+        
+        Route::get('/contact', [ContactController::class,'contact'])->name('admin.pages.contact');
         
         Route::get('/setting', function () {
             return view('admin.pages.setting');

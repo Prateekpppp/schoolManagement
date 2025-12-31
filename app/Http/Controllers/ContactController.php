@@ -23,4 +23,10 @@ class ContactController extends Controller
             'response_code'=> '200',
         ]);
     }
+
+    public function contact(){
+        $contact = Contact::all();
+
+        return view('admin.pages.contact',compact('contact'));
+    }
 }

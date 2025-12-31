@@ -51,14 +51,11 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Religion </label>
-                                    <select name="religion" class="select2">
-                                        <option value="">Please Select Religion *</option>
-                                        <option value="Hindu">Hindu</option>
-                                        <option value="Islam">Islam</option>
-                                        <option value="Christian">Christian</option>
-                                        <option value="Buddish">Buddish</option>
-                                        <option value="Others">Others</option>
+                                    <label>Role </label>
+                                    <select name="role" class="select2 required">
+                                        <option value="">Please Select Role *</option>
+                                        <option value="1">Staff</option>
+                                        <option value="2">Teacher</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -73,26 +70,26 @@
                                         <option value="O-">O-</option>
                                     </select>
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section *</label>
-                                    <select name="section" multiple class="select2 required">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Section </label>
+                                    <select name="section" multiple class="select2">
                                         <option value="">Please Select Section *</option>
                                         @foreach($sections as $class)
                                             <option value="{{$class->id}}">{{$class->section_name}}</option>
                                         @endforeach
                                     </select>
-                                </div> --}}
+                                </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Salary</label>
+                                    <label>Salary *</label>
                                     <input name="salary" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Qualification</label>
+                                    <label>Qualification *</label>
                                     <input name="qualification" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class *</label>
-                                    <select name="class" multiple class="select2 required">
+                                    <label>Class </label>
+                                    <select name="class" multiple class="select2">
                                         <option value="">Please Select Class *</option>
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->class_name}}</option>
@@ -100,8 +97,8 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Subject *</label>
-                                    <select name="subject" class="select2 required">
+                                    <label>Subject </label>
+                                    <select name="subject" class="select2">
                                         <option value="">Please Subject Class *</option>
                                         @foreach($subject as $class)
                                             <option value="{{$class->id}}">{{$class->subject}}</option>
@@ -109,22 +106,22 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Joining Date</label>
+                                    <label>Joining Date *</label>
                                     <input name="joining_date" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Teacher Photo (150px X 150px)</label>
-                                    <input name="photo" type="file" class="form-control-file">
+                                    <label class="text-dark-medium">Upload Photo (150px X 150px)</label>
+                                    <input name="photo" type="file" class="form-control-file required">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
-                                    <input name="id_proof_front" type="file" class="form-control-file">
+                                    <input name="id_proof_front" type="file" class="form-control-file required">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
-                                    <input name="id_proof_back" type="file" class="form-control-file">
+                                    <input name="id_proof_back" type="file" class="form-control-file required">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Document </label>

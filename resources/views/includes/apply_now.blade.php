@@ -16,7 +16,7 @@
                 <div class="login-page-content">
                     <div class="login-box">
                         <div class="item-logo text-center">
-                            <img src="{{asset('storage/').$appdata->logo}}" alt="logo" width="80px" height="80px">
+                            <img src="{{asset('/').$appdata->logo}}" alt="logo" width="80px" height="80px">
                         </div>
                         <form class="">
                         @csrf
@@ -42,12 +42,13 @@
                                     <option value="">Please Select</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
+                                    <option value="3">Both</option>
                                 </select>
                                 
                             </div>
                             <div class="form-group mb-3">
                                 <label>Upload Resume</label>
-                                <input name="uploads" type="file"  class="form-control" style="height: unset;">
+                                <input name="uploads" type="file" class="form-control" style="height: unset;">
                                 {{-- <i class="fas fa-lock"></i> --}}
                             </div>
                             <!-- <div class="form-group d-flex align-items-center justify-content-between">

@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_sections', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->string('section_id');
-            $table->string('class_id');
+            $table->string('exam_code')->unique();
+            $table->string('subject');
+            $table->string('class');
+            $table->string('date');
+            $table->string('room_code')->nullable();
+            $table->string('time')->nullable();
+            // status => 0 = failed, 1 = processing, 2 = successful
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_sections');
+        Schema::dropIfExists('exams');
     }
 };

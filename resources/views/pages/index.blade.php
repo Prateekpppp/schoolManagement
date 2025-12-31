@@ -238,7 +238,7 @@
                               <img src="assets/img/about/icon-1-2.png" alt="">
                               <span>Digital & Smart Classrooms</span>
                            </div>
-                           <a class="it-btn-white yellow-bg" href="#!">
+                           <a class="it-btn-white yellow-bg" href="{{route('user.about')}}">
                               <span>
                                  Read More
                                  <svg width="17" height="14" viewBox="0 0 17 14" fill="none"

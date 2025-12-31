@@ -41,7 +41,7 @@
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Academics</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.classSections')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Sections</a>
+                                    <a href="{{route('admin.pages.section')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Sections</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.addClassSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
@@ -61,13 +61,13 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Teacher</span></a>
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Member</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.staff')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Teacher</a>
+                                    <a href="{{route('admin.pages.staff')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Member</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Teacher</a>
+                                    <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Member</a>
                                 </li>
                             </ul>
                         </li>
@@ -80,6 +80,23 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.addStudent')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Fee Collection</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.generateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generated Fee</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a href="{{route('admin.pages.collectFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>
+                                </li> --}}
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
