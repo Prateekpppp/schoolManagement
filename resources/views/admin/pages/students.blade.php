@@ -85,7 +85,9 @@
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
-                                            <td><i class="fas fa-cogs text-dark-pastel-green"></i></td>
+                                            <td>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach

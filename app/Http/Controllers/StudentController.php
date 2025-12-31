@@ -137,8 +137,8 @@ class StudentController extends Controller
     }
     
     public function studentDetail(Request $request){
-        $studentDetail = Student::where('id',$request->id)->first();
-        return view('admin.pages.studentDetail',compact('studentDetail'));
+        $student = Student::where('id',$request->id)->first();
+        return view('admin.pages.studentDetail',compact('student'));
     }
     
     public function studentDetailByEnrollNo(Request $request){

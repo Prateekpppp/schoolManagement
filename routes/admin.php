@@ -117,6 +117,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createStudent', [StudentController::class,'createStudent'])->name('admin.post.createStudent')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::get('/studentDetail/{id}', [StudentController::class,'studentDetail'])->name('admin.pages.studentDetail');
+        
         Route::post('/studentDetailByEnrollNo', [StudentController::class,'studentDetailByEnrollNo'])->name('admin.post.studentDetailByEnrollNo')->withoutMiddleware([VerifyCsrfToken::class]);
         
         // Fee Module
