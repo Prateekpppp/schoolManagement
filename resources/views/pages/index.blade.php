@@ -392,10 +392,16 @@
                      <marquee direction="up" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
 
                         <ul class="news-list">
+                           @if(isset($notices) && count($notices))
+                           @forEach($notices as $notice)
+                           <li>{{$notice->notice}}</li>
+                           @endforeach
+                           @else
                            <li>Germination mission school celebrated Founder’s Day with pride.</li>
                            <li>Inter Grade Sports Fiesta held from 12–14 November.</li>
                            <li>150th birth anniversary of Vande Mataram celebrated.</li>
                            <li>Students participated in Vigilance Awareness Week.</li>
+                           @endif
                         </ul>
 
                      </marquee>

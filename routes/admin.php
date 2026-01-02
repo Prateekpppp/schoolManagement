@@ -23,6 +23,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NoticeController;
 
 
 // Admin routes
@@ -169,6 +170,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
             return view('admin.pages.setting');
         })->name('admin.pages.setting');
 
+        Route::get('/notice', [NoticeController::class,'notice'])->name('admin.pages.notice');
+        
+        Route::get('/allNotice', [NoticeController::class,'allNotice'])->name('admin.get.allNotice');
+        
+        Route::get('/addNotice', [NoticeController::class,'addNotice'])->name('admin.pages.addNotice');
+        
+        Route::post('/createNotice', [NoticeController::class,'createNotice'])->name('admin.post.createNotice')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         Route::get('/banner', [BannerController::class,'banner'])->name('admin.pages.banner');
         
         Route::get('/allBanner', [BannerController::class,'allBanner'])->name('admin.get.allBanner');

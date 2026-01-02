@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Sections</h3>
+                                <h3>All Notice</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -32,7 +32,7 @@
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div> --}}
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <a href="{{route('admin.pages.addSection')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">ADD SECTION</a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">ADD NOTICE</a>
                                 </div>
                             </div>
                         </form>
@@ -41,25 +41,27 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Section</th>
+                                        <th>Notice</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($section) || count($section) == 0)
+                                    @if(!isset($notice) || count($notice) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                         </tr>
                                     @else
-                                    @foreach ($section as $key=>$job)
+                                    @foreach ($notice as $key=>$job)
                                         <tr>
                                             <td>{{$key+1}}</td>
-                                            <td>{{$job->section}}</td>
+                                            <td>{{$job->notice}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                     <a data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a>
-                                                    <a href="javascript:void(0)" data-model="Section" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
+                                                    <a href="javascript:void(0)" data-model="Notice" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
 
                                                 </div>
                                             </td>
@@ -79,7 +81,7 @@
                     <div class="modal-dialog" role="document">
                         <form class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit Section</h5>
+                                <h5 class="modal-title">Update Notice</h5>
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -89,9 +91,9 @@
                                 <div class="new-added-form">
                                     <input id="id" type="hidden" name="id" value="">
                                     <div class="row">
-                                        <div class="col-lg-6 col-12 form-group">
-                                            <label>Section *</label>
-                                            <input name="section" type="text" placeholder="" class="form-control required">
+                                        <div class="col-12 form-group">
+                                            <label>Notice *</label>
+                                            <textarea name="notice" type="text" placeholder="" class="form-control required"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +116,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createSection')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createNotice')}}",data,ajaxResponseModal);
     }
 
     function appendData(response){
@@ -130,10 +132,6 @@
         $('.tdata').html(rows);
     }
 
-    $(document).ready(function(){
-        
-        // callAjaxFormData('get',"{{route('admin.get.allSection')}}",null,appendData);
-    });
 
 </script>
 

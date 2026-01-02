@@ -48,6 +48,8 @@ return new class extends Migration
             $table->string('mother_occupation');
             $table->string('parent_email');
             $table->string('parent_password');
+            // other details
+            // $table->string('fee');
             $table->string('id_proof_front');
             $table->string('id_proof_back');
             $table->string('qrcode')->nullable();

@@ -208,6 +208,33 @@
                 </div>
             </div>
         </div>
+        
+        <div class="card height-auto">
+            <div class="card-body">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3>Assign Fees</h3>
+                    </div>
+                </div>
+                <div class="new-added-form">
+                    <div class="row">
+                        @if(isset($fees) && count($fees))
+                        @foreach($fees as $fee)
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <div class="form-check">
+                                <input type="checkbox" name="fee[]" class="form-check-input" value="{{$fee->id}}">
+                                <label for="remember-me" class="form-check-label">{{$fee->name}}</label>
+                            </div>
+                        </div>
+                        @endforeach
+                        @else
+                            <div>Please Add Fee Types!</div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card height-auto">
             <div class="card-body">
                 <div class="heading-layout1">

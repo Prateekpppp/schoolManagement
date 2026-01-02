@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Student;
+use App\Models\StudentFee;
 use App\Models\Classes;
 use App\Models\ClassSection;
 use App\Models\Appdata;
+use App\Models\Fee;
 
 class StudentController extends Controller
 {
@@ -17,7 +19,8 @@ class StudentController extends Controller
         // ->join('class_sections','staff.section','=','class_sections.id')
         ->get(['students.*','classes.class']);
         // dd($students);
-        return view('admin.pages.students',compact('students'));
+        $fees = Fee::all();
+        return view('admin.pages.students',compact('students','fees'));
     }
 
     public function allStudents(){
@@ -122,6 +125,13 @@ class StudentController extends Controller
             $student->id_proof_back = $request->id_proof_back;
             $student->status = 1;
             $student->save();  
+
+            foreach($request->fee as $fee){
+                $studentFee = new StudentFee();
+                $studentFee->student_id = $student->id;
+                $studentFee->fee_id = $fee;
+                $studentFee->save();
+            }
 
             return response()->json([
                 'redirect'=> route('admin.pages.students'),

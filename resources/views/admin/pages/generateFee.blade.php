@@ -158,6 +158,7 @@
 <script>
     let data = [];
     $('.checkAll').on('click', function(){
+        data = [];
         console.log('check status',$('.checkAll').is(':checked'));
         
         let $checkboxes = $(this).parents('table').find('tbody').find('input[type=checkbox]');

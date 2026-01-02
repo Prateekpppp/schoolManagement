@@ -100,23 +100,6 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Fee Collection</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin.pages.generateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generated Fee</a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{route('admin.pages.collectFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>
-                                </li> --}}
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Frontend</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
@@ -129,6 +112,14 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.applicants')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Applicants</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Notice</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.notice')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Notice</a>
                                 </li>
                             </ul>
                         </li>
