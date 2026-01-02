@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClassSection;
+use App\Models\ClassSubject;
 use App\Models\Classes;
 use App\Models\Subject;
+use App\Models\Section;
 
 class ClassesController extends Controller
 {
@@ -39,8 +41,8 @@ class ClassesController extends Controller
     }
 
     public function addClass(){
-        $classSections = ClassSection::where('status',1)->get();
-        return view('admin.pages.addClass',compact('classSections'));
+        $section = Section::where('status',1)->get();
+        return view('admin.pages.addClass',compact('section'));
     }
 
     public function createClass(Request $request){
@@ -52,16 +54,15 @@ class ClassesController extends Controller
                 //     $request->all()
                 // );
                 $class = new Classes();
-                $class->class_name = $request->class_name;
-                $class->sections = json_encode($request->sections);
+                $class->class = $request->class;
                 $class->status = 1;
                 $class->save();
             } else{
+                dd($request->subject);
                 $class= Classes::where('id',$request->id)->first();
-                $class->sections = json_encode($request->sections);
-                $class->subject = json_encode($request->subject);
-                $class->class_name = $request->class_name;
+                $class->class = $request->class;
                 $class->save();
+
                 // $class = Classes::updateOrCreate(
                 //     ['id'=>$request->id],
                 //     $request->all()
@@ -75,7 +76,7 @@ class ClassesController extends Controller
 
             return response()->json([
                 'redirect'=> route('admin.pages.classes'),
-                'message'=>'Class added successfully',
+                'message'=>'Class Added successfully',
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){
@@ -88,25 +89,75 @@ class ClassesController extends Controller
 
     public function manageClass(Request $request){
         $class = Classes::where('id',$request->id)->first();
-        $cSections = [];
-        $class->sections = json_decode($class->sections);
-        if($class->sections){
-            foreach ($class->sections as $key => $value) {
-                $cSections[$value] = ClassSection::where('id',$value)->first()->section_name;
-            }
-        }
-        $classSections = ClassSection::where('status',1)->get();
         
-        $cSubject = [];
-        $class->subject = json_decode($class->subject);
-        if($class->subject){
-            foreach ($class->subject as $key => $value) {
-                $cSubject[$value] = Subject::where('id',$value)->first()->subject;
-            }
-        }
-        $subject = Subject::where('status',1)->get();
+        $sections = Section::where('status',1)->get();
+        $subjects = Subject::where('status',1)->get();
 
-        return view('admin.pages.manageClass',compact('class','classSections','cSections','subject','cSubject'));
+        $section = ClassSection::join('sections','class_sections.section_id','sections.id')
+        ->select('sections.section','class_sections.id')
+        ->where('class_id',$request->id)->get();
+        
+        $subject = ClassSubject::join('subjects','class_subjects.subject_id','subjects.id')
+        ->select('subjects.subject','class_subjects.id')
+        ->where('class_id',$request->id)->get();
+
+        return view('admin.pages.manageClass',compact('class','sections','subjects','section','subject'));
+    }
+
+    public function updateClass(Request $request){
+        
+        try{
+            if(!isset($request->id)){
+                return response()->json([
+                    'message'=> 'Something went wrong',
+                    'response_code'=> '500',
+                ]);
+            } else{
+                // dd($request->section);
+                $class= Classes::where('id',$request->id)->first();
+                $class->class = $request->class;
+                $class->save();
+                ClassSection::where('class_id',$request->id)->delete();
+                ClassSubject::where('class_id',$request->id)->delete();
+                
+                foreach ($request->section as $key => $value) {
+                    // dd('$value',$value);
+                    ClassSection::create([
+                        'class_id'=>$request->id,
+                        'section_id'=>$value
+                    ]);
+                }
+
+                foreach ($request->subject as $key => $value) {
+                    
+                    ClassSubject::create([
+                        'class_id'=>$request->id,
+                        'subject_id'=>$value
+                    ]);
+                }
+                $classSections = ClassSection::where('class_id',$request->id)->get();
+                // $class = Classes::updateOrCreate(
+                //     ['id'=>$request->id],
+                //     $request->all()
+                // );
+                return response()->json([
+                    'redirect'=> $request->header('referer'),
+                    'message'=>'Class Updated successfully',
+                    'response_code'=>'200'
+                ]);
+            }
+
+            return response()->json([
+                'redirect'=> route('admin.pages.classes'),
+                'message'=>'Class Added successfully',
+                'response_code'=>'200'
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500',
+            ]);
+        }
     }
 
     public function remove_cSection(Request $request){

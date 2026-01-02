@@ -15,7 +15,7 @@ class StudentController extends Controller
     public function students(){
         $students = Student::join('classes','students.class','=','classes.id')
         // ->join('class_sections','staff.section','=','class_sections.id')
-        ->get(['students.*','classes.class_name']);
+        ->get(['students.*','classes.class']);
         // dd($students);
         return view('admin.pages.students',compact('students'));
     }
@@ -144,6 +144,12 @@ class StudentController extends Controller
     public function studentDetailByEnrollNo(Request $request){
         try {
             $studentDetail = Student::where('enrollment_no',$request->enrollment_no)->first();
+            if(!$studentDetail){
+                return response()->json([
+                    'message'=>'No Data Found',
+                    'response_code'=>'200'
+                ]);
+            }
             return response()->json([
                 'data'=>$studentDetail,
                 'response_code'=>'200'

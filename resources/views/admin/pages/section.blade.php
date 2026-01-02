@@ -32,7 +32,7 @@
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div> --}}
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <a href="{{route('admin.pages.addClassSection')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD SECTION</a>
+                                    <a href="{{route('admin.pages.addSection')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD SECTION</a>
                                 </div>
                             </div>
                         </form>
@@ -40,25 +40,26 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Class</th>
+                                        <th>S.No.</th>
+                                        <th>Section</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($classSections) || count($classSections) == 0)
+                                    @if(!isset($section) || count($section) == 0)
                                         <tr>
                                             <td colspan="11" class="text-center">No Data Found</td>
                                         </tr>
                                     @else
-                                    @foreach ($classSections as $key=>$job)
+                                    @foreach ($section as $key=>$job)
                                         <tr>
-                                            {{-- <td>{{$key+1}}</td> --}}
-                                            <td>{{$job->section_name}}</td>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$job->section}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.editClassSection',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
-                                                    <a href="javascript:void(0)" data-model="ClassSection" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
+                                                    <a data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a>
+                                                    <a href="javascript:void(0)" data-model="Section" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
 
                                                 </div>
                                             </td>
@@ -78,7 +79,7 @@
                     <div class="modal-dialog" role="document">
                         <form class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Add New Section</h5>
+                                <h5 class="modal-title">Edit Section</h5>
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -86,10 +87,10 @@
                             </div>
                             <div class="modal-body">
                                 <div class="new-added-form">
-                                    <input type="hidden" name="id" value="">
+                                    <input id="id" type="hidden" name="id" value="">
                                     <div class="row">
                                         <div class="col-lg-6 col-12 form-group">
-                                            <label>Fee Paid *</label>
+                                            <label>Section *</label>
                                             <input name="section" type="text" placeholder="" class="form-control required">
                                         </div>
                                     </div>
@@ -111,6 +112,11 @@
 
 <script>
 
+    function submitForm(form){
+        let data = new FormData($(form)[0]);
+        callAjaxFormData('post',"{{route('admin.post.createSection')}}",data,ajaxResponseModal);
+    }
+
     function appendData(response){
         let rows = '';
         console.log(response);
@@ -126,7 +132,7 @@
 
     $(document).ready(function(){
         
-        // callAjaxFormData('get',"{{route('admin.get.allClassSections')}}",null,appendData);
+        // callAjaxFormData('get',"{{route('admin.get.allSection')}}",null,appendData);
     });
 
 </script>

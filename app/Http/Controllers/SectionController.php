@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ClassSection;
+use App\Models\ClassSubject;
+use App\Models\Classes;
+use App\Models\Subject;
 use App\Models\Section;
 
 class SectionController extends Controller
@@ -13,7 +17,7 @@ class SectionController extends Controller
         return view('admin.pages.section',compact('section'));
     }
 
-    public function allsection(){
+    public function allSection(){
         try {
             $section = Section::where('status',1)->get();
             return response()->json([
@@ -29,7 +33,8 @@ class SectionController extends Controller
     }
 
     public function addSection(){
-        return view('admin.pages.addSection');
+        $section = Section::where('status',1)->get();
+        return view('admin.pages.addSection',compact('section'));
     }
 
     public function createSection(Request $request){
@@ -41,19 +46,19 @@ class SectionController extends Controller
                 //     $request->all()
                 // );
                 $section = Section::where('id',$request->id)->first();
-                $section->section_name = $request->section_name;
+                $section->section = $request->section;
                 $section->status = 1;
                 $section->save();
             } else{
                 $section = new Section();
-                $section->section_name = $request->section_name;
+                $section->section = $request->section;
                 $section->status = 1;
                 $section->save();
             }
 
             return response()->json([
                 'redirect'=> route('admin.pages.section'),
-                'message'=>'Class Section added successfully',
+                'message'=>'Section Updated successfully',
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){
@@ -67,5 +72,21 @@ class SectionController extends Controller
     public function manageSection(Request $request){
         $classSection = Section::where('id',$request->id)->first();
         return view('admin.pages.section',compact('section'));
+    }
+
+    public function getSectionsByClass(Request $request){
+        $section = ClassSection::join('sections','class_sections.section_id','sections.id')
+        ->select('sections.section','sections.id')
+        ->where('class_id',$request->class_id)->get();
+
+        $subject = ClassSubject::join('subjects','class_subjects.subject_id','subjects.id')
+        ->select('subjects.*')
+        ->where('class_id',$request->class_id)->get();
+
+        return response()->json([
+            'section'=>$section,
+            'subject'=>$subject,
+            'response_code'=>'200'
+        ]);
     }
 }

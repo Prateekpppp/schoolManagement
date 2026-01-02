@@ -121,21 +121,18 @@
                 <div class="new-added-form">
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Class *</label>
-                            <select name="class" class="select2 required">
+                            <label>Class </label>
+                            <select name="class" class="select2 changeClass required">
                                 <option value="">Please Select Class *</option>
                                 @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->class_name}}</option>
+                                    <option value="{{$class->id}}">{{$class->class}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Section *</label>
+                            <label>Section </label>
                             <select name="section" class="select2 required">
-                                <option value="">Please Select Section *</option>
-                                @foreach($sections as $class)
-                                    <option value="{{$class->id}}">{{$class->section_name}}</option>
-                                @endforeach
+                                <option class="secAfter" value="">Please Select Section *</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -159,6 +156,9 @@
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Sibling Enrolment No. </label>
                             <input name="enrollment_no" type="text" placeholder="" class="form-control">
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group flex items-center">
+                            <a href="javascript:void(0)" type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark searchSibling">Search</a>
                         </div>
                     </div>
                 </div>
@@ -219,15 +219,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                            <input name="photo" type="file" class="form-control-file">
+                            <input name="photo" type="file" class="form-control-file required">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
-                            <input name="id_proof_front" type="file" class="form-control-file">
+                            <input name="id_proof_front" type="file" class="form-control-file required">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
-                            <input name="id_proof_back" type="file" class="form-control-file">
+                            <input name="id_proof_back" type="file" class="form-control-file required">
                         </div>
                         <div class="col-12 form-group mg-t-8">
                             <button type="submit" class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
@@ -246,6 +246,25 @@
 
 <script>
 
+    function searchSibling(response){
+        if(response.data.length == 0){
+        responseToast(response.message,'bg-warning');
+        }
+        response = response.data;
+        $('input[name=father_name]').val(response.father_name);
+        $('input[name=father_phone]').val(response.father_phone);
+        $('input[name=father_occupation]').val(response.father_occupation);
+        $('input[name=mother_name]').val(response.mother_name);
+        $('input[name=mother_phone]').val(response.mother_phone);
+        $('input[name=mother_occupation]').val(response.mother_occupation);
+        $('input[name=parent_email]').val(response.parent_email);
+
+    }
+    
+    $('.searchSibling').on('click', function(){
+        callApi('post',"{{route('admin.post.studentDetailByEnrollNo')}}",{enrollment_no:$('input[name=enrollment_no]').val()},searchSibling);
+    });
+    
     function submitForm(form){
         let data = new FormData($(form)[0]);
         callAjaxFormData('post',"{{route('admin.post.createStudent')}}",data,ajaxResponse);

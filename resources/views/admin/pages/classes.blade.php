@@ -40,8 +40,8 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>S.No.</th>
                                         <th>Class</th>
-                                        {{-- <th>Sections</th> --}}
                                         {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
@@ -49,13 +49,15 @@
                                 <tbody class="tdata">
                                     @if(!isset($classes) || count($classes) == 0)
                                         <tr>
+                                            <td colspan="11" class="text-center"></td>
                                             <td colspan="11" class="text-center">No Data Found</td>
+                                            <td colspan="11" class="text-center"></td>
                                         </tr>
                                     @else
                                     @foreach ($classes as $key=>$job)
                                         <tr>
-                                            {{-- <td>{{$key+1}}</td> --}}
-                                            <td>{{$job->class_name}}</td>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$job->class}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
@@ -75,6 +77,7 @@
                     </div>
                 </div>
                 <!-- Teacher Table Area End Here -->
+                
 
 @endsection
 
@@ -82,6 +85,11 @@
 @section('inner_js')
 
 <script>
+
+    function submitForm(form){
+        let data = new FormData($(form)[0]);
+        callAjaxFormData('post',"{{route('admin.post.createClass')}}",data,ajaxResponseModal);
+    }
 
     function appendData(response){
         let rows = '';

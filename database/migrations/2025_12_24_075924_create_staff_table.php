@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('section')->nullable();
             $table->string('id_proof_front');
             $table->string('id_proof_back');
-            $table->string('other_document');
+            $table->string('other_document')->nullable();
             $table->string('qualification');
             // status = 0 = inactive, 1 = teacher, 2 = staff, 3 = drivers, 4 = others
             $table->tinyInteger('status')->default(1);

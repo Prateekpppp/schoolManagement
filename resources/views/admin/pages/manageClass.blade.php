@@ -30,15 +30,15 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class Name *</label>
-                                    <input value="{{(isset($class) && !is_null($class)) ? $class->class_name : ''}}" name="class_name" type="text" placeholder="" class="form-control required">
+                                    <input value="{{(isset($class) && !is_null($class)) ? $class->class : ''}}" name="class" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section *</label>
-                                    <select name="sections[]" multiple class="select2 required">
+                                    <select name="section[]" multiple class="select2 required">
                                         <option value="">Please Select Section *</option>
-                                        @if(count($classSections) > 0)
-                                            @foreach($classSections as $section)
-                                                <option value="{{$section->id}}">{{$section->section_name}}</option>
+                                        @if(count($sections) > 0)
+                                            @foreach($sections as $sec)
+                                                <option value="{{$sec->id}}">{{$sec->section}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -47,9 +47,9 @@
                                     <label>Subject *</label>
                                     <select name="subject[]" multiple class="select2 required">
                                         <option value="">Please Select Subject *</option>
-                                        @if(count($subject) > 0)
-                                            @foreach($subject as $section)
-                                                <option value="{{$section->id}}">{{$section->subject}}</option>
+                                        @if(count($subjects) > 0)
+                                            @foreach($subjects as $sub)
+                                                <option value="{{$sub->id}}">{{$sub->subject}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Sections</h3>
+                                <h3>Sections</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -96,21 +96,23 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($cSections) || count($cSections) == 0)
+                                    @if(!isset($section) || count($section) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td class="text-center"></td>
                                         </tr>
                                     @else
                                     @php
                                     $sn1 = 0;
                                     @endphp
-                                    @foreach ($cSections as $key=>$job)
+                                    @foreach ($section as $key=>$job)
                                         <tr>
                                             <td>{{$sn1+1}}</td>
-                                            <td>{{$job}}</td>
+                                            <td>{{$job->section}}</td>
                                             {{-- <td>{{$key}}</td> --}}
-                                            <td data-id="{{$key}}">
-                                                <a class_id="{{$class->id}}" section_id="{{$key}}" class="remove_cSection btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            <td>
+                                                <a href="javascript:void(0)" data-model="ClassSection" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         
@@ -125,7 +127,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Subjects</h3>
+                                <h3>Subjects</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -153,21 +155,23 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($cSubject) || count($cSubject) == 0)
+                                    @if(!isset($subject) || count($subject) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td class="text-center"></td>
                                         </tr>
                                     @else
                                     @php
                                     $sn = 0;
                                     @endphp
-                                    @foreach ($cSubject as $key=>$job)
+                                    @foreach ($subject as $key=>$job)
                                         <tr>
                                             <td>{{$sn+1}}</td>
-                                            <td>{{$job}}</td>
+                                            <td>{{$job->subject}}</td>
                                             {{-- <td>{{$key}}</td> --}}
-                                            <td data-id="{{$key}}">
-                                                <a class_id="{{$class->id}}" subject_id="{{$key}}" class="remove_cSubject btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            <td>
+                                                <a href="javascript:void(0)" data-model="ClassSection" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         
@@ -189,7 +193,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createClass')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.updateClass')}}",data,ajaxResponseModal);
     }
 
     $('.remove_cSection').on('click', function(){

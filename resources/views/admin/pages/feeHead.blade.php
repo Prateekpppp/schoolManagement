@@ -30,6 +30,26 @@
                                     <input name="name" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Class </label>
+                                    <select name="class" class="select2 required">
+                                        <option value="">Please Select Class *</option>
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Period </label>
+                                    <select name="period" class="select2 required">
+                                        <option value="">Please Select Period *</option>
+                                        <option value="0">One Time</option>
+                                        <option value="1">Monthly</option>
+                                        <option value="2">Quaterly</option>
+                                        <option value="3">Half Yearly</option>
+                                        <option value="4">Annually</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Fee Amount *</label>
                                     <input name="amount" type="text" placeholder="" class="form-control required">
                                 </div>
@@ -69,6 +89,8 @@
                                     <tr>
                                         <th>S.NO.</th>
                                         <th>Fee Head</th>
+                                        <th>Class</th>
+                                        <th>Period</th>
                                         <th>Amount</th>
                                         {{-- <th>Status</th> --}}
                                         <th>Action</th>
@@ -87,6 +109,8 @@
                                         <tr>
                                             <td>{{$sn1+1}}</td>
                                             <td>{{$job->name}}</td>
+                                            <td>{{$job->class}}</td>
+                                            <td>{{!$job->period ? 'One Time' : ($job->period ==1 ? 'Monthly' : ($job->period == 2 ? 'Quaterly' : ($job->period == 3 ? 'Half Yearly' : 'Annually')))}}</td>
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>

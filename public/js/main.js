@@ -93,9 +93,9 @@
     /*-------------------------------------
           All Checkbox Checked
       -------------------------------------*/
-    $(".checkAll").on("click", function () {
-      $(this).parents('.table').find('input:checkbox').prop('checked', this.checked);
-    });
+    // $(".checkAll").on("click", function () {
+    //   $(this).parents('.table').find('input:checkbox').prop('checked', this.checked);
+    // });
 
     /*-------------------------------------
           Tooltip init

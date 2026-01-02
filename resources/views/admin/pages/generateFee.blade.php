@@ -163,7 +163,9 @@
         let $checkboxes = $(this).parents('table').find('tbody').find('input[type=checkbox]');
         // $checkboxes.prop('checked', $('.checkAll').is(':checked'));
         
+
         if($(this).is(':checked')){
+            $(this).parents('.table').find('.checkOne').prop('checked', this.checked);
             $checkboxes.map(function(){
                 data.push($(this).attr('data-value'));
             });

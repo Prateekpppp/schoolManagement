@@ -66,13 +66,15 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         // Section Module
         Route::get('/section', [SectionController::class,'section'])->name('admin.pages.section');
         
-        Route::get('/allClassSections', [ClassSectionController::class,'allClassSections'])->name('admin.get.allClassSections');
+        Route::get('/allSection', [SectionController::class,'allSection'])->name('admin.get.allSection');
         
-        Route::get('/addClassSection', [ClassSectionController::class,'addClassSection'])->name('admin.pages.addClassSection');
+        Route::get('/addSection', [SectionController::class,'addSection'])->name('admin.pages.addSection');
         
-        Route::post('/createClassSection', [ClassSectionController::class,'createClassSection'])->name('admin.post.createClassSection')->withoutMiddleware([VerifyCsrfToken::class]);        
+        Route::post('/createSection', [SectionController::class,'createSection'])->name('admin.post.createSection')->withoutMiddleware([VerifyCsrfToken::class]);        
         
-        Route::get('/editClassSection/{id}', [ClassSectionController::class,'editClassSection'])->name('admin.pages.editClassSection')->withoutMiddleware([VerifyCsrfToken::class]);        
+        Route::get('/manageSection/{id}', [SectionController::class,'manageSection'])->name('admin.pages.manageSection')->withoutMiddleware([VerifyCsrfToken::class]);        
+        
+        Route::post('/getSectionsByClass', [SectionController::class,'getSectionsByClass'])->name('admin.post.getSectionsByClass')->withoutMiddleware([VerifyCsrfToken::class]);        
         
         // Classes Module
         Route::get('/classes', [ClassesController::class,'classes'])->name('admin.pages.classes');
@@ -84,6 +86,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createClass', [ClassesController::class,'createClass'])->name('admin.post.createClass')->withoutMiddleware([VerifyCsrfToken::class]);        
 
         Route::get('/manageClass/{id}', [ClassesController::class,'manageClass'])->name('admin.pages.manageClass');
+        
+        Route::post('/updateClass', [ClassesController::class,'updateClass'])->name('admin.post.updateClass')->withoutMiddleware([VerifyCsrfToken::class]);  
 
         Route::post('/remove_cSection', [ClassesController::class,'remove_cSection'])->name('admin.post.remove_cSection')->withoutMiddleware([VerifyCsrfToken::class]);
         

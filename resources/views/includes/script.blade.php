@@ -103,8 +103,12 @@
         var searchText = $(this).val().toLowerCase(); 
 
         $('table tbody tr').filter(function() {
-            
-            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+            if($(this).text().toLowerCase().indexOf(searchText) > -1){
+                $(this).removeClass('hidden');
+            } else{
+                $(this).addClass('hidden');
+            }
+
         });
     });
     
@@ -148,12 +152,6 @@
         }
     });
 
-    // js for form changes
-    $('select[name=class]').on('change',function(){
-        console.log('class changed');
-        
-        // callApi('post',"{{route('admin.post.remove_cSection')}}",data,ajaxResponseModal);
-    });
   
     $('.delete').on('click',function(){
         let data = {};
@@ -161,6 +159,9 @@
         data['id'] = $(this).attr('data-id');
         data['model'] = $(this).attr('data-model');
         let url = $(this).attr('data-href');
+        if(!url){
+            url = '{{route('admin.post.delete')}}';
+        }
         callApi('post',url,data,ajaxResponse);
 
     });

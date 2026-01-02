@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fees', function (Blueprint $table) {
+        Schema::create('class_subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            // period: 0 = one time, 1 = monthly, 2 = Quaterly, 3 = half yearly, 4 = annually
-            $table->string('class');
-            $table->string('period');
-            $table->string('amount');
+            $table->string('subject_id');
+            $table->string('class_id');
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fees');
+        Schema::dropIfExists('class_subjects');
     }
 };

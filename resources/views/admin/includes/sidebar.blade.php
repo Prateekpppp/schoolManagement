@@ -44,7 +44,7 @@
                                     <a href="{{route('admin.pages.section')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Sections</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.addClassSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
+                                    <a href="{{route('admin.pages.addSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.classes')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
@@ -86,13 +86,13 @@
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Fee Collection</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
+                                    <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Type</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.generateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generated Fee</a>
+                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Invoices</a>
                                 </li>
                                 {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.collectFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>

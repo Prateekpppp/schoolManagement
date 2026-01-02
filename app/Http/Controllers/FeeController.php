@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fee;
 use App\Models\Student;
+use App\Models\Classes;
 use App\Models\StudentFee;
 
 class FeeController extends Controller
@@ -12,7 +13,8 @@ class FeeController extends Controller
     //
     public function feeHead(Request $request){
         $fee = Fee::where('status',1)->get();
-        return view('admin.pages.feeHead',compact('fee'));
+        $classes = Classes::where('status',1)->get();
+        return view('admin.pages.feeHead',compact('fee','classes'));
     }
 
     public function allFeeHead(){
@@ -33,12 +35,16 @@ class FeeController extends Controller
             if(!$request->id){
                 $fee = new Fee();
                 $fee->name = $request->name;
+                $fee->class = $request->class;
+                $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->status = 1;
                 $fee->save();
             } else {
                 $fee = Fee::where('id',$request->id)->first();
                 $fee->name = $request->name;
+                $fee->class = $request->class;
+                $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->save();
             }

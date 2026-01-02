@@ -71,12 +71,24 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section </label>
-                                    <select name="section" multiple class="select2">
-                                        <option value="">Please Select Section *</option>
-                                        @foreach($sections as $class)
-                                            <option value="{{$class->id}}">{{$class->section_name}}</option>
+                                    <label>Class </label>
+                                    <select name="class" class="select2 changeClass required">
+                                        <option value="">Please Select Class *</option>
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Section </label>
+                                    <select name="section" class="select2">
+                                        <option class="secAfter" value="">Please Select Section *</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Subject </label>
+                                    <select name="subject" class="select2">
+                                        <option class="subAfter" value="">Please Subject Class *</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -86,24 +98,6 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Qualification *</label>
                                     <input name="qualification" type="text" placeholder="" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class </label>
-                                    <select name="class" multiple class="select2">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($classes as $class)
-                                            <option value="{{$class->id}}">{{$class->class_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Subject </label>
-                                    <select name="subject" class="select2">
-                                        <option value="">Please Subject Class *</option>
-                                        @foreach($subject as $class)
-                                            <option value="{{$class->id}}">{{$class->subject}}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Joining Date *</label>

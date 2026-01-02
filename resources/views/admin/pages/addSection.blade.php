@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section Name *</label>
-                                    <input value="{{(isset($classSection) && !is_null($classSection)) ? $classSection->section_name : ''}}" name="section_name" type="text" placeholder="" class="form-control required">
+                                    <input value="{{(isset($classSection) && !is_null($classSection)) ? $classSection->section_name : ''}}" name="section" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -53,7 +53,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createClassSection')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createSection')}}",data,ajaxResponseModal);
     }
 
 </script>

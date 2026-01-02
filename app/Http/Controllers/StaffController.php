@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Staff;
 use App\Models\Classes;
 use App\Models\ClassSection;
+use App\Models\ClassTeacher;
 use App\Models\Subject;
 
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class StaffController extends Controller
     //
     public function staff(){
         $staff = Staff::join('classes','staff.class','=','classes.id')
-        ->join('class_sections','staff.section','=','class_sections.id')
-        ->get(['staff.*','classes.class_name','class_sections.section_name']);
+        ->join('sections','staff.section','=','sections.id')
+        ->get(['staff.*','classes.class','sections.section']);
 
         $staff = Staff::join('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject')
@@ -27,8 +28,8 @@ class StaffController extends Controller
         try {
             
             $staff = Staff::join('classes','staff.class','=','classes.id')
-            ->join('class_sections','staff.section','=','class_sections.id')
-            ->get(['staff.*','classes.class_name','class_sections.section_name']);
+            ->join('sections','staff.section','=','sections.id')
+            ->get(['staff.*','classes.class','sections.section']);
             return response()->json([
                 'data'=>$staff,
                 'response_code'=>'200'
@@ -105,12 +106,18 @@ class StaffController extends Controller
             $staff->salary = $request->salary;
             $staff->joining_date = $request->joining_date;
             $staff->qualification = $request->qualification;
-            // $staff->class = $request->class;
-            $staff->class = json_encode($request->class);
+            $staff->class = $request->class;
+            // $staff->class = json_encode($request->class);
             // $staff->section = $request->section;
             $staff->subject = $request->subject;
             $staff->status = 1;
             $staff->save();
+
+            // dd($staff->id);
+            $classTeacher = new ClassTeacher();
+            $classTeacher->staff_id = $staff->id;
+            $classTeacher->class_id = $staff->class;
+            $classTeacher->save();
 
             return response()->json([
                 'message'=>'Staff added successfully',
