@@ -117,23 +117,46 @@ class ClassesController extends Controller
                 $class= Classes::where('id',$request->id)->first();
                 $class->class = $request->class;
                 $class->save();
-                ClassSection::where('class_id',$request->id)->delete();
-                ClassSubject::where('class_id',$request->id)->delete();
-                
-                foreach ($request->section as $key => $value) {
-                    // dd('$value',$value);
-                    ClassSection::create([
-                        'class_id'=>$request->id,
-                        'section_id'=>$value
-                    ]);
+                // ClassSection::where('class_id',$request->id)->delete();
+                // ClassSubject::where('class_id',$request->id)->delete();
+                // dd($request->section);
+                if(isset($request->section)){
+                    foreach ($request->section as $key => $value) {
+                        // dd('$value',$value);
+                        // ClassSection::create([
+                        //     'class_id'=>$request->id,
+                        //     'section_id'=>$value
+                        // ]);
+                        $classSection = ClassSection::where('class_id',$value)->first();
+                        // dd($classSection);
+                        if($classSection){
+                            continue;
+                        }else{
+                            $classSection = new ClassSection();
+                            $classSection->class_id = $request->id;
+                            $classSection->section_id = $value;
+                            $classSection->save();
+                        }
+                    }
                 }
 
-                foreach ($request->subject as $key => $value) {
-                    
-                    ClassSubject::create([
-                        'class_id'=>$request->id,
-                        'subject_id'=>$value
-                    ]);
+                if(isset($request->subject)){
+                    foreach ($request->subject as $key => $value) {
+                        
+                        // ClassSubject::create([
+                        //     'class_id'=>$request->id,
+                        //     'subject_id'=>$value
+                        // ]);
+                        $classSection = ClassSubject::where('class_id',$value)->first();
+                        if($classSection){
+                            continue;
+                        }else{
+                            $classSection = new ClassSubject();
+                            $classSection->class_id = $request->id;
+                            $classSection->subject_id = $value;
+                            $classSection->save();
+                        }
+                    }
                 }
                 $classSections = ClassSection::where('class_id',$request->id)->get();
                 // $class = Classes::updateOrCreate(

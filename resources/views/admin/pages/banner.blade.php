@@ -43,8 +43,9 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>S.NO.</th>
                                         <th>Image</th>
-                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -55,11 +56,14 @@
                                     @else
                                     @foreach ($banners as $key=>$job)
                                         <tr>
-                                            {{-- <td>{{$key+1}}</td> --}}
+                                            <td>{{$key+1}}</td>
                                             <td>
                                                 <img src="{{asset('/').$job->image}}" alt="Image" width="50px" height="50px">
                                             </td>
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
+                                            <td>
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Banner" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach

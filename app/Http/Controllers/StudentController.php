@@ -10,6 +10,7 @@ use App\Models\Classes;
 use App\Models\ClassSection;
 use App\Models\Appdata;
 use App\Models\Fee;
+use FeeController;
 
 class StudentController extends Controller
 {
@@ -41,7 +42,8 @@ class StudentController extends Controller
     public function addStudent(){
         $classes = Classes::where('status',1)->get();
         $sections = ClassSection::where('status',1)->get();
-        return view('admin.pages.addStudent',compact('classes','sections'));
+        $fees = Fee::where('status',1)->get();
+        return view('admin.pages.addStudent',compact('classes','sections','fees'));
     }
 
     public function createStudent(Request $request){
@@ -127,9 +129,11 @@ class StudentController extends Controller
             $student->save();  
 
             foreach($request->fee as $fee){
+                $fees = Fee::where('id',$fee)->first();
                 $studentFee = new StudentFee();
                 $studentFee->student_id = $student->id;
                 $studentFee->fee_id = $fee;
+                $studentFee->fee = $fees->amount;
                 $studentFee->save();
             }
 

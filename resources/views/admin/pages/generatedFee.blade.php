@@ -39,13 +39,14 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>S. No.</th>
-                                        <th>Roll No.</th>
+                                        <th>S.NO.</th>
+                                        <th>Roll NO.</th>
                                         <th>Name</th>
                                         <th>Class</th>
                                         <th>Month</th>
                                         <th>Fee</th>
                                         <th>Paid</th>
+                                        <th>Dues</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -64,10 +65,11 @@
                                             <td>{{date('M',strtotime($job->created_at))}}</td>
                                             <td>{{$job->amount}}</td>
                                             <td>{{$job->paid}}</td>
+                                            <td>{{$job->amount-$job->paid}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a data-id="{{$job->id}}" data-model="Fee" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
+                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
                                                     <a href="javascript:void(0)" data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee">Collect</a>
 
                                                 </div>
@@ -89,7 +91,7 @@
                     <div class="modal-dialog" role="document">
                         <form class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Select Fee Head</h5>
+                                <h5 class="modal-title">Update Invoice</h5>
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -105,7 +107,21 @@
                                         </div>
                                         <div class="col-lg-6 col-12 form-group">
                                             <label>Collection Date *</label>
-                                            <input value="" name="updated_at" type="text" placeholder="dd/mm/yyyy" class="form-control  air-datepicker required">
+                                            <input value="" name="date" type="text" placeholder="dd/mm/yyyy" class="form-control  air-datepicker required">
+                                        </div>
+                                        <div class="col-lg-6 col-12 form-group">
+                                            <label>Payment Method </label>
+                                            <select name="payment_method" class="select2">
+                                                <option value="">Please Select Class *</option>
+                                                <option value="Cash">Cash</option>
+                                                <option value="UPI">UPI</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Cheque">Bank Transfer</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 col-12 form-group">
+                                            <label>Transaction ID </label>
+                                            <input value="" name="transaction_id" type="text" placeholder="" class="form-control">
                                         </div>
                                     </div>
                                 </div>

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // period: 0 = one time, 1 = monthly, 2 = Quaterly, 3 = half yearly, 4 = annually
             $table->string('class');
+            // period: 0 = one time, 1 = monthly, 2 = Quaterly, 3 = half yearly, 4 = annually
             $table->string('period');
             $table->string('amount');
             $table->tinyInteger('status')->default(1);

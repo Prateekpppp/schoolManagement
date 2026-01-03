@@ -7,12 +7,15 @@ use App\Models\Fee;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\StudentFee;
+use App\Models\Transaction;
 
 class FeeController extends Controller
 {
     //
     public function feeHead(Request $request){
-        $fee = Fee::where('status',1)->get();
+        $fee = Fee::join('classes','classes.id','fees.class')
+        ->select('fees.*','classes.class')
+        ->where('fees.status',1)->get();
         $classes = Classes::where('status',1)->get();
         return view('admin.pages.feeHead',compact('fee','classes'));
     }
@@ -62,7 +65,7 @@ class FeeController extends Controller
         }
     }
 
-    public function generateFee(){
+    public function generateFee(Request $request){
         $fee = Fee::where('status',1)->get();
         $students = Student::where('status',1)->get();
         return view('admin.pages.generateFee',compact('fee','students'));
@@ -70,14 +73,39 @@ class FeeController extends Controller
 
     public function assignFee(Request $request){
         // dd($request->all());
+        $fee = Fee::where('status',1)->get();
         $data = [];
-        $students = explode(',',$request->students);
+        // $students = explode(',',$request->students);
+        $students = $request->students;
         foreach ($students as $k=>$value) {
-            $data[$k]['fee_id'] = $request->name;
-            $data[$k]['student_id'] = $value;
+            $data['student_id'] = $value;
+            foreach($fee as $feetype){
+                // $data['fee_id'] = $feetype->id;
+                // $studentFee = StudentFee::where('student_id',$data['student_id'])->where('fee_id',$feetype->id)->where('status',1)->first();
+                $studentFee = StudentFee::where('student_id',$data['student_id'])->where('fee_id',$feetype->id)->first();
+                dd($studentFee);
+                if($studentFee){
+                    if(date('M Y',$studentFee->created_at) != now()->format('M Y')){
+                        // update fee
+                        if($studentFee->status==1){
+                            $studentFee->fee += $feetype->amount;
+                            $studentFee->save();
+                        }
+                    } else{
+                        continue;
+                    }
+                }
+                
+                // dd(date('M Y',$studentFee->created_at)==now()->format('M Y'));
+
+                $studentFee = new StudentFee();
+                $studentFee->student_id = $data['student_id'];
+                $studentFee->fee_id = $feetype->id;
+                $studentFee->fee = $feetype->amount;
+                $studentFee->save();
+            }
         }
         // dd($data);
-        $students = \DB::table('student_fees')->insert($data);
         return response()->json([
             'redirect'=> $request->header('referer'),
             'message'=>'Fee Assigned Successfully',
@@ -96,7 +124,10 @@ class FeeController extends Controller
     }
 
     public function collectFee(Request $request){
+
+
         $feeCollect = StudentFee::where('id',$request->id)->first();
+
         $fee = Fee::where('id',$feeCollect->fee_id)->first();
 
         $feeCollect->paid += $request->paid;
@@ -106,11 +137,33 @@ class FeeController extends Controller
             $feeCollect->status = 2;
         }
         $feeCollect->save();
+
+        $transactionData = Transaction::max('id') + 1;
+        
+        $transaction = new Transaction();
+        $transaction->receipt_no = sprintf('%06d', $transactionData);
+        $transaction->title = $fee->name;
+        $transaction->student_id = $feeCollect->student_id;
+        $transaction->transaction_amount = $request->paid;
+        $transaction->transaction_id = $request->transaction_id;
+        $transaction->date = $request->date;
+        $transaction->payment_method = $request->payment_method;
+        $transaction->save();
+
         return response()->json([
             'redirect'=> $request->header('referer'),
             'message'=>'Fee Collected Successfully',
             'response_code'=> '200'
         ]);
+        
+    }
+
+    public function receipt(Request $request){
+        $data = Transaction::all();
+        return view('admin.pages.receipt',compact('data'));
+    }
+
+    public function feeHistory(Request $request){
         
     }
 }

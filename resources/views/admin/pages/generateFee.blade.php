@@ -192,13 +192,16 @@
 
     $('.generateFee').on('click',function(e){
         
+        $(this).addClass('disabled');
         if(data.length == 0){
             responseToast('Please Select Student', 'bg-warning');
-            $('.closeModel').click();
+            // $('.closeModel').click();
+            $(this).removeClass('disabled');
             return;
         }
-        $('#standard-modal').modal('show');
-        $('input[name=students]').val(data);
+        // $('#standard-modal').modal('show');
+        // $('input[name=students]').val(data);
+        callApi('post',"{{route('admin.post.assignFee')}}",{students:data},ajaxResponseModal);
     });
     
     function submitForm(form){

@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // student_fees = invoice
-        Schema::create('student_fees', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('receipt_no')->nullable();
+            $table->string('title');
             $table->string('student_id');
-            $table->string('fee_id');
-            $table->string('paid')->default('0');
-            $table->string('fee')->default('0');
-            // status => 0 = failed, 1 = processing, 2 = successful
+            $table->string('transaction_amount');
+            $table->string('transaction_id')->nullable();
+            $table->string('date');
+            $table->string('payment_method')->default('Cash');
+            $table->string('session_id')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_fees');
+        Schema::dropIfExists('transactions');
     }
 };

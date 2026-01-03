@@ -60,7 +60,7 @@
                                         <th>Section</th> --}}
                                         <th>Subject</th>
                                         <th>Joining Date</th>
-                                        {{-- <th>Status</th> --}}
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -86,6 +86,10 @@
                                             <td>{{$job->subject}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>{{$job->joining_date}}</td>
+                                            <td>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.staffDetail',$job->id)}}">Details</a>
+                                                <a href="javascript:void(0)" data-model="Staff" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach

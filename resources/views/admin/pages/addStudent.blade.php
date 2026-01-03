@@ -285,6 +285,7 @@
         $('input[name=mother_phone]').val(response.mother_phone);
         $('input[name=mother_occupation]').val(response.mother_occupation);
         $('input[name=parent_email]').val(response.parent_email);
+        $('input[name=password]').val(response.password);
 
     }
     

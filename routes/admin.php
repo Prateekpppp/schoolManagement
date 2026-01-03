@@ -24,6 +24,7 @@ use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\TransactionController;
 
 
 // Admin routes
@@ -116,6 +117,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createStaff', [StaffController::class,'createStaff'])->name('admin.post.createStaff')->withoutMiddleware([VerifyCsrfToken::class]);        
 
+        Route::get('/staffDetail/{id}', [StaffController::class,'staffDetail'])->name('admin.pages.staffDetail');
+
         // Student Module
         Route::get('/students', [StudentController::class,'students'])->name('admin.pages.students');
         
@@ -143,6 +146,13 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/generatedFee', [FeeController::class,'generatedFee'])->name('admin.pages.generatedFee');
         
         Route::post('/collectFee', [FeeController::class,'collectFee'])->name('admin.post.collectFee')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        // Transaction Module
+        Route::get('/receipt', [FeeController::class,'receipt'])->name('admin.pages.receipt');
+        
+        Route::get('/print_invoice/{id}', [TransactionController::class,'print_invoice'])->name('admin.pages.print_invoice');
+
+        Route::get('/print_receipt/{id}', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');
 
         // Exam Module
         Route::get('/examcreateExam', [ExamController::class,'exam'])->name('admin.pages.exam');

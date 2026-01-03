@@ -131,4 +131,12 @@ class StaffController extends Controller
         }
     }
 
+    public function staffDetail(Request $request){
+        $student = Staff::join('subjects','subjects.id','staff.subject')
+        ->select('staff.*','subjects.subject')
+        ->where('staff.id',$request->id)
+        ->first();
+        return view('admin.pages.staffDetail',compact('student'));
+    }
+    
 }

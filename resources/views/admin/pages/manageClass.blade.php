@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section *</label>
-                                    <select name="section[]" multiple class="select2 required">
+                                    <select name="section[]" multiple class="select2">
                                         <option value="">Please Select Section *</option>
                                         @if(count($sections) > 0)
                                             @foreach($sections as $sec)
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Subject *</label>
-                                    <select name="subject[]" multiple class="select2 required">
+                                    <select name="subject[]" multiple class="select2">
                                         <option value="">Please Select Subject *</option>
                                         @if(count($subjects) > 0)
                                             @foreach($subjects as $sub)
@@ -171,7 +171,7 @@
                                             <td>{{$job->subject}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
-                                                <a href="javascript:void(0)" data-model="ClassSection" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                <a href="javascript:void(0)" data-model="ClassSubject" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         

@@ -94,9 +94,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Invoices</a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{route('admin.pages.collectFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>
-                                </li> --}}
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.receipt')}}" class="nav-link"><i class="fas fa-angle-right"></i>Receipt</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
