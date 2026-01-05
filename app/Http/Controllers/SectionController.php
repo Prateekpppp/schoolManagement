@@ -8,6 +8,7 @@ use App\Models\ClassSubject;
 use App\Models\Classes;
 use App\Models\Subject;
 use App\Models\Section;
+use App\Models\Fee;
 
 class SectionController extends Controller
 {
@@ -76,16 +77,22 @@ class SectionController extends Controller
 
     public function getSectionsByClass(Request $request){
         $section = ClassSection::join('sections','class_sections.section_id','sections.id')
-        ->select('sections.section','sections.id')
+        ->select('sections.*','class_sections.class_id')
         ->where('class_id',$request->class_id)->get();
 
         $subject = ClassSubject::join('subjects','class_subjects.subject_id','subjects.id')
-        ->select('subjects.*')
+        ->select('subjects.*','class_subjects.class_id')
         ->where('class_id',$request->class_id)->get();
+        
+        $fees = Classes::join('fees','fees.class','classes.id')
+        ->select('fees.*','classes.id')
+        ->where('classes.id',$request->class_id)
+        ->get();
 
         return response()->json([
             'section'=>$section,
             'subject'=>$subject,
+            'fee'=>$fees,
             'response_code'=>'200'
         ]);
     }

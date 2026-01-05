@@ -10,3 +10,9 @@ a.btn:hover {
 .card.height-auto .dropdown{
     display: none !important;
 }
+
+.item-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

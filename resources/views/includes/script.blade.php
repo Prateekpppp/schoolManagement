@@ -151,7 +151,6 @@
             submitForm($(this).parents('form'));
         }
     });
-
   
     $('.delete').on('click',function(){
         let data = {};

@@ -25,6 +25,8 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\HomeworkController;
+use App\Http\Controllers\StudenthomeworkController;
 
 
 // Admin routes
@@ -146,6 +148,34 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/generatedFee', [FeeController::class,'generatedFee'])->name('admin.pages.generatedFee');
         
         Route::post('/collectFee', [FeeController::class,'collectFee'])->name('admin.post.collectFee')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        // Homework Module
+        Route::get('/homework', [HomeworkController::class,'homework'])->name('admin.pages.homework');
+
+        Route::get('/homeworkFilter', [HomeworkController::class,'homeworkFilter'])->name('admin.pages.homeworkFilter');
+        
+        Route::get('/addHomework', [HomeworkController::class,'addHomework'])->name('admin.pages.addHomework');
+
+        Route::get('/allHomework', [HomeworkController::class,'allHomework'])->name('admin.get.allHomework');
+        
+        Route::get('/addHomework', [HomeworkController::class,'addHomework'])->name('admin.pages.addHomework');
+        
+        Route::get('/updateHomework', [HomeworkController::class,'updateHomework'])->name('admin.pages.updateHomework');
+        
+        Route::post('/createHomework', [HomeworkController::class,'createHomework'])->name('admin.post.createHomework')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        // Student Homework Module
+        Route::get('/studentHomework', [StudenthomeworkController::class,'homework'])->name('admin.pages.homework');
+
+        Route::get('/studentHomeworkFilter', [StudenthomeworkController::class,'homeworkFilter'])->name('admin.pages.homeworkFilter');
+        
+        Route::get('/allStudentHomework', [StudenthomeworkController::class,'allHomework'])->name('admin.get.allHomework');
+        
+        Route::get('/addStudentHomework', [StudenthomeworkController::class,'addHomework'])->name('admin.pages.addHomework');
+        
+        Route::get('/updateStudentHomework', [StudenthomeworkController::class,'updateHomework'])->name('admin.pages.updateHomework');
+        
+        Route::post('/createStudentHomework', [StudenthomeworkController::class,'createHomework'])->name('admin.post.createHomework')->withoutMiddleware([VerifyCsrfToken::class]);
         
         // Transaction Module
         Route::get('/receipt', [FeeController::class,'receipt'])->name('admin.pages.receipt');

@@ -107,7 +107,7 @@
                                     @endphp
                                     @foreach ($fee as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1+1}}</td>
+                                            <td>{{$sn1=+1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{!$job->period ? 'One Time' : ($job->period ==1 ? 'Monthly' : ($job->period == 2 ? 'Quaterly' : ($job->period == 3 ? 'Half Yearly' : 'Annually')))}}</td>

@@ -9,13 +9,64 @@
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-green ">
-                                        <i class="flaticon-classmates text-green"></i>
+                                        <i class="fa fa-layer-group text-green"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="item-content">
-                                        <div class="item-title">Students</div>
-                                        <div class="item-number"><span class="counter" data-num="150000">1,50,000</span></div>
+                                        <div class="item-title">Total Classes</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$classes}}">{{$classes}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue">
+                                        <i class="fa fa-layer-group text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Sections</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$sections}}">{{$sections}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="flaticon-couple text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Active Students</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$students}}">{{$students}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-red">
+                                        <i class="flaticon-couple text-red"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Inactive Students</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$inactiveStudents}}">{{$inactiveStudents}}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +83,77 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Teachers</div>
-                                        <div class="item-number"><span class="counter" data-num="2250">2,250</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{$teachers}}">{{$teachers}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue">
+                                        <i class="flaticon-multiple-users-silhouette text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Staff</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$staff}}">{{$staff}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{-- </div>
+                <div class="row gutters-20"> --}}
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue ">
+                                        <i class="fa fa-file-invoice text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Invoices</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$totalInvoice}}">{{$totalInvoice}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-green ">
+                                        <i class="fa fa-file-invoice text-green"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Paid Invoice</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$paidInvoice}}">{{$paidInvoice}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-red ">
+                                        <i class="fa fa-file-invoice text-red"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Dues</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$totalDue}}">{{$totalDue}}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -43,13 +164,13 @@
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-yellow">
-                                        <i class="flaticon-couple text-orange"></i>
+                                        <i class="flaticon-money text-orange"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="item-content">
-                                        <div class="item-title">Parents</div>
-                                        <div class="item-number"><span class="counter" data-num="5690">5,690</span></div>
+                                        <div class="item-title">Total Payments</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$transactions}}">{{$transactions}}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -59,14 +180,82 @@
                         <div class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <div class="item-icon bg-light-red">
-                                        <i class="flaticon-money text-red"></i>
+                                    <div class="item-icon bg-light-dark">
+                                        <i class="fa fa-briefcase text-gray"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="item-content">
-                                        <div class="item-title">Earnings</div>
-                                        <div class="item-number"><span>$</span><span class="counter" data-num="193000">1,93,000</span></div>
+                                        <div class="item-title">Total Jobs</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$jobs}}">{{$jobs}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue">
+                                        <i class="fa fa-envelope text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Contact Inquiries</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$contactEnquiries}}">{{$contactEnquiries}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-green">
+                                        <i class="fa fa-image text-green"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Sliders</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$sliders}}">{{$sliders}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue">
+                                        <i class="fa fa-camera text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Gallery</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$gallery}}">{{$gallery}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="fa fa-bullhorn text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Notice</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$notice}}">{{$notice}}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +297,7 @@
                                             <span>15,000</span>
                                         </div>
                                     </div>
-                                    <div class="dropdown">
+                                    <div class="dropdown hidden">
                                         <a class="date-dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                             aria-expanded="false">Jan 20, 2019</a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -124,7 +313,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4 col-3-xxxl">
+                    <div class="col-12 col-xl-4 col-3-xxxl hidden">
                         <div class="card dashboard-card-two pd-b-20">
                             <div class="card-body">
                                 <div class="heading-layout1">
@@ -191,18 +380,18 @@
                                 </div>
                                 <div class="student-report">
                                     <div class="student-count pseudo-bg-blue">
-                                        <h4 class="item-title">Female Students</h4>
-                                        <div class="item-number">45,000</div>
+                                        <h4 class="item-title">Girls</h4>
+                                        <div class="item-number">{{ $female }}</div>
                                     </div>
                                     <div class="student-count pseudo-bg-yellow">
-                                        <h4 class="item-title">Male Students</h4>
-                                        <div class="item-number">1,05,000</div>
+                                        <h4 class="item-title">Boys</h4>
+                                        <div class="item-number">{{ $males }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-6 col-4-xxxl">
+                    <div class="col-12 col-xl-6 col-4-xxxl hidden">
                         <div class="card dashboard-card-four pd-b-20">
                             <div class="card-body">
                                 <div class="heading-layout1">
@@ -229,7 +418,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 col-4-xxxl">
+                    <div class="col-lg-6 col-xl-6 col-4-xxxl hidden">
                         <div class="card dashboard-card-five pd-b-20">
                             <div class="card-body pd-b-14">
                                 <div class="heading-layout1">
@@ -291,7 +480,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 col-4-xxxl">
+                    <div class="col-lg-6 col-xl-6 col-4-xxxl hidden">
                         <div class="card dashboard-card-six pd-b-20">
                             <div class="card-body">
                                 <div class="heading-layout1 mg-b-17">
@@ -352,7 +541,7 @@
                 </div>
                 <!-- Dashboard Content End Here -->
                 <!-- Social Media Start Here -->
-                <div class="row gutters-20">
+                <div class="row gutters-20 hidden">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-fb hover-fb">

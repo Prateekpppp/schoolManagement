@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('dob');
             $table->string('gender');
+            // status 1 = male, 2 = female, 3 = other
             $table->string('religion');
             $table->string('blood_group')->nullable();
             $table->string('caste');

@@ -45,6 +45,35 @@
         callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:$(this).val()},changeSectionSubject);
     });
 
+    $(document).ready(function(){
+        let class_id = $('.changeClass').val();
+        if(class_id){
+            callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:class_id},changeSectionSubject);
+        }
+    });
+
+    $('.submitFilterForm').on('click',function(e){
+        $(this).addClass('disabled');
+        e.preventDefault();
+        let exitLoop = true;
+        let requiredInputs = $('.required');
+        $(requiredInputs).each(function(){
+            if($(this).val() != ''){
+                
+                exitLoop = false;
+                scrollToElement($(this));
+                // return false;
+            }
+            
+        });
+        if(!exitLoop){
+            $(this).parents('form').submit();
+            // submitFilterForm($(this).parents('form'));
+        } else {
+            responseToast(`Please Provide Some Inputs`,'bg-warning');
+            $(this).removeClass('disabled');
+        }
+    });
     // js for form changes
     // $('select[name=class]').on('change',function(){
         

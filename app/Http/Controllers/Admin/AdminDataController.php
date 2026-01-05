@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,16 @@ use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\DynamicModel;
+use App\Models\Classes;
+use App\Models\Contact;
+use App\Models\Gallery;
+use App\Models\Job;
+use App\Models\Notice;
+use App\Models\Section;
+use App\Models\Staff;
+use App\Models\Student;
+use App\Models\StudentFee;
+use App\Models\Transaction;
 
 class AdminDataController extends Controller
 {
@@ -31,8 +42,27 @@ class AdminDataController extends Controller
     
     public function index(){
         // $user = User::getCurrentUser();
-        
-        return view('admin.pages.index');
+        $classes = Classes::where('status',1)->count();
+        $sections = Section::where('status',1)->count();
+        $students = Student::where('status',1)->count();
+        $inactiveStudents = Student::where('status',0)->count();
+        $teachers = Staff::where('status',1)->count();
+        $staff = Staff::where('status',2)->count();
+        $totalInvoice = StudentFee::sum('fee');
+        $paidInvoice = StudentFee::sum('paid');
+        $duesInvoice = $totalInvoice - $paidInvoice;
+        $totalDue = sprintf("%.2f", $duesInvoice);
+        $transactions = Transaction::count();
+        $totalSiblings = '';
+        $female = Student::where('gender',2)->count();
+        $males = Student::where('gender',1)->count();
+        $jobs = Job::where('status',1)->count();
+        $contactEnquiries = Contact::count();
+        $sliders = Banner::where('status',1)->count();
+        $gallery = Gallery::where('status',1)->count();
+        $notice = Notice::where('status',1)->count();
+        // $totalSiblings = Student::whereNotNull('sibling_id')->count();
+        return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice'));
     }
     
     public function createData(Request $request){

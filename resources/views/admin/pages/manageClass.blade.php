@@ -108,7 +108,7 @@
                                     @endphp
                                     @foreach ($section as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1+1}}</td>
+                                            <td>{{$sn1=+1}}</td>
                                             <td>{{$job->section}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
@@ -167,7 +167,7 @@
                                     @endphp
                                     @foreach ($subject as $key=>$job)
                                         <tr>
-                                            <td>{{$sn+1}}</td>
+                                            <td>{{$sn=+1}}</td>
                                             <td>{{$job->subject}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
