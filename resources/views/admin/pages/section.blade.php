@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>All Sections</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.addSection')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">ADD SECTION</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -31,9 +34,9 @@
                                 {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div> --}}
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <a href="{{route('admin.pages.addSection')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">ADD SECTION</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                         <div class="table-responsive">

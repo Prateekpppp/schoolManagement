@@ -40,12 +40,13 @@
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
-                                        <th>Roll NO.</th>
+                                        {{-- <th>Roll NO.</th> --}}
                                         <th>Name</th>
+                                        <th>Father's Name</th>
                                         <th>Class</th>
-                                        <th>Month</th>
-                                        <th>Fee</th>
-                                        <th>Paid</th>
+                                        {{-- <th>Month</th> --}}
+                                        {{-- <th>Fee</th> --}}
+                                        {{-- <th>Paid</th> --}}
                                         <th>Dues</th>
                                         <th>Action</th>
                                     </tr>
@@ -59,16 +60,17 @@
                                     @foreach ($fee as $k=>$job)
                                         <tr>
                                             <td>{{$k+1}}</td>
-                                            <td>{{$job->roll_no}}</td>
                                             <td>{{$job->name}}</td>
+                                            <td>{{$job->father_name}}</td>
                                             <td>{{$job->class}}</td>
-                                            <td>{{date('M',strtotime($job->created_at))}}</td>
-                                            <td>{{$job->amount}}</td>
-                                            <td>{{$job->paid}}</td>
+                                            {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
+                                            {{-- <td>{{$job->amount}}</td> --}}
+                                            {{-- <td>{{$job->paid}}</td> --}}
                                             <td>{{$job->amount-$job->paid}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
+                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Details</a>
                                                     <a target="_blank" href="{{route('admin.pages.print_invoice',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
                                                     <a href="javascript:void(0)" data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee">Collect</a>
 

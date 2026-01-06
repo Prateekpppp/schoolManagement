@@ -24,7 +24,7 @@
                                     <input name="search" type="text" placeholder="Search by Roll ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
+                                    <input name="search" type="text" placeholder="Search by Month ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
                                     <input name="search" type="text" placeholder="Search by Class ..." class="form-control">

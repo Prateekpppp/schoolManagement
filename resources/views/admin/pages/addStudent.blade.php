@@ -246,15 +246,19 @@
                     <div class="row">
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                            <input name="photo" type="file" class="form-control-file required">
+                            <input name="photo" type="file" class="form-control-file">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
-                            <input name="id_proof_front" type="file" class="form-control-file required">
+                            <input name="id_proof_front" type="file" class="form-control-file">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
-                            <input name="id_proof_back" type="file" class="form-control-file required">
+                            <input name="id_proof_back" type="file" class="form-control-file">
+                        </div>
+                        <div class="col-lg-6 col-12 form-group mg-t-30">
+                            <label class="text-dark-medium">Upload Other Document </label>
+                            <input name="other_document" type="file" class="form-control-file">
                         </div>
                         <div class="col-12 form-group mg-t-8">
                             <button type="submit" class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>

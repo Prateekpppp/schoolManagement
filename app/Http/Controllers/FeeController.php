@@ -116,7 +116,7 @@ class FeeController extends Controller
     public function generatedFee(){
         $fee = Fee::join('student_fees','fees.id','student_fees.fee_id')
         ->join('students','student_fees.student_id','students.id')
-        ->select('students.roll_no','students.name','students.class','fees.amount','student_fees.id','student_fees.paid','student_fees.created_at','student_fees.status')
+        ->select('students.roll_no','students.name','students.father_name','students.class','fees.amount','student_fees.id','student_fees.paid','student_fees.created_at','student_fees.status')
         ->where('student_fees.status',1)
         ->get();
         // dd($fee);
