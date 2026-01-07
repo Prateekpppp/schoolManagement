@@ -52,6 +52,7 @@ class BannerController extends Controller
             }
 
             return response()->json([
+                'redirect'=> $request->header('referer'),
                 'message'=>'Banner images added successfully',
                 'response_code'=>'200'
             ]);

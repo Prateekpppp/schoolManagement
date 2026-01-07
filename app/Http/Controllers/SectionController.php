@@ -58,7 +58,7 @@ class SectionController extends Controller
             }
 
             return response()->json([
-                'redirect'=> route('admin.pages.section'),
+                'redirect'=> $request->header('referer'),
                 'message'=>'Section Updated successfully',
                 'response_code'=>'200'
             ]);

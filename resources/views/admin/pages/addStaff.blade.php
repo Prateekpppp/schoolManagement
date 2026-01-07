@@ -7,7 +7,10 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Personal Details</h3>
+                                <h3>Add Staff</h3>
+                            </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.staff')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -54,8 +57,8 @@
                                     <label>Role </label>
                                     <select name="role" class="select2 required">
                                         <option value="">Please Select Role *</option>
-                                        <option value="1">Staff</option>
-                                        <option value="2">Teacher</option>
+                                        <option value="1">Teacher</option>
+                                        <option value="2">Staff</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">

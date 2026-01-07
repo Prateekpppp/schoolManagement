@@ -19,19 +19,29 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Roll ..." class="form-control">
-                                </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.studentFilter')}}">
+                            <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Class ..." class="form-control">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button name="search" type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                             </div>
                         </form>
@@ -39,6 +49,11 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        {{-- <th>Religion</th> --}}
+                                        {{-- <th>Blood Group</th> --}}
+                                        {{-- <th>Caste</th> --}}
+                                        {{-- <th>State</th> --}}
+                                        {{-- <th>Address</th> --}}
                                         <th>S. No.</th>
                                         <th>Photo</th>
                                         <th>Enrollment No.</th>
@@ -46,12 +61,7 @@
                                         <th>Name</th>
                                         <th>Date Of birth</th>
                                         <th>Gender</th>
-                                        {{-- <th>Religion</th> --}}
-                                        {{-- <th>Blood Group</th> --}}
-                                        {{-- <th>Caste</th> --}}
                                         <th>City</th>
-                                        {{-- <th>State</th> --}}
-                                        {{-- <th>Address</th> --}}
                                         <th>Phone</th>
                                         <th>E-mail</th>
                                         <th>Father's Name</th>
@@ -64,7 +74,21 @@
                                 <tbody class="tdata">
                                     @if(!isset($students) || count($students) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($students as $k=>$job)

@@ -40,6 +40,8 @@ return new class extends Migration
             $table->string('roll_no')->unique();
 
             // sibling option in form
+            $table->string('sibling_id')->nullable();
+
             // parent details
             $table->string('father_name');
             $table->string('father_phone');

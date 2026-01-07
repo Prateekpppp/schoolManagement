@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>All Gallery</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.addGallery')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Gallery</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -44,7 +47,7 @@
                                 <thead>
                                     <tr>
                                         <th>Image</th>
-                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -59,7 +62,11 @@
                                             <td>
                                                 <img src="{{asset('/').$job->image}}" alt="Image" width="50px" height="50px">
                                             </td>
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
+                                            <td>
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Gallery" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            </td>
+
                                         </tr>
                                         
                                     @endforeach

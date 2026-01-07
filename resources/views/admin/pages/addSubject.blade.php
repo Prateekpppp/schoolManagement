@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>Update Subject</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.subject')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>
+                            </div>
                         </div>
                         <form class="new-added-form">
                             @if(isset($subject))

@@ -5,7 +5,7 @@
                 <!-- Dashboard summery Start Here -->
                 <div class="row gutters-20">
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.classes')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-green ">
@@ -19,10 +19,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.section')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-blue">
@@ -36,10 +36,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.students',['status'=>1])}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-yellow">
@@ -53,10 +53,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.students')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-red">
@@ -70,10 +70,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.staff')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-blue">
@@ -87,10 +87,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.staff')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-blue">
@@ -104,12 +104,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 {{-- </div>
                 <div class="row gutters-20"> --}}
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.generatedFee')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-blue ">
@@ -123,10 +123,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.receipt')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-green ">
@@ -140,10 +140,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.generatedFee')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-red ">
@@ -157,10 +157,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.receipt')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-yellow">
@@ -174,10 +174,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.jobs')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-dark">
@@ -191,7 +191,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="dashboard-summery-one mg-b-20">
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.banner')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-green">
@@ -225,10 +225,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.gallery')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-blue">
@@ -242,10 +242,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
+                        <a href="{{route('admin.pages.notice')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <div class="item-icon bg-light-yellow">
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <!-- Dashboard summery End Here -->

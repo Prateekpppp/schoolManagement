@@ -90,6 +90,23 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="fa fa-file"></i><span>Transport</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.driver')}}" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.vehicle')}}" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Routes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.receipt')}}" class="nav-link"><i class="fas fa-angle-right"></i>Students</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-globe"></i><span>Frontend</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">

@@ -52,14 +52,14 @@ class SubjectController extends Controller
                     $request->all()
                 );
                 return response()->json([
-                    'redirect'=> route('admin.pages.subject'),
+                    'redirect'=> $request->header('referer'),
                     'message'=>'Subject Updated successfully',
                     'response_code'=>'200'
                 ]);
             }
 
             return response()->json([
-                'redirect'=> route('admin.pages.subject'),
+                'redirect'=> $request->header('referer'),
                 'message'=>'Subject added successfully',
                 'response_code'=>'200'
             ]);

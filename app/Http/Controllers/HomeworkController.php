@@ -72,6 +72,7 @@ class HomeworkController extends Controller
         
         return view('admin.pages.updateHomework',compact('classes','data'));
     }
+    
     public function createHomework(Request $request){
         
         try{
@@ -106,7 +107,7 @@ class HomeworkController extends Controller
             $student->save();  
 
             return response()->json([
-            'redirect'=> $request->header('referer'),
+                'redirect'=> $request->header('referer'),
                 'message'=> 'Data updated successfully',
                 'response_code'=> '200',
             ]);

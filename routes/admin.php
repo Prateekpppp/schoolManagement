@@ -27,6 +27,9 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\StudenthomeworkController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\DriverRouteController;
 
 
 // Admin routes
@@ -49,6 +52,38 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
         
+        // Vehicle Module
+        Route::get('/vehicle', [VehicleController::class,'driver'])->name('admin.pages.vehicle');
+
+        Route::get('/vehicleFilter', [VehicleController::class,'staffFilter'])->name('admin.pages.vehicleFilter');
+
+        Route::get('/allVehicle', [VehicleController::class,'allDriver'])->name('admin.get.allVehicle');
+
+        Route::get('/addVehicle', [VehicleController::class,'addDriver'])->name('admin.pages.addVehicle');
+
+        Route::post('/createVehicle', [VehicleController::class,'createDriver'])->name('admin.post.createVehicle')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateVehicle', [VehicleController::class,'updateDriver'])->name('admin.pages.updateVehicle');
+
+        Route::post('/manageVehicle', [VehicleController::class,'manageDriver'])->name('admin.post.manageVehicle')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        // Driver Module
+        Route::get('/driver', [DriverController::class,'driver'])->name('admin.pages.driver');
+        
+        Route::get('/driverFilter', [DriverController::class,'driverFilter'])->name('admin.pages.driverFilter');
+        
+        Route::get('/allDriver', [DriverController::class,'allDriver'])->name('admin.get.allDriver');
+        
+        Route::get('/addDriver', [DriverController::class,'addDriver'])->name('admin.pages.addDriver');
+        
+        Route::post('/createDriver', [DriverController::class,'createDriver'])->name('admin.post.createDriver')->withoutMiddleware([VerifyCsrfToken::class]);        
+
+        Route::get('/updateDriver', [DriverController::class,'updateDriver'])->name('admin.pages.updateDriver');
+
+        Route::post('/manageDriver', [DriverController::class,'manageDriver'])->name('admin.post.manageDriver')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/driverDetail/{id}', [DriverController::class,'driverDetail'])->name('admin.pages.driverDetail');
+        // Logout Route
         Route::get('/logout', function () {
             Session::flush();
             return redirect()->route('admin.login');
@@ -113,22 +148,32 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         // Staff Module
         Route::get('/staff', [StaffController::class,'staff'])->name('admin.pages.staff');
         
+        Route::get('/staffFilter', [StaffController::class,'staffFilter'])->name('admin.pages.staffFilter');
+        
         Route::get('/allStaff', [StaffController::class,'allStaff'])->name('admin.get.allStaff');
         
         Route::get('/addStaff', [StaffController::class,'addStaff'])->name('admin.pages.addStaff');
         
         Route::post('/createStaff', [StaffController::class,'createStaff'])->name('admin.post.createStaff')->withoutMiddleware([VerifyCsrfToken::class]);        
 
+        Route::get('/updateStaff', [StaffController::class,'updateStaff'])->name('admin.pages.updateStaff');
+
+        Route::post('/manageStaff', [StaffController::class,'manageStaff'])->name('admin.post.manageStaff')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         Route::get('/staffDetail/{id}', [StaffController::class,'staffDetail'])->name('admin.pages.staffDetail');
 
         // Student Module
         Route::get('/students', [StudentController::class,'students'])->name('admin.pages.students');
+        
+        Route::get('/studentFilter', [StudentController::class,'studentFilter'])->name('admin.pages.studentFilter');
         
         Route::get('/allStudents', [StudentController::class,'allStudents'])->name('admin.get.allStudents');
         
         Route::get('/addStudent', [StudentController::class,'addStudent'])->name('admin.pages.addStudent');
         
         Route::post('/createStudent', [StudentController::class,'createStudent'])->name('admin.post.createStudent')->withoutMiddleware([VerifyCsrfToken::class]);
+          
+        Route::get('/updateStudent', [StudentController::class,'updateStudent'])->name('admin.pages.updateStudent');
         
         Route::get('/studentDetail/{id}', [StudentController::class,'studentDetail'])->name('admin.pages.studentDetail');
         
@@ -136,12 +181,18 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         // Fee Module
         Route::get('/feeHead', [FeeController::class,'feeHead'])->name('admin.pages.feeHead');
+          
+        Route::get('/feeHeadFilter', [FeeController::class,'feeHeadFilter'])->name('admin.pages.feeHeadFilter');
         
         Route::get('/allFeeHead', [FeeController::class,'allFeeHead'])->name('admin.get.allFeeHead');
         
         Route::post('/createFeeHead', [FeeController::class,'createFeeHead'])->name('admin.post.createFeeHead')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::get('/updateFeeHead', [FeeController::class,'updateFeeHead'])->name('admin.pages.updateFeeHead');
+        
         Route::get('/generateFee', [FeeController::class,'generateFee'])->name('admin.pages.generateFee');
+        
+        Route::get('/filterGenerateFee', [FeeController::class,'filterGenerateFee'])->name('admin.pages.filterGenerateFee');
         
         Route::post('/assignFee', [FeeController::class,'assignFee'])->name('admin.post.assignFee')->withoutMiddleware([VerifyCsrfToken::class]);
         
@@ -202,6 +253,7 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createJob', [JobController::class,'createJob'])->name('admin.post.createJob')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::get('/updateJob', [JobController::class,'updateJob'])->name('admin.pages.updateJob');
         Route::get('/applicants', [ApplicantController::class,'applicants'])->name('admin.pages.applicants');
         
         Route::get('/contact', [ContactController::class,'contact'])->name('admin.pages.contact');

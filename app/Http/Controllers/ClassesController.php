@@ -75,7 +75,7 @@ class ClassesController extends Controller
             }
 
             return response()->json([
-                'redirect'=> route('admin.pages.classes'),
+                'redirect'=> $request->header('referer'),
                 'message'=>'Class Added successfully',
                 'response_code'=>'200'
             ]);

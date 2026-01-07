@@ -7,7 +7,10 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Teachers Data</h3>
+                                <h3>All Staff Data</h3>
+                            </div>
+                            <div>
+                                <a href="{{route('admin.pages.addStaff')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Add Staff</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -23,19 +26,29 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by ID ..." class="form-control">
-                                </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.staffFilter')}}">
+                            <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Phone ..." class="form-control">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                             </div>
                         </form>
@@ -64,12 +77,22 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($staff) && count($staff) == 0)
+                                    @if(!isset($data) && count($data) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
-                                    @foreach ($staff as $key=>$job)
+                                    @foreach ($data as $key=>$job)
                                         <tr>
                                             <td>{{'EMP_'.$job->id}}</td>
                                             {{-- <td>{{$key+1}}</td> --}}
@@ -87,6 +110,7 @@
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>{{$job->joining_date}}</td>
                                             <td>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStaff', ['id' => $job->id])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.staffDetail',$job->id)}}">Details</a>
                                                 <a href="javascript:void(0)" data-model="Staff" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>

@@ -39,6 +39,12 @@
 
         $('.subAfter').after(html);
 
+        @if(isset($data) && isset($data->section_id))
+            $('select[name=section]').val("{{$data->section_id}}").trigger('change');
+        @endif
+        @if(isset($data) && isset($data->subject_id))
+            $('select[name=subject]').val("{{$data->subject_id}}").change();
+        @endif
     }
 
     $('.changeClass').on('change', function(){

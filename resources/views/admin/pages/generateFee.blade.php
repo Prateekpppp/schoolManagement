@@ -18,22 +18,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Roll ..." class="form-control">
-                                </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.filterGenerateFee')}}">
+                            <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Month ..." class="form-control">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Class ..." class="form-control">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
@@ -41,7 +51,7 @@
                                         <th>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Roll</label>
+                                                <label class="form-check-label">All</label>
                                             </div>
                                         </th>
                                         <th>Photo</th>
@@ -50,17 +60,28 @@
                                         <th>Class</th>
                                         <th>Section</th>
                                         <th>Parents</th>
-                                        {{-- <th>Address</th> --}}
                                         <th>Date Of Birth</th>
+                                        <th>City</th>
                                         <th>Phone</th>
                                         <th>E-mail</th>
-                                        <th></th>
+                                        {{-- <th></th> --}}
+                                        {{-- <th>Address</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
                                     @if(!isset($students) && count($students) == 0)
                                         <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
                                         </tr>
                                     @else
                                     @foreach ($students as $k=>$job)
@@ -68,7 +89,7 @@
                                             <td>
                                                 <div class="form-check">
                                                     <input data-value="{{$job->id}}" type="checkbox" class="form-check-input checkOne">
-                                                    <label class="form-check-label">{{$job->roll_no}}</label>
+                                                    <label class="form-check-label">Check</label>
                                                 </div>
                                             </td>
                                             <td>

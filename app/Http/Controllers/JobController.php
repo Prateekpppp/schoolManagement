@@ -13,7 +13,11 @@ class JobController extends Controller
     //
     function createJob(Request $request){
 
-        $modelObject = new Job();
+        if(isset($request->id)){
+            $modelObject = Job::where('id',$request->id)->first();
+        } else{
+            $modelObject = new Job();
+        }
         $modelObject->title = $request->title;
         $modelObject->salary = $request->salary;
         $modelObject->openings = $request->openings;
@@ -60,6 +64,11 @@ class JobController extends Controller
         //         'message'=>'Data not updated successfully'
         //     ]);
         // }
+    }
+
+    public function updateJob(Request $request){
+        $data = Job::where('id',$request->id)->first();
+        return view('admin.pages.updateJob',compact('data'));
     }
 
     public function jobs(){

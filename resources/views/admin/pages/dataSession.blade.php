@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>All Sessions</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.addDatasession')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Session</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -23,29 +26,20 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20">
+                        <div class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by ID ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Name ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Phone ..." class="form-control">
-                                </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <input name="search" type="text" placeholder="Search by Year ..." class="form-control">
                                 </div>
                             </div>
-                        </form>
+                        </div>
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Session</th>
                                         {{-- <th>Classes</th> --}}
-                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -59,7 +53,10 @@
                                             {{-- <td>{{$key+1}}</td> --}}
                                             <td>{{$job->session_name}}</td>
                                             {{-- <td>{{$job->classes ?? '--'}}</td> --}}
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
+                                            <td>
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Datasession" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach
@@ -92,7 +89,7 @@
 
     $(document).ready(function(){
         
-        callAjaxFormData('get',"{{route('admin.get.allDatasession')}}",null,appendData);
+        // callAjaxFormData('get',"{{route('admin.get.allDatasession')}}",null,appendData);
     });
 </script>
 

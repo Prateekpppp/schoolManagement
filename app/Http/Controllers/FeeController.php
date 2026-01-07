@@ -13,11 +13,30 @@ class FeeController extends Controller
 {
     //
     public function feeHead(Request $request){
-        $fee = Fee::join('classes','classes.id','fees.class')
+        $data = Fee::join('classes','classes.id','fees.class')
         ->select('fees.*','classes.class')
         ->where('fees.status',1)->get();
         $classes = Classes::where('status',1)->get();
-        return view('admin.pages.feeHead',compact('fee','classes'));
+        return view('admin.pages.feeHead',compact('data','classes'));
+    }
+
+    public function feeHeadFilter(Request $request){
+        $data = Fee::join('classes','classes.id','fees.class')
+        ->select('fees.*','classes.class');
+        
+        if($request->name){
+            $data = $data->where('fees.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if($request->class_id){
+            $data = $data->where('classes.id',$request->class_id);
+        } 
+        if($request->section_id){
+            $data = $data->where('sections.id',$request->section_id);
+        }
+        $data = $data->get();
+
+        $classes = Classes::where('status',1)->get();
+        return view('admin.pages.feeHead',compact('data','classes'));
     }
 
     public function allFeeHead(){
@@ -26,6 +45,14 @@ class FeeController extends Controller
             'data'=>$fee,
             'response_code'=> '200'
         ]);
+    }
+
+    public function updateFeeHead(Request $request){
+        $data = Fee::join('classes','classes.id','fees.class')
+        ->select('fees.*','classes.class','classes.id as class_id')
+        ->where('fees.id',$request->id)->first();
+        
+        return view('admin.pages.updateFeeHead',compact('data'));
     }
 
     // public function addFee(){
@@ -68,6 +95,25 @@ class FeeController extends Controller
     public function generateFee(Request $request){
         $fee = Fee::where('status',1)->get();
         $students = Student::where('status',1)->get();
+        return view('admin.pages.generateFee',compact('fee','students'));
+    }
+
+    public function filterGenerateFee(Request $request){
+        $fee = Fee::where('status',1)->get();
+        
+        $students = Student::join('classes','students.class','=','classes.id');
+        // ->join('class_sections','staff.section','=','class_sections.id')
+        if($request->name){
+            $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if($request->class_id){
+            $students = $students->where('students.class',$request->class_id);
+        } 
+        if($request->section_id){
+            $students = $students->where('students.section',$request->section_id);
+        }
+        $students = $students->get(['students.*','classes.class']);
+
         return view('admin.pages.generateFee',compact('fee','students'));
     }
 

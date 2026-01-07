@@ -83,6 +83,32 @@
                                 </div>
                             </div>
                         </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.feeHeadFilter')}}">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
@@ -92,20 +118,26 @@
                                         <th>Class</th>
                                         <th>Period</th>
                                         <th>Amount</th>
-                                        {{-- <th>Status</th> --}}
                                         <th>Action</th>
+                                        {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($fee) || count($fee) == 0)
+                                    @if(!isset($data) || count($data) == 0)
                                         <tr>
+                                            <td></td>
+                                            <td></td>
                                             <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
                                         </tr>
                                     @else
                                     @php
                                     $sn1 = 0;
                                     @endphp
-                                    @foreach ($fee as $key=>$job)
+                                    @foreach ($data as $key=>$job)
                                         <tr>
                                             <td>{{$sn1=+1}}</td>
                                             <td>{{$job->name}}</td>
@@ -114,7 +146,11 @@
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
-                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Fee" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                <div class="flex flex-row gap-2">
+                                                    <a href="{{route('admin.pages.updateFeeHead', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Fee" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+
+                                                </div>
                                             </td>
                                         </tr>
                                         

@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>Add New Session</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.dataSession')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>

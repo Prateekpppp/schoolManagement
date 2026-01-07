@@ -17,11 +17,34 @@ class StaffController extends Controller
         ->join('sections','staff.section','=','sections.id')
         ->get(['staff.*','classes.class','sections.section']);
 
-        $staff = Staff::join('subjects','subjects.id','staff.subject')
+        $data = Staff::join('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject')
         ->where('staff.status',1)->get();
         // dd($staff);
-        return view('admin.pages.staff',compact('staff'));
+        return view('admin.pages.staff',compact('data'));
+    }
+
+    public function staffFilter(Request $request){
+
+        $data = Staff::join('subjects','subjects.id','staff.subject')
+        ->leftJoin('classes','staff.class','=','classes.id')
+        ->leftJoin('sections','staff.section','=','sections.id')
+        ->select('staff.*','subjects.subject','classes.id as class_id','sections.id as section_id');
+        
+        if($request->name){
+            $data = $data->where('staff.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if($request->class_id){
+            $data = $data->where('classes.id',$request->class_id);
+        } 
+        // dd($data->get());
+        if($request->section_id){
+            $data = $data->where('sections.id',$request->section_id);
+        }
+        $data = $data->get();
+
+        // dd($data);
+        return view('admin.pages.staff',compact('data'));
     }
 
     public function allStaff(){
@@ -52,15 +75,16 @@ class StaffController extends Controller
     public function createStaff(Request $request){
         // dd($request->all());
         try {
+            $s_id = Staff::max('id') + 1;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'staff/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $request->photo = 'staff/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'staff/id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'staff/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
@@ -71,7 +95,7 @@ class StaffController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'staff/id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'staff/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([
@@ -82,7 +106,7 @@ class StaffController extends Controller
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'staff/other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->other_document = 'staff/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
                 } else{
                     $request->other_document = null;
@@ -108,7 +132,7 @@ class StaffController extends Controller
             $staff->qualification = $request->qualification;
             $staff->class = $request->class;
             // $staff->class = json_encode($request->class);
-            // $staff->section = $request->section;
+            $staff->section = $request->section;
             $staff->subject = $request->subject;
             $staff->status = 1;
             $staff->save();
@@ -120,6 +144,7 @@ class StaffController extends Controller
             $classTeacher->save();
 
             return response()->json([
+                'redirect'=> $request->header('referer'),
                 'message'=>'Staff added successfully',
                 'response_code'=>'200'
             ]);
@@ -131,6 +156,98 @@ class StaffController extends Controller
         }
     }
 
+    public function updateStaff(Request $request){
+        $data = Staff::join('classes','staff.class','=','classes.id')
+        ->leftJoin('sections','staff.section','=','sections.id')
+        ->leftJoin('subjects','staff.subject','=','subjects.id')
+        ->select('staff.*','classes.class','sections.section','classes.id as class_id','sections.id as section_id','subjects.subject','subjects.id as subject_id')
+        ->where('staff.id',$request->id)->first();
+        // dd($data);
+        // dd($data->subject_id);
+        return view('admin.pages.updateStaff',compact('data'));
+    }
+
+    public function manageStaff(Request $request){
+        // dd($request->all());
+        try {
+            $staff = Staff::where('id',$request->id)->first();
+            if (!empty($request->allFiles())) {
+                $file = $request->file('photo');
+                $request->photo = 'staff/'.$staff->id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+
+                $staff->photo = $request->photo;  
+
+                $file = $request->file('id_proof_front');
+                // dd($file);
+                if($file){
+                    $request->id_proof_front = 'staff/'.$staff->id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
+                    $staff->id_proof_front = $request->id_proof_front;                    
+                } else{
+                    
+                    $request->id_proof_front = $staff->id_proof_front;
+                }
+
+                $file = $request->file('id_proof_back');
+                if($file){
+                    $request->id_proof_back = 'staff/'.$staff->id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
+                    $staff->id_proof_back = $request->id_proof_back;                    
+                } else{
+                    
+                    $request->id_proof_back = $staff->id_proof_back;
+                }
+
+                $file = $request->file('other_document');
+                if($file){
+                    $request->other_document = 'staff/'.$staff->id.'/other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
+                    $staff->other_document = $request->other_document;                    
+                } else{
+                    
+                    $request->other_document = $staff->other_document;
+                }
+
+            } else{
+                $request->photo = $staff->photo;
+            }
+            
+            $staff->name = $request->name;
+            $staff->phone = $request->phone;
+            $staff->email = $request->email;
+            $staff->address = $request->address;
+            $staff->gender = $request->gender;
+            $staff->religion = $request->religion;
+            $staff->blood_group = $request->blood_group;
+            $staff->salary = $request->salary;
+            $staff->joining_date = $request->joining_date;
+            $staff->qualification = $request->qualification;
+            $staff->class = $request->class;
+            // $staff->class = json_encode($request->class);
+            $staff->section = $request->section;
+            $staff->subject = $request->subject;
+            $staff->status = 1;
+            $staff->save();
+
+            // dd($staff->id);
+            $classTeacher = ClassTeacher::where('staff_id',$staff->id)->first();
+            $classTeacher->class_id = $staff->class;
+            $classTeacher->save();
+
+            return response()->json([
+                'redirect'=> $request->header('referer'),
+                'message'=>'Staff Updated successfully',
+                'response_code'=>'200'
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500',
+            ]);
+        }
+    }
+    
     public function staffDetail(Request $request){
         $student = Staff::join('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject')
