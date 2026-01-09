@@ -12,6 +12,7 @@ use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\DynamicModel;
+use App\Models\User;
 use App\Models\Classes;
 use App\Models\Contact;
 use App\Models\Gallery;
@@ -22,6 +23,9 @@ use App\Models\Staff;
 use App\Models\Student;
 use App\Models\StudentFee;
 use App\Models\Transaction;
+use App\Models\Driver;
+use App\Models\Vehicle;
+use App\Models\ScRoute;
 
 class AdminDataController extends Controller
 {
@@ -61,8 +65,11 @@ class AdminDataController extends Controller
         $sliders = Banner::where('status',1)->count();
         $gallery = Gallery::where('status',1)->count();
         $notice = Notice::where('status',1)->count();
+        $driver = Driver::where('status',1)->count();
+        $vehicle = Vehicle::where('status',1)->count();
+        $routes = ScRoute::where('status',1)->count();
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
-        return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice'));
+        return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
     }
     
     public function createData(Request $request){

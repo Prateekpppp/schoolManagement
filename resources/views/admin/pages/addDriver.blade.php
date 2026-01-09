@@ -37,6 +37,10 @@
                                     <input name="phone" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Password *</label>
+                                    <input name="password" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
                                     <select name="gender" class="select2 required">
                                         <option value="">Please Select Gender *</option>
@@ -56,6 +60,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Joining Date *</label>
                                     <input name="joining_date" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Driving license *</label>
+                                    <input name="driving_license" type="text" placeholder="" class="form-control required">
                                 </div>
                             </div>
                             <div class="row">

@@ -130,7 +130,7 @@ class StudentController extends Controller
             $student->city = $request->city;
             $student->state = $request->state;
             $student->address = $request->address;
-            $student->password = Hash::make($request->password);
+            $student->password = $request->password;
 
             // class details
             $student->class = $request->class;
@@ -150,7 +150,7 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->mother_occupation = $request->mother_occupation;
             $student->parent_email = $request->parent_email;
-            $student->parent_password = Hash::make($request->parent_password);
+            $student->parent_password = $request->parent_password;
             
             // id proofs
             $student->id_proof_front = $request->id_proof_front;
@@ -240,7 +240,7 @@ class StudentController extends Controller
             $student->city = $request->city;
             $student->state = $request->state;
             $student->address = $request->address;
-            $student->password = Hash::make($request->password);
+            $student->password = $request->password;
 
             // class details
             $student->class = $request->class;
@@ -260,7 +260,7 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->mother_occupation = $request->mother_occupation;
             $student->parent_email = $request->parent_email;
-            $student->parent_password = Hash::make($request->parent_password);
+            $student->parent_password = $request->parent_password;
             
             // id proofs
             $student->id_proof_front = $request->id_proof_front;

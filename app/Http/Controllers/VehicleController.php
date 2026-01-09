@@ -14,29 +14,6 @@ class VehicleController extends Controller
         return view('admin.pages.vehicle',compact('data'));
     }
 
-    public function staffFilter(Request $request){
-
-        $data = Vehicle::join('subjects','subjects.id','staff.subject')
-        ->leftJoin('classes','staff.class','=','classes.id')
-        ->leftJoin('sections','staff.section','=','sections.id')
-        ->select('staff.*','subjects.subject','classes.id as class_id','sections.id as section_id');
-        
-        if($request->name){
-            $data = $data->where('staff.name', 'LIKE','%'.$request->name.'%');
-        } 
-        if($request->class_id){
-            $data = $data->where('classes.id',$request->class_id);
-        } 
-        // dd($data->get());
-        if($request->section_id){
-            $data = $data->where('sections.id',$request->section_id);
-        }
-        $data = $data->get();
-
-        // dd($data);
-        return view('admin.pages.staff',compact('data'));
-    }
-
     public function allDriver(){
         try {
             
@@ -123,7 +100,7 @@ class VehicleController extends Controller
 
             return response()->json([
                 'redirect'=> $request->header('referer'),
-                'message'=>'Vehicle added successfully',
+                'message'=>'Vehicle updated successfully',
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){

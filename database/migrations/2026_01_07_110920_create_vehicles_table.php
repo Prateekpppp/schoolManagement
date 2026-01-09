@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('vehicle_no');
             $table->string('vehicle_document')->nullable();
+            $table->string('vehicle_type')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id');
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

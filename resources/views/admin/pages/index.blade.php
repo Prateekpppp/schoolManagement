@@ -261,6 +261,57 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.driver')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="fa fa-bullhorn text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Driver</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$driver}}">{{$driver}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.vehicle')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="fa fa-bullhorn text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Vehicle</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$vehicle}}">{{$vehicle}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.allRoutes')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="fa fa-bullhorn text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Routes</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$routes}}">{{$routes}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 <!-- Dashboard summery End Here -->
                 <!-- Dashboard Content Start Here -->

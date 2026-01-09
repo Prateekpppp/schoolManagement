@@ -16,10 +16,12 @@ return new class extends Migration
             // $table->string('employ_code');
             $table->string('name');
             $table->string('phone');
+            $table->string('password');
             $table->string('gender');
             $table->text('address');
             $table->string('salary');
             $table->string('joining_date');
+            $table->string('driving_license')->nullable();
             $table->string('photo')->nullable();
             $table->string('id_proof_front');
             $table->string('id_proof_back');

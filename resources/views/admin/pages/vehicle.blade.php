@@ -86,34 +86,6 @@
 
 <script>
 
-    function appendData(response){
-        let rows = '';
-        console.log(response);
-        
-        response.data.forEach(function(job){
-            rows += `<tr>
-                        <td>
-                            <img src="{{asset('storage/')}}${job.photo}" alt="photo" width="50px" height="50px">
-                        </td>
-                        <td>${job.name}</td>
-                        <td>${job.phone}</td>
-                        <td>${job.email}</td>
-                        <td>${job.gender ? 'Male' : 'Female'}</td>
-                        <td>${job.address}</td>
-                        <td>${job.class}</td>
-                        <td>${job.section}</td>
-                        <td>${job.subject}</td>
-                        <td>${job.status ? 'Active' : 'Inactive'}</td>
-                        <td>${job.created_at}</td>
-            </tr>`;
-        });  
-        $('.tdata').html(rows);
-    }
-
-    $(document).ready(function(){
-        
-        // callAjaxFormData('get',"{{route('admin.get.allStaff')}}",null,appendData);
-    });
 </script>
 
 @endsection

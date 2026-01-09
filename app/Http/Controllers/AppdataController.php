@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Appdata;
 use App\Models\ClassSection;
 use App\Models\Classes;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AppdataController extends Controller
 {
@@ -51,5 +53,24 @@ class AppdataController extends Controller
             'response_code'=> '200',
         ]);
         dd($model);
+    }
+
+    public function addUser(Request $request){
+        $admin = User::getCurrentUser();
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->admin_username = $admin->username;
+        if($request->email){
+            $user->email = $request->email;
+        }
+        $user->password = $request->password;
+        $user->role = $request->role;
+        $user->status = 1;
+        $user->save();
+        return response()->json([
+            'message'=> 'User added successfully',
+            'response_code'=> '200',
+        ]);
     }
 }

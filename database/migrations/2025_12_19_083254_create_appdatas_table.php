@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('school_code');
             $table->string('title');
             $table->string('logo');
+            $table->string('signature');
+            $table->string('stamp');
             $table->string('director_name');
-            $table->string('contact_person');
-            $table->string('phone')->nullable();
+            // $table->string('contact_person');
+            $table->string('primary_phone')->nullable();
+            $table->string('secondary_phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->tinyInteger('status')->default(1);

@@ -30,6 +30,11 @@ use App\Http\Controllers\StudenthomeworkController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\DriverRouteController;
+use App\Http\Controllers\ScRouteController;
+use App\Http\Controllers\StudentRouteController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InventoryCategoryController;
+use App\Http\Controllers\SalaryController;
 
 
 // Admin routes
@@ -52,6 +57,77 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
         
+        // Salary Module
+        Route::get('/salary', [SalaryController::class,'inventory'])->name('admin.pages.salary');
+
+        Route::get('/salaryFilter', [SalaryController::class,'inventoryFilter'])->name('admin.pages.salaryFilter');
+
+        Route::post('/createSalary', [SalaryController::class,'createInventory'])->name('admin.post.createSalary')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateSalary', [SalaryController::class,'updateInventory'])->name('admin.pages.updateSalary');
+
+        Route::get('/printSalary', [SalaryController::class,'printSalary'])->name('admin.pages.printSalary');
+
+        // Inventory Module
+        Route::get('/inventory', [InventoryController::class,'inventory'])->name('admin.pages.inventory');
+
+        Route::get('/inventoryFilter', [InventoryController::class,'inventoryFilter'])->name('admin.pages.inventoryFilter');
+
+        Route::get('/allInventory', [InventoryController::class,'allInventory'])->name('admin.get.allInventory');
+
+        Route::get('/addInventory', [InventoryController::class,'addInventory'])->name('admin.pages.addInventory');
+
+        Route::post('/createInventory', [InventoryController::class,'createInventory'])->name('admin.post.createInventory')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateInventory', [InventoryController::class,'updateInventory'])->name('admin.pages.updateInventory');
+
+        Route::get('/printInventory', [InventoryController::class,'printInventory'])->name('admin.pages.printInventory');
+
+        // Inventory Category Module
+        Route::get('/inventoryCategory', [InventoryCategoryController::class,'inventoryCategory'])->name('admin.pages.inventoryCategory');
+          
+        Route::get('/inventoryCategoryFilter', [InventoryCategoryController::class,'inventoryCategoryFilter'])->name('admin.pages.inventoryCategoryFilter');
+        
+        Route::post('/createInventoryCategory', [InventoryCategoryController::class,'createInventoryCategory'])->name('admin.post.createInventoryCategory')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/updateInventoryCategory', [InventoryCategoryController::class,'updateInventoryCategory'])->name('admin.pages.updateInventoryCategory');
+        
+        Route::post('/manageInventoryCategory', [InventoryCategoryController::class,'manageInventoryCategory'])->name('admin.post.manageInventoryCategory')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::post('/getClassByInventoryCategory', [InventoryCategoryController::class,'getClassByInventoryCategory'])->name('admin.post.getClassByInventoryCategory')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        // StudentRoute Module
+        Route::get('/assignedStudentRoute', [StudentRouteController::class,'assignedStudentRoute'])->name('admin.pages.assignedStudentRoute');
+
+        Route::get('/assignStudentRoute', [StudentRouteController::class,'assignStudentRoute'])->name('admin.pages.assignStudentRoute');
+
+        Route::post('/createStudentRoute', [StudentRouteController::class,'createStudentRoute'])->name('admin.post.createStudentRoute')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/updateStudentRoute', [StudentRouteController::class,'updateStudentRoute'])->name('admin.pages.updateStudentRoute');
+
+        // RouteVehicle Module
+        Route::get('/assignedRouteVehicle', [DriverRouteController::class,'assignedRouteVehicle'])->name('admin.pages.assignedRouteVehicle');
+
+        Route::get('/assignRouteVehicle', [DriverRouteController::class,'assignRouteVehicle'])->name('admin.pages.assignRouteVehicle');
+
+        Route::post('/assignRouteVehicleDriver', [DriverRouteController::class,'assignRouteVehicleDriver'])->name('admin.post.assignRouteVehicleDriver')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/updateAssignRouteVehicle', [DriverRouteController::class,'updateAssignRouteVehicle'])->name('admin.pages.updateAssignRouteVehicle');
+
+        // ScRoute Module
+        Route::get('/allRoutes', [ScRouteController::class,'driver'])->name('admin.pages.allRoutes');
+
+        Route::get('/routeFilter', [ScRouteController::class,'staffFilter'])->name('admin.pages.routeFilter');
+
+        Route::get('/aRoutes', [ScRouteController::class,'allDriver'])->name('admin.get.aRoutes');
+
+        Route::get('/addRoute', [ScRouteController::class,'addDriver'])->name('admin.pages.addRoute');
+
+        Route::post('/createRoute', [ScRouteController::class,'createDriver'])->name('admin.post.createRoute')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateRoute', [ScRouteController::class,'updateDriver'])->name('admin.pages.updateRoute');
+        Route::post('/manageRoute', [ScRouteController::class,'manageDriver'])->name('admin.post.manageRoute')->withoutMiddleware([VerifyCsrfToken::class]);
+
         // Vehicle Module
         Route::get('/vehicle', [VehicleController::class,'driver'])->name('admin.pages.vehicle');
 
@@ -83,6 +159,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/manageDriver', [DriverController::class,'manageDriver'])->name('admin.post.manageDriver')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::get('/driverDetail/{id}', [DriverController::class,'driverDetail'])->name('admin.pages.driverDetail');
+       
+       
         // Logout Route
         Route::get('/logout', function () {
             Session::flush();

@@ -49,6 +49,8 @@
                                         <th>Gender</th>
                                         <th>Salary</th>
                                         <th>Joining Date</th>
+                                        <th>Driving License</th>
+                                        {{-- <th>Document</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -58,7 +60,9 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            {{-- <td></td> --}}
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -75,10 +79,12 @@
                                             <td>{{$job->gender ? 'Male' : 'Female'}}</td>
                                             <td>{{$job->salary}}</td>
                                             <td>{{$job->joining_date}}</td>
+                                            <td>{{$job->driving_license}}</td>
+                                            {{-- <td><a href="{{asset('/').$job->other_document}}" download="{{$job->phone}}">Download Document</a></td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateDriver', ['id' => $job->id])}}">Edit</a>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.driverDetail',$job->id)}}">Details</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.driverDetail', ['id' => $job->id])}}">Details</a>
                                                 <a href="javascript:void(0)" data-model="Driver" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
@@ -99,34 +105,6 @@
 
 <script>
 
-    function appendData(response){
-        let rows = '';
-        console.log(response);
-        
-        response.data.forEach(function(job){
-            rows += `<tr>
-                        <td>
-                            <img src="{{asset('storage/')}}${job.photo}" alt="photo" width="50px" height="50px">
-                        </td>
-                        <td>${job.name}</td>
-                        <td>${job.phone}</td>
-                        <td>${job.email}</td>
-                        <td>${job.gender ? 'Male' : 'Female'}</td>
-                        <td>${job.address}</td>
-                        <td>${job.class}</td>
-                        <td>${job.section}</td>
-                        <td>${job.subject}</td>
-                        <td>${job.status ? 'Active' : 'Inactive'}</td>
-                        <td>${job.created_at}</td>
-            </tr>`;
-        });  
-        $('.tdata').html(rows);
-    }
-
-    $(document).ready(function(){
-        
-        // callAjaxFormData('get',"{{route('admin.get.allStaff')}}",null,appendData);
-    });
 </script>
 
 @endsection

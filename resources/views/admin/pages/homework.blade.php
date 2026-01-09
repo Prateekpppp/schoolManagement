@@ -88,7 +88,7 @@
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                     <a href="{{route('admin.pages.updateHomework', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a>
-                                                    <a href="--" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Submit</a>
+                                                    {{-- <a href="--" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Submit</a> --}}
                                                     <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Homework" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                                 </div>
                                             </td>

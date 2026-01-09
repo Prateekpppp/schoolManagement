@@ -27,27 +27,27 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.section')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Sections</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.addSection')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.classes')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.addClass')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Class</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.subject')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Subject</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.addSubject')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.homework')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Homework</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.addHomework')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Homework</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
@@ -99,10 +99,28 @@
                                     <a href="{{route('admin.pages.vehicle')}}" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Routes</a>
+                                    <a href="{{route('admin.pages.allRoutes')}}" class="nav-link"><i class="fas fa-angle-right"></i>Routes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.receipt')}}" class="nav-link"><i class="fas fa-angle-right"></i>Students</a>
+                                    <a href="{{route('admin.pages.assignedRouteVehicle')}}" class="nav-link"><i class="fas fa-angle-right"></i>Assign Vehicle/Routes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.assignedStudentRoute')}}" class="nav-link"><i class="fas fa-angle-right"></i>Assign Student/Routes</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i
+                                    class="fa fa-calculator"></i><span>Expense</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.inventoryCategory')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inventory Category</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.inventory')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inventory Invoice</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.salary')}}" class="nav-link"><i class="fas fa-angle-right"></i>Salary</a>
                                 </li>
                             </ul>
                         </li>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Driver;
+use App\Models\DriverRoute;
+use App\Models\ScRoute;
+use App\Models\Vehicle;
 
 class DriverController extends Controller
 {
@@ -65,8 +69,15 @@ class DriverController extends Controller
             $s_id = Driver::max('id') + 1;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'driver/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                if($file){
+                    $request->photo = 'driver/'.$s_id.'/'.'photo/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                } else{
+                    return response()->json([
+                        'message'=> 'Please upload Photo',
+                        'response_code'=> '103',
+                    ]);
+                }
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
@@ -99,11 +110,10 @@ class DriverController extends Controller
                     $request->other_document = null;
                 }
 
-            } else{
-                $request->photo = null;
             }
             $staff = new Driver();
             $staff->photo = $request->photo;
+            $staff->password = $request->password;
             $staff->id_proof_front = $request->id_proof_front;
             $staff->id_proof_back = $request->id_proof_back;
             $staff->other_document = $request->other_document;
@@ -113,6 +123,7 @@ class DriverController extends Controller
             $staff->gender = $request->gender;
             $staff->salary = $request->salary;
             $staff->joining_date = $request->joining_date;
+            $staff->driving_license = $request->driving_license;
             $staff->status = 1;
             $staff->save();
 
@@ -138,54 +149,60 @@ class DriverController extends Controller
         // dd($request->all());
         try {
             $staff = Driver::where('id',$request->id)->first();
+            $s_id = $staff->id;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'staff/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
-
-                $staff->photo = $request->photo;  
+                if($file){
+                    $request->photo = 'driver/'.$s_id.'/'.'photo/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                    $staff->photo = $request->photo; 
+                } else{
+                    $staff->photo = $staff->photo;  
+                }
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'staff/id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'driver/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                     $staff->id_proof_front = $request->id_proof_front;                    
                 } else{
                     
-                    $request->id_proof_front = $staff->id_proof_front;
+                    $staff->id_proof_front = $staff->id_proof_front;
                 }
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'staff/id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'driver/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                     $staff->id_proof_back = $request->id_proof_back;                    
                 } else{
                     
-                    $request->id_proof_back = $staff->id_proof_back;
+                    $staff->id_proof_back = $staff->id_proof_back;
                 }
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'staff/other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->other_document = 'driver/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
                     $staff->other_document = $request->other_document;                    
                 } else{
                     
-                    $request->other_document = $staff->other_document;
+                    $staff->other_document = $staff->other_document;
                 }
 
-            } else{
-                $request->photo = $staff->photo;
             }
             
             $staff->name = $request->name;
             $staff->phone = $request->phone;
+            if($request->password){
+                $staff->password = $request->password;
+            }
             $staff->address = $request->address;
             $staff->gender = $request->gender;
             $staff->salary = $request->salary;
             $staff->joining_date = $request->joining_date;
+            $staff->driving_license = $request->driving_license;
             $staff->status = 1;
             $staff->save();
 
@@ -203,11 +220,9 @@ class DriverController extends Controller
     }
     
     public function driverDetail(Request $request){
-        $student = Driver::join('subjects','subjects.id','staff.subject')
-        ->select('staff.*','subjects.subject')
-        ->where('staff.id',$request->id)
-        ->first();
+        $student = Driver::where('id',$request->id)->first();
         return view('admin.pages.driverDetail',compact('student'));
     }
+
     
 }

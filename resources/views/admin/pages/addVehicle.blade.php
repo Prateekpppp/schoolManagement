@@ -32,6 +32,15 @@
                                     <label>Vehicle No. *</label>
                                     <input name="vehicle_no" type="text" placeholder="" class="form-control required">
                                 </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Type *</label>
+                                    <select name="vehicle_type" class="select2 required">
+                                        <option value="">Please Select Type *</option>
+                                        <option value="Car">Car</option>
+                                        <option value="Van">Van</option>
+                                        <option value="Bus">Bus</option>
+                                    </select>
+                                </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Document </label>
                                     <input name="vehicle_document" type="file" class="form-control-file required">
