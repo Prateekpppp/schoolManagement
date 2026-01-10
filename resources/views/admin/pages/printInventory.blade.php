@@ -120,7 +120,7 @@
                     <tr>
                         <td>1.</td>
                         <td>{{$data->category}}</td>
-                        <td>{{$data->amount}}</td>
+                        <td>{{$data->amount}} /-</td>
                     </tr>
                     <tr>
                         <td>2.</td>
@@ -129,7 +129,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->total_amount}}</td>
+                        <td class="fw-bold">{{$data->total_amount}} /-</td>
                     </tr>
                 </tbody>
             </table>

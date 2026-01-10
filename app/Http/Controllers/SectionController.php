@@ -84,8 +84,8 @@ class SectionController extends Controller
         ->select('subjects.*','class_subjects.class_id')
         ->where('class_id',$request->class_id)->get();
         
-        $fees = Classes::join('fees','fees.class','classes.id')
-        ->select('fees.*','classes.id')
+        $fees = Fee::join('classes','fees.class','classes.id')
+        ->select('fees.*')
         ->where('classes.id',$request->class_id)
         ->get();
 

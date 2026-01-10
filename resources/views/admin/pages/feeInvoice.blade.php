@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Generated Fee</h3>
+                                <h3>Fee Invoice</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
@@ -43,11 +43,15 @@
                                         {{-- <th>Roll NO.</th> --}}
                                         <th>Student</th>
                                         <th>Father's Name</th>
+                                        <th>Admission No.</th>
                                         <th>Class</th>
-                                        {{-- <th>Month</th> --}}
-                                        {{-- <th>Fee</th> --}}
-                                        {{-- <th>Paid</th> --}}
+                                        <th>Section</th>
+                                        {{-- <th>Invoice No.</th> --}}
+                                        <th>Month</th>
+                                        <th>Payable</th>
+                                        <th>Paid</th>
                                         <th>Dues</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -62,17 +66,20 @@
                                             <td>{{$k+1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->father_name}}</td>
+                                            <td>{{$job->admission_no}}</td>
                                             <td>{{$job->class}}</td>
+                                            <td>{{$job->section}}</td>
+                                            <td>{{$job->month}}</td>
                                             {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
-                                            {{-- <td>{{$job->amount}}</td> --}}
-                                            {{-- <td>{{$job->paid}}</td> --}}
-                                            <td>{{$job->amount-$job->paid}}</td>
-                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
+                                            <td>{{$job->total_amount}}</td>
+                                            <td>{{$job->paid}}</td>
+                                            <td>{{$job->payable}}</td>
+                                            <td>{{$job->status == 2 ? 'Paid' : 'Partially Paid'}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Details</a>
-                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
-                                                    <a href="javascript:void(0)" data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee">Collect</a>
+                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="FeeInvoice" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',['id'=>$job->id,'month'=>$job->month])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Print</a>
+                                                    <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee !max-w-min">Collect</a>
 
                                                 </div>
                                             </td>
@@ -114,7 +121,7 @@
                                         <div class="col-lg-6 col-12 form-group">
                                             <label>Payment Method </label>
                                             <select name="payment_method" class="select2">
-                                                <option value="">Please Select Class *</option>
+                                                <option value="">Please Select Method *</option>
                                                 <option value="Cash">Cash</option>
                                                 <option value="UPI">UPI</option>
                                                 <option value="Cheque">Cheque</option>

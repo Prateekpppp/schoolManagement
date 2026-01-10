@@ -82,7 +82,7 @@
                                     <a href="{{route('admin.pages.generateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.generatedFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Invoices</a>
+                                    <a href="{{route('admin.pages.feeInvoice')}}" class="nav-link"><i class="fas fa-angle-right"></i>Invoices</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.receipt')}}" class="nav-link"><i class="fas fa-angle-right"></i>Receipt</a>
@@ -90,7 +90,7 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="fa fa-file"></i><span>Transport</span></a>
+                            <a href="#" class="nav-link"><i class="fa fa-car"></i><span>Transport</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.driver')}}" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>

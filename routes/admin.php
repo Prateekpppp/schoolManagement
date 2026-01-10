@@ -35,6 +35,7 @@ use App\Http\Controllers\StudentRouteController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\FeeinvoiceController;
 
 
 // Admin routes
@@ -268,9 +269,20 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::get('/updateFeeHead', [FeeController::class,'updateFeeHead'])->name('admin.pages.updateFeeHead');
         
+        // Fee Invoice Module
         Route::get('/generateFee', [FeeController::class,'generateFee'])->name('admin.pages.generateFee');
         
+        Route::post('/genrateFeeInvoice', [FeeinvoiceController::class,'genrateFeeInvoice'])->name('admin.post.genrateFeeInvoice')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         Route::get('/filterGenerateFee', [FeeController::class,'filterGenerateFee'])->name('admin.pages.filterGenerateFee');
+        
+        Route::get('/feeInvoice', [FeeinvoiceController::class,'feeInvoice'])->name('admin.pages.feeInvoice');
+        
+        Route::post('/createFeeInvoice', [FeeinvoiceController::class,'createFeeInvoice'])->name('admin.post.createFeeInvoice')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/updateFeeInvoice', [FeeinvoiceController::class,'updateFeeInvoice'])->name('admin.pages.updateFeeInvoice');
+        
+        Route::post('/manageFeeInvoice', [FeeinvoiceController::class,'manageFeeInvoice'])->name('admin.post.manageFeeInvoice')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::post('/assignFee', [FeeController::class,'assignFee'])->name('admin.post.assignFee')->withoutMiddleware([VerifyCsrfToken::class]);
         
@@ -309,9 +321,9 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         // Transaction Module
         Route::get('/receipt', [FeeController::class,'receipt'])->name('admin.pages.receipt');
         
-        Route::get('/print_invoice/{id}', [TransactionController::class,'print_invoice'])->name('admin.pages.print_invoice');
+        Route::get('/print_invoice', [TransactionController::class,'print_invoice'])->name('admin.pages.print_invoice');
 
-        Route::get('/print_receipt/{id}', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');
+        Route::get('/print_receipt', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');
 
         // Exam Module
         Route::get('/examcreateExam', [ExamController::class,'exam'])->name('admin.pages.exam');

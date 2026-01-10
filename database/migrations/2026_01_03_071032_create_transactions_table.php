@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('student_id');
             $table->string('transaction_amount');
             $table->string('transaction_id')->nullable();
+            $table->string('due_amount')->nullable();
+            $table->string('due_date')->nullable();
+            $table->string('late_fine')->nullable();
+            $table->string('total_dues')->nullable();
             $table->string('date');
             $table->string('payment_method')->default('Cash');
             $table->string('session_id')->nullable();

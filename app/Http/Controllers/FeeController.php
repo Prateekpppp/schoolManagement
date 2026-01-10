@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Fee;
 use App\Models\Student;
 use App\Models\Classes;
+use App\Models\Feeinvoice;
 use App\Models\StudentFee;
 use App\Models\Transaction;
 
@@ -94,7 +95,10 @@ class FeeController extends Controller
 
     public function generateFee(Request $request){
         $fee = Fee::where('status',1)->get();
-        $students = Student::where('status',1)->get();
+        $students = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','classes.class','sections.section')
+        ->where('students.status',1)->get();
         return view('admin.pages.generateFee',compact('fee','students'));
     }
 
@@ -119,17 +123,18 @@ class FeeController extends Controller
 
     public function assignFee(Request $request){
         // dd($request->all());
-        $fee = Fee::where('status',1)->get();
         $data = [];
         // $students = explode(',',$request->students);
         $students = $request->students;
+        // dd($students);
         foreach ($students as $k=>$value) {
             $data['student_id'] = $value;
+
+            // assigned fees data
+            $fee = StudentFee::where('student_id',$value)->get();
+            dd($fee);
             foreach($fee as $feetype){
-                // $data['fee_id'] = $feetype->id;
-                // $studentFee = StudentFee::where('student_id',$data['student_id'])->where('fee_id',$feetype->id)->where('status',1)->first();
-                $studentFee = StudentFee::where('student_id',$data['student_id'])->where('fee_id',$feetype->id)->first();
-                dd($studentFee);
+                
                 if($studentFee){
                     if(date('M Y',$studentFee->created_at) != now()->format('M Y')){
                         // update fee
@@ -160,12 +165,16 @@ class FeeController extends Controller
     }
     
     public function generatedFee(){
-        $fee = Fee::join('student_fees','fees.id','student_fees.fee_id')
-        ->join('students','student_fees.student_id','students.id')
-        ->select('students.roll_no','students.name','students.father_name','students.class','fees.amount','student_fees.id','student_fees.paid','student_fees.created_at','student_fees.status')
-        ->where('student_fees.status',1)
+        $fee = Feeinvoice::join('students','feeinvoices.student_id','students.id')
+        ->join('classes','students.class','classes.id')
+        ->select('students.roll_no','students.name','students.father_name','classes.class','feeinvoices.total_amount','feeinvoices.paid','feeinvoices.invoice_date','feeinvoices.status')
+        // ->where('feeinvoices.status',1)
         ->get();
-        // dd($fee);
+
+        // $fee = StudentFee::join('students','students.student_id','student.id')
+        // ->select('students.*','student_fees.fee')
+        // ->join('fees','fees.id','student_fees.fee_id')
+        dd($fee);
         return view('admin.pages.generatedFee',compact('fee'));
     }
 

@@ -6,9 +6,9 @@
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
-                            <div class="item-title">
+                            {{-- <div class="item-title">
                                 <h3>About Me</h3>
-                            </div>
+                            </div> --}}
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
                                 data-toggle="dropdown" aria-expanded="false">...</a>

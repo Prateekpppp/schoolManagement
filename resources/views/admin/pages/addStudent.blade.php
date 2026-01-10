@@ -217,8 +217,8 @@
                     </div>
                 </div>
                 <div class="new-added-form">
-                    <div class="row">
-                        @if(isset($fees) && count($fees))
+                    <div class="row feeTypes">
+                        {{-- @if(isset($fees) && count($fees))
                         @foreach($fees as $fee)
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <div class="form-check">
@@ -227,9 +227,9 @@
                             </div>
                         </div>
                         @endforeach
-                        @else
-                            <div>Please Add Fee Types!</div>
-                        @endif
+                        @else --}}
+                            <div>Please Assign Class for fee types!</div>
+                        {{-- @endif --}}
                     </div>
                 </div>
             </div>
@@ -305,6 +305,26 @@
     //     e.preventDefault();
     //     submitForm($(this).parents('form'));
     // });
+    
+    function changeFeeTypes(response){
+        let html = ``;
+        $(response.fee).each(function(i,item){
+            
+            html += `
+                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="fee[]" class="form-check-input" value="${item.id}">
+                        <label for="remember-me" class="form-check-label">${item.name}</label>
+                    </div>
+                </div>
+            `;
+        });
+        $('.feeTypes').html(html);
+    }
+
+    $('.changeClass').on('change', function(){
+        callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:$(this).val()},changeFeeTypes);
+    });
 
 </script>
 

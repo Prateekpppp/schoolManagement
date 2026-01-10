@@ -67,11 +67,6 @@
     <div class="w-75 mx-auto my-3">
         <div class="modal-content p-3">
 
-            <!-- Header -->
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold">Print Expense</h5>
-                <button type="button" class="btn-close"></button>
-            </div>
 
 
             <!-- School Info -->
@@ -90,7 +85,7 @@
             <div class="expense-box text-center">
                 <h6 class="fw-bold">
                     Expense Title:
-                    <span class="fw-normal">Inventory Expense - Nov 2026</span>
+                    <span class="fw-normal">Salary Expense - Nov 2026</span>
                 </h6>
             </div>
 
@@ -118,7 +113,7 @@
                     <tr>
                         <td>1.</td>
                         <td>Monthly Salary</td>
-                        <td>{{$data->monthly_salary}}</td>
+                        <td>{{$data->monthly_salary}} /-</td>
                     </tr>
                     <tr>
                         <td>2.</td>
@@ -127,7 +122,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->total_salary}}</td>
+                        <td class="fw-bold">{{$data->total_salary}} /-</td>
                     </tr>
                 </tbody>
             </table>

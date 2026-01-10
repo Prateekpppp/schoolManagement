@@ -20,11 +20,15 @@
                         </div>
                         <form class="mg-b-20" type='GET' action="{{route('admin.pages.filterGenerateFee')}}">
                             <div class="row gutters-8 items-center">
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
                                     <label class="hidden">Name </label>
                                     <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Select Month *</label>
+                                    <input name="month" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Class </label>
                                     <select name="class_id" class="select2 changeClass">
                                         <option value="">Please Select Class</option>
@@ -33,13 +37,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Section </label>
                                     <select name="section_id" class="select2">
                                         <option class="secAfter" value="">Please Select Section</option>
                                     </select>
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                             </div>
@@ -88,7 +92,7 @@
                                         <tr>
                                             <td>
                                                 <div class="form-check">
-                                                    <input data-value="{{$job->id}}" type="checkbox" class="form-check-input checkOne">
+                                                    <input data-value="{{$job->id}}" type="checkbox" name="students[]" class="form-check-input checkOne">
                                                     <label class="form-check-label">Check</label>
                                                 </div>
                                             </td>
@@ -222,7 +226,7 @@
         }
         // $('#standard-modal').modal('show');
         // $('input[name=students]').val(data);
-        callApi('post',"{{route('admin.post.assignFee')}}",{students:data},ajaxResponseModal);
+        callApi('post',"{{route('admin.post.genrateFeeInvoice')}}",{students:data},ajaxResponseModal);
     });
     
     function submitForm(form){

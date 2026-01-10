@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // student_fees = invoice
+        // this table of to asign fee type on a student
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
             $table->string('student_id');

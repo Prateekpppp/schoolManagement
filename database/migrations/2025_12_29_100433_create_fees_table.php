@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('class');
-            // period: 0 = one time, 1 = monthly, 2 = Quaterly, 3 = half yearly, 4 = annually
+            // period: 0 = one time, 1 = monthly, 2 = Quaterly, 3 = half yearly, 4 = annually, 5 = latefee
             $table->string('period');
             $table->string('amount');
             $table->tinyInteger('status')->default(1);
