@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice_id')->nullable();
             $table->string('receipt_no')->nullable();
             $table->string('title');
             $table->string('student_id');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('payment_method')->default('Cash');
             $table->string('session_id')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

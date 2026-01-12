@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('subject')->nullable();
             $table->string('message')->nullable();
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

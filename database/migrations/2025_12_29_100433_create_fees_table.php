@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('period');
             $table->string('amount');
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

@@ -103,10 +103,22 @@ class FeeController extends Controller
     }
 
     public function filterGenerateFee(Request $request){
+        if(!$request->month){
+            return view('admin.pages.generateFee');
+        }
         $fee = Fee::where('status',1)->get();
         
-        $students = Student::join('classes','students.class','=','classes.id');
-        // ->join('class_sections','staff.section','=','class_sections.id')
+        $month = date('M',strtotime($request->month));
+        $year = date('Y',strtotime($request->month));
+
+        $students = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->leftJoin('feeinvoices','feeinvoices.student_id','students.id')
+        ->where('feeinvoices.month','!=',$month)
+        ->orWhereNull('feeinvoices.month');
+        // $students = $students->get(['students.*','classes.class','sections.section']);
+        // $students = $students->toSql();
+        // dd($students);
         if($request->name){
             $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
         } 
@@ -116,7 +128,9 @@ class FeeController extends Controller
         if($request->section_id){
             $students = $students->where('students.section',$request->section_id);
         }
-        $students = $students->get(['students.*','classes.class']);
+        
+        $students = $students->get(['students.*','classes.class','sections.section']);
+        // dd($students);
 
         return view('admin.pages.generateFee',compact('fee','students'));
     }

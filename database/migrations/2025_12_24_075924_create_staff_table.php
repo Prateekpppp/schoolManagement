@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('qualification');
             // status = 0 = inactive, 1 = teacher, 2 = staff, 3 = drivers, 4 = others
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

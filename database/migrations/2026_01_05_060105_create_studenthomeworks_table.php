@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('upload')->nullable();
             // status => 0 = NOT DONE, 1 = CHECKING, 2 = DONE
             $table->tinyInteger('status')->default(0);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

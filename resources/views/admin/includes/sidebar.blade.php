@@ -79,7 +79,7 @@
                                     <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Type</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.generateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
+                                    <a href="{{route('admin.pages.filterGenerateFee')}}" class="nav-link"><i class="fas fa-angle-right"></i>Generate Fee</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.feeInvoice')}}" class="nav-link"><i class="fas fa-angle-right"></i>Invoices</a>

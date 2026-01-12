@@ -48,7 +48,7 @@
                                         <th>Section</th>
                                         {{-- <th>Invoice No.</th> --}}
                                         <th>Month</th>
-                                        <th>Payable</th>
+                                        {{-- <th>Payable</th> --}}
                                         <th>Paid</th>
                                         <th>Dues</th>
                                         <th>Status</th>
@@ -71,9 +71,9 @@
                                             <td>{{$job->section}}</td>
                                             <td>{{$job->month}}</td>
                                             {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
-                                            <td>{{$job->total_amount}}</td>
-                                            <td>{{$job->paid}}</td>
-                                            <td>{{$job->payable}}</td>
+                                            {{-- <td>{{$job->total_amount}}</td> --}}
+                                            <td>{{$job->transaction_amount}}</td>
+                                            <td>{{$job->total_amount-$job->transaction_amount}}</td>
                                             <td>{{$job->status == 2 ? 'Paid' : 'Partially Paid'}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">

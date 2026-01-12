@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sc_route_id');
             $table->string('student_id');
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

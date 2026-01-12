@@ -22,7 +22,8 @@ return new class extends Migration
             // 1 = male, 2 = female, 3 = others
             $table->tinyInteger('gender')->default(1);
             $table->string('uploads');
-            $table->tinyInteger('status')->default(1)->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

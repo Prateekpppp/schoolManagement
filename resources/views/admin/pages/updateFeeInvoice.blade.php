@@ -111,10 +111,11 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <input type="hidden" name="id" value="{{ isset($data) ? $data->id : '' }}">
+                                <input type="hidden" name="month" value="{{ isset($data) ? $data->month : '' }}">
                                 <input type="hidden" name="student_id" value="{{ isset($student) ? $student->id : '' }}">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Amount *</label>
-                                    <input name="payable" value="{{ isset($data) ? $data->payable : '' }}" type="text" placeholder="" class="form-control required" readonly>
+                                    <input name="payable" value="{{ isset($data) ? $data->total_amount-$data->transaction_amount : '' }}" type="text" placeholder="" class="form-control required" readonly>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Paying Amount *</label>

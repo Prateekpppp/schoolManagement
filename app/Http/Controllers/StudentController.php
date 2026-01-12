@@ -11,6 +11,7 @@ use App\Models\ClassSection;
 use App\Models\Appdata;
 use App\Models\Fee;
 use FeeController;
+// use AppdataController;
 
 class StudentController extends Controller
 {
@@ -156,16 +157,29 @@ class StudentController extends Controller
             $student->id_proof_front = $request->id_proof_front;
             $student->id_proof_back = $request->id_proof_back;
             $student->status = 1;
+            // dd(new AppdataController);
+            // create user
+            $userData = new \stdClass();
+            $userData->name = $student->father_name;
+            $userData->username = $student->admission_no;
+            $userData->password = $student->password;
+            $userData->status = 4;
+            $user = (new AppdataController)->addUser($userData);
+            // dd($user);
             $student->save();  
 
-            foreach($request->fee as $fee){
-                $fees = Fee::where('id',$fee)->first();
-                $studentFee = new StudentFee();
-                $studentFee->student_id = $student->id;
-                $studentFee->fee_id = $fee;
-                $studentFee->fee = $fees->amount;
-                $studentFee->save();
+            if($request->fee){
+                foreach($request->fee as $fee){
+                    $fees = Fee::where('id',$fee)->first();
+                    $studentFee = new StudentFee();
+                    $studentFee->student_id = $student->id;
+                    $studentFee->fee_id = $fee;
+                    $studentFee->fee = $fees->amount;
+                    $studentFee->save();
+                }
+
             }
+
 
             return response()->json([
                 'redirect'=> route('admin.pages.students'),

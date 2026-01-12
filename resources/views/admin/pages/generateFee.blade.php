@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Select Month *</label>
-                                    <input name="month" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                    <input name="month" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Class </label>
@@ -73,14 +73,15 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($students) && count($students) == 0)
+                                    @if(!isset($students))
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -137,44 +138,6 @@
                 </div>
                 <!-- Student Table Area End Here -->
                 
-                <!-- Modal -->
-                <div class="modal fade" id="standard-modal" tabindex="-1" role="dialog"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <form class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Select Fee Head</h5>
-                                <button type="button" class="close" data-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="new-added-form">
-                                    <input type="hidden" name="students" value="">
-                                    <div class="row">
-                                        <div class="col-12 form-group">
-                                            <label>Fee Head *</label>
-                                            <select name="name" class="select2 required">
-                                                <option value="">Please Select Fee Head *</option>
-                                                @if(count($fee) > 0)
-                                                    @foreach($fee as $section)
-                                                        <option value="{{$section->id}}">{{$section->name}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="closeModel footer-btn bg-dark-low"
-                                    data-dismiss="modal">Close</button>
-                                <button type="button" class="submitForm footer-btn bg-linkedin">Assign Fee</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 
 @endsection
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('subject')->unique();
             // $table->json('class');
             $table->tinyInteger('status')->default(1);
+            $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
         });

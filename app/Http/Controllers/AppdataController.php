@@ -55,22 +55,41 @@ class AppdataController extends Controller
         dd($model);
     }
 
-    public function addUser(Request $request){
+    public function addUser($request){
         $admin = User::getCurrentUser();
         $user = new User();
         $user->name = $request->name;
         $user->username = $request->username;
         $user->admin_username = $admin->username;
-        if($request->email){
+        if(isset($request->email)){
             $user->email = $request->email;
         }
         $user->password = $request->password;
-        $user->role = $request->role;
-        $user->status = 1;
+        // $user->role = $request->role;
+        $user->status = $request->status;
         $user->save();
         return response()->json([
             'message'=> 'User added successfully',
             'response_code'=> '200',
         ]);
     }
+    
+    // public function addUser(Request $request){
+    //     $admin = User::getCurrentUser();
+    //     $user = new User();
+    //     $user->name = $request->name;
+    //     $user->username = $request->username;
+    //     $user->admin_username = $admin->username;
+    //     if($request->email){
+    //         $user->email = $request->email;
+    //     }
+    //     $user->password = $request->password;
+    //     $user->role = $request->role;
+    //     $user->status = $request->status;
+    //     $user->save();
+    //     return response()->json([
+    //         'message'=> 'User added successfully',
+    //         'response_code'=> '200',
+    //     ]);
+    // }
 }

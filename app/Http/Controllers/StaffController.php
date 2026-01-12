@@ -135,6 +135,14 @@ class StaffController extends Controller
             $staff->section = $request->section;
             $staff->subject = $request->subject;
             $staff->status = 1;
+
+            // $userData = new \stdClass();
+            // $userData->name = $staff->name;
+            // $userData->username = $staff->phone;
+            // $userData->password = $staff->password;
+            // $userData->status = 3;
+            // $user = (new AppdataController)->addUser($userData);
+
             $staff->save();
 
             // dd($staff->id);

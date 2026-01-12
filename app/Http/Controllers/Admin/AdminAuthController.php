@@ -26,7 +26,8 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        if(Hash::check($request->password,$user->password)){
+        // if(Hash::check($request->password,$user->password)){
+        if($request->password == $user->password){
             Session::put([
                 'admin_username'=>$user->username,
                 'session_name'=> date('Y')
