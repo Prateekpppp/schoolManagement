@@ -48,6 +48,9 @@
                                 {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.addHomework')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Homework</a>
                                 </li> --}}
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.exam')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Exam</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">

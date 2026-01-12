@@ -11,7 +11,10 @@ class ExamController extends Controller
 {
     //
     public function exam(){
-        $exam = Exam::where('status',1)->get();
+        $exam = Exam::join('classes','exams.class','classes.id')
+        ->join('subjects','exams.subject','subjects.id')
+        ->select('exams.*','classes.class','subjects.subject')
+        ->where('exams.status',1)->get();
         $classes = Classes::where('status',1)->get();
         $subject = Subject::where('status',1)->get();
         
@@ -33,6 +36,14 @@ class ExamController extends Controller
         }
     }
     
+    public function updateExam(Request $request){
+        $data = Exam::where('exams.id',$request->id)->first();
+        $classes = Classes::where('status',1)->get();
+        $subject = Subject::where('status',1)->get();
+        
+        return view('admin.pages.updateExam',compact('data','classes','subject'));
+    }
+
     public function createExam(Request $request){
         // dd($request->all());
         

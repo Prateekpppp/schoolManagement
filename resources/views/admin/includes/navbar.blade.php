@@ -25,7 +25,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
+            <div class="header-main-menu navbar-collapse" id="mobile-navbar">
                 <ul class="navbar-nav">
                     <li class="navbar-item header-search-bar">
                         <div class="input-group stylish-input-group">

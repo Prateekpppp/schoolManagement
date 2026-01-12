@@ -32,10 +32,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class *</label>
                                     <select name="class" class="select2 required">
-                                        <option value="">Please Class Subject *</option>
+                                        <option value="">Please Select Class *</option>
                                         @if(count($classes) > 0)
                                             @foreach($classes as $section)
-                                                <option value="{{$section->id}}">{{$section->class_name}}</option>
+                                                <option value="{{$section->id}}">{{$section->class}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Date *</label>
-                                    <input name="date" type="text" placeholder="" class="form-control required">
+                                    <input name="date" value="" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Room Code *</label>
@@ -78,8 +78,11 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Classes</h3>
+                                <h3>All Exams</h3>
                             </div>
+                                {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <a href="{{route('admin.pages.addClass')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD CLASS</a>
+                                </div> --}}
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -102,9 +105,6 @@
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <a href="{{route('admin.pages.addClass')}}" class="btn fw-btn-fill btn-gradient-yellow">ADD CLASS</a>
-                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -112,6 +112,7 @@
                                 <thead>
                                     <tr>
                                         <th>Exam Code</th>
+                                        <th>Room Code</th>
                                         <th>Subject</th>
                                         <th>Class</th>
                                         <th>Date</th>
@@ -123,19 +124,27 @@
                                 <tbody class="tdata">
                                     @if(!isset($exam) || count($exam) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($exam as $key=>$job)
                                         <tr>
                                             {{-- <td>{{$key+1}}</td> --}}
-                                            <td>{{$job->class_name}}</td>
+                                            <td>{{$job->exam_code}}</td>
+                                            <td>{{$job->room_code}}</td>
+                                            <td>{{$job->subject}}</td>
+                                            <td>{{$job->class}}</td>
+                                            <td>{{$job->date}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
-                                                    <a href="javascript:void(0)" data-model="Classes" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
+                                                    <a href="{{route('admin.pages.updateExam',['id'=>$job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    <a href="javascript:void(0)" data-model="Exam" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
 
                                                 </div>
                                             </td>

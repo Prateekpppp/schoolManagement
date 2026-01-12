@@ -326,12 +326,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/print_receipt', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');
 
         // Exam Module
-        Route::get('/examcreateExam', [ExamController::class,'exam'])->name('admin.pages.exam');
+        Route::get('/exam', [ExamController::class,'exam'])->name('admin.pages.exam');
         
         Route::get('/allExam', [ExamController::class,'allExam'])->name('admin.get.allExam');
         
         Route::post('/createExam', [ExamController::class,'createExam'])->name('admin.post.createExam')->withoutMiddleware([VerifyCsrfToken::class]);        
 
+        Route::get('/updateExam', [ExamController::class,'updateExam'])->name('admin.pages.updateExam');
+        
         // Job Module
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
         
