@@ -161,11 +161,27 @@ class StudentController extends Controller
             $student->id_proof_back = $request->id_proof_back;
 
             // qrcode part
-            $fileName = 'students/'.$s_id.'/qr_code'.'/'. time() . '.png';
-            $path = public_path('/' . $fileName);
+            $fileName = 'my-qr-code-' . time() . '.png';
+
+            // relative path (store this in DB)
+            $relativePath = 'students/' . $s_id . '/' . $fileName;
+
+            // absolute filesystem path (for saving file)
+            $fullPath = public_path($relativePath);
+
+            // create directory if not exists
+            if (!file_exists(public_path('students/' . $s_id))) {
+                mkdir(public_path('students/' . $s_id), 0755, true);
+            }
             $url = route('admin.pages.studentDetail',$s_id);
-            QrCode::format('png')->size(300)->generate($url, $path);
-            $student->qrcode = $path;
+
+            // generate QR code
+            QrCode::format('png')
+                ->size(300)
+                ->generate($url, $fullPath);
+
+            // save ONLY this in DB
+            $student->qrcode = $relativePath;
 
             $admin = User::getCurrentUser();
             $student->admin_username = $admin->username;
