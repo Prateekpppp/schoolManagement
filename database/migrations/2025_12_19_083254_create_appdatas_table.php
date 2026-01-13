@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('appdatas', function (Blueprint $table) {
             $table->id();
-            $table->string('admin_username');
             $table->string('school_code');
-            $table->string('title');
-            $table->string('logo');
-            $table->string('signature');
-            $table->string('stamp');
-            $table->string('director_name');
+            $table->string('title')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('signature')->nullable();
+            $table->string('stamp')->nullable();
+            $table->string('director_name')->nullable();
             // $table->string('contact_person');
             $table->string('primary_phone')->nullable();
             $table->string('secondary_phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
+            // admin_username is super admin
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

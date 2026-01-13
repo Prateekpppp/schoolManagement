@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 
 class AdminAuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminAuthController extends Controller
         // ->whereIn('status', [1])
         ->where('status', '!=', 0)
         ->first();
-        
+        // dd($request->remember_me);
         if(empty($user)){
             return redirect()->route('admin.login')->with([
                 'message'=> 'Wrong User Credentials',
@@ -32,6 +33,10 @@ class AdminAuthController extends Controller
                 'admin_username'=>$user->username,
                 'session_name'=> date('Y')
             ]);
+            if($request->remember_me == 'on'){
+                Cookie::queue('admin_username', $user->username, 21900);
+            }
+
             return redirect()->route('admin.index');
         } else{
             return redirect()->route('admin.login')->with([

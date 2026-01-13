@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('driver_routes', function (Blueprint $table) {
             $table->id();
-            $table->string('session_id')->nullable();
             $table->string('driver_id');
-            $table->string('vehicle_no');
+            $table->string('vehicle_id');
             $table->string('sc_route_id');
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

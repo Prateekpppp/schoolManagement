@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('username')->unique();
-            $table->string('admin_username');
             $table->string('email')->unique()->nullable();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // 0 = inactive, 1 = super admin, 2 = admin, 3 = staff, 4 = parent, 5 = student
-            $table->boolean('status')->default(1);
+            $table->string('admin_username')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();

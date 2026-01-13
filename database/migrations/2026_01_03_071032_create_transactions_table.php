@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('total_dues')->nullable();
             $table->string('date');
             $table->string('payment_method')->default('Cash');
-            $table->string('session_id')->nullable();
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

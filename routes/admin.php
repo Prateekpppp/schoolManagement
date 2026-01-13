@@ -36,6 +36,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use Illuminate\Support\Facades\Cookie;
 
 
 // Admin routes
@@ -45,7 +46,9 @@ Route::middleware(['admin_auth_middleware','custom_admin_session_middleware'])->
     Route::prefix('admin')->group(function () {
 
         Route::get('/login', function () {
-            return view('admin.pages.login');
+            // $uLogin
+            $value = Cookie::get('admin_username');
+            return view('admin.pages.login',compact('value'));
         })->name('admin.login');
         
         Route::post('login', [AdminAuthController::class,'login'])->name('admin.auth.login');

@@ -86,6 +86,7 @@ class FeeinvoiceController extends Controller
             // dd(date('M Y',$studentFee->created_at)==now()->format('M Y'));
 
             $feeInvoice = new Feeinvoice();
+            $feeInvoice->feeinvoice_no = 'INV_'.substr(time(),-6);
             $feeInvoice->student_id = $value;
             // $feeInvoice->class_id = $request->class_id;
             $feeInvoice->month = date('M');

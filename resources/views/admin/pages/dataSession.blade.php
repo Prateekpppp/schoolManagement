@@ -38,6 +38,8 @@
                                 <thead>
                                     <tr>
                                         <th>Session</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         {{-- <th>Classes</th> --}}
                                         <th>Action</th>
                                     </tr>
@@ -45,13 +47,18 @@
                                 <tbody class="tdata">
                                     @if(!isset($data) && count($data) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($data as $key=>$job)
                                         <tr>
                                             {{-- <td>{{$key+1}}</td> --}}
                                             <td>{{$job->session_name}}</td>
+                                            <td>{{$job->start_date}}</td>
+                                            <td>{{$job->end_date}}</td>
                                             {{-- <td>{{$job->classes ?? '--'}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>

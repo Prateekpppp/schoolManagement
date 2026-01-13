@@ -14,7 +14,7 @@ class FeeController extends Controller
 {
     //
     public function feeHead(Request $request){
-        $data = Fee::join('classes','classes.id','fees.class')
+        $data = Fee::join('classes','classes.id','fees.class_id')
         ->select('fees.*','classes.class')
         ->where('fees.status',1)->get();
         $classes = Classes::where('status',1)->get();
@@ -22,7 +22,7 @@ class FeeController extends Controller
     }
 
     public function feeHeadFilter(Request $request){
-        $data = Fee::join('classes','classes.id','fees.class')
+        $data = Fee::join('classes','classes.id','fees.class_id')
         ->select('fees.*','classes.class');
         
         if($request->name){
@@ -49,7 +49,7 @@ class FeeController extends Controller
     }
 
     public function updateFeeHead(Request $request){
-        $data = Fee::join('classes','classes.id','fees.class')
+        $data = Fee::join('classes','classes.id','fees.class_id')
         ->select('fees.*','classes.class','classes.id as class_id')
         ->where('fees.id',$request->id)->first();
         
@@ -66,7 +66,7 @@ class FeeController extends Controller
             if(!$request->id){
                 $fee = new Fee();
                 $fee->name = $request->name;
-                $fee->class = $request->class;
+                $fee->class_id = $request->class_id;
                 $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->status = 1;
@@ -74,7 +74,7 @@ class FeeController extends Controller
             } else {
                 $fee = Fee::where('id',$request->id)->first();
                 $fee->name = $request->name;
-                $fee->class = $request->class;
+                $fee->class_id = $request->class_id;
                 $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->save();

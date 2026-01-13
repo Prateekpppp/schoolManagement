@@ -21,6 +21,7 @@ return new class extends Migration
             // salary calculation based on present days
             $table->string('total_salary')->nullable();
             $table->string('salary_date')->nullable();
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

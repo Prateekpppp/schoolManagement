@@ -182,7 +182,13 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Occupation *</label>
-                            <input name="father_occupation" type="text" placeholder="" class="form-control required">
+                            <select name="father_occupation" class="select2 required">
+                                <option class="" value="">Please Select Occupation *</option>
+                                <option value="Private Emp">Private Emp.</option>
+                                <option value="Government Emp.">Government Emp.</option>
+                                <option value="Bussiness Men">Bussiness Men</option>
+                                <option value="Not Working">Not Working</option>
+                            </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Name *</label>
@@ -194,7 +200,13 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Occupation *</label>
-                            <input name="mother_occupation" type="text" placeholder="" class="form-control required">
+                            <select name="mother_occupation" class="select2 required">
+                                <option class="" value="">Please Select Occupation *</option>
+                                <option value="Private Emp">Private Emp.</option>
+                                <option value="Government Emp.">Government Emp.</option>
+                                <option value="Bussiness Men">Bussiness Men</option>
+                                <option value="House Wife">House Wife</option>
+                            </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent E-Mail *</label>

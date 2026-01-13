@@ -40,6 +40,7 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>S.No.</th>
                                         <th>Subject</th>
                                         {{-- <th>Sections</th> --}}
                                         {{-- <th>Status</th> --}}
@@ -49,12 +50,14 @@
                                 <tbody class="tdata">
                                     @if(!isset($subject) || count($subject) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($subject as $key=>$job)
                                         <tr>
-                                            {{-- <td>{{$key+1}}</td> --}}
+                                            <td>{{$key+1}}</td>
                                             <td>{{$job->subject}}</td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}

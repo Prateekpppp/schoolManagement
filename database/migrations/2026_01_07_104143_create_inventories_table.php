@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // inventory invoice
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             // auto genrerated invoice no = INV-randon 4 digits 
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('payment_method')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('invoice_date');
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('homework', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('session_id')->nullable();
-            $table->string('admin_username');
             $table->string('class_id');
-            $table->string('section_id');
+            $table->string('section_id')->nullable();
             $table->string('subject_id');
-            $table->string('due_date');
+            $table->string('date');
             $table->string('description')->nullable();
             $table->string('upload')->nullable();
+            $table->string('admin_username')->nullable();
             // status => 1 = processing, 2 = DONE
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();

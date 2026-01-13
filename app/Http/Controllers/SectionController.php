@@ -49,11 +49,14 @@ class SectionController extends Controller
                 $section = Section::where('id',$request->id)->first();
                 $section->section = $request->section;
                 $section->status = 1;
+                // $section->session_id = session('session_id');
                 $section->save();
             } else{
+                // dd(session('session_id'));
                 $section = new Section();
                 $section->section = $request->section;
                 $section->status = 1;
+                // $section->session_id = session('session_id');
                 $section->save();
             }
 
@@ -84,7 +87,7 @@ class SectionController extends Controller
         ->select('subjects.*','class_subjects.class_id')
         ->where('class_id',$request->class_id)->get();
         
-        $fees = Fee::join('classes','fees.class','classes.id')
+        $fees = Fee::join('classes','fees.class_id','classes.id')
         ->select('fees.*')
         ->where('classes.id',$request->class_id)
         ->get();

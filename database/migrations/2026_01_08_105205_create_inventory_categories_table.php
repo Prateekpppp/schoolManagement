@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('class_id');
             $table->string('amount');
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

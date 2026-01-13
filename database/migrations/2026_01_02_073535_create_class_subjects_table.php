@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject_id');
             $table->string('class_id');
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

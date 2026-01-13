@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('work_type')->nullable();
             $table->string('working_hours')->nullable();
             $table->string('description')->nullable();
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

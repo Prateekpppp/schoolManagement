@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Student;
 use App\Models\StudentFee;
 use App\Models\Classes;
 use App\Models\ClassSection;
 use App\Models\Appdata;
 use App\Models\Fee;
+use App\Models\User;
 use FeeController;
 // use AppdataController;
 
@@ -80,13 +83,13 @@ class StudentController extends Controller
             // dd($request->dob);
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = $s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = $s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
@@ -97,7 +100,7 @@ class StudentController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = $s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([
@@ -156,13 +159,24 @@ class StudentController extends Controller
             // id proofs
             $student->id_proof_front = $request->id_proof_front;
             $student->id_proof_back = $request->id_proof_back;
+
+            // qrcode part
+            $fileName = 'students/'.$s_id.'/qr_code'.'/'. time() . '.png';
+            $path = public_path('/' . $fileName);
+            $url = route('admin.pages.studentDetail',$s_id);
+            QrCode::format('png')->size(300)->generate($url, $path);
+            $student->qrcode = $path;
+
+            $admin = User::getCurrentUser();
+            $student->admin_username = $admin->username;
             $student->status = 1;
+            $student->session_id = session('session_id');
             // dd(new AppdataController);
             // create user
             $userData = new \stdClass();
-            $userData->name = $student->father_name;
-            $userData->username = $student->admission_no;
-            $userData->password = $student->password;
+            $userData->name = $request->father_name;
+            $userData->username = $request->father_phone;
+            $userData->password = $request->parent_password;
             $userData->status = 4;
             $user = (new AppdataController)->addUser($userData);
             // dd($user);
@@ -175,6 +189,7 @@ class StudentController extends Controller
                     $studentFee->student_id = $student->id;
                     $studentFee->fee_id = $fee;
                     $studentFee->fee = $fees->amount;
+                    $studentFee->session_id = session('session_id');
                     $studentFee->save();
                 }
 
@@ -203,13 +218,13 @@ class StudentController extends Controller
             // dd($request->dob);
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = $s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = $s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
@@ -220,7 +235,7 @@ class StudentController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = $s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([

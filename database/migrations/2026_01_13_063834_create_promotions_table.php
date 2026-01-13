@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('studenthomeworks', function (Blueprint $table) {
+        Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string('homework_id');
-            $table->string('student_id');
-            $table->string('class_id')->nullable();
-            $table->string('section_id')->nullable();
-            $table->string('description')->nullable();
-            $table->string('upload')->nullable();
+            $table->string('from_student_id')->nullable();
+            $table->string('to_student_id')->nullable();
+            $table->string('note')->nullable();
             $table->string('admin_username')->nullable();
-            // status => 0 = NOT DONE, 1 = CHECKING, 2 = DONE
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studenthomeworks');
+        Schema::dropIfExists('promotions');
     }
 };

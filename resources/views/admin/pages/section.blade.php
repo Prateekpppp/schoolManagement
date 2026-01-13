@@ -51,7 +51,9 @@
                                 <tbody class="tdata">
                                     @if(!isset($section) || count($section) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($section as $key=>$job)

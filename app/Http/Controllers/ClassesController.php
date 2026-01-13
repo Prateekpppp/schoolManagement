@@ -127,7 +127,7 @@ class ClassesController extends Controller
                         //     'class_id'=>$request->id,
                         //     'section_id'=>$value
                         // ]);
-                        $classSection = ClassSection::where('section_id',$value)->first();
+                        $classSection = ClassSection::where('section_id',$value)->where('class_id',$class->id)->first();
                         // dd($classSection);
                         if($classSection){
                             continue;
@@ -147,7 +147,7 @@ class ClassesController extends Controller
                         //     'class_id'=>$request->id,
                         //     'subject_id'=>$value
                         // ]);
-                        $classSection = ClassSubject::where('subject_id',$value)->first();
+                        $classSection = ClassSubject::where('subject_id',$value)->where('class_id',$class->id)->first();
                         if($classSection){
                             continue;
                         }else{

@@ -129,6 +129,7 @@
                                             <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($exam as $key=>$job)

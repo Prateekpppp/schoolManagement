@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->string('employ_code');
             $table->string('name');
             $table->string('phone');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('gender');
             $table->text('address');
             $table->string('salary');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('id_proof_front');
             $table->string('id_proof_back');
             $table->string('other_document')->nullable();
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

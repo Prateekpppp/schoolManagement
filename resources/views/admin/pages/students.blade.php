@@ -9,6 +9,9 @@
                             <div class="item-title">
                                 <h3>All Students Data</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Student</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
@@ -67,6 +70,7 @@
                                         <th>Father's Name</th>
                                         <th>Class</th>
                                         <th>Section</th>
+                                        <th>QR Code</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -74,6 +78,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($students) || count($students) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -108,6 +113,9 @@
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
+                                            <td>
+                                                <img src="{{asset('/').$job->qrcode}}" alt="photo" width="100px" height="100px">
+                                            </td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>

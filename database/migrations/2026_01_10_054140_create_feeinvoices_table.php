@@ -25,6 +25,7 @@ return new class extends Migration
             // will update two times, one during generation and one during payment 
             $table->string('due_date')->nullable();
             // status => {0 = unpaid, 1 = partially paid, 2 = paid}
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Datasession;
+use App\Models\User;
 
 class DatasessionController extends Controller
 {
@@ -34,8 +35,13 @@ class DatasessionController extends Controller
 
     public function createDatasession(Request $request){
         try{
+            $admin = User::getCurrentUser();
+            // dd($admin);
             $class = new Datasession();
             $class->session_name = $request->session_name;
+            $class->start_date = $request->start_date;
+            $class->end_date = $request->end_date;
+            $class->admin_username = $admin->username;
             $class->status = 1;
             $class->save();
 
@@ -53,7 +59,9 @@ class DatasessionController extends Controller
 
     public function changeSession(Request $request){
 
+        $data = Datasession::where('session_name',$request->session_name)->first();
         session(['session_name'=>$request->session_name]);
+        session(['session_id'=>$data->id]);
         return redirect()->back();
     }
 }

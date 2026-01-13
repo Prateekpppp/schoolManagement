@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email')->unique();
+            $table->string('password');
+            $table->string('dob')->nullable();
+            $table->string('aadhaar_no');
             $table->string('gender');
             $table->string('religion')->nullable();
             $table->string('blood_group')->nullable();
@@ -29,8 +32,10 @@ return new class extends Migration
             $table->string('section')->nullable();
             $table->string('id_proof_front');
             $table->string('id_proof_back');
+            $table->string('driving_license')->nullable();
             $table->string('other_document')->nullable();
-            $table->string('qualification');
+            $table->string('qualification')->nullable();
+            $table->string('admin_username')->nullable();
             // status = 0 = inactive, 1 = teacher, 2 = staff, 3 = drivers, 4 = others
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();

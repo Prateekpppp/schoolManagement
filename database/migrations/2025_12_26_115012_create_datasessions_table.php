@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('datasessions', function (Blueprint $table) {
             $table->id();
             $table->string('session_name');
-            $table->json('classes')->nullable();
+            $table->string('start_date');
+            $table->string('end_date');
+            // $table->json('classes')->nullable();
+            $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->json('additional_data')->nullable();
             $table->timestamps();
