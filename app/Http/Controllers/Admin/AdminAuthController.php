@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Datasession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -36,7 +37,10 @@ class AdminAuthController extends Controller
             if($request->remember_me == 'on'){
                 Cookie::queue('admin_username', $user->username, 21900);
             }
-
+            // $currentDate
+            $data = Datasession::latest()->first();
+            session(['session_name'=>$request->session_name]);
+            session(['session_id'=>$data->id]);
             return redirect()->route('admin.index');
         } else{
             return redirect()->route('admin.login')->with([

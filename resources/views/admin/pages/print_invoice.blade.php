@@ -92,7 +92,7 @@
             <!-- Expense Info -->
             <div class="row mb-3 info-text">
                 <div class="col-md-6">
-                    <p class="mb-0"><strong>Invoice No:</strong> INV{{$data->id}}</p>
+                    <p class="mb-0"><strong>Invoice No:</strong> {{$data->feeinvoice_no}}</p>
                 </div>
                 <div class="col-md-6 text-end">
                     <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
@@ -119,8 +119,16 @@
                     </tr>
                     @endforeach
                     <tr>
+                        <td colspan="2" class="fw-bold text-end">Previous Dues</td>
+                        <td class="fw-bold">{{$oldData}} /-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="fw-bold text-end">This Month</td>
+                        <td class="fw-bold">{{$data->payable}} /-</td>
+                    </tr>
+                    <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->total_amount}} /-</td>
+                        <td class="fw-bold">{{$data->payable + $oldData}} /-</td>
                     </tr>
                 </tbody>
             </table>

@@ -18,7 +18,7 @@ return new class extends Migration
 
             // first 3 digits of school _456758 unique, show on admission form with reed only
             $table->string('enrollment_no')->unique();
-            $table->string('admission_no')->unique();
+            $table->string('admission_no');
             $table->string('photo');
             $table->string('name');
             $table->string('dob');

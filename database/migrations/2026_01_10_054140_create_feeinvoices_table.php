@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('year')->nullable();
             $table->string('total_amount')->nullable();
             $table->string('payable')->nullable();
-            $table->string('paid')->default(1);
+            $table->string('paid')->default(0);
             $table->string('invoice_date')->nullable();
             // will update two times, one during generation and one during payment 
             $table->string('due_date')->nullable();

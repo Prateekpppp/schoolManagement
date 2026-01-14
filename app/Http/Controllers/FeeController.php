@@ -103,19 +103,43 @@ class FeeController extends Controller
     }
 
     public function filterGenerateFee(Request $request){
+        // dd($request->month);
+        // dd($month);
         if(!$request->month){
             return view('admin.pages.generateFee');
         }
         $fee = Fee::where('status',1)->get();
         
-        $month = date('M',strtotime($request->month));
-        $year = date('Y',strtotime($request->month));
+        $searchDate = $request->month;
+        $month = explode('/',$request->month)[1];
+        // $month = date('M', strtotime($request->month));
+        // $month = $request->month;
+// $year  = date('Y', strtotime($request->month));
 
-        $students = Student::join('classes','students.class','=','classes.id')
-        ->join('sections','students.section','=','sections.id')
-        ->leftJoin('feeinvoices','feeinvoices.student_id','students.id')
-        ->where('feeinvoices.month','!=',$month)
-        ->orWhereNull('feeinvoices.month');
+$students = Student::join('classes','students.class','=','classes.id')
+    ->join('sections','students.section','=','sections.id')
+    ->whereNotExists(function ($query) use ($month) {
+        $query->select(\DB::raw(1))
+            ->from('feeinvoices')
+            ->whereColumn('feeinvoices.student_id', 'students.id')
+            ->where('feeinvoices.month', $month);
+            // ->where('feeinvoices.year', $year);
+    });
+
+
+        // $month = date('M',strtotime($request->month));
+        // $year = date('Y',strtotime($request->month));
+        // dd($month);
+        // $students = Student::join('classes','students.class','=','classes.id')
+        // ->join('sections','students.section','=','sections.id')
+        // ->leftJoin('feeinvoices','feeinvoices.student_id','students.id')
+        // // ->select('students.*','classes.class','sections.section','feeinvoices.month')
+        // // ->where('feeinvoices.month','!=',$month)
+        // // ->orWhereNull('feeinvoices.month');
+        // ->where(function ($query) use ($month) {
+        //     $query->where('feeinvoices.month', '!=', $month)
+        //         ->orWhereNull('feeinvoices.month');
+        // });
         // $students = $students->get(['students.*','classes.class','sections.section']);
         // $students = $students->toSql();
         // dd($students);
@@ -129,10 +153,12 @@ class FeeController extends Controller
             $students = $students->where('students.section',$request->section_id);
         }
         
+        // $students = $students->where('feeinvoices.month','!=',$month)
+        // ->orWhereNull('feeinvoices.month');
         $students = $students->get(['students.*','classes.class','sections.section']);
         // dd($students);
 
-        return view('admin.pages.generateFee',compact('fee','students'));
+        return view('admin.pages.generateFee',compact('fee','students','request'));
     }
 
     public function assignFee(Request $request){

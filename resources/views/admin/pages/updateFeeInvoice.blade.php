@@ -143,8 +143,8 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Due Date *</label>
-                                    <input name="due_date" value="{{ isset($data) ? $data->due_date : '' }}" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                    <label>Due Date </label>
+                                    <input name="due_date" value="{{ isset($data) ? $data->due_date : '' }}" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Due Amount *</label>

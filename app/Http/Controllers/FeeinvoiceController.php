@@ -60,7 +60,7 @@ class FeeinvoiceController extends Controller
             'sections.section',
         )
         ->get();
-
+        // dd($fee);
         return view('admin.pages.feeInvoice',compact('fee'));
     }
 
@@ -69,6 +69,7 @@ class FeeinvoiceController extends Controller
         $data = [];
         // $students = explode(',',$request->students);
         $students = $request->students;
+        $month = explode('/',$request->month)[1];
         // dd($students);
         foreach ($students as $k=>$value) {
 
@@ -76,7 +77,7 @@ class FeeinvoiceController extends Controller
             $totalFee = StudentFee::where('student_id',$value)->sum('fee');
             // dd($totalFee);
             $feeInvoice = Feeinvoice::where('student_id',$value)
-            ->where('month',date('M'))
+            ->where('month',$month)
             ->first();
 
             if($feeInvoice){
@@ -86,15 +87,16 @@ class FeeinvoiceController extends Controller
             // dd(date('M Y',$studentFee->created_at)==now()->format('M Y'));
 
             $feeInvoice = new Feeinvoice();
-            $feeInvoice->feeinvoice_no = 'INV_'.substr(time(),-6);
+            $feeInvoice->feeinvoice_no = 'INV_'.substr(time(),-6).rand(000,111);
             $feeInvoice->student_id = $value;
             // $feeInvoice->class_id = $request->class_id;
-            $feeInvoice->month = date('M');
-            $feeInvoice->year = date('Y');
+            $feeInvoice->month = $month;
+            // $feeInvoice->year = date('Y');
             $feeInvoice->total_amount = $totalFee;
-            $feeInvoice->payable = $totalFee;
+            // $feeInvoice->payable = $totalFee;
             $feeInvoice->invoice_date = now();
             $feeInvoice->status = 0;
+            $feeInvoice->session_id = session('session_id');
             $feeInvoice->save();
         }
         // dd($data);
@@ -199,17 +201,17 @@ class FeeinvoiceController extends Controller
             $feeInvoice = Feeinvoice::where('student_id',$request->student_id)
             ->where('month',$request->month)
             ->first();
-            
-            $feeInvoice->payable = $feeInvoice->payable - $request->transaction_amount;
-            if($request->late_fine){
-                $feeInvoice->payable += $request->late_fine;
-            }
+            // dd($feeInvoice);
+            // $feeInvoice->payable = $feeInvoice->payable - $request->transaction_amount;
+            // dd($feeInvoice->payable);
+            // if($request->late_fine){
+            //     $feeInvoice->payable += $request->late_fine;
+            // }
             if($request->due_date){
                 $feeInvoice->due_date = $request->due_date;
             }
-            $feeInvoice->paid = $request->transaction_amount;
-            $feeInvoice->due_date = $request->due_date;
-            $feeInvoice->save();
+            // $feeInvoice->paid = $request->transaction_amount;
+            // $feeInvoice->due_date = $request->due_date;
 
             if($request->transaction_amount){
 
@@ -218,11 +220,13 @@ class FeeinvoiceController extends Controller
                 $transaction->receipt_no = 'INV_'.substr(time(),-6);
                 $transaction->title = 'Fee Submission';
                 $transaction->student_id = $request->student_id;
+                $transaction->payable_amount = $request->total_amount;
                 $transaction->transaction_amount = $request->transaction_amount;
-                $transaction->due_amount =  $feeInvoice->payable;
+                $transaction->due_amount =  $feeInvoice->total_amount - $request->transaction_amount;
                 $transaction->due_date = $request->due_date;
                 $transaction->late_fine = $request->late_fine;
-                $transaction->total_dues = $feeInvoice->payable;
+                $transaction->total_dues = $transaction->due_amount + $transaction->late_fine;
+                $transaction->session_id = session('session_id');
 
                 if($request->transaction_id){
                     $transaction->transaction_id = $request->transaction_id;
@@ -233,6 +237,13 @@ class FeeinvoiceController extends Controller
                 $transaction->date = $request->date;
                 $transaction->save();
             }
+
+            if($transaction->due_amount == 0){
+                $feeInvoice->status = 2;
+            } else{
+                $feeInvoice->status = 1;
+            }
+            $feeInvoice->save();
 
             return response()->json([
                 'redirect'=> $request->header('referer'),

@@ -1,3 +1,6 @@
+@php
+// dd($request->class_id);
+@endphp
 @extends('admin.inner_master')
 
 @section('inner_body')
@@ -25,15 +28,11 @@
                                     <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
-                                    <label class="hidden">Select Month *</label>
-                                    <input name="month" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
-                                </div>
-                                <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Class </label>
                                     <select name="class_id" class="select2 changeClass">
                                         <option value="">Please Select Class</option>
                                         @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                            <option {{isset($request->class_id) && $request->class_id == $class->id?'selected':''}} value="{{$class->id}}">{{$class->class}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -43,6 +42,28 @@
                                         <option class="secAfter" value="">Please Select Section</option>
                                     </select>
                                 </div>
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Select Month *</label>
+                                    <input name="month" value="{{isset($request->month)?$request->month:''}}" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
+                                </div>
+                                {{-- <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Select Month *</label>
+                                    <select name="month" class="select2">
+                                        <option value="">Please Select Month</option>
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                                        <option value="3">Mar</option>
+                                        <option value="4">Apr</option>
+                                        <option value="5">May</option>
+                                        <option value="6">Jun</option>
+                                        <option value="7">Jul</option>
+                                        <option value="8">Aug</option>
+                                        <option value="9">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select> --}}
+                                {{-- </div> --}}
                                 <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
@@ -145,6 +166,7 @@
 
 <script>
     let data = [];
+
     $('.checkAll').on('click', function(){
         data = [];
         console.log('check status',$('.checkAll').is(':checked'));
@@ -180,6 +202,7 @@
 
     $('.generateFee').on('click',function(e){
         
+        let month = $('input[name=month]').val();
         $(this).addClass('disabled');
         if(data.length == 0){
             responseToast('Please Select Student', 'bg-warning');
@@ -189,7 +212,7 @@
         }
         // $('#standard-modal').modal('show');
         // $('input[name=students]').val(data);
-        callApi('post',"{{route('admin.post.genrateFeeInvoice')}}",{students:data},ajaxResponseModal);
+        callApi('post',"{{route('admin.post.genrateFeeInvoice')}}",{students:data,month:month},ajaxResponseModal);
     });
     
     function submitForm(form){
