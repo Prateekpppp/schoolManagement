@@ -58,6 +58,9 @@
         .modal-content {
             border-radius: 6px;
         }
+        .modal {
+            display: block !important;
+        }
     </style>
 </head>
 <body>
@@ -119,16 +122,101 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="2" class="fw-bold text-end">Previous Dues</td>
-                        <td class="fw-bold">{{$oldData}} /-</td>
+                        <td colspan="2" class="fw-bold text-end">This Month</td>
+                        {{-- <td class="fw-bold">{{$currentTransactions}} /-</td> --}}
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount}} /-</td>
+
                     </tr>
                     <tr>
-                        <td colspan="2" class="fw-bold text-end">This Month</td>
-                        <td class="fw-bold">{{$data->payable}} /-</td>
+                        <td colspan="2" class="fw-bold text-end">Previous Dues</td>
+                        <td class="fw-bold">{{$oldData->total_amount - $oldData->transaction_amount}} /-</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->payable + $oldData}} /-</td>
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + $oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Signature -->
+            <div class="row signature-section">
+                <div class="col-md-6">
+                    Authorised By
+                </div>
+                <div class="col-md-6 text-end">
+                    Receiver's Signature
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="w-75 mx-auto my-3">
+        <div class="modal-content p-3">
+
+
+
+            <!-- School Info -->
+            <div class="text-center">
+                    <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+                <h5 class="fw-bold mb-1">{{$appdata->title}}</h5>
+                <p class="mb-0 info-text">
+                    Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | Website: www.germinationschool.com
+                </p>
+                <p class="info-text">
+                    {{$appdata->address}}
+                </p>
+            </div>
+
+            <!-- Expense Title -->
+            <div class="expense-box text-center">
+                <h6 class="fw-bold">
+                    Expense Title:
+                    <span class="fw-normal">Invoice - Nov 2026</span>
+                </h6>
+            </div>
+
+            <!-- Expense Info -->
+            <div class="row mb-3 info-text">
+                <div class="col-md-6">
+                    <p class="mb-0"><strong>Invoice No:</strong> {{$data->feeinvoice_no}}</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
+                    <p class="mb-0"><strong>Class Name:</strong> {{$student->class}}</p>
+                    <p class="mb-0"><strong>Admission No:</strong> {{$student->admission_no}}</p>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">Sr. No</th>
+                        <th>Title</th>
+                        <th style="width: 20%;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($fees as $k => $fee)
+                    <tr>
+                        <td>{{$k+1}}</td>
+                        <td>{{$fee->feeName}}</td>
+                        <td>{{$fee->amount}} /-</td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="2" class="fw-bold text-end">This Month</td>
+                        {{-- <td class="fw-bold">{{$currentTransactions}} /-</td> --}}
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount}} /-</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="fw-bold text-end">Previous Dues</td>
+                        <td class="fw-bold">{{$oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="fw-bold text-end">Total</td>
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + $oldData->total_amount - $oldData->transaction_amount}} /-</td>
                     </tr>
                 </tbody>
             </table>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('receipt_no')->nullable();
             $table->string('title');
             $table->string('student_id');
+            $table->string('payable_amount');
             $table->string('transaction_amount');
             $table->string('transaction_id')->nullable();
             $table->string('due_amount')->nullable();

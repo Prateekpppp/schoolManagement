@@ -201,6 +201,14 @@ class FeeinvoiceController extends Controller
             $feeInvoice = Feeinvoice::where('student_id',$request->student_id)
             ->where('month',$request->month)
             ->first();
+
+            $due_amount = Transaction::where('invoice_id',$feeInvoice->feeinvoice_no)->latest()->first();
+
+            if($due_amount){
+                $due_amount = $due_amount->due_amount;
+            } else{
+                $due_amount = 0;
+            }
             // dd($feeInvoice);
             // $feeInvoice->payable = $feeInvoice->payable - $request->transaction_amount;
             // dd($feeInvoice->payable);
@@ -220,9 +228,9 @@ class FeeinvoiceController extends Controller
                 $transaction->receipt_no = 'INV_'.substr(time(),-6);
                 $transaction->title = 'Fee Submission';
                 $transaction->student_id = $request->student_id;
-                $transaction->payable_amount = $request->total_amount;
+                $transaction->payable_amount = $feeInvoice->total_amount;
                 $transaction->transaction_amount = $request->transaction_amount;
-                $transaction->due_amount =  $feeInvoice->total_amount - $request->transaction_amount;
+                $transaction->due_amount =  $due_amount - $request->transaction_amount;
                 $transaction->due_date = $request->due_date;
                 $transaction->late_fine = $request->late_fine;
                 $transaction->total_dues = $transaction->due_amount + $transaction->late_fine;
@@ -235,14 +243,16 @@ class FeeinvoiceController extends Controller
                     $transaction->payment_method = $request->payment_method;
                 }
                 $transaction->date = $request->date;
+                // dd($transaction->due_amount);
+                if($transaction->due_amount == 0){
+                    $feeInvoice->status = 2;
+                } else{
+                    $feeInvoice->status = 1;
+                }
+
                 $transaction->save();
             }
 
-            if($transaction->due_amount == 0){
-                $feeInvoice->status = 2;
-            } else{
-                $feeInvoice->status = 1;
-            }
             $feeInvoice->save();
 
             return response()->json([
