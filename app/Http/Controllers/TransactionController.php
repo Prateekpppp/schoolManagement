@@ -14,6 +14,13 @@ class TransactionController extends Controller
 {
     //
 
+    function paymentHistory(Request $request){
+        $paymentHistory = Student::join('transactions','transactions.student_id','students.id')
+        ->where('student_id',$request->id)->get();
+        dd($paymentHistory);
+        return view('admin.pages.paymentHistory',compact('paymentHistory'));
+    }
+
     function print_invoice(Request $request){
 
     

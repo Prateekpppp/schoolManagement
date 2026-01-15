@@ -22,6 +22,7 @@ class CustomAdminSessionMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // dd(session('session_id'));
         $appdata = Appdata::where('status',1)->first();
         View::share('appdata',$appdata);
         

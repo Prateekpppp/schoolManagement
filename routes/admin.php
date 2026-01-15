@@ -261,6 +261,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/studentDetailByEnrollNo', [StudentController::class,'studentDetailByEnrollNo'])->name('admin.post.studentDetailByEnrollNo')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::post('/manageStudent', [StudentController::class,'manageStudent'])->name('admin.post.manageStudent')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         // Fee Module
         Route::get('/feeHead', [FeeController::class,'feeHead'])->name('admin.pages.feeHead');
           
@@ -324,6 +326,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         // Transaction Module
         Route::get('/receipt', [FeeController::class,'receipt'])->name('admin.pages.receipt');
         
+        Route::get('/paymentHistory', [TransactionController::class,'paymentHistory'])->name('admin.pages.paymentHistory');
+       
         Route::get('/print_invoice', [TransactionController::class,'print_invoice'])->name('admin.pages.print_invoice');
 
         Route::get('/print_receipt', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');

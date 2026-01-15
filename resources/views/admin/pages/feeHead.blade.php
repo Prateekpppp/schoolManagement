@@ -127,7 +127,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -139,7 +139,7 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1=+1}}</td>
+                                            <td>{{$sn1+=1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{!$job->period ? 'One Time' : ($job->period ==1 ? 'Monthly' : ($job->period == 2 ? 'Quaterly' : ($job->period == 3 ? 'Half Yearly' : 'Annually')))}}</td>

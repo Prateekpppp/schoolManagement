@@ -164,4 +164,22 @@
         callApi('post',url,data,ajaxResponse);
 
     });
+
+    $('.passwordType').on('click',function(){
+        // $(this).find('i').toggleClass('fa-eye');
+        let $passwordField = $(this).parent().find('input');
+        let currentType = $(this).parent().find('input').attr('type');
+
+        if (currentType === 'password') {
+            $(this).find('i').removeClass('fa-eye-slash');
+            $(this).find('i').addClass('fa-eye');
+            $passwordField.attr('type', 'text'); // Change to text
+            
+        } else {
+            $(this).find('i').addClass('fa-eye-slash');
+            $(this).find('i').removeClass('fa-eye');
+            $passwordField.attr('type', 'password'); // Change to password
+            
+        }
+    });
 </script>

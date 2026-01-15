@@ -106,6 +106,7 @@
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Password *</label>
                             <input name="password" type="password" placeholder="" class="form-control required">
+                            <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +205,7 @@
                                 <option class="" value="">Please Select Occupation *</option>
                                 <option value="Private Emp">Private Emp.</option>
                                 <option value="Government Emp.">Government Emp.</option>
-                                <option value="Bussiness Men">Bussiness Men</option>
+                                <option value="Bussiness Men">Bussiness Women</option>
                                 <option value="House Wife">House Wife</option>
                             </select>
                         </div>
@@ -215,6 +216,7 @@
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent Password *</label>
                             <input name="parent_password" type="password" placeholder="" class="form-control required">
+                            <div class="float-right"> <i class="fa fa-eye"></i> </div>
                         </div>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
         </div>
         
         <div class="card height-auto">
-            <div class="card-body">
+            <div class="card-body !bg-red-200">
                 <div class="heading-layout1">
                     <div class="item-title">
                         <h3>Assign Fees</h3>
@@ -336,6 +338,13 @@
 
     $('.changeClass').on('change', function(){
         callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:$(this).val()},changeFeeTypes);
+    });
+    $(document).ready(function(){
+        let class_id = $('.changeClass').val();
+        
+        if(class_id){
+            callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:class_id},changeFeeTypes);
+        }
     });
 
 </script>

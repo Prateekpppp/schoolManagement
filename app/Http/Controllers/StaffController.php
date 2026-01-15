@@ -135,6 +135,7 @@ class StaffController extends Controller
             $staff->section = $request->section;
             $staff->subject = $request->subject;
             $staff->status = 1;
+            $staff->password = 1234;
 
             // $userData = new \stdClass();
             // $userData->name = $staff->name;
@@ -181,10 +182,13 @@ class StaffController extends Controller
             $staff = Staff::where('id',$request->id)->first();
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'staff/'.$staff->id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                if($file){
+                    $request->photo = 'staff/'.$staff->id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                } else{
+                    $staff->photo = $request->photo;
+                }
 
-                $staff->photo = $request->photo;  
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
@@ -219,6 +223,9 @@ class StaffController extends Controller
 
             } else{
                 $request->photo = $staff->photo;
+                $request->id_proof_front = $staff->id_proof_front;
+                $request->id_proof_back = $staff->id_proof_back;
+                $request->other_document = $staff->other_document;
             }
             
             $staff->name = $request->name;

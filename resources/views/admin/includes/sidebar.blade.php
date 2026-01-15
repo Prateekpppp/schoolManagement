@@ -76,7 +76,7 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="fa fa-file"></i><span>Fee Collection</span></a>
+                            <a href="#" class="nav-link"><i class="fa fa-coins"></i><span>Fee Collection</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.feeHead')}}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Type</a>

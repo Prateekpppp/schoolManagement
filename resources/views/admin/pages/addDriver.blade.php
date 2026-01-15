@@ -39,6 +39,7 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Password *</label>
                                     <input name="password" minlength="10" maxlength="10"type="text" placeholder="" class="form-control required">
+                                    <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>

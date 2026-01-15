@@ -39,8 +39,11 @@
 
         $('.subAfter').after(html);
 
-        @if(isset($data) && isset($data->section_id))
+        @if(isset($data) && (isset($data->section_id) || isset($data->section)))
             $('select[name=section]').val("{{$data->section_id}}").trigger('change');
+            @if($data->section)
+            $('select[name=section]').val("{{$data->section}}").trigger('change');
+            @endif
         @endif
         @if(isset($data) && isset($data->subject_id))
             $('select[name=subject]').val("{{$data->subject_id}}").change();

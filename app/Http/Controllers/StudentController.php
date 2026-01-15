@@ -12,6 +12,7 @@ use App\Models\Classes;
 use App\Models\ClassSection;
 use App\Models\Appdata;
 use App\Models\Fee;
+use App\Models\Feeinvoice;
 use App\Models\User;
 use FeeController;
 // use AppdataController;
@@ -68,11 +69,16 @@ class StudentController extends Controller
         return view('admin.pages.addStudent',compact('classes','sections','fees'));
     }
 
-    public function updateStudent(){
+    public function updateStudent(Request $request){
+        $data = Student::where('id',$request->id)->first();
         $classes = Classes::where('status',1)->get();
         $sections = ClassSection::where('status',1)->get();
-        $fees = Fee::where('status',1)->get();
-        return view('admin.pages.updateStudent',compact('classes','sections','fees'));
+        $fees = StudentFee::join('fees','fees.id','student_fees.fee_id')
+        ->select('fees.*','student_fees.student_id')
+        ->where('student_fees.student_id',$request->id)->get();
+        // dd($fees);
+        // dd($data->class);
+        return view('admin.pages.updateStudent',compact('classes','sections','data','fees'));
     }
 
     public function createStudent(Request $request){
@@ -213,7 +219,7 @@ class StudentController extends Controller
 
 
             return response()->json([
-                'redirect'=> route('admin.pages.students'),
+                'redirect'=> $request->header('referer'),
                 'message'=> 'Data updated successfully',
                 'response_code'=> '200',
             ]);
@@ -234,8 +240,13 @@ class StudentController extends Controller
             // dd($request->dob);
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                if($file){
+                    $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                } else{
+                    $student->photo = $request->photo;  
+
+                }
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
@@ -243,10 +254,7 @@ class StudentController extends Controller
                     $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
-                    return response()->json([
-                        'message'=> 'Please upload front of Adhar',
-                        'response_code'=> '103',
-                    ]);
+                    $request->id_proof_front = $student->id_proof_front;
                 }
 
                 $file = $request->file('id_proof_back');
@@ -254,14 +262,23 @@ class StudentController extends Controller
                     $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
-                    return response()->json([
-                        'message'=> 'Please upload back of Adhar',
-                        'response_code'=> '103',
-                    ]);
+                    $request->id_proof_back = $student->id_proof_back;
+                }
+
+                $file = $request->file('other_document');
+                if($file){
+                    $request->other_document = 'students/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->other_document, 'public_uploads');                   
+                } else{
+                    
+                    $request->other_document = $student->other_document;
                 }
 
             } else{
-                $request->photo = null;
+                $request->photo = $student->photo;
+                $request->id_proof_front = $student->id_proof_front;
+                $request->id_proof_back = $student->id_proof_back;
+                $request->other_document = $student->other_document;
             }
 
             // $appdata = Appdata::where('status',1)->first();
@@ -285,7 +302,9 @@ class StudentController extends Controller
             $student->city = $request->city;
             $student->state = $request->state;
             $student->address = $request->address;
-            $student->password = $request->password;
+            if($request->password){
+                $student->password = $request->password;
+            }
 
             // class details
             $student->class = $request->class;
@@ -305,7 +324,9 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->mother_occupation = $request->mother_occupation;
             $student->parent_email = $request->parent_email;
-            $student->parent_password = $request->parent_password;
+            if($request->parent_password){
+                $student->password = $request->parent_password;
+            }
             
             // id proofs
             $student->id_proof_front = $request->id_proof_front;
@@ -313,17 +334,21 @@ class StudentController extends Controller
             $student->status = 1;
             $student->save();  
 
-            foreach($request->fee as $fee){
-                $fees = Fee::where('id',$fee)->first();
-                $studentFee = new StudentFee();
-                $studentFee->student_id = $student->id;
-                $studentFee->fee_id = $fee;
-                $studentFee->fee = $fees->amount;
-                $studentFee->save();
+            if(isset($request->fee)){
+                $studentFee = StudentFee::where('student_id',$student->id)->delete();
+                foreach($request->fee as $fee){
+                    $fees = Fee::where('id',$fee)->first();
+                    $studentFee = new StudentFee();
+                    $studentFee->student_id = $student->id;
+                    $studentFee->fee_id = $fee;
+                    $studentFee->fee = $fees->amount;
+                    $studentFee->save();
+                }
+
             }
 
             return response()->json([
-                'redirect'=> route('admin.pages.students'),
+                'redirect'=> $request->header('referer'),
                 'message'=> 'Data updated successfully',
                 'response_code'=> '200',
             ]);
@@ -337,7 +362,9 @@ class StudentController extends Controller
 
     public function studentDetail(Request $request){
         $student = Student::where('id',$request->id)->first();
-        return view('admin.pages.studentDetail',compact('student'));
+        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
+        // dd($studentFeeInvoice);
+        return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));
     }
     
     public function studentDetailByEnrollNo(Request $request){

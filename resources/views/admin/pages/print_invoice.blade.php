@@ -129,11 +129,11 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Previous Dues</td>
-                        <td class="fw-bold">{{$oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                        <td class="fw-bold">{{$oldData?$oldData->total_amount - $oldData->transaction_amount:0}} /-</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + $oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + ($oldData?$oldData->total_amount - $oldData->transaction_amount:0)}} /-</td>
                     </tr>
                 </tbody>
             </table>
@@ -150,6 +150,7 @@
 
         </div>
     </div>
+    
     <div class="w-75 mx-auto my-3">
         <div class="modal-content p-3">
 
@@ -212,11 +213,11 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Previous Dues</td>
-                        <td class="fw-bold">{{$oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                        <td class="fw-bold">{{$oldData?$oldData->total_amount - $oldData->transaction_amount:0}} /-</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + $oldData->total_amount - $oldData->transaction_amount}} /-</td>
+                        <td class="fw-bold">{{$data->total_amount - $data->transaction_amount + ($oldData?$oldData->total_amount - $oldData->transaction_amount:0)}} /-</td>
                     </tr>
                 </tbody>
             </table>

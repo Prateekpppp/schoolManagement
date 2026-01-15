@@ -39,7 +39,7 @@ class AdminAuthController extends Controller
             }
             // $currentDate
             $data = Datasession::latest()->first();
-            session(['session_name'=>$request->session_name]);
+            session(['session_name'=>$data->session_name]);
             session(['session_id'=>$data->id]);
             return redirect()->route('admin.index');
         } else{

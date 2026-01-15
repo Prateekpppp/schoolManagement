@@ -57,26 +57,24 @@
                                         {{-- <th>Caste</th> --}}
                                         {{-- <th>State</th> --}}
                                         {{-- <th>Address</th> --}}
-                                        <th>S. No.</th>
-                                        <th>Photo</th>
+                                        <th>Receipt. No.</th>
                                         <th>Enrollment No.</th>
                                         <th>Admission No.</th>
-                                        <th>Name</th>
-                                        <th>Date Of birth</th>
-                                        <th>Gender</th>
-                                        <th>City</th>
-                                        <th>Phone</th>
-                                        <th>E-mail</th>
-                                        <th>Father's Name</th>
+                                        <th>Student Name</th>
                                         <th>Class</th>
                                         <th>Section</th>
-                                        <th>QR Code</th>
+                                        <th>Roll No.</th>
+                                        <th>Phone</th>
+                                        <th>Amount</th>
+                                        <th>Due Amount</th>
+                                        <th>Paid Date</th>
+                                        <th>Due Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($students) || count($students) == 0)
+                                    @if(!isset($paymentHistory) || count($paymentHistory) == 0)
                                         <tr>
                                             <td></td>
                                             <td></td>
@@ -96,7 +94,7 @@
                                             <td></td>
                                         </tr>
                                     @else
-                                    @foreach ($students as $k=>$job)
+                                    @foreach ($paymentHistory as $k=>$job)
                                         <tr>
                                             <td>{{$k+1}}</td>
                                             <td>
@@ -118,7 +116,6 @@
                                             </td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
                                             </td>
                                         </tr>
@@ -137,34 +134,6 @@
 @section('inner_js')
 
 <script>
-
-    function appendData(response){
-        let rows = '';
-        console.log(response);
-        
-        response.data.forEach(function(job){
-            rows += `<tr>
-                <td>${job.photo}</td>
-                <td>${job.name}</td>
-                <td>${job.gender ? 'Male' : 'Female'}</td>
-                <td>${job.class}</td>
-                <td>${job.section}</td>
-                <td>${job.parent}</td>
-                <td>${job.address}</td>
-                <td>${job.dob}</td>
-                <td>${job.phone}</td>
-                <td>${job.email}</td>
-                <td>${job.status ? 'Active' : 'Inactive'}</td>
-                <td>${job.created_at}</td>
-            </tr>`;
-        });  
-        $('.tdata').html(rows);
-    }
-
-    $(document).ready(function(){
-        
-        // callAjaxFormData('get',"{{route('admin.get.allStudents')}}",null,appendData);
-    });
 </script>
 
 @endsection

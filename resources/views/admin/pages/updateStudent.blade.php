@@ -28,17 +28,18 @@
                 </div>
                 <div class="new-added-form">
                     <div class="row">
+                        <input type="hidden" name="id" value="{{$data->id ?? ''}}">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Admission Number *</label>
-                            <input name="admission_no" value="{{}}" type="text" placeholder="" class="form-control required">
+                            <input name="admission_no" value="{{$data->admission_no ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Name *</label>
-                            <input name="name" type="text" placeholder="" class="form-control required">
+                            <input name="name" value="{{$data->name ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Date Of Birth *</label>
-                            <input name="dob" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required"
+                            <input name="dob" value="{{$data->dob ?? ''}}" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required"
                                 data-position='bottom right'>
                             <i class="far fa-calendar-alt"></i>
                         </div>
@@ -46,66 +47,67 @@
                             <label>Gender *</label>
                             <select name="gender" class="select2 required">
                                 <option value="">Please Select Gender *</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Others</option>
+                                <option {{$data->gender == 1 ? 'selected' : ''}} value="1">Male</option>
+                                <option {{$data->gender == 2 ? 'selected' : ''}} value="2">Female</option>
+                                <option {{$data->gender == 3 ? 'selected' : ''}} value="3">Others</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Religion *</label>
                             <select name="religion" class="select2 required">
                                 <option value="">Please Select Religion *</option>
-                                <option value="Hindu">Hindu</option>
-                                <option value="Islam">Islam</option>
-                                <option value="Christian">Christian</option>
-                                <option value="Buddish">Buddish</option>
-                                <option value="Others">Others</option>
+                                <option {{$data->religion == 'Hindu' ? 'selected' : ''}} value="Hindu">Hindu</option>
+                                <option {{$data->religion == 'Islam' ? 'selected' : ''}} value="Islam">Islam</option>
+                                <option {{$data->religion == 'Christian' ? 'selected' : ''}} value="Christian">Christian</option>
+                                <option {{$data->religion == 'Buddish' ? 'selected' : ''}} value="Buddish">Buddish</option>
+                                <option {{$data->religion == 'Others' ? 'selected' : ''}} value="Others">Others</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Blood Group </label>
                             <select name="blood_group" class="select2">
                                 <option value="">Please Select Group *</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
+                                <option {{$data->blood_group == 'A+' ? 'selected' : ''}} value="A+">A+</option>
+                                <option {{$data->blood_group == 'A-' ? 'selected' : ''}} value="A-">A-</option>
+                                <option {{$data->blood_group == 'B+' ? 'selected' : ''}} value="B+">B+</option>
+                                <option {{$data->blood_group == 'B-' ? 'selected' : ''}} value="B-">B-</option>
+                                <option {{$data->blood_group == 'O+' ? 'selected' : ''}} value="O+">O+</option>
+                                <option {{$data->blood_group == 'O-' ? 'selected' : ''}} value="O-">O-</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Caste *</label>
                             <select name="caste" class="select2 required">
                                 <option value="">Please Select Group *</option>
-                                <option value="General" selected>General</option>
-                                <option value="OBC">OBC</option>
-                                <option value="ST/SC">ST/SC</option>
+                                <option {{$data->caste == 'General' ? 'selected' : ''}} value="General" selected>General</option>
+                                <option {{$data->caste == 'OBC' ? 'selected' : ''}} value="OBC">OBC</option>
+                                <option {{$data->caste == 'ST/SC' ? 'selected' : ''}} value="ST/SC">ST/SC</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>City *</label>
-                            <input name="city" type="text" placeholder="" class="form-control required">
+                            <input name="city" value="{{$data->city ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>State *</label>
-                            <input name="state" type="text" placeholder="" class="form-control required">
+                            <input name="state" value="{{$data->state ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Address *</label>
-                            <input name="address" type="text" placeholder="" class="form-control required">
+                            <input name="address" value="{{$data->address ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Phone *</label>
-                            <input name="phone" minlength="10" maxlength="10" type="text" placeholder="" class="form-control required">
+                            <input name="phone" value="{{$data->phone ?? ''}}" minlength="10" maxlength="10" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>E-Mail *</label>
-                            <input name="email" type="email" placeholder="" class="form-control required">
+                            <input name="email" value="{{$data->email ?? ''}}" type="email" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Password *</label>
-                            <input name="password" type="password" placeholder="" class="form-control required">
+                            <label>Password </label>
+                            <input name="password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
+                            <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                         </div>
                     </div>
                 </div>
@@ -124,8 +126,8 @@
                             <label>Class </label>
                             <select name="class" class="select2 changeClass required">
                                 <option value="">Please Select Class *</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->class}}</option>
+                                @foreach($globalClasses as $class)
+                                    <option {{$data->class == $class->id ? 'selected' : ''}} value="{{$class->id}}">{{$class->class}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -137,7 +139,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Roll Number *</label>
-                            <input name="roll_no" type="text" placeholder="" class="form-control required">
+                            <input value="{{$data->roll_no ?? ''}}" name="roll_no" type="text" placeholder="" class="form-control required">
                         </div>
                     </div>
                 </div>
@@ -155,7 +157,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Sibling Enrolment No. </label>
-                            <input name="enrollment_no" type="text" placeholder="" class="form-control">
+                            <input name="enrollment_no" value="{{$data->sibling_id ?? ''}}" type="text" placeholder="" class="form-control">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group flex items-center">
                             <a href="javascript:void(0)" type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark searchSibling">Search</a>
@@ -174,35 +176,52 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Name *</label>
-                            <input name="father_name" type="text" placeholder="" class="form-control required">
+                            <input name="father_name" value="{{$data->father_name ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Phone *</label>
-                            <input name="father_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
+                            <input name="father_phone" value="{{$data->father_phone ?? ''}}" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Father Occupation *</label>
-                            <input name="father_occupation" type="text" placeholder="" class="form-control required">
+                            <select name="father_occupation" class="select2 required">
+                                <option class="" value="">Please Select Occupation *</option>
+                                <option {{$data->father_occupation == 'Private Emp.' ? 'selected' : ''}} value="Private Emp.">Private Emp.</option>
+                                <option {{$data->father_occupation == 'Government Emp.' ? 'selected' : ''}} value="Government Emp.">Government Emp.</option>
+                                <option {{$data->father_occupation == 'Bussiness Men' ? 'selected' : ''}} value="Bussiness Men">Bussiness Men</option>
+                                <option {{$data->father_occupation == 'Not Working' ? 'selected' : ''}} value="Not Working">Not Working</option>
+                            </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Name *</label>
-                            <input name="mother_name" type="text" placeholder="" class="form-control required">
+                            <input name="mother_name" value="{{$data->mother_name ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Phone *</label>
-                            <input name="mother_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
+                            <input name="mother_phone" value="{{$data->mother_phone ?? ''}}" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Occupation *</label>
-                            <input name="mother_occupation" type="text" placeholder="" class="form-control required">
+                            <select name="mother_occupation" class="select2 required">
+                                <option class="" value="">Please Select Occupation *</option>
+                                <option {{$data->father_occupation == 'Private Emp.' ? 'selected' : ''}} value="Private Emp.">Private Emp.</option>
+                                <option {{$data->father_occupation == 'Government Emp.' ? 'selected' : ''}} value="Government Emp.">Government Emp.</option>
+                                <option {{$data->father_occupation == 'Bussiness Men' ? 'selected' : ''}} value="Bussiness Men">Bussiness Women</option>
+                                <option {{$data->father_occupation == 'House Wife' ? 'selected' : ''}} value="House Wife">House Wife</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>Mother Occupation *</label>
+                            <input name="mother_occupation" value="{{$data->mother_occupation ?? ''}}" type="text" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent E-Mail *</label>
-                            <input name="parent_email" type="email" placeholder="" class="form-control required">
+                            <input name="parent_email" value="{{$data->parent_email ?? ''}}" type="email" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent Password *</label>
-                            <input name="parent_password" type="password" placeholder="" class="form-control required">
+                            <input name="parent_password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
+                            <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                         </div>
                     </div>
                 </div>
@@ -210,25 +229,27 @@
         </div>
         
         <div class="card height-auto">
-            <div class="card-body">
+            <div class="card-body !bg-red-200">
                 <div class="heading-layout1">
                     <div class="item-title">
                         <h3>Assign Fees</h3>
                     </div>
                 </div>
                 <div class="new-added-form">
-                    <div class="row">
+                    <div class="row feeTypes">
+                    {{-- <div class="row feeTypes"> --}}
+                        
                         @if(isset($fees) && count($fees))
                         @foreach($fees as $fee)
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <div class="form-check">
-                                <input type="checkbox" name="fee[]" class="form-check-input" value="{{$fee->id}}">
+                                <input type="checkbox" name="fee[]" class="form-check-input" value="{{$fee->id}}" checked>
                                 <label for="remember-me" class="form-check-label">{{$fee->name}}</label>
                             </div>
                         </div>
                         @endforeach
                         @else
-                            <div>Please Add Fee Types!</div>
+                            <div>Please Assign Class for fee types!</div>
                         @endif
                     </div>
                 </div>
@@ -245,18 +266,24 @@
                 <div class="new-added-form">
                     <div class="row">
                         <div class="col-lg-6 col-12 form-group mg-t-30">
+                            <a href="{{asset('/').$data->photo}}" target="_blank" rel="noopener noreferrer">View</a>
                             <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
                             <input name="photo" type="file" class="form-control-file">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
+                            <a href="{{asset('/').$data->id_proof_front}}" target="_blank" rel="noopener noreferrer">View</a>
                             <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
                             <input name="id_proof_front" type="file" class="form-control-file">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
+                            <a href="{{asset('/').$data->id_proof_back}}" target="_blank" rel="noopener noreferrer">View</a>
                             <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
                             <input name="id_proof_back" type="file" class="form-control-file">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
+                            @if($data->other_document)
+                            <a href="{{asset('/').$data->other_document}}" target="_blank" rel="noopener noreferrer">View</a>
+                            @endif
                             <label class="text-dark-medium">Upload Other Document </label>
                             <input name="other_document" type="file" class="form-control-file">
                         </div>
@@ -305,6 +332,54 @@
     //     e.preventDefault();
     //     submitForm($(this).parents('form'));
     // });
+
+    function loadFeeTypes(response){
+        // console.log('feee');
+        let html = ``;
+        $(response.fee).each(function(i,item){
+            
+            html += `
+                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="fee[]" class="form-check-input feeCheckbox" value="${item.id}" checked>
+                        <label for="remember-me" class="form-check-label">${item.name}</label>
+                    </div>
+                </div>
+            `;
+        });
+        $('.feeTypes').html(html);
+
+    }
+
+    $(document).ready(function(){
+        let class_id = $('.changeClass').val();
+        
+        // if(class_id){
+        //     callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:class_id},loadFeeTypes);
+        // }
+    });
+
+    function changeFeeTypes(response){
+        // console.log('feee');
+        let html = ``;
+        $(response.fee).each(function(i,item){
+            
+            html += `
+                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="fee[]" class="form-check-input feeCheckbox" value="${item.id}">
+                        <label for="remember-me" class="form-check-label">${item.name}</label>
+                    </div>
+                </div>
+            `;
+        });
+        $('.feeTypes').html(html);
+
+    }
+
+    $('.changeClass').on('change', function(){
+        callApi('post',"{{route('admin.post.getSectionsByClass')}}",{class_id:$(this).val()},changeFeeTypes);
+    });
 
 </script>
 

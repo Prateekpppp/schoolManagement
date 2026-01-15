@@ -1,5 +1,12 @@
 @extends('admin.inner_master')
 
+@section('admin_head')
+<style>
+    .single-info-details .item-content .info-table .table tr td {
+        padding: 3px;
+    }
+</style>
+@endsection
 @section('inner_body')
 
                 <!-- Student Details Area Start Here -->
@@ -20,11 +27,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="single-info-details">
-                            <div class="item-img">
+                        <div class="single-info-details row">
+                            <div class="item-img flex flex-col justify-center items-center gap-3 col-md-4">
                                 <img src="{{asset('/')}}{{$student->photo ?? '--'}}" alt="student" width="300px">
+                                <div class="flex flex-row gap-3 justify-center items-center flex-wrap">
+                                    @if($studentFeeInvoice)
+                                    <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$studentFeeInvoice->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-500" href="javascript:void(0)"> <i class="fa fa-credit-card"></i> Pay Fee</a>
+                                    @endif
+                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-blue-500" href="javascript:void(0)"> <i class="fa fa-calculator"></i> View Dues</a>
+                                    <a href="{{route('admin.pages.paymentHistory',['id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-green-500" href="javascript:void(0)"> <i class="fa fa-clock"></i> Payment History</a>
+                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-purple-500" href="javascript:void(0)"> <i class="fa fa-qrcode"></i> Dowload QR</a>
+                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)"> <i class="fa fa-user"></i> Attendance Report</a>
+                                </div>
                             </div>
-                            <div class="item-content">
+                            <div class="item-content col-md-6">
                                 <div class="header-inline item-header">
                                     <h3 class="text-dark-medium font-medium">{{$student->name ?? '--'}}</h3>
                                     {{-- <div class="header-elements">
