@@ -22,11 +22,24 @@ class StudentController extends Controller
     //
     public function students(){
         $students = Student::join('classes','students.class','=','classes.id')
-        // ->join('class_sections','staff.section','=','class_sections.id')
-        ->get(['students.*','classes.class']);
+        ->join('sections','students.section','=','sections.id')
+        ->where('students.status',1)
+        ->get(['students.*','classes.class','sections.section']);
         // dd($students);
+        // $students = Student::where('status',1)->get();
         $fees = Fee::all();
         return view('admin.pages.students',compact('students','fees'));
+    }
+
+    public function inactiveStudents(){
+        $students = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->where('students.status',0)
+        ->get(['students.*','classes.class','sections.section']);
+        // dd($students);
+        // $students = Student::where('status',1)->get();
+        $fees = Fee::all();
+        return view('admin.pages.inactiveStudents',compact('students','fees'));
     }
 
     public function studentFilter(Request $request){
@@ -77,7 +90,7 @@ class StudentController extends Controller
         ->select('fees.*','student_fees.student_id')
         ->where('student_fees.student_id',$request->id)->get();
         // dd($fees);
-        // dd($data->class);
+        // dd($data->father_occupation);
         return view('admin.pages.updateStudent',compact('classes','sections','data','fees'));
     }
 
@@ -85,38 +98,60 @@ class StudentController extends Controller
         
         try{
             
-            $s_id = Student::max('id') + 1;
+            $s_id = $request->admission_no;
             // dd($request->dob);
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
-
+                if($file){
+                    $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                } else{
+                    return response()->json([
+                        'message'=> 'Please upload photo',
+                        'response_code'=> '103',
+                    ]);
+                }
+                // dd($request->photo);
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
-                        'message'=> 'Please upload front of Adhar',
+                        'message'=> 'Please upload front of ID Proof',
                         'response_code'=> '103',
                     ]);
                 }
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([
-                        'message'=> 'Please upload back of Adhar',
+                        'message'=> 'Please upload back of ID Proof',
                         'response_code'=> '103',
                     ]);
                 }
+                $file = $request->file('other_document');
+                if($file){
+                    $request->other_document = 'students/'.$s_id.'/'.'other_document_'.time().rand(000,111) . '_' . $file->getClientOriginalName();  
+                    $filePath = $file->storeAs('', $request->other_document, 'public_uploads');                 
+                } else{
+                    
+                    $request->other_document = null;
+                }
 
             } else{
+                return response()->json([
+                    'message'=> 'Please upload photo',
+                    'response_code'=> '103',
+                ]);
                 $request->photo = null;
+                $request->id_proof_front = null;
+                $request->id_proof_back = null;
+                $request->other_document = null;
             }
 
             $appdata = Appdata::where('status',1)->first();
@@ -136,7 +171,7 @@ class StudentController extends Controller
             $student->blood_group = $request->blood_group;
             $student->caste = $request->caste;
             $student->phone = $request->phone;
-            $student->email = $request->email;
+            // $student->email = $request->email;
             $student->city = $request->city;
             $student->state = $request->state;
             $student->address = $request->address;
@@ -160,7 +195,7 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->mother_occupation = $request->mother_occupation;
             $student->parent_email = $request->parent_email;
-            $student->parent_password = $request->parent_password;
+            // $student->parent_password = $request->parent_password;
             
             // id proofs
             $student->id_proof_front = $request->id_proof_front;
@@ -172,20 +207,6 @@ class StudentController extends Controller
             // relative path (store this in DB)
             $relativePath = 'students/' . $s_id . '/' . $fileName;
 
-            // absolute filesystem path (for saving file)
-            $fullPath = public_path($relativePath);
-
-            // create directory if not exists
-            if (!file_exists(public_path('students/' . $s_id))) {
-                mkdir(public_path('students/' . $s_id), 0755, true);
-            }
-            $url = route('admin.pages.studentDetail',$s_id);
-
-            // generate QR code
-            QrCode::format('png')
-                ->size(300)
-                ->generate($url, $fullPath);
-
             // save ONLY this in DB
             $student->qrcode = $relativePath;
 
@@ -194,15 +215,45 @@ class StudentController extends Controller
             $student->status = 1;
             $student->session_id = session('session_id');
             // dd(new AppdataController);
+            
             // create user
             $userData = new \stdClass();
             $userData->name = $request->father_name;
             $userData->username = $request->father_phone;
-            $userData->password = $request->parent_password;
+            $userData->password = $request->password;
             $userData->status = 4;
             $user = (new AppdataController)->addUser($userData);
             // dd($user);
             $student->save();  
+            
+            // store files
+            // dd($request->photo);
+            // if($request->photo){
+            //     $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+            // }
+            // if($request->id_proof_front){
+            //     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
+            // }
+            // if($request->id_proof_back){
+            //     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
+            // }
+            // if($request->other_document){
+            //     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');   
+            // }
+
+            // absolute filesystem path (for saving file)
+            $fullPath = public_path($relativePath);
+
+            // create directory if not exists
+            // if (!file_exists(public_path('students/' . $s_id))) {
+            //     mkdir(public_path('students/' . $s_id), 0755, true);
+            // }
+            $url = route('admin.pages.studentDetail',$student->id);
+
+            // generate QR code
+            QrCode::format('png')
+                ->size(300)
+                ->generate($url, $fullPath);
 
             if($request->fee){
                 foreach($request->fee as $fee){
@@ -236,7 +287,7 @@ class StudentController extends Controller
         try{
             
             $student = Student::where('id',$request->id)->first();
-            $s_id = $student->id;
+            $s_id = $student->admission_no;
             // dd($request->dob);
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
@@ -244,14 +295,14 @@ class StudentController extends Controller
                     $request->photo = 'students/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
                 } else{
-                    $student->photo = $request->photo;  
+                    $request->photo = $student->photo;  
 
                 }
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'students/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     $request->id_proof_front = $student->id_proof_front;
@@ -259,7 +310,7 @@ class StudentController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'students/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     $request->id_proof_back = $student->id_proof_back;
@@ -267,8 +318,8 @@ class StudentController extends Controller
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'students/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                    $filePath = $file->storeAs('', $request->other_document, 'public_uploads');                   
+                    $request->other_document = 'students/'.$s_id.'/'.'other_document_'.time().rand(000,111) . '_' . $file->getClientOriginalName();  
+                    $filePath = $file->storeAs('', $request->other_document, 'public_uploads');              
                 } else{
                     
                     $request->other_document = $student->other_document;
@@ -298,7 +349,7 @@ class StudentController extends Controller
             $student->blood_group = $request->blood_group;
             $student->caste = $request->caste;
             $student->phone = $request->phone;
-            $student->email = $request->email;
+            // $student->email = $request->email;
             $student->city = $request->city;
             $student->state = $request->state;
             $student->address = $request->address;
@@ -324,13 +375,14 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->mother_occupation = $request->mother_occupation;
             $student->parent_email = $request->parent_email;
-            if($request->parent_password){
-                $student->password = $request->parent_password;
-            }
+            // if($request->parent_password){
+            //     $student->password = $request->parent_password;
+            // }
             
             // id proofs
             $student->id_proof_front = $request->id_proof_front;
             $student->id_proof_back = $request->id_proof_back;
+            $student->other_document = $request->other_document;
             $student->status = 1;
             $student->save();  
 
@@ -361,9 +413,12 @@ class StudentController extends Controller
     }
 
     public function studentDetail(Request $request){
-        $student = Student::where('id',$request->id)->first();
-        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
-        // dd($studentFeeInvoice);
+        $student = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','classes.class','sections.section')
+        ->where('students.id',$request->id)->first();
+        // dd($student->id);
+        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',1)->first();
         return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));
     }
     

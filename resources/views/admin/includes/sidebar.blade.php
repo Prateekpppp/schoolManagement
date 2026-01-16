@@ -73,6 +73,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.addStudent')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.inactiveStudents')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inactive Students</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">

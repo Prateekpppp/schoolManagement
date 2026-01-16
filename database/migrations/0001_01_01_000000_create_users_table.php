@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // 0 = super admin, 1 = admin, 2 = principle, 3 = staff, 4 = parent, 5 = student
+            // 0 = super admin, 1 = admin, 2 = principle, 3 = staff, 4 = parent, 5 = driver
             $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();

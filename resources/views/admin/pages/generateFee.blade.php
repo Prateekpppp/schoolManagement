@@ -130,7 +130,7 @@
                                             <td>{{$job->dob}}</td>
                                             <td>{{$job->city}}</td>
                                             <td>{{$job->phone}}</td>
-                                            <td>{{$job->email}}</td>
+                                            <td>{{$job->parent_email}}</td>
                                             {{-- <td>
                                                 <div class="flex flex-row gap-2">
                                                     <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow w-25">Edit</a>

@@ -109,7 +109,7 @@
                                             <td>{{$job->gender ? 'Male' : 'Female'}}</td>
                                             <td>{{$job->city}}</td>
                                             <td>{{$job->phone}}</td>
-                                            <td>{{$job->parent_email}}</td>
+                                            <td>{{$job->email}}</td>
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
@@ -120,7 +120,7 @@
                                             <td>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
-                                                <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                <a data-href="{{route('admin.post.restore')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-blue-700 !max-w-min" href="javascript:void(0)">Restore</a>
                                             </td>
                                         </tr>
                                         
@@ -139,33 +139,6 @@
 
 <script>
 
-    function appendData(response){
-        let rows = '';
-        console.log(response);
-        
-        response.data.forEach(function(job){
-            rows += `<tr>
-                <td>${job.photo}</td>
-                <td>${job.name}</td>
-                <td>${job.gender ? 'Male' : 'Female'}</td>
-                <td>${job.class}</td>
-                <td>${job.section}</td>
-                <td>${job.parent}</td>
-                <td>${job.address}</td>
-                <td>${job.dob}</td>
-                <td>${job.phone}</td>
-                <td>${job.email}</td>
-                <td>${job.status ? 'Active' : 'Inactive'}</td>
-                <td>${job.created_at}</td>
-            </tr>`;
-        });  
-        $('.tdata').html(rows);
-    }
-
-    $(document).ready(function(){
-        
-        // callAjaxFormData('get',"{{route('admin.get.allStudents')}}",null,appendData);
-    });
 </script>
 
 @endsection

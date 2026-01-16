@@ -7,10 +7,10 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Students Data</h3>
+                                <h3>Payment History</h3>
                             </div>
                             <div class="">
-                                <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Student</a>
+                                <a href="{{url()->previous()}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Back</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
@@ -52,72 +52,46 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        {{-- <th>Religion</th> --}}
-                                        {{-- <th>Blood Group</th> --}}
-                                        {{-- <th>Caste</th> --}}
-                                        {{-- <th>State</th> --}}
-                                        {{-- <th>Address</th> --}}
-                                        <th>Receipt. No.</th>
-                                        <th>Enrollment No.</th>
-                                        <th>Admission No.</th>
-                                        <th>Student Name</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Roll No.</th>
-                                        <th>Phone</th>
-                                        <th>Amount</th>
-                                        <th>Due Amount</th>
-                                        <th>Paid Date</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Receipt NO.</th>
+                                        <th>Invoice NO.</th>
+                                        <th>Total</th>
+                                        <th>Paid</th>
+                                        <th>Dues</th>
+                                        <th>Payment Method</th>
+                                        <th>Transaction ID</th>
+                                        <th>Date</th>
+                                        {{-- <th>Fee</th> --}}
+                                        {{-- <th>Paid</th> --}}
+                                        {{-- <th>Dues</th> --}}
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(!isset($paymentHistory) || count($paymentHistory) == 0)
+                                    @if(!isset($transactions) || count($transactions) == 0)
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
                                         </tr>
                                     @else
-                                    @foreach ($paymentHistory as $k=>$job)
+                                    @foreach ($transactions as $k=>$job)
                                         <tr>
-                                            <td>{{$k+1}}</td>
-                                            <td>
-                                                <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
-                                            </td>
-                                            <td>{{$job->enrollment_no}}</td>
-                                            <td>{{$job->admission_no}}</td>
-                                            <td>{{$job->name}}</td>
-                                            <td>{{$job->dob}}</td>
-                                            <td>{{$job->gender ? 'Male' : 'Female'}}</td>
-                                            <td>{{$job->city}}</td>
-                                            <td>{{$job->phone}}</td>
-                                            <td>{{$job->email}}</td>
-                                            <td>{{$job->father_name}}</td>
-                                            <td>{{$job->class}}</td>
-                                            <td>{{$job->section}}</td>
-                                            <td>
-                                                <img src="{{asset('/').$job->qrcode}}" alt="photo" width="100px" height="100px">
-                                            </td>
-                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
-                                            <td>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
-                                            </td>
+                                            <td>{{$job->receipt_no ?? '--'}}</td>
+                                            <td>{{$job->invoice_id ?? '--'}}</td>
+                                            <td>{{$job->payable_amount ?? '--'}}</td>
+                                            <td>{{$job->transaction_amount ?? '--'}}</td>
+                                            <td>{{$job->due_amount ?? '--'}}</td>
+                                            <td>{{$job->payment_method ?? '--'}}</td>
+                                            <td>{{$job->transaction_id ?? '--'}}</td>
+                                            {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
+                                            {{-- <td>{{$job->amount}}</td> --}}
+                                            {{-- <td>{{$job->paid}}</td> --}}
+                                            <td>{{$job->date ?? '--'}}</td>
+                                            {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                         </tr>
                                         
                                     @endforeach

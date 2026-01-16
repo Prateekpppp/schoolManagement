@@ -75,16 +75,23 @@ class StaffController extends Controller
     public function createStaff(Request $request){
         // dd($request->all());
         try {
-            $s_id = Staff::max('id') + 1;
+            $s_id = $request->employ_code;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
-                $request->photo = 'staff/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                if($file){
+                    $request->photo = 'staff/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->photo, 'public_uploads');
+                } else{
+                    return response()->json([
+                        'message'=> 'Please upload photo',
+                        'response_code'=> '103',
+                    ]);
+                }
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'staff/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'staff/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
@@ -95,7 +102,7 @@ class StaffController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'staff/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'staff/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([
@@ -106,14 +113,17 @@ class StaffController extends Controller
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'staff/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->other_document = 'staff/'.$s_id.'/'.'other_document_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
                 } else{
                     $request->other_document = null;
                 }
 
             } else{
-                $request->photo = null;
+                return response()->json([
+                    'message'=> 'Please upload photo',
+                    'response_code'=> '103',
+                ]);
             }
             $staff = new Staff();
             $staff->photo = $request->photo;
@@ -124,6 +134,7 @@ class StaffController extends Controller
             $staff->phone = $request->phone;
             $staff->email = $request->email;
             $staff->address = $request->address;
+            $staff->aadhaar_no = $request->aadhaar_no;
             $staff->gender = $request->gender;
             $staff->religion = $request->religion;
             $staff->blood_group = $request->blood_group;
@@ -145,6 +156,20 @@ class StaffController extends Controller
             // $user = (new AppdataController)->addUser($userData);
 
             $staff->save();
+
+            // store files
+            // if($request->photo){
+            //     $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+            // }
+            // if($request->id_proof_front){
+            //     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
+            // }
+            // if($request->id_proof_back){
+            //     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
+            // }
+            // if($request->other_document){
+            //     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');   
+            // }
 
             // dd($staff->id);
             $classTeacher = new ClassTeacher();
@@ -180,20 +205,22 @@ class StaffController extends Controller
         // dd($request->all());
         try {
             $staff = Staff::where('id',$request->id)->first();
+            $s_id = $staff->employ_code;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
                 if($file){
-                    $request->photo = 'staff/'.$staff->id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->photo = 'staff/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
+                    $staff->photo = $request->photo; 
                 } else{
-                    $staff->photo = $request->photo;
+                    $request->photo = $staff->photo;
                 }
 
 
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'staff/'.$staff->id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'staff/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                     $staff->id_proof_front = $request->id_proof_front;                    
                 } else{
@@ -203,7 +230,7 @@ class StaffController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'staff/'.$staff->id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'staff/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                     $staff->id_proof_back = $request->id_proof_back;                    
                 } else{
@@ -213,7 +240,7 @@ class StaffController extends Controller
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'staff/'.$staff->id.'/other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->other_document = 'staff/'.$s_id.'/other_document_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
                     $staff->other_document = $request->other_document;                    
                 } else{
@@ -232,6 +259,7 @@ class StaffController extends Controller
             $staff->phone = $request->phone;
             $staff->email = $request->email;
             $staff->address = $request->address;
+            $staff->aadhaar_no = $request->aadhaar_no;
             $staff->gender = $request->gender;
             $staff->religion = $request->religion;
             $staff->blood_group = $request->blood_group;

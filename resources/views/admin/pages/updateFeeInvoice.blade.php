@@ -89,7 +89,9 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Fee Invoice</h3>
+                                <h3>
+                                    Update Fee Invoice ({{ date('F', mktime(0, 0, 0, $data->month, 1)) }})
+                                </h3>
                             </div>
                             <div>
                                 <a href="{{route('admin.pages.feeInvoice')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>

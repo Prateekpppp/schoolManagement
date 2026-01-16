@@ -69,12 +69,13 @@
                                             <td>{{$job->admission_no}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
-                                            <td>{{$job->month}}</td>
+                                            <td>{{date('F', mktime(0, 0, 0, $job->month, 1))}}</td>
                                             {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
                                             {{-- <td>{{$job->total_amount}}</td> --}}
                                             <td>{{$job->transaction_amount}}</td>
                                             <td>{{$job->total_amount-$job->transaction_amount}}</td>
-                                            <td>{{$job->status == 2 ? 'Paid' : 'Partially Paid'}}</td>
+        {{-- // select transaction amount from transaction where feeinvoice_id = current invoice --}}
+                                            <td>{{$job->total_amount == $job->transaction_amount ? 'Paid' : 'Partially Paid'}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                     <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="FeeInvoice" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>

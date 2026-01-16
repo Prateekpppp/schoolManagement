@@ -247,6 +247,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         // Student Module
         Route::get('/students', [StudentController::class,'students'])->name('admin.pages.students');
         
+        Route::get('/inactiveStudents', [StudentController::class,'inactiveStudents'])->name('admin.pages.inactiveStudents');
+        
         Route::get('/studentFilter', [StudentController::class,'studentFilter'])->name('admin.pages.studentFilter');
         
         Route::get('/allStudents', [StudentController::class,'allStudents'])->name('admin.get.allStudents');
@@ -390,6 +392,10 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         // delete operation
         Route::post('/delete', [AppdataController::class,'delete'])->name('admin.post.delete')->withoutMiddleware([VerifyCsrfToken::class]);        
+        
+        Route::post('/inactive', [AppdataController::class,'inactive'])->name('admin.post.inactive')->withoutMiddleware([VerifyCsrfToken::class]);        
+        
+        Route::post('/restore', [AppdataController::class,'restore'])->name('admin.post.restore')->withoutMiddleware([VerifyCsrfToken::class]);        
 
 
         // Post Requests

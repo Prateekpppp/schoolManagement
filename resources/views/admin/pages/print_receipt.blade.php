@@ -85,7 +85,7 @@
             <div class="expense-box text-center">
                 <h6 class="fw-bold">
                     Expense Title:
-                    <span class="fw-normal">Receipt - Nov 2026</span>
+                    <span class="fw-normal">Receipt - {{$payment_date}}</span>
                 </h6>
             </div>
 
@@ -94,12 +94,15 @@
                 <div class="col-md-6">
                     <p class="mb-0"><strong>Receipt No:</strong> {{$data->receipt_no}}</p>
                     <p class="mb-0"><strong>Payment Date:</strong> {{$data->date}}</p>
-                    <p class="mb-0"><strong>Receipt No:</strong> {{$data->receipt_no}}</p>
+                    <p class="mb-0"><strong>Total Amount:</strong>  ₹{{$feeInvoice}} /-</p>
+                    <p class="mb-0"><strong>Total Paid:</strong>  ₹{{$total_transaction}} /-</p>
+                    <p class="mb-0"><strong>Due Date:</strong> {{$data->due_date }}</p>
                 </div>
                 <div class="col-md-6 text-end">
                     <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
                     <p class="mb-0"><strong>Class Name:</strong> {{$student->class}}</p>
                     <p class="mb-0"><strong>Admission No:</strong> {{$student->admission_no}}</p>
+                    <p class="mb-0"><strong>Due Amount:</strong> ₹{{$feeInvoice - $total_transaction}} /-</p>
                 </div>
             </div>
 
@@ -116,11 +119,11 @@
                     <tr>
                         <td>1.</td>
                         <td>{{$data->title}}</td>
-                        <td>{{$data->transaction_amount}} /-</td>
+                        <td>₹{{$data->transaction_amount}} /-</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">{{$data->transaction_amount}} /-</td>
+                        <td class="fw-bold">₹{{$data->transaction_amount}} /-</td>
                     </tr>
                 </tbody>
             </table>

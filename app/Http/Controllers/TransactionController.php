@@ -15,10 +15,11 @@ class TransactionController extends Controller
     //
 
     function paymentHistory(Request $request){
-        $paymentHistory = Student::join('transactions','transactions.student_id','students.id')
+        $transactions = Student::join('transactions','transactions.student_id','students.id')
+        ->select('transactions.*')
         ->where('student_id',$request->id)->get();
-        dd($paymentHistory);
-        return view('admin.pages.paymentHistory',compact('paymentHistory'));
+        // dd($paymentHistory);
+        return view('admin.pages.paymentHistory',compact('transactions'));
     }
 
     function print_invoice(Request $request){
@@ -165,13 +166,24 @@ class TransactionController extends Controller
 
     function print_receipt(Request $request){
 
-        $data = Transaction::where('transactions.id',$request->id)->first();
+        $data = Transaction::where('id',$request->id)->first();
+        $date = \DateTime::createFromFormat('d/m/Y', $data->date);
+        $payment_date = $date->format('d-M-Y');
+        
+        // select transaction amount from transaction where feeinvoice_id = INV_55725081
 
+        $feeInvoice = Feeinvoice::where('feeinvoice_no',$data->invoice_id)->first()->total_amount;
+
+        // total paid amount
+        $total_transaction = Transaction::where('invoice_id',$data->invoice_id)->sum('transaction_amount');
+
+        // dd($feeInvoice);
+        
         $student = Student::join('classes','classes.id','students.class')
         ->select('students.*','classes.class')
         ->where('students.id',$data->student_id)
         ->first();
         // dd($data);
-        return view('admin.pages.print_receipt',compact('data','student'));
+        return view('admin.pages.print_receipt',compact('data','student','feeInvoice','total_transaction','payment_date'));
     }
 }

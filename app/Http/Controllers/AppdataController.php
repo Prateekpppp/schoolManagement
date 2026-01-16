@@ -44,6 +44,30 @@ class AppdataController extends Controller
         }
     }
 
+    public function inactive(Request $request){
+        $model = 'App\\Models\\' . $request->model;
+        $model = app($model);
+        $item = $model->where('id',$request->id)->update(['status'=>0]);
+        return response()->json([
+            'redirect'=> $request->header('referer'),
+            'message'=> 'Data updated successfully',
+            'response_code'=> '200',
+        ]);
+        dd($model);
+    }
+
+    public function restore(Request $request){
+        $model = 'App\\Models\\' . $request->model;
+        $model = app($model);
+        $item = $model->where('id',$request->id)->update(['status'=>1]);
+        return response()->json([
+            'redirect'=> $request->header('referer'),
+            'message'=> 'Data updated successfully',
+            'response_code'=> '200',
+        ]);
+        dd($model);
+    }
+
     public function delete(Request $request){
         $model = 'App\\Models\\' . $request->model;
         $model = app($model);

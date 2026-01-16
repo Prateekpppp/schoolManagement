@@ -29,6 +29,10 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Employee Code *</label>
+                                    <input name="employ_code" type="text" placeholder="" class="form-control required uppercase">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Name *</label>
                                     <input name="name" type="text" placeholder="" class="form-control required">
                                 </div>
@@ -43,6 +47,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Address</label>
                                     <input name="address" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Aadhaar No.</label>
+                                    <input name="aadhaar_no" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
@@ -105,6 +113,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Joining Date *</label>
                                     <input name="joining_date" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Password *</label>
+                                    <input name="password" type="text" placeholder="" class="form-control required">
                                 </div>
                             </div>
                             <div class="row">

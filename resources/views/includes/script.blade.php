@@ -182,4 +182,11 @@
             
         }
     });
+
+    $('input[name=admission_no]').on("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, "");
+    });
+    $('input[name=employ_code]').on("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, "");
+    });
 </script>

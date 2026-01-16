@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('address');
             $table->string('phone')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('password');
 
             // class details
@@ -50,11 +50,12 @@ return new class extends Migration
             $table->string('mother_phone');
             $table->string('mother_occupation');
             $table->string('parent_email');
-            $table->string('parent_password');
+            $table->string('parent_password')->nullable();
             // other details
             // $table->string('fee');
             $table->string('id_proof_front');
             $table->string('id_proof_back');
+            $table->string('other_document');
             $table->string('qrcode')->nullable();
             $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);

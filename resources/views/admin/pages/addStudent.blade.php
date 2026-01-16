@@ -10,7 +10,10 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3>Students Details</h3>
+                        <h3>Add Student</h3>
+                    </div>
+                    <div class="">
+                        <a href="{{route('admin.pages.students')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
                     </div>
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -30,7 +33,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Admission Number *</label>
-                            <input name="admission_no" type="text" placeholder="" class="form-control required">
+                            <input name="admission_no" type="text" placeholder="" class="form-control required uppercase">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Name *</label>
@@ -99,15 +102,15 @@
                             <label>Phone *</label>
                             <input name="phone" minlength="10" maxlength="10" type="text" placeholder="" class="form-control required">
                         </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>E-Mail *</label>
                             <input name="email" type="email" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        </div> --}}
+                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Password *</label>
                             <input name="password" type="password" placeholder="" class="form-control required">
                             <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -185,7 +188,7 @@
                             <label>Father Occupation *</label>
                             <select name="father_occupation" class="select2 required">
                                 <option class="" value="">Please Select Occupation *</option>
-                                <option value="Private Emp">Private Emp.</option>
+                                <option value="Private Emp.">Private Emp.</option>
                                 <option value="Government Emp.">Government Emp.</option>
                                 <option value="Bussiness Men">Bussiness Men</option>
                                 <option value="Not Working">Not Working</option>
@@ -203,7 +206,7 @@
                             <label>Mother Occupation *</label>
                             <select name="mother_occupation" class="select2 required">
                                 <option class="" value="">Please Select Occupation *</option>
-                                <option value="Private Emp">Private Emp.</option>
+                                <option value="Private Emp.">Private Emp.</option>
                                 <option value="Government Emp.">Government Emp.</option>
                                 <option value="Bussiness Men">Bussiness Women</option>
                                 <option value="House Wife">House Wife</option>
@@ -215,8 +218,8 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent Password *</label>
-                            <input name="parent_password" type="password" placeholder="" class="form-control required">
-                            <div class="float-right"> <i class="fa fa-eye"></i> </div>
+                            <input name="password" type="password" placeholder="" class="form-control required">
+                            <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                         </div>
                     </div>
                 </div>
@@ -260,15 +263,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                            <input name="photo" type="file" class="form-control-file">
+                            <input name="photo" type="file" class="form-control-file required">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Front Photo (150px X 150px)</label>
-                            <input name="id_proof_front" type="file" class="form-control-file">
+                            <input name="id_proof_front" type="file" class="form-control-file required">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload ID Back Photo (150px X 150px)</label>
-                            <input name="id_proof_back" type="file" class="form-control-file">
+                            <input name="id_proof_back" type="file" class="form-control-file required">
                         </div>
                         <div class="col-lg-6 col-12 form-group mg-t-30">
                             <label class="text-dark-medium">Upload Other Document </label>

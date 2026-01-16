@@ -31,7 +31,7 @@
                         <input type="hidden" name="id" value="{{$data->id ?? ''}}">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Admission Number *</label>
-                            <input name="admission_no" value="{{$data->admission_no ?? ''}}" type="text" placeholder="" class="form-control required">
+                            <input name="admission_no" value="{{$data->admission_no ?? ''}}" type="text" placeholder="" class="form-control required uppercase">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Name *</label>
@@ -100,15 +100,15 @@
                             <label>Phone *</label>
                             <input name="phone" value="{{$data->phone ?? ''}}" minlength="10" maxlength="10" type="text" placeholder="" class="form-control required">
                         </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>E-Mail *</label>
                             <input name="email" value="{{$data->email ?? ''}}" type="email" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        </div> --}}
+                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Password </label>
                             <input name="password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
                             <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -211,16 +211,12 @@
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Mother Occupation *</label>
-                            <input name="mother_occupation" value="{{$data->mother_occupation ?? ''}}" type="text" placeholder="" class="form-control required">
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent E-Mail *</label>
                             <input name="parent_email" value="{{$data->parent_email ?? ''}}" type="email" placeholder="" class="form-control required">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Parent Password *</label>
-                            <input name="parent_password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
+                            <input name="password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
                             <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                         </div>
                     </div>

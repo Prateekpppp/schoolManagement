@@ -16,20 +16,6 @@ class FeeinvoiceController extends Controller
     //
 
     public function feeInvoice(){
-        // $fee = Feeinvoice::join('students','feeinvoices.student_id','students.id')
-        // ->join('classes','students.class','classes.id')
-        // ->join('sections','students.section','sections.id')
-        // ->join('transactions','transactions.student_id','students.id')
-        // // ->join('transactions',\DB::raw('month(transactions.date)'),\DB::raw('month(feeinvoices.month)'))
-        // ->select('feeinvoices.feeinvoice_no','feeinvoices.student_id','feeinvoices.month','feeinvoices.year','students.roll_no','students.name','students.father_name','classes.class','students.admission_no','sections.section')
-        // ->groupBy('feeinvoices.id','feeinvoices.feeinvoice_no','feeinvoices.student_id','feeinvoices.month','feeinvoices.year')
-        // ->whereColumn('transactions.month','feeinvoices.month')
-        // ->get();
-    // dd($fee);
-        // $fee = StudentFee::join('students','students.student_id','student.id')
-        // ->select('students.*','student_fees.fee')
-        // ->join('fees','fees.id','student_fees.fee_id')
-        // dd($fee);
 
         $fee = \DB::table('feeinvoices')
         ->join('students','students.id','feeinvoices.student_id')
@@ -202,13 +188,10 @@ class FeeinvoiceController extends Controller
             ->where('month',$request->month)
             ->first();
 
-            $due_amount = Transaction::where('invoice_id',$feeInvoice->feeinvoice_no)->latest()->first();
 
-            if($due_amount){
-                $due_amount = $due_amount->due_amount;
-            } else{
-                $due_amount = 0;
-            }
+            $paid_amount = Transaction::where('invoice_id',$feeInvoice->feeinvoice_no)->sum('transaction_amount');
+            
+            $due_amount = $feeInvoice->total_amount - $paid_amount - $request->transaction_amount;
             // dd($feeInvoice);
             // $feeInvoice->payable = $feeInvoice->payable - $request->transaction_amount;
             // dd($feeInvoice->payable);
@@ -230,7 +213,7 @@ class FeeinvoiceController extends Controller
                 $transaction->student_id = $request->student_id;
                 $transaction->payable_amount = $feeInvoice->total_amount;
                 $transaction->transaction_amount = $request->transaction_amount;
-                $transaction->due_amount =  $due_amount - $request->transaction_amount;
+                $transaction->due_amount =  $feeInvoice->total_amount - $paid_amount - $request->transaction_amount;
                 $transaction->due_date = $request->due_date;
                 $transaction->late_fine = $request->late_fine;
                 $transaction->total_dues = $transaction->due_amount + $transaction->late_fine;
@@ -244,15 +227,16 @@ class FeeinvoiceController extends Controller
                 }
                 $transaction->date = $request->date;
                 // dd($transaction->due_amount);
-                if($transaction->due_amount == 0){
-                    $feeInvoice->status = 2;
-                } else{
-                    $feeInvoice->status = 1;
-                }
 
                 $transaction->save();
             }
 
+            
+            if($due_amount == 0){
+                $feeInvoice->status = 1;
+            } else{
+                $feeInvoice->status = 0;
+            }
             $feeInvoice->save();
 
             return response()->json([

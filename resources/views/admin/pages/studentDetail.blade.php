@@ -36,7 +36,7 @@
                                     @endif
                                     <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-blue-500" href="javascript:void(0)"> <i class="fa fa-calculator"></i> View Dues</a>
                                     <a href="{{route('admin.pages.paymentHistory',['id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-green-500" href="javascript:void(0)"> <i class="fa fa-clock"></i> Payment History</a>
-                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-purple-500" href="javascript:void(0)"> <i class="fa fa-qrcode"></i> Dowload QR</a>
+                                    <a href="{{asset('/').$student->qrcode}}" download class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-purple-500" href="javascript:void(0)"> <i class="fa fa-qrcode"></i> Download QR</a>
                                     <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)"> <i class="fa fa-user"></i> Attendance Report</a>
                                 </div>
                             </div>
@@ -109,6 +109,25 @@
                                                 <td>Phone:</td>
                                                 <td class="font-medium text-dark-medium">{{$student->phone ?? '--'}}</td>
                                             </tr>
+                                                <td>Front Id:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                    <a href="{{asset('/').$student->id_proof_front}}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Back Id:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                    <a href="{{asset('/').$student->id_proof_back}}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </td>
+                                            </tr>
+                                            @if($student->other_document)
+                                            <tr>
+                                                <td>Document:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                    <a href="{{asset('/').$student->other_document}}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </td>
+                                            </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

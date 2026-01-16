@@ -116,15 +116,15 @@ class FeeController extends Controller
         // $month = $request->month;
 // $year  = date('Y', strtotime($request->month));
 
-$students = Student::join('classes','students.class','=','classes.id')
-    ->join('sections','students.section','=','sections.id')
-    ->whereNotExists(function ($query) use ($month) {
-        $query->select(\DB::raw(1))
-            ->from('feeinvoices')
-            ->whereColumn('feeinvoices.student_id', 'students.id')
-            ->where('feeinvoices.month', $month);
-            // ->where('feeinvoices.year', $year);
-    });
+        $students = Student::join('classes','students.class','=','classes.id')
+            ->join('sections','students.section','=','sections.id')
+            ->whereNotExists(function ($query) use ($month) {
+                $query->select(\DB::raw(1))
+                    ->from('feeinvoices')
+                    ->whereColumn('feeinvoices.student_id', 'students.id')
+                    ->where('feeinvoices.month', $month);
+                    // ->where('feeinvoices.year', $year);
+            })->where('students.status',1);
 
 
         // $month = date('M',strtotime($request->month));
