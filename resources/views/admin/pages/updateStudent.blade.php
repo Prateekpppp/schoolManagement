@@ -12,6 +12,9 @@
                     <div class="item-title">
                         <h3>Update Student</h3>
                     </div>
+                    <div class="">
+                        <a href="{{route('admin.pages.students')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
+                    </div>
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">...</a>

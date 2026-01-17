@@ -16,7 +16,10 @@ class FeeController extends Controller
     public function feeHead(Request $request){
         $data = Fee::join('classes','classes.id','fees.class_id')
         ->select('fees.*','classes.class')
-        ->where('fees.status',1)->get();
+        ->where('fees.status',1)
+        ->orderBy('fees.id','desc')
+        ->get();
+        // dd($data);
         $classes = Classes::where('status',1)->get();
         return view('admin.pages.feeHead',compact('data','classes'));
     }
@@ -67,6 +70,7 @@ class FeeController extends Controller
                 $fee = new Fee();
                 $fee->name = $request->name;
                 $fee->class_id = $request->class_id;
+                $fee->month = $request->month;
                 $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->status = 1;
@@ -75,6 +79,7 @@ class FeeController extends Controller
                 $fee = Fee::where('id',$request->id)->first();
                 $fee->name = $request->name;
                 $fee->class_id = $request->class_id;
+                $fee->month = $request->month;
                 $fee->period = $request->period;
                 $fee->amount = $request->amount;
                 $fee->save();

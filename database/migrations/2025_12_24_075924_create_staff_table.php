@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('other_document')->nullable();
             $table->string('qualification')->nullable();
             $table->string('admin_username')->nullable();
-            // status = 0 = inactive, 1 = teacher, 2 = staff, 3 = drivers, 4 = others
+            // 0 = inactive, 1 = main_admin, 2 = admin, 3 = principle, 4 = staff, 5 = parent, 6 = driver
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();

@@ -45,6 +45,8 @@ class FeeinvoiceController extends Controller
             'classes.class',
             'sections.section',
         )
+        ->where('feeinvoices.status',1)
+        ->orderBy('feeinvoices.id','desc')
         ->get();
         // dd($fee);
         return view('admin.pages.feeInvoice',compact('fee'));
@@ -60,8 +62,7 @@ class FeeinvoiceController extends Controller
         foreach ($students as $k=>$value) {
 
             // assigned fees data
-            $totalFee = StudentFee::where('student_id',$value)->sum('fee');
-            // dd($totalFee);
+
             $feeInvoice = Feeinvoice::where('student_id',$value)
             ->where('month',$month)
             ->first();
@@ -69,6 +70,32 @@ class FeeinvoiceController extends Controller
             if($feeInvoice){
                 continue;
             }
+
+            $oneTimeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+            ->select('student_fees.*','fees.period')
+            ->where('student_fees.student_id',$value)
+            ->where('student_fees.status',1)
+            ->where('fees.period',0)
+            ->sum('fee');
+            
+            $monthlyFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+            ->select('student_fees.*','fees.period')
+            ->where('student_fees.student_id',$value)
+            ->where('student_fees.status',1)
+            ->where('fees.period',1)
+            ->sum('fee');
+
+            $annualFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+            ->select('student_fees.*','fees.period','fees.month')
+            ->where('student_fees.student_id',$value)
+            ->where('student_fees.status',1)
+            ->where('fees.period',2)
+            ->where('fees.month',$month)
+            ->sum('fee');
+
+            $totalFee = $oneTimeFee + $monthlyFee + $annualFee;
+
+            // dd($totalFee);
             
             // dd(date('M Y',$studentFee->created_at)==now()->format('M Y'));
 
@@ -81,9 +108,26 @@ class FeeinvoiceController extends Controller
             $feeInvoice->total_amount = $totalFee;
             // $feeInvoice->payable = $totalFee;
             $feeInvoice->invoice_date = now();
-            $feeInvoice->status = 0;
+            $feeInvoice->status = 1;
             $feeInvoice->session_id = session('session_id');
             $feeInvoice->save();
+
+            // update student_fee table for applied period of fee type
+            $removeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+            ->select('student_fees.*','fees.period','fees.month')
+            ->where('student_id',$value)
+            ->where('fees.period',1)
+            ->orWhere('fees.month',$month)
+            ->update(['student_fees.status'=>0]);
+
+            // ==================================== //
+            // -- The Code --
+            // ->get(['student_fees.id']);
+            
+            // $removeFee = StudentFee::whereIn('id',$removeFee)->update('status',0);
+
+            // ==================================== //
+
         }
         // dd($data);
         return response()->json([
@@ -174,8 +218,10 @@ class FeeinvoiceController extends Controller
 
         $student = Student::join('classes','students.class','classes.id')
         ->join('sections','students.section','sections.id')
-        ->select('students.*','classes.class','sections.section')
+        ->join('student_fees','students.id','student_fees.student_id')
+        ->select('students.*','classes.class','sections.section','student_fees.fee_id')
         ->where('students.id',$data->student_id)->first();
+        // $feetype = Fee::where('id',$student->fee_id)->first();
         $lateFee = Fee::where('period',5)->first()->amount ?? 0;
         $transactions = Transaction::where('student_id', $data->student_id)->get();
         return view('admin.pages.updateFeeInvoice', compact('data', 'student', 'transactions','lateFee'));
@@ -233,7 +279,7 @@ class FeeinvoiceController extends Controller
 
             
             if($due_amount == 0){
-                $feeInvoice->status = 1;
+                $feeInvoice->status = 2;
             } else{
                 $feeInvoice->status = 0;
             }

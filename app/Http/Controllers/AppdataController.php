@@ -106,6 +106,30 @@ class AppdataController extends Controller
         }
     }
     
+    public function updateUser($request){
+        try {
+            
+            $user = User::where('username',$request->username)->first();
+            $user->name = $request->name;
+            if(isset($request->email)){
+                $user->email = $request->email;
+            }
+            $user->password = $request->password;
+            // $user->role = $request->role;
+            $user->status = $request->status;
+            $user->save();
+            return response()->json([
+                'message'=> 'User added successfully',
+                'response_code'=> '200',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500'
+            ]);
+        }
+    }
+
     // public function addUser(Request $request){
     //     $admin = User::getCurrentUser();
     //     $user = new User();

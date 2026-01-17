@@ -37,7 +37,7 @@ return new class extends Migration
             // class details
             $table->string('class');
             $table->string('section');
-            $table->string('roll_no')->unique();
+            $table->string('roll_no');
 
             // sibling option in form
             $table->string('sibling_id')->nullable();

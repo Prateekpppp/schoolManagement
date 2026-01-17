@@ -24,6 +24,7 @@ class StudentController extends Controller
         $students = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',1)
+        ->orderBy('students.id','desc')
         ->get(['students.*','classes.class','sections.section']);
         // dd($students);
         // $students = Student::where('status',1)->get();
@@ -221,10 +222,10 @@ class StudentController extends Controller
             $userData->name = $request->father_name;
             $userData->username = $request->father_phone;
             $userData->password = $request->password;
-            $userData->status = 4;
+            $userData->status = 5;
             $user = (new AppdataController)->addUser($userData);
             // dd($user);
-            $student->save();  
+            $student->save();
             
             // store files
             // dd($request->photo);
@@ -262,6 +263,7 @@ class StudentController extends Controller
                     $studentFee->student_id = $student->id;
                     $studentFee->fee_id = $fee;
                     $studentFee->fee = $fees->amount;
+                    $studentFee->status = 0;
                     $studentFee->session_id = session('session_id');
                     $studentFee->save();
                 }
@@ -418,7 +420,7 @@ class StudentController extends Controller
         ->select('students.*','classes.class','sections.section')
         ->where('students.id',$request->id)->first();
         // dd($student->id);
-        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',1)->first();
+        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
         return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));
     }
     

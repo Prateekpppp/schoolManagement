@@ -44,9 +44,25 @@
                                         <option value="">Please Select Period *</option>
                                         <option value="0">One Time</option>
                                         <option value="1">Monthly</option>
-                                        <option value="2">Quaterly</option>
-                                        <option value="3">Half Yearly</option>
-                                        <option value="4">Annually</option>
+                                        <option value="2">Annually</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group monthVal hidden">
+                                    <label>Month </label>
+                                    <select name="month" class="select2">
+                                        <option value="">Please Select Period *</option>
+                                        <option value="01">Jan</option>
+                                        <option value="02">Feb</option>
+                                        <option value="03">Mar</option>
+                                        <option value="04">Apr</option>
+                                        <option value="05">May</option>
+                                        <option value="06">Jun</option>
+                                        <option value="07">Jul</option>
+                                        <option value="08">Aug</option>
+                                        <option value="09">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -117,6 +133,7 @@
                                         <th>Fee Head</th>
                                         <th>Class</th>
                                         <th>Period</th>
+                                        <th>Month</th>
                                         <th>Amount</th>
                                         <th>Action</th>
                                         {{-- <th>Status</th> --}}
@@ -125,6 +142,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($data) || count($data) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
@@ -143,6 +161,7 @@
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{!$job->period ? 'One Time' : ($job->period ==1 ? 'Monthly' : ($job->period == 2 ? 'Quaterly' : ($job->period == 3 ? 'Half Yearly' : 'Annually')))}}</td>
+                                            <td>{{ date('F', mktime(0, 0, 0, $job->month, 1)) }}</td>
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
@@ -182,6 +201,13 @@
     //     callApi('post',"{{route('admin.post.remove_cSection')}}",data,ajaxResponseModal);
     // });
     
+    $('select[name=period]').on('change',function(){
+        if($(this).val() == 2){
+            $('.monthVal').removeClass('hidden');
+        } else{
+            $('.monthVal').addClass('hidden');
+        }
+    });
 
 </script>
 

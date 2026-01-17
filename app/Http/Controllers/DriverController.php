@@ -66,11 +66,11 @@ class DriverController extends Controller
     public function createDriver(Request $request){
         // dd($request->all());
         try {
-            $s_id = Driver::max('id') + 1;
+            $s_id = $request->employ_code;
             if (!empty($request->allFiles())) {
                 $file = $request->file('photo');
                 if($file){
-                    $request->photo = 'driver/'.$s_id.'/'.'photo/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->photo = 'driver/'.$s_id.'/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->photo, 'public_uploads'); 
                 } else{
                     return response()->json([
@@ -82,7 +82,7 @@ class DriverController extends Controller
                 $file = $request->file('id_proof_front');
                 // dd($file);
                 if($file){
-                    $request->id_proof_front = 'driver/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_front = 'driver/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_front, 'public_uploads');
                 } else{
                     return response()->json([
@@ -93,7 +93,7 @@ class DriverController extends Controller
 
                 $file = $request->file('id_proof_back');
                 if($file){
-                    $request->id_proof_back = 'driver/'.$s_id.'/'.'id_proof/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->id_proof_back = 'driver/'.$s_id.'/'.'id_proof_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->id_proof_back, 'public_uploads');
                 } else{
                     return response()->json([
@@ -104,7 +104,7 @@ class DriverController extends Controller
 
                 $file = $request->file('other_document');
                 if($file){
-                    $request->other_document = 'driver/'.$s_id.'/'.'other_document/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                    $request->other_document = 'driver/'.$s_id.'/'.'other_document_'.time().rand(000,111) . '_' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('', $request->other_document, 'public_uploads');
                 } else{
                     $request->other_document = null;
@@ -125,6 +125,14 @@ class DriverController extends Controller
             $staff->joining_date = $request->joining_date;
             $staff->driving_license = $request->driving_license;
             $staff->status = 1;
+            
+            $userData = new \stdClass();
+            $userData->name = $staff->name;
+            $userData->username = $staff->phone;
+            $userData->password = $staff->password;
+            $userData->status = 6;
+            $user = (new AppdataController)->addUser($userData);
+
             $staff->save();
 
             return response()->json([
