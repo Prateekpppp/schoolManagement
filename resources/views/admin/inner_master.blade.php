@@ -32,9 +32,23 @@
 
 
             <div class="dashboard-content-one">
+                
+                @if($currentUser->status == 1 || $currentUser->status == 2)
+                {{-- 1 = main_admin, 2 = admin --}}
                 <!-- Breadcubs Area Start Here -->
                 @include('admin.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
+                @elseif($currentUser->status == 3)
+                {{-- 3 = principal --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('principal.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+                @elseif($currentUser->status == 4)
+                {{-- 4 = staff --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('staff.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+                @endif
                 
                     @yield('inner_body')
                     

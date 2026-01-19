@@ -116,15 +116,6 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/createStudentHomework', [StudenthomeworkController::class,'createHomework'])->name('staff.post.createHomework')->withoutMiddleware([VerifyCsrfToken::class]);
         
-        // Transaction Module
-        Route::get('/receipt', [FeeController::class,'receipt'])->name('staff.pages.receipt');
-        
-        Route::get('/paymentHistory', [TransactionController::class,'paymentHistory'])->name('staff.pages.paymentHistory');
-       
-        Route::get('/print_invoice', [TransactionController::class,'print_invoice'])->name('staff.pages.print_invoice');
-
-        Route::get('/print_receipt', [TransactionController::class,'print_receipt'])->name('staff.pages.print_receipt');
-
         // Exam Module
         Route::get('/exam', [ExamController::class,'exam'])->name('staff.pages.exam');
         
@@ -133,64 +124,6 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createExam', [ExamController::class,'createExam'])->name('staff.post.createExam')->withoutMiddleware([VerifyCsrfToken::class]);        
 
         Route::get('/updateExam', [ExamController::class,'updateExam'])->name('staff.pages.updateExam');
-        
-        // Job Module
-        Route::get('/jobs', [JobController::class,'jobs'])->name('staff.pages.jobs');
-        
-        Route::get('/allJobs', [JobController::class,'allJobs'])->name('staff.get.allJobs');
-        
-        Route::get('/addJobs', function () {
-            return view('admin.pages.addJobs');
-        })->name('staff.pages.addJobs');
-        
-        Route::post('/createJob', [JobController::class,'createJob'])->name('staff.post.createJob')->withoutMiddleware([VerifyCsrfToken::class]);
-        
-        Route::get('/updateJob', [JobController::class,'updateJob'])->name('staff.pages.updateJob');
-        Route::get('/applicants', [ApplicantController::class,'applicants'])->name('staff.pages.applicants');
-        
-        Route::get('/contact', [ContactController::class,'contact'])->name('staff.pages.contact');
-        
-        Route::get('/setting', function () {
-            return view('admin.pages.setting');
-        })->name('staff.pages.setting');
-
-        Route::get('/notice', [NoticeController::class,'notice'])->name('staff.pages.notice');
-        
-        Route::get('/allNotice', [NoticeController::class,'allNotice'])->name('staff.get.allNotice');
-        
-        Route::get('/addNotice', [NoticeController::class,'addNotice'])->name('staff.pages.addNotice');
-        
-        Route::post('/createNotice', [NoticeController::class,'createNotice'])->name('staff.post.createNotice')->withoutMiddleware([VerifyCsrfToken::class]);
-        
-        Route::get('/banner', [BannerController::class,'banner'])->name('staff.pages.banner');
-        
-        Route::get('/allBanner', [BannerController::class,'allBanner'])->name('staff.get.allBanner');
-        
-        Route::get('/addBanner', [BannerController::class,'addBanner'])->name('staff.pages.addBanner');
-        
-        Route::post('/createBanner', [BannerController::class,'createBanner'])->name('staff.post.createBanner')->withoutMiddleware([VerifyCsrfToken::class]);
-        
-        Route::get('/gallery', [GalleryController::class,'gallery'])->name('staff.pages.gallery');
-        
-        Route::get('/allGallery', [GalleryController::class,'allGallery'])->name('staff.get.allGallery');
-        
-        Route::get('/addGallery', [GalleryController::class,'addGallery'])->name('staff.pages.addGallery');
-        
-        Route::post('/createGallery', [GalleryController::class,'createGallery'])->name('staff.post.createGallery')->withoutMiddleware([VerifyCsrfToken::class]);
-        
-        Route::post('/updateAppdata', [AppdataController::class,'updateAppdata'])->name('staff.post.updateAppdata')->withoutMiddleware([VerifyCsrfToken::class]);
-
-
-        // delete operation
-        Route::post('/delete', [AppdataController::class,'delete'])->name('staff.post.delete')->withoutMiddleware([VerifyCsrfToken::class]);        
-        
-        Route::post('/inactive', [AppdataController::class,'inactive'])->name('staff.post.inactive')->withoutMiddleware([VerifyCsrfToken::class]);        
-        
-        Route::post('/restore', [AppdataController::class,'restore'])->name('staff.post.restore')->withoutMiddleware([VerifyCsrfToken::class]);        
-
-
-        // Post Requests
-
         
     });
     

@@ -43,8 +43,8 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">{{$appdata->admin_username ?? 'Admin'}}</h5>
-                                <span>{{isset($appdata->status) ? ($appdata->status ? 'Admin' : 'User') : ''}}</span>
+                                <h5 class="item-title">{{$currentUser->name ?? 'Admin'}}</h5>
+                                {{-- <span>{{isset($appdata->status) ? ($appdata->status ? 'Admin' : 'User') : ''}}</span> --}}
                             </div>
                             <div class="admin-img">
                                 <img src="img/figure/admin.jpg" alt="Admin">
@@ -53,7 +53,7 @@
                         {{-- @if($sessions) --}}
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">{{$appdata->admin_username ?? 'Admin'}}</h6>
+                                <h6 class="item-title">{{$currentUser->name ?? 'Admin'}}</h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">

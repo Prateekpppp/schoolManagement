@@ -263,7 +263,7 @@ class StudentController extends Controller
                     $studentFee->student_id = $student->id;
                     $studentFee->fee_id = $fee;
                     $studentFee->fee = $fees->amount;
-                    $studentFee->status = 0;
+                    $studentFee->status = 1;
                     $studentFee->session_id = session('session_id');
                     $studentFee->save();
                 }

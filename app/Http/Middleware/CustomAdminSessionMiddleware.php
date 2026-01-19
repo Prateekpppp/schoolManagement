@@ -34,23 +34,6 @@ class CustomAdminSessionMiddleware
         $globalClasses = Classes::where('status',1)->get();
         View::share('globalClasses',$globalClasses);
 
-        $currentUser = User::getCurrentUser();
-        View::share('currentUser',$currentUser);
-
-        if($currentUser->status == 3){
-            $currentPrincipal = Staff::where('phone',$currentUser->username)->first();
-            View::share('currentPrincipal',$currentPrincipal);
-        }
-        
-        if($currentUser->status == 4){
-            $currentStaff = Staff::where('phone',$currentUser->username)->first();
-            View::share('currentStaff',$currentStaff);
-        }
-
-        if($currentUser->status == 5){
-            $currentStudent = Student::where('father_phone',$currentUser->username)->first();
-            View::share('currentStudent',$currentStudent);
-        }
 
         return $next($request);
     }

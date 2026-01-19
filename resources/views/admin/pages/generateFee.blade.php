@@ -11,6 +11,9 @@
                             <div class="item-title">
                                 <h3>All Students Data</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.feeInvoice')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View Invoices</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 

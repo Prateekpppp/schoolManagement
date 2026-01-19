@@ -71,28 +71,41 @@ class FeeinvoiceController extends Controller
                 continue;
             }
 
-            $oneTimeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
-            ->select('student_fees.*','fees.period')
-            ->where('student_fees.student_id',$value)
-            ->where('student_fees.status',1)
-            ->where('fees.period',0)
-            ->sum('fee');
+            $oneTimeFee = Feeinvoice::where('student_id',$value)->first();
+            if($oneTimeFee){
+                $oneTimeFee = 0;
+            } else{
+                $oneTimeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+                ->select('student_fees.*','fees.period')
+                ->where('student_fees.student_id',$value)
+                ->where('student_fees.status',1)
+                ->where('fees.period',0)
+                ->sum('fee');
+            }
             
+            $annualFee = Feeinvoice::where('student_id',$value)->where('month',$month)->first();
+            if($annualFee){
+                $annualFee = 0;
+            } else{
+                $annualFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+                ->select('student_fees.*','fees.period','fees.month')
+                ->where('student_fees.student_id',$value)
+                ->where('student_fees.status',1)
+                ->where('fees.period',2)
+                ->where('fees.month',$month)
+                ->sum('fee');
+            }
+
             $monthlyFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
             ->select('student_fees.*','fees.period')
             ->where('student_fees.student_id',$value)
             ->where('student_fees.status',1)
             ->where('fees.period',1)
             ->sum('fee');
+            
+            $monthlyFee = $monthlyFee ?? 0;
 
-            $annualFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
-            ->select('student_fees.*','fees.period','fees.month')
-            ->where('student_fees.student_id',$value)
-            ->where('student_fees.status',1)
-            ->where('fees.period',2)
-            ->where('fees.month',$month)
-            ->sum('fee');
-
+            // dd($oneTimeFee,$annualFee,$monthlyFee );
             $totalFee = $oneTimeFee + $monthlyFee + $annualFee;
 
             // dd($totalFee);
@@ -113,12 +126,12 @@ class FeeinvoiceController extends Controller
             $feeInvoice->save();
 
             // update student_fee table for applied period of fee type
-            $removeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
-            ->select('student_fees.*','fees.period','fees.month')
-            ->where('student_id',$value)
-            ->where('fees.period',1)
-            ->orWhere('fees.month',$month)
-            ->update(['student_fees.status'=>0]);
+            // $removeFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
+            // ->select('student_fees.*','fees.period','fees.month')
+            // ->where('student_id',$value)
+            // ->where('fees.period',1)
+            // ->orWhere('fees.month',$month)
+            // ->update(['student_fees.status'=>0]);
 
             // ==================================== //
             // -- The Code --
