@@ -31,8 +31,7 @@ class AdminAuthController extends Controller
         // if(Hash::check($request->password,$user->password)){
         if($request->password == $user->password){
             Session::put([
-                'admin_username'=>$user->username,
-                'session_name'=> date('Y')
+                'admin_username'=>$user->username
             ]);
             if($request->remember_me == 'on'){
                 Cookie::queue('admin_username', $user->username, 21900);
@@ -41,7 +40,15 @@ class AdminAuthController extends Controller
             $data = Datasession::latest()->first();
             session(['session_name'=>$data->session_name]);
             session(['session_id'=>$data->id]);
+
+        if($user->status == 1 || $user->status == 2){
             return redirect()->route('admin.index');
+        } elseif ($user->status == 3) {
+            return redirect()->route('principal.index');
+        } elseif ($user->status == 3) {
+            return redirect()->route('staff.index');
+
+        }
         } else{
             return redirect()->route('admin.login')->with([
                 'message'=> 'Wrong User Credentials',

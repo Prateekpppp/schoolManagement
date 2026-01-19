@@ -13,8 +13,12 @@ class HomeworkController extends Controller
     public function homework(Request $request){
         $data = Homework::join('classes','homework.class_id','classes.id')
         ->join('sections','homework.section_id','sections.id')
-        ->select('homework.*','classes.class','sections.section')
-        ->where('homework.status',1)->get();
+        ->select('homework.*','classes.class','sections.section');
+
+        if($this->currentUser->status > 2){
+            $data = $data->where('homework.admin_username',$this->currentUser->username);
+        }
+        $data = $data->where('homework.status',1)->get();
         
         // dd($data);
         return view('admin.pages.homework',compact('data'));
@@ -25,6 +29,7 @@ class HomeworkController extends Controller
         $data = Homework::join('classes','homework.class_id','classes.id')
         ->join('sections','homework.section_id','sections.id')
         ->select('homework.*','classes.class','sections.section','classes.id as c_id','sections.id as s_id')
+        ->where('homework.admin_username',$this->currentUser->username)
         ->where('homework.status',1);
 
         if($request->name){
@@ -36,7 +41,10 @@ class HomeworkController extends Controller
         if($request->section_id){
             $data = $data->where('sections.id',$request->section_id);
         }
-        $data = $data->get();
+        if($this->currentUser->status > 2){
+            $data = $data->where('homework.admin_username',$this->currentUser->username);
+        }
+        $data = $data->where('homework.status',1)->get();
         // dd($data);
         return view('admin.pages.homework',compact('data'));
     }
@@ -100,7 +108,7 @@ class HomeworkController extends Controller
             $student->class_id = $request->class_id;
             $student->section_id = $request->section_id;
             $student->subject_id = $request->subject_id;
-            $student->due_date = date('d-m-Y',strtotime($request->due_date));
+            $student->date = date('d-m-Y',strtotime($request->due_date));
             $student->description = $request->description;
 
             $student->upload = $request->upload;

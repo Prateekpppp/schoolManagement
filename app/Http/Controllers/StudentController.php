@@ -417,8 +417,12 @@ class StudentController extends Controller
     public function studentDetail(Request $request){
         $student = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
-        ->select('students.*','classes.class','sections.section')
-        ->where('students.id',$request->id)->first();
+        ->select('students.*','classes.class','sections.section');
+        if($request->id){
+            $student = $student->where('students.id',$request->id)->first();
+        } else{
+            $student = $student->where('students.father_phone',$this->currentUser->username)->first();
+        }
         // dd($student->id);
         $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
         return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));

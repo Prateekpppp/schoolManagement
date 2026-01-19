@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Date *</label>
-                                    <input name="due_date" type="text" placeholder="" class="form-control air-datepicker required"
+                                    <input name="date" type="text" placeholder="" class="form-control air-datepicker required"
                                         data-position='bottom right'>
                                     <i class="far fa-calendar-alt"></i>
                                 </div>

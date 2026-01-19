@@ -118,7 +118,7 @@
                     <tr>
                         <td>2.</td>
                         <td>Total Salary</td>
-                        <td>{{$data->total_salary}} %</td>
+                        <td>{{$data->total_salary}} /-</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="fw-bold text-end">Total</td>

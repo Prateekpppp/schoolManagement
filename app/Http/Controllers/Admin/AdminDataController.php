@@ -45,7 +45,7 @@ class AdminDataController extends Controller
     }
     
     public function index(){
-        // $user = User::getCurrentUser();
+        $user = User::getCurrentUser();
         $classes = Classes::where('status',1)->count();
         $sections = Section::where('status',1)->count();
         $students = Student::where('status',1)->count();
@@ -69,7 +69,15 @@ class AdminDataController extends Controller
         $vehicle = Vehicle::where('status',1)->count();
         $routes = ScRoute::where('status',1)->count();
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
-        return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+       if($user->status == 1 || $user->status == 2){
+           return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+        } elseif ($user->status == 3) {
+           return view('principal.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+           } elseif ($user->status == 4) {
+            return view('staff.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+
+        }
+        
     }
     
     public function createData(Request $request){

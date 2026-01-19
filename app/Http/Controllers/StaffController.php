@@ -19,7 +19,7 @@ class StaffController extends Controller
 
         $data = Staff::join('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject')
-        ->where('staff.status',1)->get();
+        ->where('staff.status','!=',0)->get();
         // dd($staff);
         return view('admin.pages.staff',compact('data'));
     }
@@ -127,6 +127,7 @@ class StaffController extends Controller
             }
             $staff = new Staff();
             $staff->photo = $request->photo;
+            $staff->employ_code = $request->employ_code;
             $staff->id_proof_front = $request->id_proof_front;
             $staff->id_proof_back = $request->id_proof_back;
             $staff->other_document = $request->other_document;
@@ -255,6 +256,7 @@ class StaffController extends Controller
                 $request->other_document = $staff->other_document;
             }
             
+            $staff->employ_code = $request->employ_code;
             $staff->name = $request->name;
             $staff->phone = $request->phone;
             $staff->email = $request->email;

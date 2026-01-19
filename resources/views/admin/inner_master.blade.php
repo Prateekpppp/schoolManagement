@@ -11,10 +11,26 @@
         
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
+
+            @if($currentUser->status == 1 || $currentUser->status == 2)
+            {{-- 1 = main_admin, 2 = admin --}}
             <!-- Sidebar Area Start Here -->
             @include('admin.includes.sidebar')
             <!-- Sidebar Area End Here -->
-            
+            @elseif($currentUser->status == 3)
+            {{-- 3 = principal --}}
+            <!-- Sidebar Area Start Here -->
+            @include('principal.includes.sidebar')
+            <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 4)
+            {{-- 3 = staff --}}
+            <!-- Sidebar Area Start Here -->
+            @include('staff.includes.sidebar')
+            <!-- Sidebar Area End Here -->
+            @endif
+
+
+
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 @include('admin.includes.breadcrumb')

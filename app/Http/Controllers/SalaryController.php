@@ -5,18 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\Salary;
+use App\Models\User;
 
 class SalaryController extends Controller
 {
     //
+
     public function inventory(){
         $data = Salary::join('staff','salaries.staff_id','staff.id')
         ->select('salaries.*','staff.name')
         ->where('salaries.status',1)->get();
 
-        $staff = Staff::where('status',1)->get();
+        $staff = Staff::where('status','!=',0)->get();
         // dd($data);
         return view('admin.pages.salary',compact('data','staff'));
+    }
+
+    public function staffSalary(Request $request){
+        $data = Salary::join('staff','salaries.staff_id','staff.id')
+        ->select('salaries.*','staff.name')
+        ->where('staff.phone',$this->currentUser->username)
+        ->where('salaries.status',1)
+        ->get();
+
+        // $staff = Staff::where('status',1)->get();
+        // dd($data);
+        return view('staff.pages.salary',compact('data'));
     }
 
     public function inventoryFilter(Request $request){
