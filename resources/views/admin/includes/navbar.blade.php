@@ -47,7 +47,7 @@
                                 {{-- <span>{{isset($appdata->status) ? ($appdata->status ? 'Admin' : 'User') : ''}}</span> --}}
                             </div>
                             <div class="admin-img">
-                                <img src="{{$currentuser->status > '2' ? asset(img/figure/admin.jpg)}}" alt="Admin">
+                                <img src="{{$currentUser->status > 2 ? asset('/').$currentLogin->photo : 'img/figure/admin.jpg'}}" alt="Admin" width="40px">
                             </div>
                         </a>
                         {{-- @if($sessions) --}}

@@ -11,7 +11,7 @@
                             <a href="{{route('admin.index')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('staff.pages.staffDetail',$currentStaff->id)}}" class="nav-link"><i class="flaticon-dashboard"></i><span>My Profile</span></a>
+                            <a href="{{route('staff.pages.staffDetail',$currentLogin->id)}}" class="nav-link"><i class="flaticon-dashboard"></i><span>My Profile</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('staff.pages.addHomework')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Add Homework</span></a>
@@ -21,6 +21,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('staff.pages.staffSalary')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Salary Report</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('staff.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
                         </li>
                     </ul>
                 </div>

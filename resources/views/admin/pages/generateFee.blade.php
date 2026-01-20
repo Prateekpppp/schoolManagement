@@ -220,6 +220,7 @@
     
     function submitForm(form){
         let data = new FormData($(form)[0]);
+        // data['invoice_date'] = $('input[name=month]').val();
         console.log('data--',data);
         
         callAjaxFormData('post',"{{route('admin.post.assignFee')}}",data,ajaxResponseModal);

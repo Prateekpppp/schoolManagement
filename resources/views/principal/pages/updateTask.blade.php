@@ -7,10 +7,10 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Fee Head</h3>
+                                <h3>Update Task</h3>
                             </div>
                             <div class="">
-                                <a href="{{route('admin.pages.feeHead')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>
+                                <a href="{{route('principal.pages.task')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -28,34 +28,18 @@
                         </div>
                         <form class="new-added-form">
                             <div class="row">
-                            <input type="hidden" name="id" value="{{$data->id ?? ''}}">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Fee Name *</label>
-                                    <input name="name" value="{{$data->name}}" type="text" placeholder="" class="form-control required">
+                                <input type="hidden" name="id" value="{{$data->id}}">
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Title </label>
+                                    <input name="title" value="{{$data->title}}" type="text" placeholder="" class="form-control">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class </label>
-                                    <select name="class_id" class="select2 required">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($globalClasses as $class)
-                                            <option {{($class->id == $data->class_id) ? 'selected' : ''}} value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Description *</label>
+                                    <textarea name="description" placeholder="" class="form-control required !h-48">{{$data->description}}</textarea>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Period </label>
-                                    <select name="period" class="select2 required">
-                                        <option value="">Please Select Period *</option>
-                                        <option {{($data->period == 0) ? 'selected' : ''}} value="0">One Time</option>
-                                        <option {{($data->period == 1) ? 'selected' : ''}} value="1">Monthly</option>
-                                        <option {{($data->period == 2) ? 'selected' : ''}} value="2">Quaterly</option>
-                                        <option {{($data->period == 3) ? 'selected' : ''}} value="3">Half Yearly</option>
-                                        <option {{($data->period == 4) ? 'selected' : ''}} value="4">Annually</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Fee Amount *</label>
-                                    <input name="amount" value="{{$data->amount}}" type="text" placeholder="" class="form-control required">
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Remark </label>
+                                    <textarea name="remark" placeholder="" class="form-control !h-48">{{$data->remark}}</textarea>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -79,7 +63,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createFeeHead')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('principal.post.createTask')}}",data,ajaxResponseModal);
     }
 
     // $('.remove_feeHead').on('click', function(){

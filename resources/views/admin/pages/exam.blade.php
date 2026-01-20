@@ -59,10 +59,10 @@
                                     <label>Exam Room Code *</label>
                                     <input name="room_code" type="text" placeholder="" class="form-control required">
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Start Time *</label>
-                                    <input name="exam_code" type="text" placeholder="" class="form-control required">
-                                </div> --}}
+                                    <input name="time" type="text" placeholder="" class="form-control required">
+                                </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
                                         class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>

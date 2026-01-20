@@ -27,7 +27,7 @@ class CustomAdminSessionMiddleware
         // dd(session('session_id'));
         $appdata = Appdata::where('status',1)->first();
         View::share('appdata',$appdata);
-        
+        // dd($appdata->stamp);
         $dataSession = Datasession::where('status',1)->get();
         View::share('dataSession',$dataSession);
         

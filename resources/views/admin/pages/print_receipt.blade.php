@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
-                    <p class="mb-0"><strong>Class Name:</strong> {{$student->class}}</p>
+                    <p class="mb-0"><strong>Class Name:</strong> {{$student->class}} ({{$student->section}}) - ({{$student->roll_no}})</p>
                     <p class="mb-0"><strong>Admission No:</strong> {{$student->admission_no}}</p>
                     <p class="mb-0"><strong>Due Amount:</strong> ₹{{$feeInvoice - $total_transaction}} /-</p>
                 </div>

@@ -32,13 +32,11 @@ class AdminAuthCheckMiddleware
         View::share('currentUser',$currentUser);
     
         if($currentUser->status > 2 && $currentUser->status < 5){
-            $currentStaff = Staff::where('phone',$currentUser->username)->first();
-            View::share('currentStaff',$currentStaff);
-        }
-
-        if($currentUser->status == 5){
-            $currentStudent = Student::where('father_phone',$currentUser->username)->first();
-            View::share('currentStudent',$currentStudent);
+            $currentLogin = Staff::where('phone',$currentUser->username)->first();
+            View::share('currentLogin',$currentLogin);
+        }elseif($currentUser->status == 5){
+            $currentLogin = Student::where('father_phone',$currentUser->username)->first();
+            View::share('currentLogin',$currentLogin);
         }
 
         return $next($request);

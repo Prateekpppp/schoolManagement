@@ -51,6 +51,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.exam')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Exam</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.task')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Task</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
@@ -61,6 +64,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Member</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('staff.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
                                 </li>
                             </ul>
                         </li>

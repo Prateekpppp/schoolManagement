@@ -16,7 +16,7 @@ class AppdataController extends Controller
         $appdata = Appdata::where('status',1)->first();
         if($appdata){
             // $appdata->admin_username = $request->admin_username;
-            $appdata->school_code = $request->school_code;
+            // $appdata->school_code = $request->school_code;
             $appdata->title = $request->title;
             $appdata->address = $request->address;
 
@@ -27,6 +27,20 @@ class AppdataController extends Controller
                     $filePath = $file->storeAs('', $request->logo, 'public_uploads'); 
     
                     $appdata->logo = $request->logo;
+                }
+                $file = $request->file('signature');
+                if($file){
+                    $request->signature = 'img/'.time() . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->signature, 'public_uploads'); 
+    
+                    $appdata->signature = $request->signature;
+                }
+                $file = $request->file('stamp');
+                if($file){
+                    $request->stamp = 'img/'.time() . '_' . $file->getClientOriginalName();
+                    $filePath = $file->storeAs('', $request->stamp, 'public_uploads'); 
+    
+                    $appdata->stamp = $request->stamp;
                 }
             }
             

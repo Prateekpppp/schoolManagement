@@ -33,6 +33,10 @@
                                     <input name="category" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Quantity *</label>
+                                    <input name="quantity" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class </label>
                                     <select name="class_id" class="select2 required">
                                         <option value="">Please Select Class *</option>
@@ -101,6 +105,8 @@
                                     <tr>
                                         <th>S.NO.</th>
                                         <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Sold</th>
                                         <th>Class</th>
                                         <th>Amount</th>
                                         <th>Action</th>
@@ -112,7 +118,8 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
 
@@ -125,6 +132,8 @@
                                         <tr>
                                             <td>{{$sn1=+1}}</td>
                                             <td>{{$job->category}}</td>
+                                            <td>{{$job->quantity}}</td>
+                                            <td>{{$job->sold}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}

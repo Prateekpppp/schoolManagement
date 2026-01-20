@@ -34,6 +34,10 @@
                                     <input name="category" value="{{$data->category}}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Quantity *</label>
+                                    <input name="quantity" value="{{$data->quantity}}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class </label>
                                     <select name="class_id" class="select2 required">
                                         <option value="">Please Select Class *</option>

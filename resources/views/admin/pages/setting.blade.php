@@ -21,6 +21,10 @@
                         </div>
                         <form class="form">
                             <div class="row">
+                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>School Code </label>
+                                    <input value="{{$appdata->title ?? 'Germination mission school'}}" name="title" type="text" placeholder="" class="form-control">
+                                </div> --}}
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Title </label>
                                     <input value="{{$appdata->title ?? 'Germination mission school'}}" name="title" type="text" placeholder="" class="form-control">

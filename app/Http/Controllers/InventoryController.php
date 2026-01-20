@@ -21,7 +21,7 @@ class InventoryController extends Controller
         ->join('classes','inventories.class_id','classes.id')
         ->join('students','inventories.student_id','students.id')
         ->select('inventories.*','inventory_categories.category','classes.class','students.name as student_name','students.admission_no')
-        ->where('inventories.status',1)
+        // ->where('inventories.status',1)
         ->get();
         // dd($data);
         return view('admin.pages.inventory',compact('data','inventoryCategory','students'));

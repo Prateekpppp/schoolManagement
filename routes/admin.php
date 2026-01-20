@@ -36,6 +36,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Cookie;
 
 
@@ -60,7 +61,16 @@ Route::middleware(['admin_auth_middleware','custom_admin_session_middleware'])->
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
     
     Route::prefix('admin')->group(function () {
-        
+          
+        // Task Module
+        Route::get('/task', [TaskController::class,'task'])->name('admin.pages.task');
+
+        Route::post('/updateTask', [TaskController::class,'updateTask'])->name('admin.post.updateTask')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateStatus', [TaskController::class,'updateStatus'])->name('admin.get.updateStatus');
+
+        Route::get('/createTask', [TaskController::class,'createTask'])->name('admin.pages.createTask');
+
         // Salary Module
         Route::get('/salary', [SalaryController::class,'inventory'])->name('admin.pages.salary');
 

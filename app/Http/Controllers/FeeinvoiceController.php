@@ -24,6 +24,7 @@ class FeeinvoiceController extends Controller
         ->leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
         ->select(
             'feeinvoices.id',
+            'feeinvoices.invoice_date',
             'feeinvoices.month',
             'feeinvoices.total_amount',
             'feeinvoices.status',
@@ -36,6 +37,7 @@ class FeeinvoiceController extends Controller
         )
         ->groupBy(
             'feeinvoices.id',
+            'feeinvoices.invoice_date',
             'feeinvoices.month',
             'feeinvoices.total_amount',
             'feeinvoices.status',
@@ -45,7 +47,7 @@ class FeeinvoiceController extends Controller
             'classes.class',
             'sections.section',
         )
-        ->where('feeinvoices.status',1)
+        // ->where('feeinvoices.status',1)
         ->orderBy('feeinvoices.id','desc')
         ->get();
         // dd($fee);
@@ -80,7 +82,7 @@ class FeeinvoiceController extends Controller
                 ->where('student_fees.student_id',$value)
                 ->where('student_fees.status',1)
                 ->where('fees.period',0)
-                ->sum('fee');
+                ->sum('fees.amount');
             }
             
             $annualFee = Feeinvoice::where('student_id',$value)->where('month',$month)->first();
@@ -88,12 +90,12 @@ class FeeinvoiceController extends Controller
                 $annualFee = 0;
             } else{
                 $annualFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
-                ->select('student_fees.*','fees.period','fees.month')
+                ->select('student_fees.*','fees.period','fees.month','fees.amount')
                 ->where('student_fees.student_id',$value)
                 ->where('student_fees.status',1)
                 ->where('fees.period',2)
                 ->where('fees.month',$month)
-                ->sum('fee');
+                ->sum('fees.amount');
             }
 
             $monthlyFee = StudentFee::join('fees','fees.id','student_fees.fee_id')
@@ -101,7 +103,7 @@ class FeeinvoiceController extends Controller
             ->where('student_fees.student_id',$value)
             ->where('student_fees.status',1)
             ->where('fees.period',1)
-            ->sum('fee');
+            ->sum('fees.amount');
             
             $monthlyFee = $monthlyFee ?? 0;
 
@@ -120,7 +122,7 @@ class FeeinvoiceController extends Controller
             // $feeInvoice->year = date('Y');
             $feeInvoice->total_amount = $totalFee;
             // $feeInvoice->payable = $totalFee;
-            $feeInvoice->invoice_date = now();
+            $feeInvoice->invoice_date = $request->month;
             $feeInvoice->status = 1;
             $feeInvoice->session_id = session('session_id');
             $feeInvoice->save();

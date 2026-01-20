@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_categories', function (Blueprint $table) {
-            // crud
+        Schema::create('student_attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
-            $table->string('class_id');
-            $table->string('quantity');
-            $table->string('amount');
+            $table->string('student_id');
+            $table->string('date');
+            // status => 0 = absent, 1 = present
+            $table->tinyInteger('status')->default(0);
             $table->string('admin_username')->nullable();
-            $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_categories');
+        Schema::dropIfExists('student_attendances');
     }
 };

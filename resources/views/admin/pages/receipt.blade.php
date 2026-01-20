@@ -124,7 +124,7 @@
                                             <td>{{$job->date}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a target="_blank" href="{{route('admin.pages.print_receipt',$job->id)}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
+                                                    <a target="_blank" href="{{route('admin.pages.print_receipt', ['id' => $job->id])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow" href="javascript:void(0)">Print</a>
 
                                                 </div>
                                             </td>

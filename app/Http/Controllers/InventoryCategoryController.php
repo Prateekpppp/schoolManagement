@@ -10,7 +10,10 @@ class InventoryCategoryController extends Controller
     //
     public function inventoryCategory(){
         $data = InventoryCategory::join('classes','inventory_categories.class_id','classes.id')
-        ->select('inventory_categories.*','classes.class')
+        // ->leftJoin('inventories','inventory_categories.id','inventories.category_id')
+        ->select('inventory_categories.*','classes.class',
+            \DB::raw('(select count(*) from inventories where inventories.category_id = inventory_categories.id) as sold')
+        )
         ->where('inventory_categories.status',1)->get();
         return view('admin.pages.inventoryCategory',compact('data'));
     }
@@ -28,6 +31,7 @@ class InventoryCategoryController extends Controller
                 $fee = new InventoryCategory();
                 $fee->category = $request->category;
                 $fee->class_id = $request->class_id;
+                $fee->quantity = $request->quantity;
                 $fee->amount = $request->amount;
                 $fee->status = 1;
                 $fee->save();
@@ -35,6 +39,7 @@ class InventoryCategoryController extends Controller
                 $fee = InventoryCategory::where('id',$request->id)->first();
                 $fee->category = $request->category;
                 $fee->class_id = $request->class_id;
+                $fee->quantity = $request->quantity;
                 $fee->amount = $request->amount;
                 $fee->save();
             }

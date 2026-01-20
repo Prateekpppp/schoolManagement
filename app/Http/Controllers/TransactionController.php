@@ -24,144 +24,31 @@ class TransactionController extends Controller
 
     function print_invoice(Request $request){
 
-    
-        $masterData = \DB::table('feeinvoices')
-        ->join('students','students.id','feeinvoices.student_id')
-        ->join('classes','students.class','classes.id')
-        ->join('sections','students.section','sections.id')
-        ->leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
-        ->select(
-            'feeinvoices.id',
-            'feeinvoices.feeinvoice_no',
-            'feeinvoices.month',
-            'feeinvoices.total_amount',
-            'feeinvoices.status',
-            'feeinvoices.student_id',
-            'feeinvoices.month',
-            'feeinvoices.session_id',
-            'students.name',
-            'students.father_name',
-            'students.admission_no',
-            'classes.class',
-            'sections.section',
-            \DB::raw('sum(transactions.transaction_amount) as transaction_amount')
-        )
-        ->groupBy(
-            'feeinvoices.id',
-            'feeinvoices.feeinvoice_no',
-            'feeinvoices.month',
-            'feeinvoices.total_amount',
-            'feeinvoices.student_id',
-            'feeinvoices.status',
-            'feeinvoices.month',
-            'feeinvoices.session_id',
-            'students.name',
-            'students.father_name',
-            'students.admission_no',
-            'classes.class',
-            'sections.section',
-        );
+        $data = Feeinvoice::where('id',$request->id)
+        // ->join('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        // ->select(\DB::raw('select sum(transaction_amount) from transactions as transaction_amount where transactions.invoice_id=feeinvoices.feeinvoice_no'))
+        ->first();
 
-        $data = $masterData->where('feeinvoices.id',$request->id)->first();
-        // ->get();
-    // dd($data);
-        // $data = Feeinvoice::where('id',$request->id)->first();
+        $currentPaid = Transaction::where('invoice_id',$data->feeinvoice_no)->sum('transaction_amount');
 
-        // $currentTransactions = Transaction::where('invoice_id',$data->feeinvoice_no)
-        // ->latest()->first();
-        // if($currentTransactions){
-        //     $currentTransactions = $currentTransactions->due_amount;
-        // } else{
-        //     $currentTransactions = $data->total_amount;
-        // }
-        // dd($data);
-        // $latestData = Feeinvoice::where('student_id',$data->student_id)->latest()->first();
-        $currentMonth = $data->month;
-        // $currentYear = $data->year;
-        // dd($currentMonth);
+        $date = \DateTime::createFromFormat('d/m/Y', $data->invoice_date);
+        
+        $invoice_date = $date->format('d-M-Y');
+
+        $month = $date->format('m');
+        
+        $previous_amount = Feeinvoice::where('month','<',$month)->sum('total_amount');
+        
+        $total_paid = Transaction::sum('transaction_amount');
+        
+        $previous_due_amount = $previous_amount - $total_paid;
         
         $student = Student::join('classes','classes.id','students.class')
-        ->select('students.*','classes.class')
+        ->join('sections','sections.id','students.section')
+        ->select('students.*','classes.class','sections.section')
         ->where('students.id',$data->student_id)
         ->first();
 
-        // $oldData = Feeinvoice::leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
-        // ->select(\DB::raw('sum(transactions.transaction_amount) as transaction_amount'))
-        // ->where('feeinvoices.student_id',$data->student_id)
-        // ->where('feeinvoices.month','<',$currentMonth)
-        // ->where('feeinvoices.session_id',$data->session_id)
-        // ->get();
-        // ->sum('transactions.due_amount');
-        // it will give zero for multiple generated fee as no transaction has been done till now
-        // ->sum('transactions.due_amount');
-        
-        $oldData = \DB::table('feeinvoices')
-        ->join('students','students.id','feeinvoices.student_id')
-        ->join('classes','students.class','classes.id')
-        ->join('sections','students.section','sections.id')
-        ->leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
-        ->select(
-            'feeinvoices.id',
-            'feeinvoices.month',
-            'feeinvoices.total_amount',
-            'feeinvoices.status',
-            'feeinvoices.student_id',
-            'feeinvoices.month',
-            'feeinvoices.session_id',
-            'students.name',
-            'students.father_name',
-            'students.admission_no',
-            'classes.class',
-            'sections.section',
-            \DB::raw('sum(transactions.transaction_amount) as transaction_amount')
-        )
-        ->groupBy(
-            'feeinvoices.id',
-            'feeinvoices.month',
-            'feeinvoices.total_amount',
-            'feeinvoices.student_id',
-            'feeinvoices.status',
-            'feeinvoices.month',
-            'feeinvoices.session_id',
-            'students.name',
-            'students.father_name',
-            'students.admission_no',
-            'classes.class',
-            'sections.section',
-        );
-        $oldData = $oldData->where('feeinvoices.student_id',$data->student_id)
-        ->where('feeinvoices.month','<',$currentMonth)
-        ->where('feeinvoices.session_id',$data->session_id)
-        ->first();
-        // dd($oldData);
-        
-        // $oldData = Feeinvoice::leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
-        // ->select(
-        //     'feeinvoices.id',
-        //     'feeinvoices.month',
-        //     'feeinvoices.total_amount',
-        //     'feeinvoices.status',
-        //     \DB::raw('sum(transactions.transaction_amount) as transaction_amount')
-        // )
-        // ->groupBy(
-        //     'feeinvoices.id',
-        //     'feeinvoices.student_id',
-        //     'feeinvoices.month',
-        //     'feeinvoices.total_amount'
-        // )
-        // ->where('feeinvoices.id',$request->id)
-        // ->where('feeinvoices.month',$request->month)
-        // ->first();
-
-
-        $fees = Fee::join('student_fees','fees.id','student_fees.fee_id')
-        ->join('students','student_fees.student_id','students.id')
-        ->select('students.roll_no','students.name','students.class','fees.name as feeName','fees.amount','student_fees.id','student_fees.paid','student_fees.created_at','student_fees.status')
-        ->where('student_fees.student_id',$data->student_id)->get();
-
-
-        // dd($fee);
-        return view('admin.pages.print_invoice',compact('data','student','fees','oldData'));
     }
 
     function print_receipt(Request $request){
@@ -180,7 +67,8 @@ class TransactionController extends Controller
         // dd($feeInvoice);
         
         $student = Student::join('classes','classes.id','students.class')
-        ->select('students.*','classes.class')
+        ->join('sections','sections.id','students.section')
+        ->select('students.*','classes.class','sections.section')
         ->where('students.id',$data->student_id)
         ->first();
         // dd($data);

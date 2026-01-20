@@ -36,6 +36,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\StaffAttendanceController;
 use Illuminate\Support\Facades\Cookie;
 
 
@@ -45,6 +46,11 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('staff')->group(function () {
         
+        // Attendance Module
+        Route::post('/createAttendance', [StaffAttendanceController::class,'create'])->name('staff.post.createAttendance')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/staffAttendance', [StaffAttendanceController::class,'read'])->name('staff.pages.staffAttendance');
+
         // Salary Module
         Route::get('/staffSalary', [SalaryController::class,'staffSalary'])->name('staff.pages.staffSalary');
 

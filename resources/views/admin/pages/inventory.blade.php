@@ -155,7 +155,10 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
 
@@ -221,6 +224,7 @@
         $('.classAfter').after(html);
         
         $('input[name="amount"]').val(response.amount);
+        $('input[name="total_amount"]').val(response.amount);
         
     }
 
