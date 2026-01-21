@@ -15,9 +15,11 @@
                 }, 1000);
             } else{
                 responseToast(response.message,'bg-warning');
+                $('.submitForm').removeClass('disabled');
             }
         } else{
             responseToast(response,'bg-warning');
+            $('.submitForm').removeClass('disabled');
         }
     }
 

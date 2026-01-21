@@ -84,8 +84,8 @@
             <!-- Expense Title -->
             <div class="expense-box text-center">
                 <h6 class="fw-bold">
-                    Expense Title:
-                    <span class="fw-normal">Receipt - {{$payment_date}}</span>
+                    Receipt:
+                    <span class="fw-normal"> {{$payment_date}}</span>
                 </h6>
             </div>
 

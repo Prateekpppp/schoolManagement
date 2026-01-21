@@ -37,9 +37,16 @@ class TransactionController extends Controller
 
         $month = $date->format('m');
         
-        $previous_amount = Feeinvoice::where('month','<',$month)->sum('total_amount');
+        $previous_invoices = Feeinvoice::where('month','<',$month)->where('student_id',$data->student_id)->get();
+
+        $previous_amount = Feeinvoice::where('month','<',$month)->where('student_id',$data->student_id)->sum('total_amount');
         
-        $total_paid = Transaction::sum('transaction_amount');
+        $total_paid = 0;
+
+        foreach ($previous_invoices as $key => $value) {
+            
+            $total_paid += Transaction::where('invoice_id',$value->feeinvoice_no)->where('student_id',$data->student_id)->sum('transaction_amount');
+        }
         
         $previous_due_amount = $previous_amount - $total_paid;
         
@@ -48,6 +55,14 @@ class TransactionController extends Controller
         ->select('students.*','classes.class','sections.section')
         ->where('students.id',$data->student_id)
         ->first();
+
+        return view('admin.pages.print_invoice',compact('data','currentPaid',
+'date',
+'invoice_date',
+'month',
+'previous_amount',
+'total_paid',
+'previous_due_amount','student'));
 
     }
 

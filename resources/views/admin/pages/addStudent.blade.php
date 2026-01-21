@@ -330,8 +330,8 @@
             html += `
                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                     <div class="form-check">
-                        <input type="checkbox" name="fee[]" class="form-check-input" value="${item.id}">
-                        <label for="remember-me" class="form-check-label">${item.name}</label>
+                        <input id="fee_${item.id}" type="checkbox" name="fee[]" class="form-check-input" value="${item.id}">
+                        <label for="fee_${item.id}" class="form-check-label">${item.name}</label>
                     </div>
                 </div>
             `;

@@ -46,3 +46,46 @@ a {
     cursor: not-allowed !important;
     opacity: 0.4 !important;
 }
+
+/* .form-switch label {
+  display: inline-block;
+  position: relative;
+  padding-left: 40px;
+  font-size: 16px;
+  color: #111111;
+}
+.form-switch label:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  top: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.form-switch label:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 4px;
+  top: 5px;
+  font-size: 10px;
+} */
+
+
+.form-check input[type="radio"]:checked + label:after {
+  font-family: 'Font Awesome 5 Free';
+  content: "\f00c";
+  font-weight: 600;
+}
+.form-check input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+.form-check input[type="radio"]:disabled + label:before {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}

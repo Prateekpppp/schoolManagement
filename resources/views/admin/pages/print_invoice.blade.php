@@ -88,8 +88,8 @@
             <!-- Expense Title -->
             <div class="expense-box text-center">
                 <h6 class="fw-bold">
-                    Expense Title:
-                    <span class="fw-normal">Invoice - {{$invoice_date}}</span>
+                    Invoice:
+                    <span class="fw-normal"> {{$invoice_date}}</span>
                 </h6>
             </div>
 

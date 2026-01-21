@@ -16,7 +16,7 @@
                                     <div class="item-content">
                                         <div class="item-title">This Month</div>
                                         <div class="">Total Present</div>
-                                        <div class="item-number"><span class="counter" data-num="{{$classes}}">{{$classes}}</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{$present}}">{{$present}}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                     <div class="item-content">
                                         <div class="item-title">This Month</div>
                                         <div class="">Total Absent</div>
-                                        <div class="item-number"><span class="counter" data-num="{{$classes}}">{{$classes}}</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{$absent}}">{{$absent}}</span></div>
                                     </div>
                                 </div>
                             </div>

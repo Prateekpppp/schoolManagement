@@ -36,6 +36,8 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\StaffAttendanceController;
+use App\Http\Controllers\StudentAttendanceController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Cookie;
 
@@ -62,6 +64,14 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
           
+        // Student Attendance Module
+        Route::post('/createStudentAttendance', [StudentAttendanceController::class,'create'])->name('admin.post.createStudentAttendance')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/studentAttendance', [StudentAttendanceController::class,'read'])->name('admin.pages.studentAttendance');
+
+        // Staff Attendance Module
+        Route::get('/staffAttendance', [StaffAttendanceController::class,'read'])->name('admin.pages.staffAttendance');
+
         // Task Module
         Route::get('/task', [TaskController::class,'task'])->name('admin.pages.task');
 

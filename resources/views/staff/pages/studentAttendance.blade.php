@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.filterGenerateFee')}}">
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.studentAttendance')}}">
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
                                     <label class="hidden">Name </label>
@@ -76,25 +76,23 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>S.NO.</th>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        <th>Section</th>
+                                        <th>Roll No.</th>
                                         <th>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">All</label>
+                                                <label class="form-check-label">Present</label>
                                             </div>
                                         </th>
-                                        <th>Photo</th>
-                                        <th>Admission No</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Parents</th>
-                                        <th>Date Of Birth</th>
-                                        <th>City</th>
-                                        <th>Phone</th>
-                                        <th>E-mail</th>
-                                        {{-- <th></th> --}}
-                                        {{-- <th>Address</th> --}}
+                                        <th>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">Absent</label>
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -103,12 +101,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td class="text-center">No Data Found</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -126,23 +119,27 @@
                                             <td>
                                                 <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
                                             </td>
-                                            <td>{{$job->admission_no}}</td>
+                                            {{-- <td>{{$job->admission_no}}</td> --}}
                                             <td>{{$job->name}}</td>
-                                            <td>{{$job->gender ? 'Male' : 'Female'}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
-                                            <td>{{$job->father_name}}</td>
-                                            <td>{{$job->dob}}</td>
-                                            <td>{{$job->city}}</td>
-                                            <td>{{$job->phone}}</td>
-                                            <td>{{$job->parent_email}}</td>
-                                            {{-- <td>
-                                                <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.manageClass',$job->id)}}" class="btn fw-btn-fill btn-gradient-yellow w-25">Edit</a>
-                                                    <a href="javascript:void(0)" data-model="Classes" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
-
+                                            <td>{{$job->roll_no}}</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" value="1" id="radioDefault1">
+                                                    <label class="form-check-label" for="radioDefault1">
+                                                        P
+                                                    </label>
                                                 </div>
-                                            </td> --}}
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" value="0" id="radioDefault1">
+                                                    <label class="form-check-label" for="radioDefault1">
+                                                        A
+                                                    </label>
+                                                </div>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach
@@ -170,15 +167,13 @@
 @section('inner_js')
 
 <script>
-    let data = [];
+    let data = {};
 
     $('.checkAll').on('click', function(){
         data = [];
         console.log('check status',$('.checkAll').is(':checked'));
         
         let $checkboxes = $(this).parents('table').find('tbody').find('input[type=checkbox]');
-        // $checkboxes.prop('checked', $('.checkAll').is(':checked'));
-        
 
         if($(this).is(':checked')){
             $(this).parents('.table').find('.checkOne').prop('checked', this.checked);

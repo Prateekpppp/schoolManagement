@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('student_id');
             $table->string('date');
+            $table->string('month')->nullable();
             // status => 0 = absent, 1 = present
             $table->tinyInteger('status')->default(0);
             $table->string('admin_username')->nullable();

@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a href="{{route('staff.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.pages.studentAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Student Attendance</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

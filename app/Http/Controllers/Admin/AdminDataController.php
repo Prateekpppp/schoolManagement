@@ -26,6 +26,7 @@ use App\Models\Transaction;
 use App\Models\Driver;
 use App\Models\Vehicle;
 use App\Models\ScRoute;
+use App\Models\StaffAttendance;
 
 class AdminDataController extends Controller
 {
@@ -68,13 +69,27 @@ class AdminDataController extends Controller
         $driver = Driver::where('status',1)->count();
         $vehicle = Vehicle::where('status',1)->count();
         $routes = ScRoute::where('status',1)->count();
+
+        // staff data
+
+
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
        if($user->status == 1 || $user->status == 2){
            return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
         } elseif ($user->status == 3) {
-           return view('principal.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+            $present = StaffAttendance::where('staff_id',$this->currentLogin->id)
+            ->where('status',1)->count();
+
+            $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)
+            ->where('status',0)->count();
+           return view('principal.pages.index',compact('classes','present','absent'));
            } elseif ($user->status == 4) {
-            return view('staff.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+            $present = StaffAttendance::where('staff_id',$this->currentLogin->id)
+            ->where('status',1)->count();
+
+            $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)
+            ->where('status',0)->count();
+            return view('staff.pages.index',compact('classes','sections','students','present','absent'));
 
         }
         

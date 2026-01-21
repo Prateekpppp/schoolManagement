@@ -34,15 +34,16 @@
                                 </div> --}}
 
                                 <input type="hidden" name="date" value="{{now()}}">
+                                <input type="hidden" name="location" value="">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label class="">Make Attendance </label>
-                                    <select name="status" class="select2">
-                                        <option value="0">Absent</option>
-                                        <option value="1">Present</option>
+                                    <select name="status" class="select2" readonly>
+                                        {{-- <option value="0">Absent</option> --}}
+                                        <option value="1" selected>Present</option>
                                     </select>
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group self-end">
-                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Submit</button>
+                                <div class="col-md-3 col-12 form-group self-end">
+                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Mark Present</button>
                                 </div>
                             </div>
                         </form>
@@ -75,7 +76,7 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1=+1}}</td>
+                                            <td>{{$sn1+=1}}</td>
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->status ? $job->monthly_salary/30 : 0}}</td>
@@ -104,7 +105,37 @@
 
 <script>
 
+    let locFlag = localStorage.getItem('locFlag');
+    $(document).ready(function(){
+        // alert(locFlag);
+        locFlag = localStorage.getItem('locFlag');
+        navigator.geolocation.getCurrentPosition(success, error);
+    });
+
+    $('select[name=status]').on('change',function(){
+        navigator.geolocation.getCurrentPosition(success, error);
+    });
+
+    function success(pos){
+        // alert('tre');
+        locFlag = true;
+        localStorage.setItem('locFlag', locFlag);
+        $('input[name=location]').val(JSON.stringify(pos.coords));
+    }
+
+    function error(){
+        // alert('false');
+        locFlag = false;
+        responseToast('please allow location access','bg-warning');
+        return false;
+    }
+
     function submitForm(form){
+        if(!locFlag){
+            responseToast('please allow location access','bg-warning');
+            $('.submitForm').removeClass('disabled');
+            return false;
+        }
         let data = new FormData($(form)[0]);
         callAjaxFormData('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
     }
