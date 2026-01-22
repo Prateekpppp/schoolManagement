@@ -45,6 +45,15 @@
                                 <div class="col-md-3 col-12 form-group self-end">
                                     <button class="submitForm fw-btn-fill btn-gradient-yellow">Mark Present</button>
                                 </div>
+                                <div class="col-md-1 col-12 form-group self-end">
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$present}}</button>
+                                </div>
+                                <div class="col-md-1 col-12 form-group self-end">
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$absent}}</button>
+                                </div>
+                                <div class="col-md-1 col-12 form-group self-end">
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$late}}</button>
+                                </div>
                             </div>
                         </form>
                         @endif
@@ -52,10 +61,12 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>S.NO.</th>
+                                        {{-- <th>S.NO.</th> --}}
                                         <th>Date</th>
-                                        <th>Staff</th>
-                                        <th>Salary</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        {{-- <th>Staff</th> --}}
+                                        <th>Remark</th>
                                         {{-- <th>Action</th> --}}
                                         {{-- <th>Status</th> --}}
                                     </tr>
@@ -76,10 +87,12 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1+=1}}</td>
+                                            {{-- <td>{{$sn1+=1}}</td> --}}
+                                            <td>{{date('d-m-Y',strtotime($job->date))}}</td>
                                             <td>{{$job->date}}</td>
-                                            <td>{{$job->name}}</td>
-                                            <td>{{$job->status ? $job->monthly_salary/30 : 0}}</td>
+                                            <td>{{$job->date}}</td>
+                                            {{-- <td>{{$job->name}}</td> --}}
+                                            <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             {{-- <td>
                                                 <div class="flex flex-row gap-2">

@@ -36,6 +36,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\StudentAttendanceController;
 use Illuminate\Support\Facades\Cookie;
 
 
@@ -43,8 +44,14 @@ use Illuminate\Support\Facades\Cookie;
 
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
     
-    Route::prefix('student')->group(function () {
+    Route::prefix('parent')->group(function () {
        
+        Route::get('/dashboard', [AdminDataController::class,'index'])->name('student.index');
+
+        // Student Attendance Module
+
+        Route::get('/attendance', [StudentAttendanceController::class,'attendanceById'])->name('student.pages.attendance');
+
         // Student Module
 
         Route::get('/inactiveStudents', [StudentController::class,'inactiveStudents'])->name('student.pages.inactiveStudents');

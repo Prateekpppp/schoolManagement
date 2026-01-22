@@ -3,7 +3,7 @@
                     <h3>Staff Dashboard</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{route('staff.index')}}">Home</a>
                         </li>
                         <li>Staff</li>
                     </ul>

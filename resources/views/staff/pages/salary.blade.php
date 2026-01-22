@@ -28,7 +28,7 @@
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Date </label>
-                                    <input name="search" type="text" placeholder="Search by Date ..." class="form-control">
+                                    <input name="search" type="text" placeholder="Search by Month ..." class="form-control">
                                 </div>
                                 {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label class="hidden">Class </label>
@@ -39,16 +39,16 @@
                                         @endforeach
                                     </select>
                                 </div> --}}
-                                {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                </div> --}}
+                                </div>
                             </div>
                         </form>
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>S.NO.</th>
+                                        <th>Month</th>
                                         <th>Staff</th>
                                         <th>Total Present</th>
                                         <th>Total Absent</th>
@@ -78,7 +78,8 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1=+1}}</td>
+                                            {{-- <td>{{$sn1=+1}}</td> --}}
+                                            <td>{{date('M',strtotime($job->salary_date))}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->total_present}}</td>
                                             <td>{{$job->total_absent}}</td>

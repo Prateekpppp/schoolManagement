@@ -3,7 +3,7 @@
                     <h3>Principal Dashboard</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{route('principal.index')}}">Home</a>
                         </li>
                         <li>Principal</li>
                     </ul>

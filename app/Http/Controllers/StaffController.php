@@ -294,6 +294,8 @@ class StaffController extends Controller
     }
     
     public function staffDetail(Request $request){
+        // not secure as it taking the id in get request, will update in next version
+        
         $student = Staff::join('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject')
         ->where('staff.id',$request->id)

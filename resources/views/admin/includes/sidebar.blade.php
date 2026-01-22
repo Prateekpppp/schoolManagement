@@ -66,7 +66,7 @@
                                     <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Member</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
+                                    <a href="{{route('admin.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i>Attendance</a>
                                 </li>
                             </ul>
                         </li>

@@ -1,10 +1,10 @@
 
                 <div class="breadcrumbs-area">
-                    <h3>Admin Dashboard</h3>
+                    <h3>Parent Dashboard</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{route('student.index')}}">Home</a>
                         </li>
-                        <li>Admin</li>
+                        <li>Parent</li>
                     </ul>
                 </div>

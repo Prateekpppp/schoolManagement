@@ -44,9 +44,12 @@ use Illuminate\Support\Facades\Cookie;
 
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
     
+
     Route::prefix('staff')->group(function () {
         
-        // Attendance Module
+        Route::get('/dashboard', [AdminDataController::class,'index'])->name('staff.index');
+
+        // Staff Attendance Module
         Route::post('/createAttendance', [StaffAttendanceController::class,'create'])->name('staff.post.createAttendance')->withoutMiddleware([VerifyCsrfToken::class]);
 
         Route::get('/staffAttendance', [StaffAttendanceController::class,'read'])->name('staff.pages.staffAttendance');

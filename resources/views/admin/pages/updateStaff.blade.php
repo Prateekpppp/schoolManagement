@@ -61,8 +61,9 @@
                                     <label>Role </label>
                                     <select name="role" class="select2 required">
                                         <option value="">Please Select Role *</option>
-                                        <option {{ $data->status == 1 ? 'selected' : '' }} value="1">Teacher</option>
-                                        <option {{ $data->status == 2 ? 'selected' : '' }} value="2">Staff</option>
+                                        <option {{ $data->status == 2 ? 'selected' : '' }} value="2">Co-Admin</option>
+                                        <option {{ $data->status == 3 ? 'selected' : '' }} value="3">Principal</option>
+                                        <option {{ $data->status == 4 ? 'selected' : '' }} value="4">Teacher</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">

@@ -57,7 +57,7 @@
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a href="{{route('admin.pages.setting')}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                    <li><a href="{{route('student.pages.studentDetail',$currentLogin->id)}}"><i class="flaticon-user"></i>My Profile</a></li>
                                     <li><a href="{{route('admin.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>

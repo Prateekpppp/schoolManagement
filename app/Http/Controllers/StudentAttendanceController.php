@@ -84,4 +84,22 @@ class StudentAttendanceController extends Controller
             ]);
         }
     }
+
+    public function attendanceById(Request $request){
+
+        dd(now()->month);
+        try{
+            $request->student_id = $this->currentLogin->id;
+
+            $data = StudentAttendance::where('student_id',$request->student_id);
+
+            return view('admin.pages.studentAttendance',compact('data','request'));
+
+        } catch(\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500'
+            ]);
+        }
+    }
 }

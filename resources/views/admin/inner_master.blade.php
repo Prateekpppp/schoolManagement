@@ -17,15 +17,23 @@
             <!-- Sidebar Area Start Here -->
             @include('admin.includes.sidebar')
             <!-- Sidebar Area End Here -->
+
             @elseif($currentUser->status == 3)
             {{-- 3 = principal --}}
             <!-- Sidebar Area Start Here -->
             @include('principal.includes.sidebar')
             <!-- Sidebar Area End Here -->
+
             @elseif($currentUser->status == 4)
-            {{-- 3 = staff --}}
+            {{-- 4 = staff --}}
             <!-- Sidebar Area Start Here -->
             @include('staff.includes.sidebar')
+            <!-- Sidebar Area End Here -->
+
+            @elseif($currentUser->status == 5)
+            {{-- 5 = parent --}}
+            <!-- Sidebar Area Start Here -->
+            @include('student.includes.sidebar')
             <!-- Sidebar Area End Here -->
             @endif
 
@@ -38,15 +46,23 @@
                 <!-- Breadcubs Area Start Here -->
                 @include('admin.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
+
                 @elseif($currentUser->status == 3)
                 {{-- 3 = principal --}}
                 <!-- Breadcubs Area Start Here -->
+                
                 @include('principal.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 @elseif($currentUser->status == 4)
                 {{-- 4 = staff --}}
                 <!-- Breadcubs Area Start Here -->
                 @include('staff.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+
+                @elseif($currentUser->status == 5)
+                {{-- 5 = parent --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('student.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 @endif
                 

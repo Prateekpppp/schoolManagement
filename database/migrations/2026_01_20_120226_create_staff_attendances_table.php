@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('staff_id');
             $table->string('date');
-            // status => 0 = absent, 1 = present
+            // status => 0 = absent, 1 = present, 2 = half day
             $table->tinyInteger('status')->default(0);
             $table->string('admin_username')->nullable();
             $table->string('session_id')->nullable();

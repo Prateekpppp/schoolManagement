@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StaffAttendance;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\StaffAttendance;
 
 class StaffAttendanceController extends Controller
 {
@@ -39,41 +40,48 @@ class StaffAttendanceController extends Controller
 
     public function create(Request $request){
         try{
-            $ScLatitude = '25.588613';
-            $ScLongitute = '85.159859';
+            $ScLatitude = ' 25.003839';
+            $ScLongitute = '84.575035';
 
             $request->location = json_decode($request->location);
             $distance = $this->haversine_distance($ScLatitude, $ScLongitute, $request->location->latitude, $request->location->longitude,'m');
 
             // dd($distance);
 
-            if($distance < 30){
+            if($distance > 30){
                 return response()->json([
-                    // 'redirect'=> $request->header('referer'),
                     'message'=>'Not under the required school area!',
                     'response_code'=> '405'
                 ]);
             }
             
-            if($distance < 30){
-                return response()->json([
-                    // 'redirect'=> $request->header('referer'),
-                    'message'=>'Not under the required school area!',
-                    'response_code'=> '405'
-                ]);
+            if(strtotime(now()) > strtotime('8:30 am')){
+                if(strtotime(now()) > strtotime('2:30 pm')){
+                    return response()->json([
+                        'message'=>'You are too late!',
+                        'response_code'=> '405'
+                    ]);
+                } else{
+                    $request->status = 2;
+                }
             }
 
-            if(!$request->staff_id){
+            $fee = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereDate('date',Carbon::today()->format('Y-m-d'))->first();
+            
+            // dd($request->status);
+
+            if(!$fee){
                 $fee = new StaffAttendance();
                 $fee->staff_id = $this->currentLogin->id;
                 $fee->date = $request->date;
                 $fee->status = $request->status;
+                $fee->session_id = session('session_id');
                 $fee->save();
-            } else {
-                $fee = StaffAttendance::where('staff_id',$this->currentLogin->id)->first();
-                $fee->date = $request->date;
-                $fee->status = $request->status;
-                $fee->save();
+            } else{
+                return response()->json([
+                    'message'=>'Attendance already marked for today!',
+                    'response_code'=> '205'
+                ]);
             }
 
             return response()->json([
@@ -92,13 +100,16 @@ class StaffAttendanceController extends Controller
     public function read(Request $request){
         $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
         ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
-        ->select('staff.name','staff_attendances.*','salaries.monthly_salary');
+        ->select('staff.name','staff_attendances.*','staff.salary');
 
+        $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',1)->count();
+        $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',0)->count();
+        $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',2)->count();
         if($this->currentUser->status > 2){
             $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
         }
         
         $data = $data->get();
-        return view('staff.pages.staffAttendance',compact('data'));
+        return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
     }
 }

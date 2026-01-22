@@ -219,8 +219,9 @@ class StudentController extends Controller
             
             // create user
             $userData = new \stdClass();
-            $userData->name = $request->father_name;
-            $userData->username = $request->father_phone;
+            $userData->name = $request->name;
+            // $userData->username = $request->father_phone;
+            $userData->username = $student->enrollment_no;
             $userData->password = $request->password;
             $userData->status = 5;
             $user = (new AppdataController)->addUser($userData);
