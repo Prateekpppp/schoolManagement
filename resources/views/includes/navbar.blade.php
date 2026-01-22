@@ -52,7 +52,7 @@
                <div class="row align-items-center">
                   <div class="col-xl-2 col-6">
                      <div class="it-header-5-logo">
-                        <a href="{{route('user.index')}}"><img src="{{isset($appdata->logo) ? asset('storage/').$appdata->logo : '/assets/logo.png' }}" width="110" class="p-2 rounded"></a>
+                        <a href="{{route('user.index')}}"><img src="{{asset('/').($appdata->logo ?? 'not_found' )}}" width="110" class="p-2 rounded"></a>
                      </div>
                   </div>
                   <div class="col-xl-7 d-none d-xl-block">
