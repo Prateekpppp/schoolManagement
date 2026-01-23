@@ -18,8 +18,16 @@ class AppdataController extends Controller
             // $appdata->admin_username = $request->admin_username;
             // $appdata->school_code = $request->school_code;
             $appdata->title = $request->title;
-            $appdata->address = $request->address;
-
+            $appdata->director_name = $request->director_name;                
+            $appdata->contact_person = $request->contact_person;                
+            $appdata->phone = $request->phone;                                 
+            $appdata->email = $request->email;                            
+            $appdata->address = $request->address;                            
+            $appdata->school_hours = $request->school_hours;                            
+            $appdata->school_time = $request->school_time;                            
+            $appdata->late_time = $request->late_time;                            
+            $appdata->session_id = session('session_id');                            
+            
             if (!empty($request->allFiles())) {
                 $file = $request->file('logo');
                 if($file){

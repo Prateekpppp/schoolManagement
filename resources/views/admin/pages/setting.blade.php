@@ -30,16 +30,16 @@
                                     <input value="{{$appdata->title ?? 'Germination mission school'}}" name="title" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Email </label>
-                                    <input value="{{$appdata->email ?? 'info@germinationmission.com'}}" name="email" type="text" placeholder="" class="form-control">
+                                    <label>Director Name </label>
+                                    <input value="{{$appdata->director_name ?? 'Amitabh Kumar'}}" name="director_name" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Primary Phone </label>
-                                    <input value="{{$appdata->primary_phone ?? 'info@germinationmission.com'}}" name="primary_phone" type="text" placeholder="" class="form-control">
+                                    <label>Contact Person </label>
+                                    <input value="{{$appdata->contact_person ?? 'Amitabh Kumar'}}" name="contact_person" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Secondary Phone </label>
-                                    <input value="{{$appdata->secondary_phone ?? 'info@germinationmission.com'}}" name="secondary_phone" type="text" placeholder="" class="form-control">
+                                    <label>Phone </label>
+                                    <input value="{{$appdata->phone ?? '8757845682'}}" name="phone" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Email </label>
@@ -48,6 +48,18 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Address </label>
                                     <input value="{{$appdata->address ?? 'Germination mission school , Aurangabad , Bihar , 824114'}}" name="address" type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>School Hours </label>
+                                    <input value="{{$appdata->school_hours ?? '8'}}" name="school_hours" type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>School Time </label>
+                                    <input value="{{$appdata->school_time ?? '7:30 am'}}" name="school_time" type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Max Late time </label>
+                                    <input value="{{$appdata->late_time ?? '8:30 am'}}" name="school_time" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Logo</label>
