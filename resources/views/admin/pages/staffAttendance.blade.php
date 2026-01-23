@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20" type='GET' action="{{route('staff.pages.staffAttendance')}}">
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.staffAttendance')}}">
                             <div class="row gutters-8 items-center">
                                 {{-- <div class="col-lg-3 col-12 form-group">
                                     <label class="hidden">Name </label>
@@ -52,46 +52,6 @@
                                 </div>
                             </div>
                         </form>
-                        @if($currentUser->status > 2)
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                {{-- <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <label class="hidden">Date </label>
-                                    <input name="search" type="text" placeholder="Search by Date ..." class="form-control">
-                                </div> --}}
-
-                                <input type="hidden" name="date" value="{{now()}}">
-                                <input type="hidden" name="location" value="">
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="">Make Attendance </label>
-                                    <select name="status" class="select2 hidden" readonly>
-                                        <option value="1" selected>Present</option>
-                                    </select>
-                                </div> --}}
-                                @if(strtotime($appdata->late_time) > strtotime(now()))
-                                <div class="col-md-3 col-12 form-group self-end">
-                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Check In</button>
-                                </div> 
-                                @else
-                                <div class="col-md-3 col-12 form-group self-end">
-                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Check Out</button>
-                                </div>
-                                @endif
-                                <div class="col-lg-3 col-12 form-group">
-                                    <label class="">Total Present </label>
-                                    <input name="" type="text" placeholder="{{$present}}" class="form-control" readonly>
-                                </div>
-                                <div class="col-lg-3 col-12 form-group">
-                                    <label class="">Total Absent </label>
-                                    <input name="" type="text" placeholder="{{$absent}}" class="form-control" readonly>
-                                </div>
-                                <div class="col-lg-3 col-12 form-group">
-                                    <label class="">Total Late </label>
-                                    <input name="" type="text" placeholder="{{$late}}" class="form-control" readonly>
-                                </div>
-                            </div>
-                        </form>
-                        @endif
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
@@ -103,7 +63,7 @@
                                         {{-- <th>Staff</th> --}}
                                         <th>Remark</th>
                                         {{-- <th>Action</th> --}}
-                                        {{-- <th>Status</th> --}}
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -153,37 +113,7 @@
 
 <script>
 
-    let locFlag = localStorage.getItem('locFlag');
-    $(document).ready(function(){
-        // alert(locFlag);
-        locFlag = localStorage.getItem('locFlag');
-        navigator.geolocation.getCurrentPosition(success, error);
-    });
-
-    $('select[name=status]').on('change',function(){
-        navigator.geolocation.getCurrentPosition(success, error);
-    });
-
-    function success(pos){
-        // alert('tre');
-        locFlag = true;
-        localStorage.setItem('locFlag', locFlag);
-        $('input[name=location]').val(JSON.stringify(pos.coords));
-    }
-
-    function error(){
-        // alert('false');
-        locFlag = false;
-        responseToast('please allow location access','bg-warning');
-        return false;
-    }
-
     function submitForm(form){
-        if(!locFlag){
-            responseToast('please allow location access','bg-warning');
-            $('.submitForm').removeClass('disabled');
-            return false;
-        }
         let data = new FormData($(form)[0]);
         callAjaxFormData('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
     }

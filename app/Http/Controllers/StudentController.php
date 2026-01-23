@@ -244,7 +244,7 @@ class StudentController extends Controller
             // }
 
             // absolute filesystem path (for saving file)
-            $fullPath = public_path($relativePath);
+            $fullPath = base_path('public_html/'.$relativePath);
 
             // create directory if not exists
             // if (!file_exists(public_path('students/' . $s_id))) {

@@ -54,34 +54,42 @@ class StaffAttendanceController extends Controller
                     'response_code'=> '405'
                 ]);
             }
-            
-            if(strtotime(now()) > strtotime('8:30 am')){
-                if(strtotime(now()) > strtotime('2:30 pm')){
+          
+            $fee = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereDate('date',Carbon::today()->format('Y-m-d'))->first();
+              
+            if(strtotime(now()) <= strtotime($this->appdata->late_time)){
+                // check in part
+                if(strtotime(now()) > strtotime($this->appdata->school_time)){
+                    $request->status = 2;
+                } else{
+                    $request->status = 1;
+                }
+            } else {
+                // check out part  
+                if(!$fee){
                     return response()->json([
-                        'message'=>'You are too late!',
+                        'message'=>'No Attendance Present for today!',
                         'response_code'=> '405'
                     ]);
-                } else{
+                }
+                if(strtotime(now()) < strtotime($this->appdata->school_time) + strtotime($this->appdata->school_hours)){
                     $request->status = 2;
+                } else{
+                    $request->status = 1;
                 }
             }
-
-            $fee = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereDate('date',Carbon::today()->format('Y-m-d'))->first();
-            
-            // dd($request->status);
 
             if(!$fee){
                 $fee = new StaffAttendance();
                 $fee->staff_id = $this->currentLogin->id;
-                $fee->date = $request->date;
+                $fee->date = now();
                 $fee->status = $request->status;
                 $fee->session_id = session('session_id');
                 $fee->save();
             } else{
-                return response()->json([
-                    'message'=>'Attendance already marked for today!',
-                    'response_code'=> '205'
-                ]);
+                $fee->checkout = now();
+                $fee->status = $request->status;
+                $fee->save();
             }
 
             return response()->json([
@@ -99,25 +107,35 @@ class StaffAttendanceController extends Controller
 
     public function read(Request $request){
         try{
+            if(!$request->month){
+                $request->month = Carbon::now()->month;
+            }
+
             $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
             // ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
-            ->select('staff.name','staff_attendances.*');
+            ->select('staff.name','staff_attendances.*')
+            ->whereMonth('date',$request->month);
             
+
             $present = 0;
             $absent = 0;
             $late = 0;
 
             if($this->currentUser->status > 2){
                 $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
-                $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',1)->count();
-                $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',0)->count();
-                $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',2)->count();
+                
+                $data = $data->get();
+                
+                $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',1)->count();
+                $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',0)->count();
+                $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',2)->count();
+                return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
             }
             
             $data = $data->get();
 
             
-            return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
+            return view('admin.pages.staffAttendance',compact('data','present','absent','late'));
             
         } catch (\Exception $e){
             return view('staff.pages.staffAttendance');
