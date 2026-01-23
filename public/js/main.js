@@ -124,7 +124,7 @@
           monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           today: 'Today',
           clear: 'Clear',
-          dateFormat: 'dd/mm/yyyy',
+          dateFormat: 'dd-mm-yyyy',
           firstDay: 0
         }
       });

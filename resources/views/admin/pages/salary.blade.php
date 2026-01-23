@@ -9,9 +9,9 @@
                             <div class="item-title">
                                 <h3>Add Staff Salary</h3>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <a href="{{route('admin.pages.salary')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>
-                            </div>
+                            </div> --}}
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -42,12 +42,24 @@
                                     <input name="total_present" value="" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Half Day *</label>
+                                    <input name="total_half_day" value="" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Leave *</label>
+                                    <input name="total_leave" value="" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Absent *</label>
                                     <input name="total_absent" value="" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Monthly Salary *</label>
                                     <input name="monthly_salary" value="" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Security Deposit *</label>
+                                    <input name="security_deposit" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Salary *</label>
@@ -90,19 +102,28 @@
                         {{-- <form class="mg-b-20" type='GET' action="{{route('admin.pages.inventoryFilter')}}"> --}}
                         <form class="mg-b-20">
                             <div class="row gutters-8 items-center">
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                {{-- <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Name </label>
                                     <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
-                                </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="hidden">Class </label>
-                                    <select name="class_id" class="select2 changeClass">
-                                        <option value="">Please Select Class</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
                                 </div> --}}
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Month </label>
+                                    <select name="search" class="select2">
+                                        <option value="">Please Select Month *</option>
+                                        <option value="Jan">Jan</option>
+                                        <option value="Feb">Feb</option>
+                                        <option value="Mar">Mar</option>
+                                        <option value="Apr">Apr</option>
+                                        <option value="May">May</option>
+                                        <option value="Jun">Jun</option>
+                                        <option value="Jul">Jul</option>
+                                        <option value="Aug">Aug</option>
+                                        <option value="Sep">Sep</option>
+                                        <option value="Oct">Oct</option>
+                                        <option value="Nov">Nov</option>
+                                        <option value="Dec">Dec</option>
+                                    </select>
+                                </div>
                                 {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div> --}}
@@ -113,12 +134,15 @@
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
+                                        <th>Salary Date</th>
                                         <th>Staff</th>
                                         <th>Total Present</th>
+                                        <th>Total Half Day</th>
+                                        <th>Total Leave</th>
                                         <th>Total Absent</th>
                                         <th>Monthly Salary</th>
                                         <th>Total Salary</th>
-                                        <th>Salary Date</th>
+                                        <th>Deposit</th>
                                         <th>Action</th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
@@ -129,7 +153,10 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -142,13 +169,16 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1=+1}}</td>
+                                            <td>{{$sn1+=1}}</td>
+                                            <td>{{date('d-M-Y',strtotime($job->salary_date))}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->total_present}}</td>
+                                            <td>{{$job->total_half_day}}</td>
+                                            <td>{{$job->total_leave}}</td>
                                             <td>{{$job->total_absent}}</td>
                                             <td>{{$job->monthly_salary}}</td>
                                             <td>{{$job->total_salary}}</td>
-                                            <td>{{$job->salary_date}}</td>
+                                            <td>{{$job->security_deposit}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">

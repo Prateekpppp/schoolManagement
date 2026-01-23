@@ -37,7 +37,7 @@
                                 <input type="hidden" name="location" value="">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label class="">Make Attendance </label>
-                                    <select name="status" class="select2" readonly>
+                                    <select name="status" class="select2 hidden" readonly>
                                         {{-- <option value="0">Absent</option> --}}
                                         <option value="1" selected>Present</option>
                                     </select>
@@ -46,13 +46,13 @@
                                     <button class="submitForm fw-btn-fill btn-gradient-yellow">Mark Present</button>
                                 </div>
                                 <div class="col-md-1 col-12 form-group self-end">
-                                    <button class="fw-btn-fill btn-gradient-yellow">{{$present}}</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$present ?? ''}}</button>
                                 </div>
                                 <div class="col-md-1 col-12 form-group self-end">
-                                    <button class="fw-btn-fill btn-gradient-yellow">{{$absent}}</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$absent ?? ''}}</button>
                                 </div>
                                 <div class="col-md-1 col-12 form-group self-end">
-                                    <button class="fw-btn-fill btn-gradient-yellow">{{$late}}</button>
+                                    <button class="fw-btn-fill btn-gradient-yellow">{{$late ?? ''}}</button>
                                 </div>
                             </div>
                         </form>

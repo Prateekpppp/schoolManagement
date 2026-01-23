@@ -114,6 +114,23 @@
         });
     });
     
+    
+    $('select[name="search"]').on('change', function() {
+        
+        
+        var searchText = $(this).val().toLowerCase(); 
+
+        $('table tbody tr').filter(function() {
+            
+            if($(this).text().toLowerCase().indexOf(searchText) > -1){
+                $(this).removeClass('hidden');
+            } else{
+                $(this).addClass('hidden');
+            }
+
+        });
+    });
+
     $('.contact_admin').on('click',function(e){
         e.preventDefault();
         responseToast('Please contact to admin.','bg-warning');

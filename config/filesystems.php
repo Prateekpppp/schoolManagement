@@ -32,7 +32,8 @@ return [
 
         'public_uploads' => [
             'driver' => 'local',
-            'root' => public_path('/'), // This points directly to the public/uploads folder
+            // 'root' => public_path('/'), // This points directly to the public folder
+            'root' => base_path('public_html/'), // This points directly to the public folder
             'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,

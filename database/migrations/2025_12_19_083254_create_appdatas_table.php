@@ -24,6 +24,11 @@ return new class extends Migration
             $table->string('secondary_phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
+            $table->string('school_hours')->nullable();
+            $table->string('school_time')->nullable();
+            // no checkout before min_time, no check in after min_time
+            $table->string('min_time')->nullable();
+            $table->string('address')->nullable();
             // admin_username is super admin
             $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);

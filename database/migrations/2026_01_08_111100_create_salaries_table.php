@@ -16,8 +16,11 @@ return new class extends Migration
             $table->id();
             $table->string('staff_id');
             $table->string('total_present');
+            $table->string('total_half_day');
+            $table->string('total_leave');
             $table->string('total_absent');
             $table->string('monthly_salary')->nullable();
+            $table->string('security_deposit')->nullable();
             // salary calculation based on present days
             $table->string('total_salary')->nullable();
             $table->string('salary_date')->nullable();

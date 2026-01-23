@@ -43,12 +43,24 @@
                                     <input name="total_present" value="{{ isset($data) ? $data->total_present : '' }}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Half Day *</label>
+                                    <input name="total_half_day" value="{{ isset($data) ? $data->total_half_day : '' }}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Leave *</label>
+                                    <input name="total_leave" value="{{ isset($data) ? $data->total_leave : '' }}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Absent *</label>
                                     <input name="total_absent" value="{{ isset($data) ? $data->total_absent : '' }}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Monthly Salary *</label>
                                     <input name="monthly_salary" value="{{ isset($data) ? $data->monthly_salary : '' }}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Security Deposit *</label>
+                                    <input name="security_deposit" value="{{ isset($data) ? $data->security_deposit : '' }}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Salary *</label>

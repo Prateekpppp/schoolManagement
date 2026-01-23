@@ -98,18 +98,33 @@ class StaffAttendanceController extends Controller
     }
 
     public function read(Request $request){
-        $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
-        ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
-        ->select('staff.name','staff_attendances.*','staff.salary');
+        try{
+            $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
+            // ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
+            ->select('staff.name','staff_attendances.*');
+            
+            $present = 0;
+            $absent = 0;
+            $late = 0;
 
-        $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',1)->count();
-        $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',0)->count();
-        $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',2)->count();
-        if($this->currentUser->status > 2){
-            $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
+            if($this->currentUser->status > 2){
+                $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
+                $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',1)->count();
+                $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',0)->count();
+                $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',Carbon::now()->month)->where('status',2)->count();
+            }
+            
+            $data = $data->get();
+
+            
+            return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
+            
+        } catch (\Exception $e){
+            return view('staff.pages.staffAttendance');
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500'
+            ]);
         }
-        
-        $data = $data->get();
-        return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
     }
 }

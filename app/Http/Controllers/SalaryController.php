@@ -28,9 +28,10 @@ class SalaryController extends Controller
         ->where('salaries.status',1)
         ->get();
 
+        $deposit = $data->sum('security_deposit');
         // $staff = Staff::where('status',1)->get();
         // dd($data);
-        return view('staff.pages.salary',compact('data'));
+        return view('staff.pages.salary',compact('data','deposit'));
     }
 
     public function inventoryFilter(Request $request){
@@ -63,8 +64,11 @@ class SalaryController extends Controller
                 $fee = new Salary();
                 $fee->staff_id = $request->staff_id;
                 $fee->total_present = $request->total_present;
+                $fee->total_half_day = $request->total_half_day;
+                $fee->total_leave = $request->total_leave;
                 $fee->total_absent = $request->total_absent;
                 $fee->monthly_salary = $request->monthly_salary;
+                $fee->security_deposit = $request->security_deposit;
                 $fee->total_salary = $request->total_salary;
                 $fee->salary_date = $request->salary_date;
                 $fee->save();
@@ -72,8 +76,11 @@ class SalaryController extends Controller
                 $fee = Salary::where('id',$request->id)->first();
                 $fee->staff_id = $request->staff_id;
                 $fee->total_present = $request->total_present;
+                $fee->total_half_day = $request->total_half_day;
+                $fee->total_leave = $request->total_leave;
                 $fee->total_absent = $request->total_absent;
                 $fee->monthly_salary = $request->monthly_salary;
+                $fee->security_deposit = $request->security_deposit;
                 $fee->total_salary = $request->total_salary;
                 $fee->salary_date = $request->salary_date;
                 $fee->save();
@@ -97,7 +104,7 @@ class SalaryController extends Controller
         ->select('salaries.*','staff.name')
         ->where('salaries.id',$request->id)->first();
 
-        $staff = Staff::where('status',1)->get();
+        $staff = Staff::where('status','!=',0)->get();
         return view('admin.pages.updateSalary',compact('data','staff'));
     }
     
