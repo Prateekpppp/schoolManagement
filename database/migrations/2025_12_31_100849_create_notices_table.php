@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('date');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->text('notice')->nullable();
+            $table->string('date')->nullable();
             $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();

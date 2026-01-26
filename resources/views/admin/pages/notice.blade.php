@@ -55,12 +55,12 @@
                                     @else
                                     @foreach ($notice as $key=>$job)
                                         <tr>
-                                            <td>{{$key+1}}</td>
+                                            <td>{{$key+=1}}</td>
                                             <td>{{$job->notice}}</td>
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a>
+                                                    {{-- <a data-id="{{$job->id}}" data-toggle="modal" data-target="#standard-modal" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a> --}}
                                                     <a href="javascript:void(0)" data-model="Notice" data-id="{{$job->id}}" data-href="{{route('admin.post.delete')}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Delete</a>
 
                                                 </div>
