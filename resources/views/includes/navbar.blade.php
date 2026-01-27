@@ -79,6 +79,7 @@
                               <li><a href="{{route('user.testimonial')}}">Testimonial</a></li>
                               <li><a href="{{route('user.career')}}">Career</a></li>
                               <li><a href="{{route('user.gallery')}}">Gallery</a></li>
+                              <li><a href="{{route('admin.login')}}">Login</a></li>
                               
                               
                               
