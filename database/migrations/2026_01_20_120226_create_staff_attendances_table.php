@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('staff_id');
             $table->string('date');
             $table->string('checkout');
-            // status => 0 = absent, 1 = present, 2 = late/half day, 3 = leave
+            // status => 0 = absent, 1 = present, 2 = late, 3 = half day, 4 = leave
             $table->tinyInteger('status')->default(0);
             $table->text('remark')->nullable();
             $table->string('admin_username')->nullable();

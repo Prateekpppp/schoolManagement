@@ -51,15 +51,15 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>School Hours </label>
-                                    <input value="{{$appdata->school_hours ?? '8'}}" name="school_hours" type="text" placeholder="" class="form-control">
+                                    <input value="{{$appdata->school_hours ?? '8'}}" name="school_hours" type="text" placeholder="8" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>School Time </label>
-                                    <input value="{{$appdata->school_time ?? '7:30 am'}}" name="school_time" type="text" placeholder="" class="form-control">
+                                    <input value="{{$appdata->school_time ?? '7:30 am'}}" name="school_time" type="text" placeholder="7:30 am" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Max Late time </label>
-                                    <input value="{{$appdata->late_time ?? '8:30 am'}}" name="school_time" type="text" placeholder="" class="form-control">
+                                    <input value="{{$appdata->late_time ?? '8:30 am'}}" name="late_time" type="text" placeholder="8:30 am" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Logo</label>

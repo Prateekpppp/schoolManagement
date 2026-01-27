@@ -42,13 +42,13 @@ class StaffAttendanceController extends Controller
         try{
             $ScLatitude = ' 25.003839';
             $ScLongitute = '84.575035';
-
+            // dd($request->location);
             $request->location = json_decode($request->location);
             $distance = $this->haversine_distance($ScLatitude, $ScLongitute, $request->location->latitude, $request->location->longitude,'m');
 
             // dd($distance);
 
-            if($distance > 30){
+            if($distance < 30){
                 return response()->json([
                     'message'=>'Not under the required school area!',
                     'response_code'=> '405'
@@ -59,6 +59,12 @@ class StaffAttendanceController extends Controller
               
             if(strtotime(now()) <= strtotime($this->appdata->late_time)){
                 // check in part
+                if($fee){
+                    return response()->json([
+                        'message'=>'Attendance Already marked for today!',
+                        'response_code'=> '405'
+                    ]);
+                }
                 if(strtotime(now()) > strtotime($this->appdata->school_time)){
                     $request->status = 2;
                 } else{
@@ -72,10 +78,23 @@ class StaffAttendanceController extends Controller
                         'response_code'=> '405'
                     ]);
                 }
-                if(strtotime(now()) < strtotime($this->appdata->school_time) + strtotime($this->appdata->school_hours)){
-                    $request->status = 2;
+                if($fee->checkout){
+                    return response()->json([
+                        'message'=>'Already checked out!',
+                        'response_code'=> '405'
+                    ]);
+                }
+                if(strtotime(now()) < strtotime('+2 hours',strtotime($fee->date))){
+                    return response()->json([
+                        'message'=>'Can\'t checkout before 2 hours!',
+                        'response_code'=> '405'
+                    ]);
+                }
+                // dd(strtotime($this->appdata->school_hours. 'hours',strtotime($this->appdata->school_time)));
+                if(strtotime(now()) < strtotime('+'.$this->appdata->school_hours. 'hours',strtotime($this->appdata->school_time))){
+                    $request->status = 3;
                 } else{
-                    $request->status = 1;
+                    $request->status = $fee->status;
                 }
             }
 
@@ -119,6 +138,7 @@ class StaffAttendanceController extends Controller
 
             $present = 0;
             $absent = 0;
+            $halfday = 0;
             $late = 0;
 
             if($this->currentUser->status > 2){
@@ -128,8 +148,9 @@ class StaffAttendanceController extends Controller
                 
                 $present = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',1)->count();
                 $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',0)->count();
+                $halfday = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',3)->count();
                 $late = StaffAttendance::where('staff_id',$this->currentLogin->id)->whereMonth('date',$request->month)->where('status',2)->count();
-                return view('staff.pages.staffAttendance',compact('data','present','absent','late'));
+                return view('staff.pages.staffAttendance',compact('data','present','absent','halfday','late'));
             }
             
             $data = $data->get();
@@ -139,6 +160,56 @@ class StaffAttendanceController extends Controller
             
         } catch (\Exception $e){
             return view('staff.pages.staffAttendance');
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500'
+            ]);
+        }
+    }
+
+    public function changeStatus(Request $request){
+        try {
+            $data = StaffAttendance::where('id',$request->id)->update(['status'=>$request->status]);
+            return response()->json([
+                'redirect'=> $request->header('referer'),
+                'message'=>'Attendance Updated Successfully',
+                'response_code'=> '200'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=> 'Something went wrong!',
+                'response_code'=> '500'
+            ]);
+        }
+    }
+
+    public function getAttendanceData(Request $request){
+        try {
+            $month = Carbon::parse($request->salary_date)->month;
+            $year = Carbon::parse($request->salary_date)->year;
+            
+            $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
+            ->where('staff_id',$request->staff_id)
+            ->whereMonth('date',$month)
+            ->whereYear('date',$year)
+            ->select(
+                \DB::raw("SUM(CASE WHEN staff_attendances.status = 1 THEN 1 ELSE 0 END) AS total_present"),
+                \DB::raw("SUM(CASE WHEN staff_attendances.status = 0 THEN 1 ELSE 0 END) AS total_absent"),
+                \DB::raw("SUM(CASE WHEN staff_attendances.status = 2 THEN 1 ELSE 0 END) AS total_late"),
+                \DB::raw("SUM(CASE WHEN staff_attendances.status = 3 THEN 1 ELSE 0 END) AS total_half_day"),
+                \DB::raw("SUM(CASE WHEN staff_attendances.status = 4 THEN 1 ELSE 0 END) AS total_leave"),
+                'staff.salary'
+            )
+            ->groupBy('staff.salary')
+            // ->where('staff.id',$request->staff_id)
+            ->first();
+            // dd($data);
+            return response()->json([
+                'data'=>$data,
+                'response_code'=> '200'
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'message'=> 'Something went wrong: '.$e->getMessage(),
                 'response_code'=> '500'

@@ -89,12 +89,18 @@
                                             {{-- <td>{{$job->name}}</td> --}}
                                             <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
                                             {{-- <td>{{$key}}</td> --}}
-                                            {{-- <td>
+                                            <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a target="_blanck" href="{{route('admin.pages.printSalary', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Print</a>
-
+                                                    <select data-id="{{$job->id}}" name="status" class="select2">
+                                                        <option value="">Change Status</option>
+                                                        <option value="0">Absent</option>
+                                                        <option value="1">Present</option>
+                                                        <option value="2">Late</option>
+                                                        <option value="3">Half Day</option>
+                                                        <option value="4">Leave</option>
+                                                    </select>
                                                 </div>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                         
                                     @endforeach
@@ -112,6 +118,13 @@
 @section('inner_js')
 
 <script>
+
+    $('select[name=status]').on('change',function(){
+        let data = {};
+        data['id'] = $(this).attr('data-id');
+        data['status'] = $(this).val();
+        callApi('post',"{{route('admin.post.changeStatus')}}",data,ajaxResponseModal);
+    });
 
     function submitForm(form){
         let data = new FormData($(form)[0]);

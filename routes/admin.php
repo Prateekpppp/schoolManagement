@@ -71,6 +71,10 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         // Staff Attendance Module
         Route::get('/staffAttendance', [StaffAttendanceController::class,'read'])->name('admin.pages.staffAttendance');
+        
+        Route::post('/changeStatus', [StaffAttendanceController::class,'changeStatus'])->name('admin.post.changeStatus')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::post('/getAttendanceData', [StaffAttendanceController::class,'getAttendanceData'])->name('admin.post.getAttendanceData')->withoutMiddleware([VerifyCsrfToken::class]);
 
         // Task Module
         Route::get('/task', [TaskController::class,'task'])->name('admin.pages.task');

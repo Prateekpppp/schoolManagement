@@ -17,8 +17,8 @@
                      <div class="it-team-3-content">
                         
                         <div class="it-team-3-author-box">
-                           <h4 class="it-team-3-title"><a href="">Anamica</a></h4>
-                           <span>Principal</span>
+                           <h4 class="it-team-3-title"><a href="">Kamalika Chakraborty</a></h4>
+                           <span>Principal (M.A. ,M.B.A. ,B.Ed, NTT, Author)</span>
                         </div>
                      </div>
                   </div>

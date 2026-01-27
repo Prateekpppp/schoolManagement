@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\Salary;
+use App\Models\StaffAttendance;
 use App\Models\User;
 
 class SalaryController extends Controller
@@ -115,4 +116,5 @@ class SalaryController extends Controller
 
         return view('admin.pages.printSalary',compact('data'));
     }
+
 }

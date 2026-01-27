@@ -77,6 +77,10 @@
                                     <button class="submitForm fw-btn-fill btn-gradient-yellow">Check Out</button>
                                 </div>
                                 @endif
+                            </div>
+                        </form>
+                        <div class="mg-b-20">
+                            <div class="row gutters-8">
                                 <div class="col-lg-3 col-12 form-group">
                                     <label class="">Total Present </label>
                                     <input name="" type="text" placeholder="{{$present}}" class="form-control" readonly>
@@ -86,11 +90,15 @@
                                     <input name="" type="text" placeholder="{{$absent}}" class="form-control" readonly>
                                 </div>
                                 <div class="col-lg-3 col-12 form-group">
+                                    <label class="">Total Half Days </label>
+                                    <input name="" type="text" placeholder="{{$halfday}}" class="form-control" readonly>
+                                </div>
+                                <div class="col-lg-3 col-12 form-group">
                                     <label class="">Total Late </label>
                                     <input name="" type="text" placeholder="{{$late}}" class="form-control" readonly>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                         @endif
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
@@ -125,7 +133,7 @@
                                             {{-- <td>{{$sn1+=1}}</td> --}}
                                             <td>{{date('d-m-Y',strtotime($job->date))}}</td>
                                             <td>{{$job->date}}</td>
-                                            <td>{{$job->date}}</td>
+                                            <td>{{$job->checkout}}</td>
                                             {{-- <td>{{$job->name}}</td> --}}
                                             <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
                                             {{-- <td>{{$key}}</td> --}}
@@ -154,9 +162,13 @@
 <script>
 
     let locFlag = localStorage.getItem('locFlag');
+    let currentLocation = localStorage.getItem('currentLocation');
     $(document).ready(function(){
         // alert(locFlag);
         locFlag = localStorage.getItem('locFlag');
+        if(currentLocation){
+            $('input[name=location]').val(currentLocation);
+        }
         navigator.geolocation.getCurrentPosition(success, error);
     });
 
@@ -168,6 +180,7 @@
         // alert('tre');
         locFlag = true;
         localStorage.setItem('locFlag', locFlag);
+        localStorage.setItem('currentLocation', JSON.stringify(pos.coords));
         $('input[name=location]').val(JSON.stringify(pos.coords));
     }
 

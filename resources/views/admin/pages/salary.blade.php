@@ -29,6 +29,10 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Salary Date *</label>
+                                    <input name="salary_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Staff </label>
                                     <select name="staff_id" class="select2 required">
                                         <option value="">Please Select Staff *</option>
@@ -44,6 +48,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Half Day *</label>
                                     <input name="total_half_day" value="" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Late *</label>
+                                    <input name="total_late" value="" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Leave *</label>
@@ -64,10 +72,6 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Salary *</label>
                                     <input name="total_salary" type="text" placeholder="" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Salary Date *</label>
-                                    <input name="salary_date" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -205,6 +209,25 @@
 @section('inner_js')
 
 <script>
+
+    function updateForm(response){
+        response = response.data;
+        if(!response){
+            return false;
+        }
+        $('input[name=total_absent]').val(response.total_absent);
+        $('input[name=total_present]').val(response.total_present);
+        $('input[name=total_late]').val(response.total_late);
+        $('input[name=total_half_day]').val(response.total_half_day);
+        $('input[name=total_leave]').val(response.total_leave);
+        $('input[name=monthly_salary]').val(response.salary);
+    }
+    
+    $('select[name=staff_id]').on('change',function(){
+        let data = {};
+        data['staff_id'] = $(this).val();
+        callApi('post',"{{route('admin.post.getAttendanceData')}}",data,updateForm);
+    });
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
