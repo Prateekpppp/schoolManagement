@@ -15,6 +15,7 @@ class AppdataController extends Controller
     public function updateAppdata(Request $request){
         $appdata = Appdata::where('status',1)->first();
         if($appdata){
+            // dd($request->latitude);
             // $appdata->admin_username = $request->admin_username;
             // $appdata->school_code = $request->school_code;
             $appdata->title = $request->title;

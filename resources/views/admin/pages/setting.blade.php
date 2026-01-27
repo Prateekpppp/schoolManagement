@@ -51,11 +51,11 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Latitude </label>
-                                    <input value="{{$appdata->latitude ?? '25.003839'}}" name="school_hours" type="text" placeholder="8" class="form-control">
+                                    <input value="{{$appdata->latitude ?? '25.003839'}}" name="latitude" type="text" placeholder="8" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Altitude </label>
-                                    <input value="{{$appdata->altitude ?? '84.575035'}}" name="school_hours" type="text" placeholder="8" class="form-control">
+                                    <input value="{{$appdata->altitude ?? '84.575035'}}" name="altitude" type="text" placeholder="8" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>School Hours </label>
