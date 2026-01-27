@@ -40,8 +40,8 @@ class StaffAttendanceController extends Controller
 
     public function create(Request $request){
         try{
-            $ScLatitude = $appdata->latitude;
-            $ScLongitute = $appdata->altitude;
+            $ScLatitude = $this->appdata->latitude;
+            $ScLongitute = $this->appdata->altitude;
             // dd($request->location);
             $request->location = json_decode($request->location);
             $distance = $this->haversine_distance($ScLatitude, $ScLongitute, $request->location->latitude, $request->location->longitude,'m');
