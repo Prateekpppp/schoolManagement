@@ -9,6 +9,15 @@
                             <div class="item-title">
                                 <h3>All Attendance</h3>
                             </div>
+                            <div class="">
+                            @if(strtotime($appdata->late_time) > strtotime(now()))
+                                <button class="attendance btn fw-btn-fill btn-gradient-yellow !max-w-min">Check In</button>
+                            {{-- </div>  --}}
+                            @else
+                            {{-- <div class="col-md-3 col-12 form-group self-end"> --}}
+                                <button class="attendance btn fw-btn-fill btn-gradient-yellow !max-w-min">Check Out</button>
+                                @endif
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -68,7 +77,7 @@
                                         <option value="1" selected>Present</option>
                                     </select>
                                 </div> --}}
-                                @if(strtotime($appdata->late_time) > strtotime(now()))
+                                {{-- @if(strtotime($appdata->late_time) > strtotime(now()))
                                 <div class="col-md-3 col-12 form-group self-end">
                                     <button class="submitForm fw-btn-fill btn-gradient-yellow">Check In</button>
                                 </div> 
@@ -76,7 +85,7 @@
                                 <div class="col-md-3 col-12 form-group self-end">
                                     <button class="submitForm fw-btn-fill btn-gradient-yellow">Check Out</button>
                                 </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </form>
                         <div class="mg-b-20">
@@ -161,45 +170,27 @@
 
 <script>
 
-    let locFlag = localStorage.getItem('locFlag');
-    let currentLocation = localStorage.getItem('currentLocation');
-    $(document).ready(function(){
-        // alert(locFlag);
-        locFlag = localStorage.getItem('locFlag');
-        if(currentLocation){
-            $('input[name=location]').val(currentLocation);
-        }
-        navigator.geolocation.getCurrentPosition(success, error);
-    });
-
-    $('select[name=status]').on('change',function(){
-        navigator.geolocation.getCurrentPosition(success, error);
-    });
-
+    let data = {};
     function success(pos){
-        // alert('tre');
-        locFlag = true;
-        localStorage.setItem('locFlag', locFlag);
-        localStorage.setItem('currentLocation', JSON.stringify(pos.coords));
-        $('input[name=location]').val(JSON.stringify(pos.coords));
+        data['location'] =  JSON.stringify(pos.coords);
+        callApi('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
+        
     }
 
     function error(){
-        // alert('false');
-        locFlag = false;
         responseToast('please allow location access','bg-warning');
         return false;
     }
 
-    function submitForm(form){
-        if(!locFlag){
-            responseToast('please allow location access','bg-warning');
-            $('.submitForm').removeClass('disabled');
-            return false;
-        }
-        let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
-    }
+    $('.attendance').on('click',function(){
+        navigator.geolocation.getCurrentPosition(success, error,
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    });
     
 
 </script>
