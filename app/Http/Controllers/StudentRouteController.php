@@ -63,7 +63,7 @@ class StudentRouteController extends Controller
 
     public function updateStudentRoute(Request $request){
         $data = StudentRoute::where('id',$request->id)->first();
-        dd($data);
+        // dd($data);
         $student = Student::where('id',$data->student_id)->get();
         // dd($student);
         $routes = ScRoute::where('status',1)->get();
