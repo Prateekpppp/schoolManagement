@@ -16,13 +16,16 @@ class StudentRouteController extends Controller
 
     public function assignedStudentRoute(){
         $data = StudentRoute::join('students','student_routes.student_id','students.id')
+        ->join('classes','students.class','classes.id')
         ->join('sc_routes','student_routes.sc_route_id','sc_routes.id')
-        ->get(['students.name','students.roll_no','student_routes.*','sc_routes.route_name']);
+        ->get(['students.name','students.roll_no','classes.class','student_routes.*','sc_routes.route_name']);
         return view('admin.pages.assignedStudentRoute',compact('data'));
     }
 
     public function assignStudentRoute(Request $request){
-        $students = Student::where('status',1)->get();
+        $students = Student::join('classes','students.class','classes.id')
+        ->select('students.*','classes.class')
+        ->where('students.status',1)->get();
         $routes = ScRoute::where('status',1)->get();
         return view('admin.pages.assignStudentRoute',compact('students','routes'));
     }
@@ -64,9 +67,13 @@ class StudentRouteController extends Controller
     public function updateStudentRoute(Request $request){
         $data = StudentRoute::where('id',$request->id)->first();
         // dd($data);
-        $students = Student::where('id',$data->student_id)->get();
+        $students = Student::join('classes','students.class','classes.id')
+        ->select('students.*','classes.class')
+        ->where('students.id',$data->student_id)->first();
+
+        // $students = Student::where('id',$data->student_id)->first();
         // dd($student);
         $routes = ScRoute::where('status',1)->get();
-        return view('admin.pages.assignStudentRoute',compact('data','students','routes'));
+        return view('admin.pages.updateStudentRoute',compact('data','students','routes'));
     }
 }

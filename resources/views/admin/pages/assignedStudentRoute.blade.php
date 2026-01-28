@@ -31,11 +31,11 @@
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Name/Roll No. </label>
-                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
+                                    <input name="search" type="text" placeholder="Search by Name/ Roll No. ..." class="form-control">
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                {{-- <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <a href="javascript:void(0)" class="fw-btn-fill btn-gradient-yellow">SEARCH</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                         <div class="table-responsive">
@@ -43,8 +43,9 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Student</th>
                                         <th>Roll No.</th>
+                                        <th>Student</th>
+                                        <th>Class</th>
                                         <th>Route Name</th>
                                         <th>Action</th>
                                     </tr>
@@ -62,8 +63,9 @@
                                     @foreach ($data as $key=>$job)
                                         <tr>
                                             <td>{{$key+=1}}</td>
-                                            <td>{{$job->name}}</td>
                                             <td>{{$job->roll_no}}</td>
+                                            <td>{{$job->name}}</td>
+                                            <td>{{$job->class}}</td>
                                             <td>{{$job->route_name}}</td>
                                             <td>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudentRoute', ['id' => $job->id])}}">Edit</a>
