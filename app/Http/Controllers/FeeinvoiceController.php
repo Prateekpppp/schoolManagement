@@ -15,13 +15,54 @@ class FeeinvoiceController extends Controller
 {
     //
 
-    public function feeInvoice(){
+    public function feeInvoice(Request $request){
+
+        // $fee = \DB::table('feeinvoices')
+        // ->join('students','students.id','feeinvoices.student_id')
+        // ->join('classes','students.class','classes.id')
+        // ->join('sections','students.section','sections.id')
+        // ->leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        // ->select(
+        //     'feeinvoices.id',
+        //     'feeinvoices.invoice_date',
+        //     'feeinvoices.month',
+        //     'feeinvoices.total_amount',
+        //     'feeinvoices.status',
+        //     'students.name',
+        //     'students.father_name',
+        //     'students.admission_no',
+        //     'classes.class',
+        //     'sections.section',
+        //     \DB::raw('sum(transactions.transaction_amount) as transaction_amount')
+        // )
+        // ->groupBy(
+        //     'feeinvoices.id',
+        //     'feeinvoices.invoice_date',
+        //     'feeinvoices.month',
+        //     'feeinvoices.total_amount',
+        //     'feeinvoices.status',
+        //     'students.name',
+        //     'students.father_name',
+        //     'students.admission_no',
+        //     'classes.class',
+        //     'sections.section',
+        // )
+        // // ->where('feeinvoices.status',1)
+        // ->orderBy('feeinvoices.id','desc')
+        // ->get();
+
+        $allTransactions = Transaction::select(
+            'invoice_id',
+            \DB::raw('sum(transaction_amount) as transaction_amount')
+        )->groupBy('invoice_id');
 
         $fee = \DB::table('feeinvoices')
         ->join('students','students.id','feeinvoices.student_id')
         ->join('classes','students.class','classes.id')
         ->join('sections','students.section','sections.id')
-        ->leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        ->leftJoinSub($allTransactions,'allTransactions',function($join){
+            $join->on('feeinvoices.feeinvoice_no','allTransactions.invoice_id');
+        })
         ->select(
             'feeinvoices.id',
             'feeinvoices.invoice_date',
@@ -33,23 +74,15 @@ class FeeinvoiceController extends Controller
             'students.admission_no',
             'classes.class',
             'sections.section',
-            \DB::raw('sum(transactions.transaction_amount) as transaction_amount')
+            'alltransactions.transaction_amount'
         )
-        ->groupBy(
-            'feeinvoices.id',
-            'feeinvoices.invoice_date',
-            'feeinvoices.month',
-            'feeinvoices.total_amount',
-            'feeinvoices.status',
-            'students.name',
-            'students.father_name',
-            'students.admission_no',
-            'classes.class',
-            'sections.section',
-        )
-        // ->where('feeinvoices.status',1)
-        ->orderBy('feeinvoices.id','desc')
-        ->get();
+        ->orderBy('feeinvoices.id','desc');
+
+        if($request->student_id){
+            $fee = $fee->where('students.id',$request->student_id);
+        }
+        $fee = $fee->get();
+
         // dd($fee);
         return view('admin.pages.feeInvoice',compact('fee'));
     }

@@ -429,6 +429,18 @@ class StudentController extends Controller
         return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));
     }
     
+    public function studentIdcard(Request $request){
+        $student = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','classes.class','sections.section');
+        if($request->id){
+            $student = $student->where('students.id',$request->id)->first();
+        }
+        // dd($student->id);
+        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
+        return view('admin.pages.studentIdcard',compact('student','studentFeeInvoice'));
+    }
+
     public function studentDetailByEnrollNo(Request $request){
         try {
             $studentDetail = Student::where('enrollment_no',$request->enrollment_no)->first();

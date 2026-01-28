@@ -53,15 +53,19 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Date *</label>
-                                    <input name="date" value="" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
+                                    <input name="date" value="" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Room Code *</label>
                                     <input name="room_code" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Start Time *</label>
+                                    <label>Exam Time *</label>
                                     <input name="time" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Exam Hours *</label>
+                                    <input name="exam_hours" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"

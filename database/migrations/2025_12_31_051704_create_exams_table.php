@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('room_code')->nullable();
             $table->string('time')->nullable();
+            $table->string('exam_hours')->nullable();
             $table->string('admin_username')->nullable();
             // status => 0 = failed, 1 = processing, 2 = successful
             $table->tinyInteger('status')->default(1);

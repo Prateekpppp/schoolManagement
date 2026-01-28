@@ -59,6 +59,8 @@ class ExamController extends Controller
                 $class->date = $request->date;
                 $class->room_code = $request->room_code;
                 $class->time = $request->time;
+                $class->exam_hours = $request->exam_hours;
+                $class->session_id = session('session_id');
                 $class->status = 1;
                 $class->save();
             } else{
@@ -69,6 +71,8 @@ class ExamController extends Controller
                 $class->date = $request->date;
                 $class->room_code = $request->room_code;
                 $class->time = $request->time;
+                $class->exam_hours = $request->exam_hours;
+                $class->session_id = session('session_id');
                 $class->save();
                 // $class = Classes::updateOrCreate(
                 //     ['id'=>$request->id],

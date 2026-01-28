@@ -171,6 +171,8 @@
 <script>
 
     let data = {};
+    let content = '';
+    
     function success(pos){
         data['location'] =  JSON.stringify(pos.coords);
         callApi('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
@@ -183,6 +185,10 @@
     }
 
     $('.attendance').on('click',function(){
+        content = $(this).text();
+
+        $(this).text('Please Wait ...');
+
         navigator.geolocation.getCurrentPosition(success, error,
             {
                 enableHighAccuracy: true,

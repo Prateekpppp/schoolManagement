@@ -33,11 +33,13 @@
                                 <div class="flex flex-row gap-3 justify-center items-center flex-wrap">
                                     @if($studentFeeInvoice)
                                     <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$studentFeeInvoice->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-500" href="javascript:void(0)"> <i class="fa fa-credit-card"></i> Pay Fee</a>
+                                    
+                                    <a href="{{route('admin.pages.feeInvoice',['student_id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-blue-500" href="javascript:void(0)"> <i class="fa fa-calculator"></i> View Dues</a>
                                     @endif
-                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-blue-500" href="javascript:void(0)"> <i class="fa fa-calculator"></i> View Dues</a>
                                     <a href="{{route('admin.pages.paymentHistory',['id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-green-500" href="javascript:void(0)"> <i class="fa fa-clock"></i> Payment History</a>
                                     <a href="{{asset('/').$student->qrcode}}" download class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-purple-500" href="javascript:void(0)"> <i class="fa fa-qrcode"></i> Download QR</a>
-                                    <a href="{{route('admin.pages.addStudent')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)"> <i class="fa fa-user"></i> Attendance Report</a>
+                                    <a href="{{route('admin.pages.studentAttendance',['id'=>$student->id,'date'=>date('m')])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)"> <i class="fa fa-user"></i> Attendance Report</a>
+                                    <a target="_blanck" href="{{route('admin.pages.studentIdcard',['id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)"> <i class="fa fa-user"></i> ID Card</a>
                                 </div>
                             </div>
                             <div class="item-content col-md-6">

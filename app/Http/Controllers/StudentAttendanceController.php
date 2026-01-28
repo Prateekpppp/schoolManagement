@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\StudentAttendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StudentAttendanceController extends Controller
@@ -49,7 +50,7 @@ class StudentAttendanceController extends Controller
             if(!$request->date){
                 return view('admin.pages.studentAttendance');
             }
-
+            $request->date = Carbon::parse($request->date)->format('d-m-y');
             $attendance = StudentAttendance::where('date',$request->date);
 
             $data = Student::join('classes','students.class','=','classes.id')
@@ -71,6 +72,10 @@ class StudentAttendanceController extends Controller
             
             if($request->section_id){
                 $data = $data->where('students.section',$request->section_id);
+            }
+
+            if($request->id){
+                $data = $data->where('students.id',$request->id);
             }
             
             $data = $data->get();

@@ -285,6 +285,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::get('/studentDetail/{id}', [StudentController::class,'studentDetail'])->name('admin.pages.studentDetail');
         
+        Route::get('/studentIdcard', [StudentController::class,'studentIdcard'])->name('admin.pages.studentIdcard');
+        
         Route::post('/studentDetailByEnrollNo', [StudentController::class,'studentDetailByEnrollNo'])->name('admin.post.studentDetailByEnrollNo')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::post('/manageStudent', [StudentController::class,'manageStudent'])->name('admin.post.manageStudent')->withoutMiddleware([VerifyCsrfToken::class]);
