@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\DriverRoute;
 use App\Models\StudentRoute;
 use App\Models\ScRoute;
+use App\Models\Student;
 use App\Models\Vehicle;
 
 class StudentRouteController extends Controller
@@ -14,46 +15,42 @@ class StudentRouteController extends Controller
     //
 
     public function assignedStudentRoute(){
-        $data = StudentRoute::join('drivers','driver_routes.driver_id','drivers.id')
-        ->join('vehicles','driver_routes.vehicle_no','vehicles.id')
-        ->join('sc_routes','driver_routes.sc_route_id','sc_routes.id')
-        ->get(['driver_routes.*','drivers.name as driver_name','vehicles.vehicle_no','sc_routes.route_name']);
+        $data = StudentRoute::join('students','student_routes.student_id','students.id')
+        ->join('sc_routes','student_routes.sc_route_id','sc_routes.id')
+        ->get(['students.name','students.roll_no','sc_routes.*']);
         return view('admin.pages.assignedStudentRoute',compact('data'));
     }
 
-    public function assignRouteVehicle(Request $request){
-        $drivers = Driver::where('status',1)->get();
-        $vehicles = Vehicle::where('status',1)->get();
+    public function assignStudentRoute(Request $request){
+        $students = Student::where('status',1)->get();
         $routes = ScRoute::where('status',1)->get();
-        return view('admin.pages.assignRouteVehicle',compact('drivers','vehicles','routes'));
+        return view('admin.pages.assignStudentRoute',compact('students','routes'));
     }
 
-    public function assignRouteVehicleDriver(Request $request){
+    public function createStudentRoute(Request $request){
         // dd($request->all());
         try {
             if($request->id){
-                $driverRoute = DriverRoute::where('id',$request->id)->first();
-                $driverRoute->driver_id = $request->driver_id;
-                $driverRoute->vehicle_no = $request->vehicle_no;
+                $driverRoute = StudentRoute::where('id',$request->id)->first();
                 $driverRoute->sc_route_id = $request->sc_route_id;
+                $driverRoute->student_id = $request->student_id;
                 $driverRoute->save();
 
                 return response()->json([
                     'redirect'=> $request->header('referer'),
-                    'message'=>'Route and Vehicle updated for Driver successfully',
+                    'message'=>'Route updated for Student successfully',
                     'response_code'=>'200'
                 ]);
             }
-            $driverRoute = new DriverRoute();
-            $driverRoute->driver_id = $request->driver_id;
-            $driverRoute->vehicle_no = $request->vehicle_no;
+            $driverRoute = new StudentRoute();
             $driverRoute->sc_route_id = $request->sc_route_id;
+            $driverRoute->student_id = $request->student_id;
             $driverRoute->status = 1;
             $driverRoute->save();
 
             return response()->json([
                 'redirect'=> $request->header('referer'),
-                'message'=>'Route and Vehicle assigned to Driver successfully',
+                'message'=>'Route assigned to Student successfully',
                 'response_code'=>'200'
             ]);
         } catch (\Exception $e){
@@ -64,11 +61,11 @@ class StudentRouteController extends Controller
         }
     }
 
-    public function updateAssignRouteVehicle(Request $request){
-        $data = DriverRoute::where('id',$request->id)->first();
-        $drivers = Driver::where('status',1)->get();
-        $vehicles = Vehicle::where('status',1)->get();
+    public function updateStudentRoute(Request $request){
+        $data = StudentRoute::where('id',$request->id)->first();
+        $student = Student::where('id',$data->student_id)->first();
+        // dd($student);
         $routes = ScRoute::where('status',1)->get();
-        return view('admin.pages.assignRouteVehicle',compact('data','drivers','vehicles','routes'));
+        return view('admin.pages.assignStudentRoute',compact('data','student','routes'));
     }
 }
