@@ -14,7 +14,7 @@ class DriverRouteController extends Controller
 
     public function assignedRouteVehicle(){
         $data = DriverRoute::join('drivers','driver_routes.driver_id','drivers.id')
-        ->join('vehicles','driver_routes.vehicle_no','vehicles.id')
+        ->join('vehicles','driver_routes.vehicle_id','vehicles.id')
         ->join('sc_routes','driver_routes.sc_route_id','sc_routes.id')
         ->get(['driver_routes.*','drivers.name as driver_name','vehicles.vehicle_no','sc_routes.route_name']);
         return view('admin.pages.assignedRouteVehicle',compact('data'));

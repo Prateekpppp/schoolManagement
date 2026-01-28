@@ -2,7 +2,7 @@
             <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                <div class="mobile-sidebar-header d-md-none">
                     <div class="header-logo">
-                        <a href="{{route('staff.index')}}"><img src="{{asset('/').($appdata->logo ?? 'not_found' )}}" alt="logo"></a>
+                        <a href="{{route('staff.index')}}"><img src="{{asset('/').($appdata->logo ?? 'not_found' )}}" width="50px" alt="logo"></a>
                     </div>
                </div>
                 <div class="sidebar-menu-content">

@@ -89,3 +89,7 @@ a {
   background-color: #eeeeee;
   cursor: not-allowed;
 }
+
+#mobile-navbar.collapse {
+  visibility: visible;
+}
