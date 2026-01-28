@@ -85,6 +85,9 @@
                             <div class="item-title">
                                 <h3>Fee Head List</h3>
                             </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.feeHead')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
+                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
