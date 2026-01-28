@@ -114,12 +114,12 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label class="hidden">Section </label>
                                     <select name="section_id" class="select2">
                                         <option class="secAfter" value="">Please Select Section</option>
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
