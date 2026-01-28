@@ -33,11 +33,11 @@
                                 @endif
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Student </label>
-                                    <select name="student_id" class="select2 required" readonly>
+                                    <select name="student_id" class="select2 required">
                                         <option class="" value="">Please Select Student *</option>
-                                        {{-- @foreach($student as $class) --}}
-                                            <option selected value="{{$student->id}}">{{$student->admission_no}} | {{$student->roll_no}} | {{$student->name}} | {{$student->class}}</option>
-                                        {{-- @endforeach --}}
+                                        @foreach($students as $class)
+                                            <option value="{{$class->id}}">{{$class->admission_no}} | {{$class->roll_no}} | {{$class->name}} | {{$class->class}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
