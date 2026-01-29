@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Aadhaar No.</label>
-                                    <input name="aadhaar_no" value="{{$data->aadhaar_no ?? ''}} type="text" placeholder="" class="form-control required">
+                                    <input name="aadhaar_no" value="{{$data->aadhaar_no ?? ''}}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
