@@ -141,7 +141,7 @@ class StaffAttendanceController extends Controller
             $halfday = 0;
             $late = 0;
 
-            if($this->currentUser->status > 2){
+            if($this->currentUser->status > 3){
                 $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
                 
                 $data = $data->get();
