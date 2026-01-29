@@ -66,6 +66,7 @@ class SalaryController extends Controller
                 $fee->staff_id = $request->staff_id;
                 $fee->total_present = $request->total_present;
                 $fee->total_half_day = $request->total_half_day;
+                $fee->total_late = $request->total_late;
                 $fee->total_leave = $request->total_leave;
                 $fee->total_absent = $request->total_absent;
                 $fee->monthly_salary = $request->monthly_salary;
@@ -78,6 +79,7 @@ class SalaryController extends Controller
                 $fee->staff_id = $request->staff_id;
                 $fee->total_present = $request->total_present;
                 $fee->total_half_day = $request->total_half_day;
+                $fee->total_late = $request->total_late;
                 $fee->total_leave = $request->total_leave;
                 $fee->total_absent = $request->total_absent;
                 $fee->monthly_salary = $request->monthly_salary;

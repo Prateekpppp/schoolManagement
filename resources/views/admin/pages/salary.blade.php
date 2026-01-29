@@ -142,6 +142,7 @@
                                         <th>Staff</th>
                                         <th>Total Present</th>
                                         <th>Total Half Day</th>
+                                        <th>Total Late</th>
                                         <th>Total Leave</th>
                                         <th>Total Absent</th>
                                         <th>Monthly Salary</th>
@@ -165,6 +166,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
 
                                         </tr>
                                     @else
@@ -179,6 +181,7 @@
                                             <td>{{$job->total_present}}</td>
                                             <td>{{$job->total_half_day}}</td>
                                             <td>{{$job->total_leave}}</td>
+                                            <td>{{$job->total_late}}</td>
                                             <td>{{$job->total_absent}}</td>
                                             <td>{{$job->monthly_salary}}</td>
                                             <td>{{$job->total_salary}}</td>
