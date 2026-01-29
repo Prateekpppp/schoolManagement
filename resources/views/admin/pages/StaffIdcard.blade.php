@@ -127,42 +127,26 @@
     </div>
 
     <div class="photo">
-        <img src="{{asset('/')}}{{$student->photo ?? '--'}}" alt="Student Photo">
+        <img src="{{asset('/')}}{{$data->photo ?? '--'}}" alt="Student Photo">
     </div>
 
     <div class="details">
         <div class="detail-row">
-            <div class="label">Admission Number</div><div class="value">{{$student->admission_no}}</div>
+            <div class="label">Emp. Code</div><div class="value">{{$data->employ_code}}</div>
         </div>
         <div class="detail-row">
-            <div class="label">Student Name</div><div class="value">{{$student->name}}</div>
+            <div class="label">Name</div><div class="value">{{$data->name}}</div>
         </div>
         <div class="detail-row">
-            <div class="label">Father / Guardian</div><div class="value">{{$student->father_name}}</div>
+            <div class="label">Class</div><div class="value">{{$data->class}}</div>
         </div>
         <div class="detail-row">
-            <div class="label">Class</div><div class="value">{{$student->class}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Section</div><div class="value">{{$student->section}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Roll No.</div><div class="value">{{$student->roll_no}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Phone</div><div class="value">{{$student->phone}}</div>
-        </div>
-    </div>
-
-    <div class="codes">
-        <!-- QR Code -->
-        <div class="qr">
-            <img src="{{asset('/').$student->qrcode}}" alt="QR Code">
+            <div class="label">Phone</div><div class="value">{{$data->phone}}</div>
         </div>
     </div>
 
     <div class="footer">
-            {{$student->address}}
+            {{$data->address}}
     </div>
 </div>
 

@@ -268,6 +268,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::get('/staffDetail/{id}', [StaffController::class,'staffDetail'])->name('admin.pages.staffDetail');
 
+        Route::get('/staffIdcard', [StaffController::class,'staffIdcard'])->name('admin.pages.staffIdcard');
+        
         // Student Module
         Route::get('/students', [StudentController::class,'students'])->name('admin.pages.students');
         

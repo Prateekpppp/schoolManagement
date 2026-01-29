@@ -87,6 +87,12 @@
                                                     <a href="{{asset('/').$student->other_document}}" target="_blank" rel="noopener noreferrer">View</a>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>ID Card:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                    <a href="{{route('admin.pages.staffIdcard',['id'=>$student->id])}}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

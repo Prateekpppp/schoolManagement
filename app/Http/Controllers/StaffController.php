@@ -315,4 +315,13 @@ class StaffController extends Controller
         return view('admin.pages.staffDetail',compact('student'));
     }
     
+    public function staffIdcard(Request $request){
+        $data = Staff::join('classes','staff.class','=','classes.id')
+        ->select('staff.*','classes.class');
+        if($request->id){
+            $data = $data->where('staff.id',$request->id)->first();
+        }
+        return view('admin.pages.staffIdcard',compact('data'));
+    }
+    
 }
