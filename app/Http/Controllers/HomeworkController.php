@@ -15,7 +15,7 @@ class HomeworkController extends Controller
         ->join('sections','homework.section_id','sections.id')
         ->select('homework.*','classes.class','sections.section');
 
-        if($this->currentUser->status > 2){
+        if($this->currentUser->status > 3){
             $data = $data->where('homework.admin_username',$this->currentUser->username);
         }
         $data = $data->where('homework.status',1)->get();
