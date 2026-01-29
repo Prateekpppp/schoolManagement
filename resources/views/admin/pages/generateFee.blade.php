@@ -51,7 +51,7 @@
                                 </div> --}}
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Select Month *</label>
-                                    <select name="month" class="select2 required">
+                                    <select name="month" class="select2 required" required>
                                         <option value="">Please Select Month</option>
                                         <option value="1">Jan</option>
                                         <option value="2">Feb</option>
