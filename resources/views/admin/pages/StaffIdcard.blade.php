@@ -141,7 +141,7 @@
             <div class="label">Phone</div><div class="value">{{$data->phone}}</div>
         </div>
         <div class="detail-row">
-            <div class="label">Class</div><div class="value">{{$data->class}}</div>
+            <div class="label">Class Teacher</div><div class="value">{{$data->class}}</div>
         </div>
         <div class="detail-row">
             <div class="label">Subject</div><div class="value">{{$data->subject}}</div>
