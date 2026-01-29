@@ -111,6 +111,11 @@
                                     <label>Joining Date *</label>
                                     <input name="joining_date" value="{{$data->joining_date ?? ''}}" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Password *</label>
+                                    <input name="password" type="text" placeholder="" class="form-control required">
+                                    <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
