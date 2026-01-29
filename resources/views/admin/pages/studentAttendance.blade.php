@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Select Date *</label>
-                                    <input name="date" value="{{isset($request->date)?$request->date:''}}" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
+                                    <input name="date" value="{{isset($request->date)?$request->date:''}}" type="text" placeholder="Select Date" class="form-control air-datepicker required" required>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>

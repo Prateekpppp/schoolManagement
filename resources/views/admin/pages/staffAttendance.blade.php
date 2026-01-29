@@ -85,11 +85,12 @@
                                             {{-- <td>{{$sn1+=1}}</td> --}}
                                             <td>{{date('d-m-Y',strtotime($job->date))}}</td>
                                             <td>{{$job->date}}</td>
-                                            <td>{{$job->date}}</td>
+                                            <td>{{$job->checkout}}</td>
                                             {{-- <td>{{$job->name}}</td> --}}
                                             <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
+                                                @if($currentLogin->status < 3)
                                                 <div class="flex flex-row gap-2">
                                                     <select data-id="{{$job->id}}" name="status" class="select2">
                                                         <option value="">Change Status</option>
@@ -100,6 +101,9 @@
                                                         <option value="4">Leave</option>
                                                     </select>
                                                 </div>
+                                                @else
+                                                --
+                                                @endif
                                             </td>
                                         </tr>
                                         

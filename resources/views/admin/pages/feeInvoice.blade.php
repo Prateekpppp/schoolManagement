@@ -22,19 +22,59 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Roll ..." class="form-control">
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.feeInvoice')}}">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option {{isset($request->class_id) && $request->class_id == $class->id?'selected':''}} value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Class ..." class="form-control">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button name="search" type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                {{-- <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Select Month *</label>
+                                    <input name="month" value="{{isset($request->month)?$request->month:''}}" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
+                                </div> --}}
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Select Month *</label>
+                                    <select name="month" class="select2 required">
+                                        <option value="">Please Select Month</option>
+                                        <option value="01">Jan</option>
+                                        <option value="02">Feb</option>
+                                        <option value="03">Mar</option>
+                                        <option value="04">Apr</option>
+                                        <option value="05">May</option>
+                                        <option value="06">Jun</option>
+                                        <option value="07">Jul</option>
+                                        <option value="08">Aug</option>
+                                        <option value="09">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="hidden">Invoice Type</label>
+                                    <select name="invoiceType" class="select2">
+                                        <option value="">Please Select Type</option>
+                                        <option value="0">All</option>
+                                        <option value="1">Dues</option>
+                                    </select>
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
                             </div>
                         </form>

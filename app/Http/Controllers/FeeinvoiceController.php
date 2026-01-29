@@ -81,6 +81,22 @@ class FeeinvoiceController extends Controller
         if($request->student_id){
             $fee = $fee->where('students.id',$request->student_id);
         }
+        if($request->name){
+            $fee = $fee->where('students.name',$request->name);
+        }
+        if($request->class_id){
+            $fee = $fee->where('students.class',$request->class_id);
+        }
+        if($request->section_id){
+            $fee = $fee->where('students.section',$request->section_id);
+        }
+        if($request->month){
+            $fee = $fee->where('feeinvoices.month',$request->month);
+        }
+        // if($request->invoiceType){
+        //     $fee = $fee->where('alltransactions.transaction_amount',0);
+        // }
+
         $fee = $fee->get();
 
         // dd($fee);
