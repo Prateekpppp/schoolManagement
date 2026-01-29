@@ -54,8 +54,8 @@ class FeeinvoiceController extends Controller
         $allTransactions = Transaction::select(
             'invoice_id',
             \DB::raw('sum(transaction_amount) as transaction_amount')
-        )->groupBy('invoice_id')->get();
-        dd($allTransactions);
+        )->groupBy('invoice_id');
+
         $fee = \DB::table('feeinvoices')
         ->join('students','students.id','feeinvoices.student_id')
         ->join('classes','students.class','classes.id')
