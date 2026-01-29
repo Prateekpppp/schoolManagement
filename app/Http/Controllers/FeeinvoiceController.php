@@ -74,7 +74,7 @@ class FeeinvoiceController extends Controller
             'students.admission_no',
             'classes.class',
             'sections.section',
-            'alltransactions.total_transaction_amount'
+            'allTransactions.total_transaction_amount'
         )
         ->orderBy('feeinvoices.id','desc');
 
@@ -93,14 +93,14 @@ class FeeinvoiceController extends Controller
         if($request->month){
             $fee = $fee->where('feeinvoices.month',$request->month);
         }
-        // if($request->invoiceType){
-        //     $fee = $fee->where('alltransactions.transaction_amount',0);
-        // }
+        if($request->invoiceType){
+            $fee = $fee->whereNull('allTransactions.total_transaction_amount');
+        }
 
         $fee = $fee->get();
 
         // dd($fee);
-        return view('admin.pages.feeInvoice',compact('fee'));
+        return view('admin.pages.feeInvoice',compact('fee','request'));
     }
 
     public function genrateFeeInvoice(Request $request){
@@ -108,7 +108,8 @@ class FeeinvoiceController extends Controller
         $data = [];
         // $students = explode(',',$request->students);
         $students = $request->students;
-        $month = explode('/',$request->month)[1];
+        // $month = explode('/',$request->month)[1];
+        $month = $request->month;
         // dd($students);
         foreach ($students as $k=>$value) {
 

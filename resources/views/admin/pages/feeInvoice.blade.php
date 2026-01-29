@@ -26,7 +26,7 @@
                             <div class="row gutters-8 items-center">
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Name </label>
-                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
+                                    <input name="name" value="{{isset($request->name)?$request->name:''}}" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Class </label>
@@ -51,26 +51,26 @@
                                     <label class="hidden">Select Month *</label>
                                     <select name="month" class="select2 required">
                                         <option value="">Please Select Month</option>
-                                        <option value="01">Jan</option>
-                                        <option value="02">Feb</option>
-                                        <option value="03">Mar</option>
-                                        <option value="04">Apr</option>
-                                        <option value="05">May</option>
-                                        <option value="06">Jun</option>
-                                        <option value="07">Jul</option>
-                                        <option value="08">Aug</option>
-                                        <option value="09">Sep</option>
-                                        <option value="10">Oct</option>
-                                        <option value="11">Nov</option>
-                                        <option value="12">Dec</option>
+                                        <option {{isset($request->month) && $request->month == '01'?'selected':''}} value="01">Jan</option>
+                                        <option {{isset($request->month) && $request->month == '02'?'selected':''}} value="02">Feb</option>
+                                        <option {{isset($request->month) && $request->month == '03'?'selected':''}} value="03">Mar</option>
+                                        <option {{isset($request->month) && $request->month == '04'?'selected':''}} value="04">Apr</option>
+                                        <option {{isset($request->month) && $request->month == '05'?'selected':''}} value="05">May</option>
+                                        <option {{isset($request->month) && $request->month == '06'?'selected':''}} value="06">Jun</option>
+                                        <option {{isset($request->month) && $request->month == '07'?'selected':''}} value="07">Jul</option>
+                                        <option {{isset($request->month) && $request->month == '08'?'selected':''}} value="08">Aug</option>
+                                        <option {{isset($request->month) && $request->month == '09'?'selected':''}} value="09">Sep</option>
+                                        <option {{isset($request->month) && $request->month == '10'?'selected':''}} value="10">Oct</option>
+                                        <option {{isset($request->month) && $request->month == '11'?'selected':''}} value="11">Nov</option>
+                                        <option {{isset($request->month) && $request->month == '12'?'selected':''}} value="12">Dec</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Invoice Type</label>
                                     <select name="invoiceType" class="select2">
                                         <option value="">Please Select Type</option>
-                                        <option value="0">All</option>
-                                        <option value="1">Dues</option>
+                                        <option {{isset($request->invoiceType) && $request->invoiceType == '0'?'selected':''}} value="0">All</option>
+                                        <option {{isset($request->invoiceType) && $request->invoiceType == '1'?'selected':''}} value="1">Dues</option>
                                     </select>
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
@@ -83,16 +83,13 @@
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
-                                        {{-- <th>Roll NO.</th> --}}
                                         <th>Student</th>
                                         <th>Father's Name</th>
                                         <th>Admission No.</th>
                                         <th>Class</th>
                                         <th>Section</th>
                                         <th>Invoice Date</th>
-                                        {{-- <th>Invoice No.</th> --}}
                                         <th>Month</th>
-                                        {{-- <th>Payable</th> --}}
                                         <th>Paid</th>
                                         <th>Dues</th>
                                         <th>Status</th>
@@ -102,12 +99,23 @@
                                 <tbody class="tdata">
                                     @if(!isset($fee) || count($fee) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($fee as $k=>$job)
                                         <tr>
-                                            <td>{{$k+1}}</td>
+                                            <td>{{$k+=1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->admission_no}}</td>
