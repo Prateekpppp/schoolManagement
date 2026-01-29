@@ -121,7 +121,9 @@
                                                     <a href="{{route('admin.get.updateStatus', ['id' => $job->id,'status' => 2])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Approve</a>
                                                     @endif
                                                     <a href="{{route('principal.pages.updateTask', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    @if($job->status == 1 && $currentUser->status < 3)
                                                     <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Task" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                    @endif
 
                                                 </div>
                                             </td>

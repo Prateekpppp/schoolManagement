@@ -173,14 +173,20 @@
     let data = {};
     let content = '';
     
+    function responseFunc(response){
+        ajaxResponseModal(response);
+        $('.attendance').text(content);
+    }
+
     function success(pos){
         data['location'] =  JSON.stringify(pos.coords);
-        callApi('post',"{{route('staff.post.createAttendance')}}",data,ajaxResponseModal);
+        callApi('post',"{{route('staff.post.createAttendance')}}",data,responseFunc);
         
     }
 
     function error(){
         responseToast('please allow location access','bg-warning');
+        $('.attendance').text(content);
         return false;
     }
 

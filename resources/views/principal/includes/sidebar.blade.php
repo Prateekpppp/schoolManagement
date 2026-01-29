@@ -19,9 +19,9 @@
                         <li class="nav-item">
                             <a href="{{route('principal.pages.homework')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>All Homework</span></a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{route('principal.pages.staffSalary')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Salary Report</span></a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{route('principal.pages.task')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>All Task</span></a>
                         </li>
