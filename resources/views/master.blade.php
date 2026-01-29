@@ -33,8 +33,8 @@
             <button class="close-btn"><i class="fal fa-times"></i></button>
          </div>
          <div class="itoffcanvas__logo">
-            <a href="index.php">
-               <img src="{{asset('storage/').$appdata->logo}}" class="w-50" alt="">
+            <a href="{{route('user.index')}}">
+               <img src="{{asset('/').($appdata->logo ?? 'not_found' )}}" class="w-50" alt="">
             </a>
          </div>
          <div class="itoffcanvas__text">
