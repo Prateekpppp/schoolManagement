@@ -256,7 +256,7 @@ class StaffController extends Controller
                 $request->other_document = $staff->other_document;
             }
             
-            $staff->employ_code = $request->employ_code;
+            // $staff->employ_code = $request->employ_code;
             $staff->name = $request->name;
             $staff->phone = $request->phone;
             $staff->email = $request->email;
