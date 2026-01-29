@@ -115,10 +115,10 @@ class FeeController extends Controller
         }
         $fee = Fee::where('status',1)->get();
         
-        $searchDate = $request->month;
-        $month = explode('/',$request->month)[1];
+        // $searchDate = $request->month;
+        // $month = explode('/',$request->month)[1];
         // $month = date('M', strtotime($request->month));
-        // $month = $request->month;
+        $month = $request->month;
 // $year  = date('Y', strtotime($request->month));
 
         $students = Student::join('classes','students.class','=','classes.id')
