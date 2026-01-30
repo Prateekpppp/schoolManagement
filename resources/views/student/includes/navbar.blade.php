@@ -43,11 +43,10 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">{{$appdata->admin_username ?? 'Admin'}}</h5>
-                                <span>{{isset($appdata->status) ? ($appdata->status ? 'Admin' : 'User') : ''}}</span>
+                                <h5 class="item-title">{{$currentUser->name ?? 'Admin'}}</h5>
                             </div>
                             <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
+                                <img src="{{$currentUser->status > 2 ? asset('/').$currentLogin->photo : 'img/figure/admin.jpg'}}" alt="Admin" width="40px">
                             </div>
                         </a>
                         {{-- @if($sessions) --}}

@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('student.master')
 
 @section('body')
     <!-- Preloader Start Here -->
@@ -7,23 +7,23 @@
     
     <div id="wrapper" class="wrapper bg-ash">
         
-        @include('admin.includes.navbar')
+        @include('student.includes.navbar')
         
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            @include('admin.includes.sidebar')
+            @include('student.includes.sidebar')
             <!-- Sidebar Area End Here -->
             
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
-                @include('admin.includes.breadcrumb')
+                @include('student.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 
                     @yield('inner_body')
                     
                 <!-- Footer Area Start Here -->
-                @include('admin.includes.footer')
+                @include('student.includes.footer')
                 <!-- Footer Area End Here -->
             </div>
         </div>

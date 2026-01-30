@@ -1,4 +1,4 @@
-@extends('admin.inner_master')
+@extends('student.inner_master')
 
 @section('inner_body')
     

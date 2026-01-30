@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('admin.includes.admin_head')
+    @include('staff.includes.admin_head')
 
     @yield('admin_head')
     <script src="{{ asset('js') }}/modernizr-3.6.0.min.js"></script>
