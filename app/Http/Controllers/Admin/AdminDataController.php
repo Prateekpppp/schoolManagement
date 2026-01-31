@@ -78,6 +78,7 @@ class AdminDataController extends Controller
        if($user->status == 1 || $user->status == 2){
            return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
         } elseif ($user->status == 5){
+            return redirect()->route('staff.pages.studentDetail',$this->currentLogin->id);
             $present = StudentAttendance::where('student_id',$this->currentLogin->id)
             ->where('status',1)->count();
 
