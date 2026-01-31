@@ -31,7 +31,7 @@
                                 <input type="hidden" name="id" value="{{ isset($data) ? $data->id : '' }}">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Salary Date *</label>
-                                    <input name="salary_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
+                                    <input name="salary_date" value="{{ isset($data) ? $data->salary_date : '' }}" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Staff </label>
