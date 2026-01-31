@@ -24,8 +24,10 @@ class StudentController extends Controller
         $students = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',1)
-        ->orderBy('students.id','desc')
-        ->get(['students.*','classes.class','sections.section']);
+        ->orderBy('students.id','desc');
+        // dd(session('session_id'));
+        $students = $students->where('students.session_id',session('session_id'));
+        $students = $students->get(['students.*','classes.class','sections.section']);
         // dd($students);
         // $students = Student::where('status',1)->get();
         $fees = Fee::all();
