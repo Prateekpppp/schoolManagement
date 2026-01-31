@@ -30,6 +30,10 @@
                             <div class="row">
                                 <input type="hidden" name="id" value="{{ isset($data) ? $data->id : '' }}">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Salary Date *</label>
+                                    <input name="salary_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Staff </label>
                                     <select name="staff_id" class="select2 required">
                                         <option value="">Please Select Staff *</option>
@@ -45,6 +49,10 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Half Day *</label>
                                     <input name="total_half_day" value="{{ isset($data) ? $data->total_half_day : '' }}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Total Late *</label>
+                                    <input name="total_late" value="{{ isset($data) ? $data->total_late : '' }}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Total Leave *</label>
