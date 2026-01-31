@@ -90,7 +90,7 @@
                                             <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
-                                                @if($currentLogin->status < 3)
+                                                @if($currentUser->status < 3)
                                                 <div class="flex flex-row gap-2">
                                                     <select data-id="{{$job->id}}" name="status" class="select2">
                                                         <option value="">Change Status</option>
