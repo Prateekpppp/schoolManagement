@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\StaffAttendance;
@@ -182,6 +183,26 @@ class StaffAttendanceController extends Controller
                 'response_code'=> '500'
             ]);
         }
+    }
+
+    public function absent(Request $request){
+        $staff = Staff::whereIn('staff.status',[3,4]);
+        $present = StaffAttendance::whereDate('date',Carbon::today()->format('Y-m-d'));
+
+        $staff = $staff->leftJoinSub($present,'present',function($join){
+            $join->on('present.staff_id','staff.id');
+        });
+        $staff = $staff->whereNull('date')->get(['staff.id']);
+
+        // dd($staff);
+        foreach($staff as $data){
+            $item = new StaffAttendance();
+            $item->date = now();
+            $item->staff_id = $data->id;
+            $item->status = 0;
+            $item->save();
+        }
+        
     }
 
     public function getAttendanceData(Request $request){

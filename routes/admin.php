@@ -74,6 +74,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::post('/changeStatus', [StaffAttendanceController::class,'changeStatus'])->name('admin.post.changeStatus')->withoutMiddleware([VerifyCsrfToken::class]);
         
+        Route::get('/absent', [StaffAttendanceController::class,'absent'])->name('admin.post.absent');
+        
         Route::post('/getAttendanceData', [StaffAttendanceController::class,'getAttendanceData'])->name('admin.post.getAttendanceData')->withoutMiddleware([VerifyCsrfToken::class]);
 
         // Task Module
