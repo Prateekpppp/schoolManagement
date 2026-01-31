@@ -74,10 +74,6 @@
                                     <label>Total Salary *</label>
                                     <input name="total_salary" value="{{ isset($data) ? $data->total_salary : '' }}" type="text" placeholder="" class="form-control required">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Salary Date *</label>
-                                    <input name="salary_date" value="{{ isset($data) ? $data->salary_date : '' }}" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
-                                </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
                                         class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
