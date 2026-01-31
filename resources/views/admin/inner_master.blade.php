@@ -7,7 +7,30 @@
     
     <div id="wrapper" class="wrapper bg-ash">
         
-        @include('admin.includes.navbar')
+            @if($currentUser->status == 1 || $currentUser->status == 2)
+            {{-- 1 = main_admin, 2 = admin --}}
+            <!-- Sidebar Area Start Here -->
+            @include('admin.includes.navbar')
+            <!-- Sidebar Area End Here -->
+
+            @elseif($currentUser->status == 3)
+            {{-- 3 = principal --}}
+            <!-- Sidebar Area Start Here -->
+            @include('principal.includes.navbar')
+            <!-- Sidebar Area End Here -->
+
+            @elseif($currentUser->status == 4)
+            {{-- 4 = staff --}}
+            <!-- Sidebar Area Start Here -->
+            @include('staff.includes.navbar')
+            <!-- Sidebar Area End Here -->
+
+            @elseif($currentUser->status == 5)
+            {{-- 5 = parent --}}
+            <!-- Sidebar Area Start Here -->
+            @include('student.includes.navbar')
+            <!-- Sidebar Area End Here -->
+            @endif
         
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
