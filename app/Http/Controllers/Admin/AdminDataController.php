@@ -87,6 +87,7 @@ class AdminDataController extends Controller
             return view('student.pages.index',compact('classes','sections','students','present','absent'));
                 
         }else{
+            redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
             $present = StaffAttendance::where('staff_id',$this->currentLogin->id)
             ->where('status',1)->count();
 
