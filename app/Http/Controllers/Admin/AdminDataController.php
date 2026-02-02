@@ -77,7 +77,12 @@ class AdminDataController extends Controller
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
        if($user->status == 1 || $user->status == 2){
            return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
-        } elseif ($user->status == 5){
+        } elseif($user->status < 5){
+            return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
+
+        }
+        
+        if ($user->status == 5){
             return redirect()->route('staff.pages.studentDetail',$this->currentLogin->id);
             $present = StudentAttendance::where('student_id',$this->currentLogin->id)
             ->where('status',1)->count();
@@ -87,32 +92,15 @@ class AdminDataController extends Controller
 
             return view('student.pages.index',compact('classes','sections','students','present','absent'));
                 
-        }else{
-            $present = StaffAttendance::where('staff_id',$this->currentLogin->id)
-            ->where('status',1)->count();
+        }
 
-            $absent = StaffAttendance::where('staff_id',$this->currentLogin->id)
-            ->where('status',0)->count();
-
-            if ($user->status == 3) {
-                return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
-                return view('principal.pages.index',compact('classes','sections','present','absent'));
-            } elseif ($user->status == 4) {
-                return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
-                return view('staff.pages.index',compact('classes','sections','students','present','absent'));
-                
-            } elseif ($user->status == 5) {
-                return redirect()->route('student.pages.studentDetail',$this->currentLogin->id);
-                return view('staff.pages.index',compact('classes','sections','students','present','absent'));
-                
-            } elseif ($user->status == 6) {
-                return view('staff.pages.index',compact('classes','sections','students','present','absent'));
-                
-            } elseif ($user->status == 7) {
-                return redirect()->route('admin.pages.feeHead');
-                
-            }
-
+        if ($user->status == 6) {
+            return view('driver.pages.index',compact('classes','sections','students','present','absent'));
+            
+        }
+        if ($user->status == 7) {
+            return redirect()->route('admin.pages.feeHead');
+            
         }
         
         
