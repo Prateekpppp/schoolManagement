@@ -45,9 +45,6 @@
                             <div class="admin-title">
                                 <h5 class="item-title">{{$currentUser->name ?? 'Admin'}}</h5>
                             </div>
-                            <div class="admin-img">
-                                <img src="{{$currentUser->status > 2 ? asset('/').$currentLogin->photo : 'img/figure/admin.jpg'}}" alt="Admin" width="40px">
-                            </div>
                         </a>
                         {{-- @if($sessions) --}}
                         <div class="dropdown-menu dropdown-menu-right">
@@ -56,7 +53,6 @@
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a href="{{route('staff.pages.staffDetail',$currentLogin->id)}}"><i class="flaticon-user"></i>My Profile</a></li>
                                     <li><a href="{{route('admin.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
