@@ -70,12 +70,12 @@
             @elseif($currentUser->status == 6)
             {{-- 6 = driver --}}
             <!-- Sidebar Area Start Here -->
-            @include('driver.includes.navbar')
+            @include('driver.includes.sidebar')
             <!-- Sidebar Area End Here -->
             @elseif($currentUser->status == 7)
             {{-- 7 = account --}}
             <!-- Sidebar Area Start Here -->
-            @include('account.includes.navbar')
+            @include('account.includes.sidebar')
             <!-- Sidebar Area End Here -->
             @endif
 
