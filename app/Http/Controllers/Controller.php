@@ -24,6 +24,8 @@ abstract class Controller
                 $this->currentLogin = Staff::where('phone',$this->currentUser->username)->first();
             }elseif($this->currentUser->status == 5){
                 $this->currentLogin = Student::where('father_phone',$this->currentUser->username)->first();
+            } else{
+                $this->currentLogin->id = null;
             }
         }
     }
