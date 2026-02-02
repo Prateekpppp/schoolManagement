@@ -155,7 +155,7 @@ class StaffAttendanceController extends Controller
             }
             
             if(!$request->name){
-                $data = $data->where('staff.name','like','%'.$this->currentLogin->id.'%');
+                $data = $data->where('staff.name','like','%'.$request->name.'%');
             }
 
             $data = $data->get();
