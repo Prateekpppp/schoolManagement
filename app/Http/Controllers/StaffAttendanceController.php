@@ -154,6 +154,10 @@ class StaffAttendanceController extends Controller
                 return view('staff.pages.staffAttendance',compact('data','present','absent','halfday','late'));
             }
             
+            if(!$request->name){
+                $data = $data->where('staff.name','like','%'.$this->currentLogin->id.'%');
+            }
+
             $data = $data->get();
 
             

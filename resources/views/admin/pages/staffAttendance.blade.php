@@ -25,10 +25,10 @@
                         </div>
                         <form class="mg-b-20" type='GET' action="{{route('admin.pages.staffAttendance')}}">
                             <div class="row gutters-8 items-center">
-                                {{-- <div class="col-lg-3 col-12 form-group">
+                                <div class="col-lg-3 col-12 form-group">
                                     <label class="hidden">Name </label>
                                     <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
-                                </div> --}}
+                                </div>
                                 <div class="col-lg-3 col-12 form-group">
                                     <label class="hidden">Month </label>
                                     <select name="month" class="select2">
