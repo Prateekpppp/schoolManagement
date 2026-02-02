@@ -1,10 +1,10 @@
 
                 <div class="breadcrumbs-area">
-                    <h3>Driver Dashboard</h3>
+                    <h3>Staff Dashboard</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{route('staff.index')}}">Home</a>
                         </li>
-                        <li>Driver</li>
+                        <li>Staff</li>
                     </ul>
                 </div>

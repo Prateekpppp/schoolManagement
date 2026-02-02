@@ -91,11 +91,11 @@
                   </div>
                   <div class="col-xl-3 col-6">
                      <div class="it-header-2-right d-flex align-items-center justify-content-end">
-                        <!-- <div class="it-header-2-icon">
-                           <a href="cart.php">
-                              <i class="fa-regular fa-cart-shopping"></i>
+                        <div class="it-header-2-icon">
+                           <a href="{{route('admin.login')}}">
+                              <i class="fa fa-sign-in"></i>
                            </a>
-                        </div> -->
+                        </div>
                         <div class="it-header-2-button d-none d-lg-block">
                            <a class="it-btn-white yellow-bg" href="{{route('user.contact')}}">
                               <span>

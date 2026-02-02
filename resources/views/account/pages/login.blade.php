@@ -5,7 +5,6 @@
     <div class="login-page-wrap">
         <div class="login-page-content">
             <div class="login-box">
-                <h3 class="text-center">{{$appdata->title}}</h3>
                 <div class="item-logo flex justify-center">
                     <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
                 </div>

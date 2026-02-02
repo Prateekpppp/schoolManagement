@@ -88,7 +88,6 @@ class AdminDataController extends Controller
             return view('student.pages.index',compact('classes','sections','students','present','absent'));
                 
         }else{
-            return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
             $present = StaffAttendance::where('staff_id',$this->currentLogin->id)
             ->where('status',1)->count();
 
@@ -96,9 +95,21 @@ class AdminDataController extends Controller
             ->where('status',0)->count();
 
             if ($user->status == 3) {
+                return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
                 return view('principal.pages.index',compact('classes','sections','present','absent'));
             } elseif ($user->status == 4) {
+                return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
                 return view('staff.pages.index',compact('classes','sections','students','present','absent'));
+                
+            } elseif ($user->status == 5) {
+                return redirect()->route('student.pages.studentDetail',$this->currentLogin->id);
+                return view('staff.pages.index',compact('classes','sections','students','present','absent'));
+                
+            } elseif ($user->status == 6) {
+                return view('staff.pages.index',compact('classes','sections','students','present','absent'));
+                
+            } elseif ($user->status == 7) {
+                return redirect()->route('admin.pages.feeHead');
                 
             }
 

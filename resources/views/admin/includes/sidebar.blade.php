@@ -52,6 +52,9 @@
                                     <a href="{{route('admin.pages.exam')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Exam</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{route('admin.pages.filterGenerateAdmitCard')}}" class="nav-link"><i class="fas fa-angle-right"></i>Admit Card</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('admin.pages.task')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Task</a>
                                 </li>
                             </ul>

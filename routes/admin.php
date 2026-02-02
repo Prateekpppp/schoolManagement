@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDataController;
+use App\Http\Controllers\AdmitcardController;
 use App\Http\Controllers\AppdataController;
 use App\Http\Controllers\DatasessionController;
 use App\Http\Controllers\JobController;
@@ -372,6 +373,10 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createExam', [ExamController::class,'createExam'])->name('admin.post.createExam')->withoutMiddleware([VerifyCsrfToken::class]);        
 
         Route::get('/updateExam', [ExamController::class,'updateExam'])->name('admin.pages.updateExam');
+        
+        Route::get('/filterGenerateAdmitCard', [AdmitcardController::class,'filterGenerateAdmitCard'])->name('admin.pages.filterGenerateAdmitCard');
+        
+        Route::post('/genrateAdmitCard', [AdmitcardController::class,'genrateAdmitCard'])->name('admin.post.genrateAdmitCard')->withoutMiddleware([VerifyCsrfToken::class]);
         
         // Job Module
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');

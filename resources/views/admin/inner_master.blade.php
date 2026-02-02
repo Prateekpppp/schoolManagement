@@ -30,6 +30,16 @@
             <!-- Sidebar Area Start Here -->
             @include('student.includes.navbar')
             <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 6)
+            {{-- 5 = parent --}}
+            <!-- Sidebar Area Start Here -->
+            @include('driver.includes.navbar')
+            <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 7)
+            {{-- 5 = parent --}}
+            <!-- Sidebar Area Start Here -->
+            @include('account.includes.navbar')
+            <!-- Sidebar Area End Here -->
             @endif
         
         <!-- Page Area Start Here -->
@@ -52,11 +62,20 @@
             <!-- Sidebar Area Start Here -->
             @include('staff.includes.sidebar')
             <!-- Sidebar Area End Here -->
-
             @elseif($currentUser->status == 5)
             {{-- 5 = parent --}}
             <!-- Sidebar Area Start Here -->
             @include('student.includes.sidebar')
+            <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 6)
+            {{-- 6 = driver --}}
+            <!-- Sidebar Area Start Here -->
+            @include('driver.includes.navbar')
+            <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 7)
+            {{-- 7 = account --}}
+            <!-- Sidebar Area Start Here -->
+            @include('account.includes.navbar')
             <!-- Sidebar Area End Here -->
             @endif
 
@@ -86,6 +105,16 @@
                 {{-- 5 = parent --}}
                 <!-- Breadcubs Area Start Here -->
                 @include('student.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+                @elseif($currentUser->status == 6)
+                {{-- 6 = driver --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('driver.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+                @elseif($currentUser->status == 7)
+                {{-- 7 = account --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('account.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 @endif
                 
