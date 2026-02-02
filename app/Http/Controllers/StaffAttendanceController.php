@@ -127,15 +127,14 @@ class StaffAttendanceController extends Controller
 
     public function read(Request $request){
         try{
+            if(!$request->month){
+                $request->month = Carbon::now()->month;
+            }
 
             $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
             // ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
-            ->select('staff.name','staff_attendances.*');
-            
-            if(!$request->month){
-                $request->month = Carbon::now()->month;
-                $data = $data->whereMonth('date',$request->month);;
-            }
+            ->select('staff.name','staff_attendances.*')
+            ->whereMonth('date',$request->month);
             
 
             $present = 0;
