@@ -58,9 +58,9 @@
                                     <tr>
                                         {{-- <th>S.NO.</th> --}}
                                         <th>Date</th>
+                                        <th>Staff</th>
                                         <th>Check In</th>
                                         <th>Check Out</th>
-                                        {{-- <th>Staff</th> --}}
                                         <th>Remark</th>
                                         {{-- <th>Action</th> --}}
                                         <th>Status</th>
@@ -70,8 +70,9 @@
                                     @if(!isset($data) || count($data) == 0)
                                         <tr>
                                             <td></td>
-                                            {{-- <td></td> --}}
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
 
@@ -84,6 +85,7 @@
                                         <tr>
                                             {{-- <td>{{$sn1+=1}}</td> --}}
                                             <td>{{date('d-m-Y',strtotime($job->date))}}</td>
+                                            <td>{{$job->name}}</td>
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->checkout}}</td>
                                             {{-- <td>{{$job->name}}</td> --}}
