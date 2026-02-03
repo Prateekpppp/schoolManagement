@@ -87,19 +87,17 @@ class AdmitcardController extends Controller
     }
 
     public function admitCard(Request $request){
-        $students = Student::join('classes','students.class','=','classes.id')
-        ->join('sections','students.section','=','sections.id')
-        ->where('students.status',1)
-        ->where('students.session_id',session('session_id'))
-        ->select('students.*','admitcards.id as card_id');
+        $students = Student::where('students.status',1)
+        ->where('students.session_id',session('session_id'));
 
-        $data = Admitcard::joinSub($students,'students',function($join){
-            $join->on('admitcards.student_id','students.id');
-        })
-        ->join('classes','students.class','=','classes.id')
-        ->join('sections','students.section','=','sections.id')
-        ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
+        // $data = Admitcard::joinSub($students,'students',function($join){
+        //     $join->on('admitcards.student_id','students.id');
+        // })
+        // ->join('classes','students.class','=','classes.id')
+        // ->join('sections','students.section','=','sections.id')
+        // ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
 
+        $data = $students->whereHas('admitcards');
         $data = $data->get();
 
         return view('admin.pages.admitCard',compact('data','request'));
