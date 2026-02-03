@@ -154,6 +154,8 @@
         <tr>
             <th>SL</th>
             <th>Date</th>
+            <th>Exam Time</th>
+            <th>Exam Hours</th>
             <th>Exam Code</th>
             <th>Subject</th>
         </tr>
@@ -162,6 +164,8 @@
         <tr>
             <td>{{$k+1}}</td>
             <td>{{$exam->date}}</td>
+            <td>{{$exam->time}}</td>
+            <td>{{$exam->exam_hours}}</td>
             <td>{{$exam->exam_code}}</td>
             <td>{{$exam->subject}}</td>
         </tr>

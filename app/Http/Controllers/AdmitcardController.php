@@ -117,7 +117,7 @@ class AdmitcardController extends Controller
         })
         ->join('exams','admitcards.exam_code','exams.exam_code')
         ->join('subjects','subjects.id','=','exams.subject')
-        ->select('students.*','exams.date','admitcards.id as card_id','admitcards.exam_code','subjects.subject');
+        ->select('students.*','exams.date','exams.time','exams.exam_hours','admitcards.id as card_id','admitcards.exam_code','subjects.subject');
 
         $data = $data->get();
 
