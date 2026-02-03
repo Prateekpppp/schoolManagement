@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Vehicle </label>
-                                    <select name="vehicle_id" class="select2 required">
+                                    <select name="vehicle_no" class="select2 required">
                                         <option value="">Please Select Vehicle *</option>
                                         @foreach($vehicles as $vehicle)
                                             <option {{isset($data) && $data->vehicle_no == $vehicle->id ? 'selected' : ''}} value="{{$vehicle->id}}">{{$vehicle->vehicle_no}}</option>
