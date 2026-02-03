@@ -7,7 +7,9 @@ use App\Models\Fee;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\Feeinvoice;
+use App\Models\ScRoute;
 use App\Models\StudentFee;
+use App\Models\StudentRoute;
 use App\Models\Transaction;
 
 
@@ -157,22 +159,35 @@ class FeeinvoiceController extends Controller
             
             $monthlyFee = $monthlyFee ?? 0;
 
+            // Transport Fee Module Part
+            $transportFee = StudentRoute::where('student_id',$value)->first();
+            $transportFee = ScRoute::where('id',$transportFee->sc_route_id)->first();
+
+            if($transportFee){
+                $transportFee = $transportFee->route_fare;
+            } else{
+                $transportFee = 0;
+            }
+
+            // Transport Fee Module Part
+
             // dd($oneTimeFee,$annualFee,$monthlyFee );
-            $totalFee = $oneTimeFee + $monthlyFee + $annualFee;
+            $totalFee = $oneTimeFee + $monthlyFee + $annualFee + $transportFee;
 
             // dd($totalFee);
             
             // dd(date('M Y',$studentFee->created_at)==now()->format('M Y'));
-
+            // dd($request->month);
             $feeInvoice = new Feeinvoice();
             $feeInvoice->feeinvoice_no = 'INV_'.substr(time(),-6).rand(000,111);
             $feeInvoice->student_id = $value;
             // $feeInvoice->class_id = $request->class_id;
-            $feeInvoice->month = $month;
+            // $feeInvoice->month = $month;
+            $feeInvoice->month = $request->month;
             // $feeInvoice->year = date('Y');
             $feeInvoice->total_amount = $totalFee;
             // $feeInvoice->payable = $totalFee;
-            $feeInvoice->invoice_date = $request->month;
+            $feeInvoice->invoice_date = now();
             $feeInvoice->status = 1;
             $feeInvoice->session_id = session('session_id');
             $feeInvoice->save();

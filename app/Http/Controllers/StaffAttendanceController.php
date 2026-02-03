@@ -133,9 +133,14 @@ class StaffAttendanceController extends Controller
 
             $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
             // ->leftJoin('salaries','salaries.staff_id','staff_attendances.staff_id')
-            ->select('staff.name','staff_attendances.*')
-            ->whereMonth('date',$request->month);
+            ->select('staff.name','staff_attendances.*');
             
+            if($request->date){
+                $request->date = Carbon::parse($request->date);
+                $data = $data->whereDate('date',$request->date);
+            } else{
+                $data = $data->whereMonth('date',$request->month);
+            }
 
             $present = 0;
             $absent = 0;
@@ -143,7 +148,7 @@ class StaffAttendanceController extends Controller
             $late = 0;
 
             if($this->currentUser->status > 3){
-                $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id);
+                $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id)->orderBy('date','desc');
                 
                 $data = $data->get();
                 
@@ -155,12 +160,11 @@ class StaffAttendanceController extends Controller
             }
             
             if($request->name){
-                $data = $data->where('staff.name','like','%'.$request->name.'%');
+                $data = $data->where('staff.name','like','%'.$request->name.'%')->orderBy('date','desc');
             }
 
             $data = $data->get();
 
-            
             return view('admin.pages.staffAttendance',compact('data','present','absent','late'));
             
         } catch (\Exception $e){

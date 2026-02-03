@@ -207,7 +207,7 @@
 
     $('.generateFee').on('click',function(e){
         
-        let month = $('input[name=month]').val();
+        let month = $('select[name=month]').val();
         $(this).addClass('disabled');
         if(data.length == 0){
             responseToast('Please Select Student', 'bg-warning');

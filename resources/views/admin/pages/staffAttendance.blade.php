@@ -29,6 +29,10 @@
                                     <label class="hidden">Name </label>
                                     <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
                                 </div>
+                                <div class="col-xl-3 col-12 form-group">
+                                    {{-- <label>Date *</label> --}}
+                                    <input name="date" value="" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
+                                </div>
                                 <div class="col-lg-3 col-12 form-group">
                                     <label class="hidden">Month </label>
                                     <select name="month" class="select2">
@@ -72,7 +76,6 @@
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
 
