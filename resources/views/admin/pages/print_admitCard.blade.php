@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Admit Card</title>
-
+<link rel="stylesheet" href="{{ asset('css') }}/tailwind.min.css">
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -172,8 +172,18 @@
         <tr>
             <td>Class Teacher Sign</td>
             <td>Exam Controller Sign</td>
-            <td>Principal Sign</td>
-            <td>School Seal</td>
+            <td>
+                <div class="flex flex-col justify-center items-center">
+                    <img src="{{asset('/').$appdata->signature}}" alt="logo" width="150px">
+                    <span>Principal Sign</span>
+                </div>
+            </td>
+            <td>
+                <div class="flex flex-col justify-center items-center">
+                    <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px">
+                    <span>School Seal</span>
+                </div>
+            </td>
         </tr>
     </table>
 
