@@ -12,7 +12,7 @@
                                 <h3>All Students Data</h3>
                             </div>
                             <div class="">
-                                <a href="{{route('admin.pages.exam')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View Exams</a>
+                                <a href="{{route('admin.pages.admitCard')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Admitcards</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>

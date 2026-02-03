@@ -1,170 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>School ID Card</title>
+@extends('admin.inner_master')
 
-<style>
-    body {
-        background: #eee;
-        font-family: Arial, sans-serif;
+@section('inner_body')
+
+                <!-- Student Table Area Start Here -->
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students Data</h3>
+                            </div>
+                            <div class="">
+                                <a href="{{route('admin.pages.filterGenerateAdmitCard')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Generate</a>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.studentFilter')}}">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <label class="hidden">Name </label>
+                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Section </label>
+                                    <select name="section_id" class="select2">
+                                        <option class="secAfter" value="">Please Select Section</option>
+                                    </select>
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        {{-- <th>Religion</th> --}}
+                                        {{-- <th>Blood Group</th> --}}
+                                        {{-- <th>Caste</th> --}}
+                                        {{-- <th>State</th> --}}
+                                        {{-- <th>Address</th> --}}
+                                        <th>S. No.</th>
+                                        <th>Photo</th>
+                                        <th>Enrollment No.</th>
+                                        <th>Admission No.</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Class</th>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tdata">
+                                    @if(!isset($data) || count($data) == 0)
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    @else
+                                    @foreach ($data as $k=>$job)
+                                        <tr>
+                                            <td>{{$k+=1}}</td>
+                                            <td>
+                                                <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
+                                            </td>
+                                            <td>{{$job->enrollment_no}}</td>
+                                            <td>{{$job->admission_no}}</td>
+                                            <td>{{$job->name}}</td>
+                                            <td>{{$job->phone}}</td>
+                                            <td>{{$job->class}}</td>
+                                            <td>{{$job->section}}</td>
+                                            <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
+                                            <td>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
+                                                <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                            </td>
+                                        </tr>
+                                        
+                                    @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Student Table Area End Here -->
+@endsection
+
+
+@section('inner_js')
+
+<script>
+
+    function appendData(response){
+        let rows = '';
+        console.log(response);
+        
+        response.data.forEach(function(job){
+            rows += `<tr>
+                <td>${job.photo}</td>
+                <td>${job.name}</td>
+                <td>${job.gender ? 'Male' : 'Female'}</td>
+                <td>${job.class}</td>
+                <td>${job.section}</td>
+                <td>${job.parent}</td>
+                <td>${job.address}</td>
+                <td>${job.dob}</td>
+                <td>${job.phone}</td>
+                <td>${job.email}</td>
+                <td>${job.status ? 'Active' : 'Inactive'}</td>
+                <td>${job.created_at}</td>
+            </tr>`;
+        });  
+        $('.tdata').html(rows);
     }
 
-    .container {
-        width: 700px;
-        margin: 40px auto;
-        text-align: center;
-    }
+    $(document).ready(function(){
+        
+        // callAjaxFormData('get',"{{route('admin.get.allStudents')}}",null,appendData);
+    });
+</script>
 
-    .print-btn {
-        background: #28a745;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 15px;
-    }
-    .id-card {
-        width: 320px;
-        background: #fff;
-        margin: 40px auto;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    }
-
-    .header {
-        background: #f57c00;
-        color: #fff;
-        text-align: center;
-        padding: 25px 10px 65px;
-        /* clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); */
-    }
-
-    .header h2 {
-        margin: 0;
-        font-size: 18px;
-        letter-spacing: 0.5px;
-    }
-
-    .header p {
-        margin: 5px 0 0;
-        font-size: 12px;
-    }
-
-    .photo {
-        width: 95px;
-        height: 95px;
-        border-radius: 50%;
-        border: 5px solid #f57c00;
-        overflow: hidden;
-        margin: -48px auto 10px;
-        background: #fff;
-    }
-
-    .photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .details {
-        padding: 10px 20px;
-        font-size: 13px;
-        text-align: start;
-    }
-
-    .detail-row {
-        display: grid;
-        grid-template-columns: 130px 1fr;
-        margin-bottom: 6px;
-    }
-
-    .detail-row .label {
-        font-weight: bold;
-        color: #333;
-    }
-
-    .detail-row .value {
-        color: #555;
-    }
-
-    .codes {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 20px 15px;
-    }
-
-    .qr img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .barcode svg {
-        width: 150px;
-        height: 40px;
-    }
-
-    .footer {
-        background: #f57c00;
-        color: #fff;
-        text-align: center;
-        font-size: 12px;
-        padding: 10px;
-    }
-</style>
-</head>
-<body>
-
-<div class="container">
-    <button class="print-btn" onclick="window.print()">Print ID Cards</button>
-<div class="id-card">
-    <div class="header">
-            <h2>{{$appdata->title}}</h2>
-    </div>
-
-    <div class="photo">
-        <img src="{{asset('/')}}{{$student->photo ?? '--'}}" alt="Student Photo">
-    </div>
-
-    <div class="details">
-        <div class="detail-row">
-            <div class="label">Admission Number</div><div class="value">{{$student->admission_no}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Student Name</div><div class="value">{{$student->name}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Father / Guardian</div><div class="value">{{$student->father_name}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Class</div><div class="value">{{$student->class}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Section</div><div class="value">{{$student->section}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Roll No.</div><div class="value">{{$student->roll_no}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Phone</div><div class="value">{{$student->phone}}</div>
-        </div>
-    </div>
-
-    <div class="codes">
-        <!-- QR Code -->
-        <div class="qr">
-            <img src="{{asset('/').$student->qrcode}}" alt="QR Code">
-        </div>
-    </div>
-
-    <div class="footer">
-            {{$student->address}}
-    </div>
-</div>
-
-</body>
-</html>
+@endsection

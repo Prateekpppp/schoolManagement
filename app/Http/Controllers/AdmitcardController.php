@@ -27,7 +27,7 @@ class AdmitcardController extends Controller
                     ->from('admitcards')
                     ->whereColumn('admitcards.student_id', 'students.id')
                     ->where('admitcards.exam_code', $exam_code);
-            })->where('students.status',1);
+            })->where('students.status',1)->where('students.session_id',session('session_id'));
 
         if($request->name){
             $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
@@ -82,6 +82,15 @@ class AdmitcardController extends Controller
     }
 
     public function admitCard(Request $request){
-        
+        $students = Student::where('status',1)->where('session_id',session('session_id'));
+
+        $data = Admitcard::joinSub($students,'students',function($join){
+            $join->on('admitcards.student_id','students.id');
+        })
+        ->select('students.*','admitcards.id as card_id');
+
+        $data = $data->get();
+
+        return view('admin.pages.admitCard',compact('data','request'));
     }
 }

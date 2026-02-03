@@ -374,9 +374,12 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         Route::get('/updateExam', [ExamController::class,'updateExam'])->name('admin.pages.updateExam');
         
+        // Admitcard Module
         Route::get('/filterGenerateAdmitCard', [AdmitcardController::class,'filterGenerateAdmitCard'])->name('admin.pages.filterGenerateAdmitCard');
         
         Route::post('/genrateAdmitCard', [AdmitcardController::class,'genrateAdmitCard'])->name('admin.post.genrateAdmitCard')->withoutMiddleware([VerifyCsrfToken::class]);
+        
+        Route::get('/admitCard', [AdmitcardController::class,'admitCard'])->name('admin.pages.admitCard');
         
         // Job Module
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');
