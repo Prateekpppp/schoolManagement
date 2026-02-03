@@ -123,6 +123,7 @@
     <button class="print-btn" onclick="window.print()">Print ID Cards</button>
 <div class="id-card">
     <div class="header">
+        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="70px">
             <h2>{{$appdata->title}}</h2>
     </div>
 
