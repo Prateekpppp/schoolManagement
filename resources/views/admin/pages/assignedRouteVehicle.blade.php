@@ -44,6 +44,7 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Route Name</th>
+                                        <th>Route Fare</th>
                                         <th>Driver</th>
                                         <th>Vehicle No.</th>
                                         <th>Action</th>
@@ -63,6 +64,7 @@
                                         <tr>
                                             <td>{{$key+1}}</td>
                                             <td>{{$job->route_name}}</td>
+                                            <td>{{$job->route_fare}}</td>
                                             <td>{{$job->driver_name}}</td>
                                             <td>{{$job->vehicle_no}}</td>
                                             <td>

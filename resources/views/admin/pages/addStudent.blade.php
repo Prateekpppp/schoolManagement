@@ -253,6 +253,32 @@
         </div>
 
         <div class="card height-auto">
+            <div class="card-body !bg-red-200">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3>Assign Routes for Transport</h3>
+                    </div>
+                </div>
+                <div class="new-added-form">
+                    <div class="row">
+                        @if(isset($scRoutes) && count($scRoutes))
+                        @foreach($scRoutes as $scRoute)
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <div class="form-check">
+                                <input type="radio" name="scRoutes" class="form-check-input" value="{{$scRoute->id}}">
+                                <label for="remember-me" class="form-check-label">{{$scRoute->route_name}}</label>
+                            </div>
+                        </div>
+                        @endforeach
+                        @else
+                            <div>No Routes Available!</div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card height-auto">
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">

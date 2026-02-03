@@ -13,6 +13,8 @@ use App\Models\ClassSection;
 use App\Models\Appdata;
 use App\Models\Fee;
 use App\Models\Feeinvoice;
+use App\Models\ScRoute;
+use App\Models\StudentRoute;
 use App\Models\User;
 use FeeController;
 // use AppdataController;
@@ -82,7 +84,8 @@ class StudentController extends Controller
         $classes = Classes::where('status',1)->get();
         $sections = ClassSection::where('status',1)->get();
         $fees = Fee::where('status',1)->get();
-        return view('admin.pages.addStudent',compact('classes','sections','fees'));
+        $scRoutes = ScRoute::where('status',1)->get();
+        return view('admin.pages.addStudent',compact('classes','sections','fees','scRoutes'));
     }
 
     public function updateStudent(Request $request){
@@ -92,9 +95,10 @@ class StudentController extends Controller
         $fees = StudentFee::join('fees','fees.id','student_fees.fee_id')
         ->select('fees.*','student_fees.student_id')
         ->where('student_fees.student_id',$request->id)->get();
+        $scRoutes = ScRoute::where('status',1)->get();
         // dd($fees);
         // dd($data->father_occupation);
-        return view('admin.pages.updateStudent',compact('classes','sections','data','fees'));
+        return view('admin.pages.updateStudent',compact('classes','sections','data','fees','scRoutes'));
     }
 
     public function createStudent(Request $request){
@@ -272,7 +276,13 @@ class StudentController extends Controller
                 }
 
             }
+            // dd($request->scRoutes);
+            if($request->scRoutes){
+                $request->student_id = $student->id;
+                $request->sc_route_id = $request->scRoutes;
+                $assignRoute = (new StudentRouteController)->createStudentRoute($request);
 
+            }
 
             return response()->json([
                 'redirect'=> $request->header('referer'),
@@ -401,6 +411,24 @@ class StudentController extends Controller
                     $studentFee->fee = $fees->amount;
                     $studentFee->save();
                 }
+
+            }
+
+            $student_route = StudentRoute::where('student_id',$student->id)->first();
+            if($request->scRoutes){
+                // foreach($request->scRoutes as $scRoute){
+                $data = new Request();
+                $data->merge([
+                    'student_id' => $student->id,
+                    'sc_route_id' => $request->scRoutes,
+                ]);
+                if($student_route){
+                    $data->merge([
+                        'id' => $student_route->id,
+                    ]);
+                }
+                $assignRoute = (new StudentRouteController)->createStudentRoute($data);
+                // }
 
             }
 

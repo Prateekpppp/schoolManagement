@@ -66,7 +66,7 @@ class ScRouteController extends Controller
             $staff->route_name = $request->route_name;
             $staff->starting_location = $request->starting_location;
             $staff->ending_location = $request->ending_location;
-            // $staff->route_fare = $request->route_fare;
+            $staff->route_fare = $request->route_fare;
             $staff->save();
 
             return response()->json([
