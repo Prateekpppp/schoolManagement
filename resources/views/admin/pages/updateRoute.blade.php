@@ -41,10 +41,10 @@
                                     <label>Ending Location *</label>
                                     <input name="ending_location" value="{{$data->ending_location}}" type="text" placeholder="" class="form-control required">
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Route Fare *</label>
                                     <input name="route_fare" value="{{$data->route_fare}}" type="text" placeholder="" class="form-control required">
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="row">
                                 
