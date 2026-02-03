@@ -61,7 +61,7 @@
                                         <th>Staff</th>
                                         <th>Check In</th>
                                         <th>Check Out</th>
-                                        <th>Remark</th>
+                                        {{-- <th>Remark</th> --}}
                                         {{-- <th>Action</th> --}}
                                         <th>Status</th>
                                     </tr>
@@ -89,18 +89,18 @@
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->checkout}}</td>
                                             {{-- <td>{{$job->name}}</td> --}}
-                                            <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td>
+                                            {{-- <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td> --}}
                                             {{-- <td>{{$key}}</td> --}}
                                             <td>
                                                 @if($currentUser->status < 3)
                                                 <div class="flex flex-row gap-2">
                                                     <select data-id="{{$job->id}}" name="status" class="select2">
                                                         <option value="">Change Status</option>
-                                                        <option value="0">Absent</option>
-                                                        <option value="1">Present</option>
-                                                        <option value="2">Late</option>
-                                                        <option value="3">Half Day</option>
-                                                        <option value="4">Leave</option>
+                                                        <option {{$job->status == 0 ? 'selected':''}} value="0">Absent</option>
+                                                        <option {{$job->status == 1 ? 'selected':''}} value="1">Present</option>
+                                                        <option {{$job->status == 2 ? 'selected':''}} value="2">Late</option>
+                                                        <option {{$job->status == 3 ? 'selected':''}} value="3">Half Day</option>
+                                                        <option {{$job->status == 4 ? 'selected':''}} value="4">Leave</option>
                                                     </select>
                                                 </div>
                                                 @else
