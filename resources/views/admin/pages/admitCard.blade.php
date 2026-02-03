@@ -98,9 +98,8 @@
                                             <td>{{$job->section}}</td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
-                                                <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                <a target="_blank" href="{{route('admin.pages.print_admitcard',['id'=>$job->id,'month'=>$job->month])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Print</a>
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->card_id}}" data-model="AdmitCard" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         

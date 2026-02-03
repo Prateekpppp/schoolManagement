@@ -20,6 +20,8 @@ class AdmitcardController extends Controller
             return view('admin.pages.filterGenerateAdmitCard', compact('exams'));
         }
 
+        $exam = Exam::where('exam_code',$exam_code)->first();
+        // dd($exam->class);
         $students = Student::join('classes','students.class','=','classes.id')
             ->join('sections','students.section','=','sections.id')
             ->whereNotExists(function ($query) use ($exam_code) {
@@ -27,7 +29,10 @@ class AdmitcardController extends Controller
                     ->from('admitcards')
                     ->whereColumn('admitcards.student_id', 'students.id')
                     ->where('admitcards.exam_code', $exam_code);
-            })->where('students.status',1)->where('students.session_id',session('session_id'));
+            })
+            ->where('students.status',1)
+            // ->where('students.class',$exam->class)
+            ->where('students.session_id',session('session_id'));
 
         if($request->name){
             $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
@@ -82,15 +87,47 @@ class AdmitcardController extends Controller
     }
 
     public function admitCard(Request $request){
-        $students = Student::where('status',1)->where('session_id',session('session_id'));
+        $students = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->where('students.status',1)
+        ->where('students.session_id',session('session_id'))
+        ->select('students.*','admitcards.id as card_id');
 
         $data = Admitcard::joinSub($students,'students',function($join){
             $join->on('admitcards.student_id','students.id');
         })
-        ->select('students.*','admitcards.id as card_id');
+        ->join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
 
         $data = $data->get();
 
         return view('admin.pages.admitCard',compact('data','request'));
+    }
+
+    public function print_admitcard(Request $request){
+        
+        $students = Student::where('students.status',1)
+        ->where('students.id',$request->id)
+        ->where('students.session_id',session('session_id'));
+
+        // $exam = Exam
+        $data = Admitcard::joinSub($students,'students',function($join){
+            $join->on('admitcards.student_id','students.id');
+        })
+        ->join('exams','admitcards.exam_code','exams.exam_code')
+        ->join('subjects','subjects.id','=','exams.subject')
+        ->select('students.*','exams.date','admitcards.id as card_id','admitcards.exam_code','subjects.subject');
+
+        $data = $data->get();
+
+        $students = $students->join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','classes.class','sections.section');
+
+        $students = $students->first();
+        // dd($data);
+
+        return view('admin.pages.print_admitcard',compact('students','data','request'));
     }
 }

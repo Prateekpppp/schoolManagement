@@ -52,7 +52,7 @@ class AdminDataController extends Controller
         $sections = Section::where('status',1)->count();
         $students = Student::where('status',1)->where('session_id',session('session_id'))->count();
         $inactiveStudents = Student::where('status',0)->where('session_id',session('session_id'))->count();
-        $teachers = Staff::where('status',1)->count();
+        $teachers = Staff::where('status',4)->count();
         $staff = Staff::where('status',2)->count();
         $totalInvoice = StudentFee::where('session_id',session('session_id'))->sum('fee');
         $paidInvoice = StudentFee::where('session_id',session('session_id'))->sum('paid');

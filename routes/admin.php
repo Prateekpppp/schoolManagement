@@ -380,6 +380,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/genrateAdmitCard', [AdmitcardController::class,'genrateAdmitCard'])->name('admin.post.genrateAdmitCard')->withoutMiddleware([VerifyCsrfToken::class]);
         
         Route::get('/admitCard', [AdmitcardController::class,'admitCard'])->name('admin.pages.admitCard');
+
+        Route::get('/print_admitcard', [AdmitcardController::class,'print_admitcard'])->name('admin.pages.print_admitcard');
         
         // Job Module
         Route::get('/jobs', [JobController::class,'jobs'])->name('admin.pages.jobs');

@@ -387,7 +387,7 @@
                <!-- RIGHT : LATEST NEWS -->
                <div class="col-lg-3">
                   <div class="latest-news-box">
-                     <h4 class="latest-title">NOTICE BOARDS</h4>
+                     <h4 class="latest-title">NOTICE BOARD</h4>
 
                      <marquee direction="up" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
 
