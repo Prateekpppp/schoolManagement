@@ -112,7 +112,7 @@ class HomeworkController extends Controller
             $student->class_id = $request->class_id;
             $student->section_id = $request->section_id;
             $student->subject_id = $request->subject_id;
-            $student->date = date('d-m-Y',strtotime($request->due_date));
+            $student->date = date('d-m-Y',strtotime($request->date));
             $student->description = $request->description;
 
             $student->upload = $request->upload;
