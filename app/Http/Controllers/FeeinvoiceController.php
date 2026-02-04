@@ -161,9 +161,9 @@ class FeeinvoiceController extends Controller
 
             // Transport Fee Module Part
             $transportFee = StudentRoute::where('student_id',$value)->first();
-            $transportFee = ScRoute::where('id',$transportFee->sc_route_id)->first();
 
             if($transportFee){
+                $transportFee = ScRoute::where('id',$transportFee->sc_route_id)->first();
                 $transportFee = $transportFee->route_fare;
             } else{
                 $transportFee = 0;
