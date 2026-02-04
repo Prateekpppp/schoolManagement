@@ -135,7 +135,7 @@
                                             </td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="FeeInvoice" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Feeinvoice" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                                     <a target="_blank" href="{{route('admin.pages.print_invoice',['id'=>$job->id,'month'=>$job->month])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Print</a>
                                                     <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee !max-w-min">Collect</a>
 

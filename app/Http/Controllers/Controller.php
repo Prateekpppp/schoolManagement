@@ -23,7 +23,7 @@ abstract class Controller
             if($this->currentUser->status > 2 && $this->currentUser->status < 5){
                 $this->currentLogin = Staff::where('phone',$this->currentUser->username)->first();
             }elseif($this->currentUser->status == 5){
-                $this->currentLogin = Student::where('father_phone',$this->currentUser->username)->first();
+                $this->currentLogin = Student::where('enrollment_no',$this->currentUser->username)->first();
             }
         }
     }

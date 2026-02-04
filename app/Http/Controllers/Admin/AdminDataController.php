@@ -83,7 +83,7 @@ class AdminDataController extends Controller
         }
         
         if ($user->status == 5){
-            return redirect()->route('staff.pages.studentDetail',$this->currentLogin->id);
+            return redirect()->route('student.pages.studentDetail',$this->currentLogin->id);
             $present = StudentAttendance::where('student_id',$this->currentLogin->id)
             ->where('status',1)->count();
 
