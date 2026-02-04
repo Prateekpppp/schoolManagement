@@ -32,9 +32,6 @@ class TransactionController extends Controller
 
         $currentPaid = Transaction::where('invoice_id',$data->feeinvoice_no)->sum('transaction_amount');
 
-        $date = \DateTime::createFromFormat('d/m/Y', $data->invoice_date);
-        
-        $invoice_date = $date->format('d-M-Y');
         $invoice_date = Carbon::parse($data->invoice_date)->format('d-M-Y');
 
         $month = $date->format('m');
