@@ -76,7 +76,7 @@
                                             <td>{{$job->title}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
-                                            <td>{{$job->due_date}}</td>
+                                            <td>{{$job->date}}</td>
                                             <td>
                                                 @if($job->upload)
                                                 <a href="{{asset('/').$job->upload}}" download>View</a>
