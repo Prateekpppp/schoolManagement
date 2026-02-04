@@ -72,7 +72,9 @@ class TransactionController extends Controller
         
         $scRoute = StudentRoute::where('student_id',$data->student_id)->first();
 
-        $scRoute = ScRoute::where('id',$scRoute->sc_route_id)->first();
+        if($scRoute){
+            $scRoute = ScRoute::where('id',$scRoute->sc_route_id)->first();
+        }
 
         return view('admin.pages.print_invoice',compact(
             'data',
