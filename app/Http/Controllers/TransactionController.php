@@ -34,7 +34,7 @@ class TransactionController extends Controller
 
         $invoice_date = Carbon::parse($data->invoice_date)->format('d-M-Y');
 
-        $month = $date->format('m');
+        $month = $invoice_date->format('m');
         
         $previous_invoices = Feeinvoice::where('month','<',$month)->where('student_id',$data->student_id)->get();
 
