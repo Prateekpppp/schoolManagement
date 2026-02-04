@@ -58,13 +58,26 @@ class TransactionController extends Controller
         ->where('students.id',$data->student_id)
         ->first();
 
-        return view('admin.pages.print_invoice',compact('data','currentPaid',
-'date',
-'invoice_date',
-'month',
-'previous_amount',
-'total_paid',
-'previous_due_amount','student'));
+        $studentFee = StudentFee::where('student_id',$data->student_id);
+
+        $fees = Fee::joinSub($studentFee,'studentFee',function($join){
+            $join->on('student_fees.fee_id','fee.id');
+        })
+        ->select('fees.*')
+        ->get();
+
+        return view('admin.pages.print_invoice',compact(
+            'data',
+            'currentPaid',
+            'date',
+            'invoice_date',
+            'month',
+            'previous_amount',
+            'total_paid',
+            'previous_due_amount',
+            'student',
+            'fees'
+        ));
 
     }
 

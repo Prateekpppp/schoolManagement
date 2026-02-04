@@ -116,13 +116,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($fees as $k => $fee)
+                    @foreach($fees as $k => $fee)
                     <tr>
                         <td>{{$k+1}}</td>
-                        <td>{{$fee->feeName}}</td>
+                        <td>{{$fee->name}}</td>
                         <td>{{$fee->amount}} /-</td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                     <tr>
                         <td colspan="2" class="fw-bold text-end">This Month</td>
                         {{-- <td class="fw-bold">{{$currentTransactions}} /-</td> --}}
