@@ -76,7 +76,8 @@ class TransactionController extends Controller
             'total_paid',
             'previous_due_amount',
             'student',
-            'fees'
+            'fees',
+            'month'
         ));
 
     }

@@ -117,6 +117,11 @@
                 </thead>
                 <tbody>
                     @foreach($fees as $k => $fee)
+                    @php
+                        if($fee->month){
+                            if($fee->month ! == $month) continue;
+                        }
+                    @endphp
                     <tr>
                         <td>{{$k+1}}</td>
                         <td>{{$fee->name}}</td>
