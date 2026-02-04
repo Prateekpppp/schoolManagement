@@ -119,7 +119,7 @@
                     @foreach($fees as $k => $fee)
                     @php
                         if($fee->month){
-                            if($fee->month ! == $month) continue;
+                            if($fee->month != $month) continue;
                         }
                     @endphp
                     <tr>
