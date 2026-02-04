@@ -148,7 +148,7 @@ class StaffAttendanceController extends Controller
             $late = 0;
 
             if($this->currentUser->status > 3){
-                $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id)->orderBy('date','desc');
+                $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id)->orderBy('id','desc');
                 
                 $data = $data->get();
                 
@@ -160,7 +160,7 @@ class StaffAttendanceController extends Controller
             }
             
             if($request->name){
-                $data = $data->where('staff.name','like','%'.$request->name.'%')->orderBy('date','desc');
+                $data = $data->where('staff.name','like','%'.$request->name.'%')->orderBy('id','desc');
             }
 
             $data = $data->get();
