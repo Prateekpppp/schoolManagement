@@ -14,7 +14,7 @@
                             <a href="{{route('student.pages.studentDetail',$currentLogin->id)}}" class="nav-link"><i class="flaticon-dashboard"></i><span>My Profile</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('student.pages.inactiveStudents')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>My Profile</span></a>
+                            <a href="{{route('student.pages.homework')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Homework</span></a>
                         </li>
                     </ul>
                 </div>
