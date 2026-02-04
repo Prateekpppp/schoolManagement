@@ -63,6 +63,14 @@
                                     <label>Exam Room Code *</label>
                                     <input name="room_code" value="{{$data->room_code}}" type="text" placeholder="" class="form-control required">
                                 </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Exam Time *</label>
+                                    <input name="time" value="{{$data->time}}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Exam Hours *</label>
+                                    <input name="exam_hours" value="{{$data->exam_hours}}" type="text" placeholder="" class="form-control required">
+                                </div>
                                 {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Start Time *</label>
                                     <input name="exam_code" type="text" placeholder="" class="form-control required">
