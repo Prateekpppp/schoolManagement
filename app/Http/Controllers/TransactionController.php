@@ -9,6 +9,7 @@ use App\Models\Classes;
 use App\Models\Feeinvoice;
 use App\Models\StudentFee;
 use App\Models\Transaction;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -34,6 +35,7 @@ class TransactionController extends Controller
         $date = \DateTime::createFromFormat('d/m/Y', $data->invoice_date);
         
         $invoice_date = $date->format('d-M-Y');
+        $invoice_date = Carbon::parse($data->invoice_date)->format('d-M-Y');
 
         $month = $date->format('m');
         
