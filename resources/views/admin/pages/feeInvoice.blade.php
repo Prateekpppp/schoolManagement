@@ -115,7 +115,7 @@
                                     @else
                                     @foreach ($fee as $k=>$job)
                                         <tr>
-                                            <td>{{$k+=1}}</td>
+                                            <td>{{$k+1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->admission_no}}</td>
@@ -127,7 +127,6 @@
                                             {{-- <td>{{$job->total_amount}}</td> --}}
                                             <td>{{$job->total_transaction_amount}}</td>
                                             <td>{{$job->total_amount-$job->total_transaction_amount}}</td>
-        {{-- // select transaction amount from transaction where feeinvoice_id = current invoice --}}
                                             <td>
                                                 <b class='{{$job->total_amount == $job->total_transaction_amount ? "text-green-700" : 'text-red-700'}}'>
                                                 {{$job->total_amount == $job->total_transaction_amount ? "Paid" : 'Partially Paid'}}
