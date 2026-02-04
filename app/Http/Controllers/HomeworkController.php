@@ -19,7 +19,8 @@ class HomeworkController extends Controller
             $data = $data->where('homework.admin_username',$this->currentUser->username);
         }
         if($this->currentUser->status == 5){
-            $data = $data->where('homework.class_id',$this->currentLogin->class);
+            $data = $data->where('homework.class_id',$this->currentLogin->class)
+            ->where('homework.section_id',$this->currentLogin->section);
         }
         $data = $data->where('homework.status',1)->get();
         
