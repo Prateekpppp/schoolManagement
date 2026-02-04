@@ -35,7 +35,7 @@ class AdminAuthCheckMiddleware
             $currentLogin = Staff::where('phone',$currentUser->username)->first();
             View::share('currentLogin',$currentLogin);
         }elseif($currentUser->status == 5){
-            $currentLogin = Student::where('father_phone',$currentUser->username)->first();
+            $currentLogin = Student::where('enrollment_no',$currentUser->username)->first();
             View::share('currentLogin',$currentLogin);
         }
 
