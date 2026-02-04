@@ -96,7 +96,7 @@ class TransactionController extends Controller
     function print_receipt(Request $request){
 
         $data = Transaction::where('id',$request->id)->first();
-        $date = \DateTime::createFromFormat('d/m/Y', $data->date);
+        $date = Carbon::parse($data->date);
         $payment_date = $date->format('d-M-Y');
         
         // select transaction amount from transaction where feeinvoice_id = INV_55725081
