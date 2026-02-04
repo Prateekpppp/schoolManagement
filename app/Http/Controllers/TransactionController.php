@@ -66,6 +66,8 @@ class TransactionController extends Controller
         ->select('fees.*')
         ->get();
 
+        $invoiceMonth = $data->month;
+
         return view('admin.pages.print_invoice',compact(
             'data',
             'currentPaid',
@@ -77,7 +79,7 @@ class TransactionController extends Controller
             'previous_due_amount',
             'student',
             'fees',
-            'month'
+            'invoiceMonth'
         ));
 
     }
