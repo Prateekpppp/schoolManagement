@@ -158,9 +158,18 @@
                 <div class="new-added-form">
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>Sibling </label>
+                            <select name="enrollment_no" class="select2 required">
+                                <option class="" value="">Please Select Student *</option>
+                                @foreach($students as $class)
+                                    <option value="{{$class->enrollment_no}}">{{$class->admission_no}} | {{$class->roll_no}} | {{$class->name}} | {{$class->class}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Sibling Enrolment No. </label>
                             <input name="enrollment_no" type="text" placeholder="" class="form-control">
-                        </div>
+                        </div> --}}
                         <div class="col-xl-3 col-lg-6 col-12 form-group flex items-center">
                             <a href="javascript:void(0)" type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark searchSibling">Search</a>
                         </div>
@@ -200,7 +209,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Phone *</label>
-                            <input name="mother_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
+                            <input name="mother_phone" type="text" minlength="10" maxlength="10" placeholder="" class="form-control">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Occupation *</label>

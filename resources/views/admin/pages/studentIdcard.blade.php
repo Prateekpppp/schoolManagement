@@ -109,7 +109,7 @@
     }
 
     .footer {
-        background: #f57c00;
+        background: #286605;;
         color: #fff;
         text-align: center;
         font-size: 12px;
