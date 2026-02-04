@@ -10,9 +10,6 @@
                             <div class="item-title">
                                 <h3>All Homework</h3>
                             </div>
-                            <div class="">
-                                <a href="{{route('admin.pages.addHomework')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Homework</a>
-                            </div>
                         </div>
                         <form class="mg-b-20" type='GET' action="{{route('student.pages.homeworkFilter')}}">
                             <div class="row gutters-8 items-center">
