@@ -31,18 +31,17 @@
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
-                                        {{-- <th>Roll NO.</th> --}}
                                         <th>Student</th>
                                         <th>Father's Name</th>
                                         <th>Admission No.</th>
                                         <th>Class</th>
                                         <th>Section</th>
-                                        {{-- <th>Invoice No.</th> --}}
+                                        <th>Invoice Date</th>
                                         <th>Month</th>
-                                        {{-- <th>Payable</th> --}}
                                         <th>Paid</th>
                                         <th>Dues</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
