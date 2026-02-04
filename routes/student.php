@@ -101,6 +101,9 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/createStudentHomework', [StudenthomeworkController::class,'createHomework'])->name('student.post.createHomework')->withoutMiddleware([VerifyCsrfToken::class]);
         
         // Transaction Module
+        
+        Route::get('/feeInvoice', [FeeinvoiceController::class,'feeInvoice'])->name('admin.pages.feeInvoice');
+        
         Route::get('/receipt', [FeeController::class,'receipt'])->name('student.pages.receipt');
         
         Route::get('/paymentHistory', [TransactionController::class,'paymentHistory'])->name('student.pages.paymentHistory');
