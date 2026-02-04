@@ -7,7 +7,9 @@ use App\Models\Fee;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\Feeinvoice;
+use App\Models\ScRoute;
 use App\Models\StudentFee;
+use App\Models\StudentRoute;
 use App\Models\Transaction;
 use Carbon\Carbon;
 
@@ -67,6 +69,10 @@ class TransactionController extends Controller
         ->get();
 
         $invoiceMonth = $data->month;
+        
+        $scRoute = StudentRoute::where('student_id',$data->student_id)->first();
+
+        $scRoute = ScRoute::where('id',$scRoute->sc_route_id)->first();
 
         return view('admin.pages.print_invoice',compact(
             'data',
@@ -79,7 +85,8 @@ class TransactionController extends Controller
             'previous_due_amount',
             'student',
             'fees',
-            'invoiceMonth'
+            'invoiceMonth',
+            'scRoute'
         ));
 
     }

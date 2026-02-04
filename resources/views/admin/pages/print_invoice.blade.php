@@ -118,8 +118,9 @@
                 <tbody>
                     @foreach($fees as $k => $fee)
                     @php
+                        $cnt = $k+1;
                         if($fee->month){
-                            if($fee->month != $month) continue;
+                            if($fee->month != $invoiceMonth) continue;
                         }
                     @endphp
                     <tr>
@@ -128,6 +129,14 @@
                         <td>{{$fee->amount}} /-</td>
                     </tr>
                     @endforeach
+
+                    @if($scRoute)
+                    <tr>
+                        <td>{{$cnt+1}}</td>
+                        <td>Transport Fee</td>
+                        <td>{{$scRoute->route_fare}} /-</td>
+                    </tr>
+                    @endif
                     <tr>
                         <td colspan="2" class="fw-bold text-end">This Month</td>
                         {{-- <td class="fw-bold">{{$currentTransactions}} /-</td> --}}
