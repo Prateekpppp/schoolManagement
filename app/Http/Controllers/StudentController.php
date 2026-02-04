@@ -452,7 +452,7 @@ class StudentController extends Controller
         if($request->id){
             $student = $student->where('students.id',$request->id)->first();
         } else{
-            $student = $student->where('students.father_phone',$this->currentUser->username)->first();
+            $student = $student->where('students.enrollment_no',$this->currentUser->username)->first();
         }
         // dd($student->id);
         $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
