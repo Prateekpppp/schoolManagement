@@ -176,6 +176,7 @@
     function responseFunc(response){
         ajaxResponseModal(response);
         $('.attendance').text(content);
+        $('.attendance').removeClass('disabled');
     }
 
     function success(pos){
@@ -187,12 +188,13 @@
     function error(){
         responseToast('please allow location access','bg-warning');
         $('.attendance').text(content);
+        $('.attendance').removeClass('disabled');
         return false;
     }
 
     $('.attendance').on('click',function(){
         content = $(this).text();
-
+        $(this).addClass('disabled');
         $(this).text('Please Wait ...');
 
         navigator.geolocation.getCurrentPosition(success, error,
