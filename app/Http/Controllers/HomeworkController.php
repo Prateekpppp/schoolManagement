@@ -21,6 +21,10 @@ class HomeworkController extends Controller
         if($this->currentUser->status == 5){
             $data = $data->where('homework.class_id',$this->currentLogin->class)
             ->where('homework.section_id',$this->currentLogin->section);
+
+            $data = $data->where('homework.status',1)->get();
+            
+            return view('student.pages.homework',compact('data'));
         }
         $data = $data->where('homework.status',1)->get();
         
@@ -32,9 +36,8 @@ class HomeworkController extends Controller
         // $homework = Homework::where('status',0)->get();
         $data = Homework::join('classes','homework.class_id','classes.id')
         ->join('sections','homework.section_id','sections.id')
-        ->select('homework.*','classes.class','sections.section','classes.id as c_id','sections.id as s_id')
-        ->where('homework.admin_username',$this->currentUser->username)
-        ->where('homework.status',1);
+        ->select('homework.*','classes.class','sections.section','classes.id as c_id','sections.id as s_id');
+        
 
         if($request->name){
             $data = $data->where('homework.title', 'LIKE','%'.$request->name.'%');
@@ -45,9 +48,21 @@ class HomeworkController extends Controller
         if($request->section_id){
             $data = $data->where('sections.id',$request->section_id);
         }
-        if($this->currentUser->status > 2){
+
+
+        if($this->currentUser->status > 2 && $this->currentUser->status < 5){
             $data = $data->where('homework.admin_username',$this->currentUser->username);
         }
+        
+        if($this->currentUser->status == 5){
+            $data = $data->where('homework.class_id',$this->currentLogin->class)
+            ->where('homework.section_id',$this->currentLogin->section);
+
+            $data = $data->where('homework.status',1)->get();
+            
+            return view('student.pages.homework',compact('data'));
+        }
+
         $data = $data->where('homework.status',1)->get();
         // dd($data);
         return view('admin.pages.homework',compact('data'));

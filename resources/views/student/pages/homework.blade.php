@@ -14,7 +14,7 @@
                                 <a href="{{route('admin.pages.addHomework')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Add Homework</a>
                             </div>
                         </div>
-                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.homeworkFilter')}}">
+                        <form class="mg-b-20" type='GET' action="{{route('student.pages.homeworkFilter')}}">
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Name </label>
@@ -50,8 +50,6 @@
                                         <th>Section</th>
                                         <th>Date</th>
                                         <th>Document</th>
-                                        {{-- <th>Status</th> --}}
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -59,8 +57,6 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            {{-- <td></td> --}}
                                             <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
@@ -76,21 +72,13 @@
                                             <td>{{$job->title}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
-                                            <td>{{$job->due_date}}</td>
+                                            <td>{{$job->date}}</td>
                                             <td>
                                                 @if($job->upload)
                                                 <a href="{{asset('/').$job->upload}}" download>View</a>
                                                 @else
                                                 N/A
                                                 @endif
-                                            </td>
-                                            {{-- <td>{{$job->status == 2 ? 'Completed' : 'Processing'}}</td> --}}
-                                            <td>
-                                                <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.updateHomework', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Edit</a>
-                                                    {{-- <a href="--" class="btn fw-btn-fill btn-gradient-yellow !max-w-min openEditModal">Submit</a> --}}
-                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Homework" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
-                                                </div>
                                             </td>
                                         </tr>
                                         
@@ -112,7 +100,7 @@
 
     function submitFilterForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('get',"{{route('admin.pages.homeworkFilter')}}",data,ajaxResponseModal);
+        callAjaxFormData('get',"{{route('student.pages.homeworkFilter')}}",data,ajaxResponseModal);
     }
 
     // $('.remove_feeHead').on('click', function(){
