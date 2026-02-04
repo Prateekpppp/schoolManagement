@@ -61,7 +61,7 @@ class TransactionController extends Controller
         $studentFee = StudentFee::where('student_id',$data->student_id);
 
         $fees = Fee::joinSub($studentFee,'studentFee',function($join){
-            $join->on('student_fees.fee_id','fees.id');
+            $join->on('studentFee.fee_id','fees.id');
         })
         ->select('fees.*')
         ->get();
