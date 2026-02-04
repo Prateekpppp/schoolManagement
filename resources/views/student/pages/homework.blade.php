@@ -15,25 +15,7 @@
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Name </label>
-                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="hidden">Class </label>
-                                    <select name="class_id" class="select2 changeClass required">
-                                        <option value="">Please Select Class</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="hidden">Section </label>
-                                    <select name="section_id" class="select2 required">
-                                        <option class="secAfter" value="">Please Select Section</option>
-                                    </select>
-                                </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button class="submitFilterForm fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control required">
                                 </div>
                             </div>
                         </form>
