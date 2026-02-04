@@ -22,16 +22,7 @@
                         <form class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Roll ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Name ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input name="search" type="text" placeholder="Search by Class ..." class="form-control">
-                                </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button name="search" type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <input name="search" type="text" placeholder="Search by Month ..." class="form-control">
                                 </div>
                             </div>
                         </form>
@@ -52,13 +43,22 @@
                                         <th>Paid</th>
                                         <th>Dues</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
                                     @if(!isset($fee) || count($fee) == 0)
                                         <tr>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($fee as $k=>$job)
@@ -76,14 +76,6 @@
                                             <td>{{$job->total_amount-$job->transaction_amount}}</td>
         {{-- // select transaction amount from transaction where feeinvoice_id = current invoice --}}
                                             <td>{{$job->total_amount == $job->transaction_amount ? 'Paid' : 'Partially Paid'}}</td>
-                                            <td>
-                                                <div class="flex flex-row gap-2">
-                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="FeeInvoice" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
-                                                    <a target="_blank" href="{{route('admin.pages.print_invoice',['id'=>$job->id,'month'=>$job->month])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Print</a>
-                                                    <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !bg-green-600 collectFee !max-w-min">Collect</a>
-
-                                                </div>
-                                            </td>
                                         </tr>
                                         
                                     @endforeach

@@ -101,6 +101,11 @@ class FeeinvoiceController extends Controller
 
         $fee = $fee->get();
 
+        if($this->currentUser->status == 5){
+            
+            return view('student.pages.feeInvoice',compact('fee','request'));
+        }
+
         // dd($fee);
         return view('admin.pages.feeInvoice',compact('fee','request'));
     }

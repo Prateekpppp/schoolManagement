@@ -16,6 +16,9 @@
                         <li class="nav-item">
                             <a href="{{route('student.pages.homework')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Homework</span></a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('student.pages.feeInvoice')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Fee Invoices</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
