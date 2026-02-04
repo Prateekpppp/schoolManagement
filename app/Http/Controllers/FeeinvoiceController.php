@@ -84,7 +84,7 @@ class FeeinvoiceController extends Controller
             $fee = $fee->where('students.id',$request->student_id);
         }
         if($request->name){
-            $fee = $fee->where('students.name',$request->name);
+            $fee = $fee->where('students.name','%'.$request->name.'%');
         }
         if($request->class_id){
             $fee = $fee->where('students.class',$request->class_id);
