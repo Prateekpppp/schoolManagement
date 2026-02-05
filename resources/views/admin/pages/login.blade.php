@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label>Password</label>
                         <input name="password" type="password" placeholder="Enter password" class="form-control">
-                        <i class="fas fa-lock"></i>
+                        <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
                     </div>
                     <div class="form-group d-flex align-items-center justify-content-between">
                         <div class="form-check">

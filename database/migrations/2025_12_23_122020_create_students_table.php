@@ -48,9 +48,9 @@ return new class extends Migration
             $table->string('father_phone');
             $table->string('father_occupation');
             $table->string('mother_name');
-            $table->string('mother_phone');
+            $table->string('mother_phone')->nullable();
             $table->string('mother_occupation');
-            $table->string('parent_email');
+            $table->string('parent_email')->nullable();
             $table->string('parent_password')->nullable();
             // other details
             // $table->string('fee');

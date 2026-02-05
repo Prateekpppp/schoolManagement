@@ -99,15 +99,20 @@ class FeeinvoiceController extends Controller
             $fee = $fee->whereNull('allTransactions.total_transaction_amount');
         }
 
+        $totalInvoiceAmount = $fee->sum('feeinvoices.total_amount');
+        $totalPaidAmount = $fee->sum('allTransactions.total_transaction_amount');
+        $totalDueAmount = $totalInvoiceAmount - $totalPaidAmount;
+
+        // dd($totalDueAmount,$totalPaidAmount);
         $fee = $fee->get();
 
         if($this->currentUser->status == 5){
             
-            return view('student.pages.feeInvoice',compact('fee','request'));
+            return view('student.pages.feeInvoice',compact('fee','request','totalInvoiceAmount','totalPaidAmount','totalDueAmount'));
         }
 
         // dd($fee);
-        return view('admin.pages.feeInvoice',compact('fee','request'));
+        return view('admin.pages.feeInvoice',compact('fee','request','totalInvoiceAmount','totalPaidAmount','totalDueAmount'));
     }
 
     public function genrateFeeInvoice(Request $request){

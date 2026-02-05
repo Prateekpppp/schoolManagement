@@ -78,6 +78,18 @@
                                 </div>
                             </div>
                         </form>
+                        <form class="mg-b-20">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="">Total Dues </label>
+                                    <input name="name" value="{{isset($totalDueAmount)?$totalDueAmount:''}}" type="text" class="form-control">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-12 form-group">
+                                    <label class="">Total Paid </label>
+                                    <input name="name" value="{{isset($totalPaidAmount)?$totalPaidAmount:''}}" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
