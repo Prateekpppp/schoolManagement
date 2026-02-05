@@ -136,7 +136,7 @@
                                             <td>{{$job->category}}</td>
                                             <td>{{$job->quantity}}</td>
                                             <td>{{$job->sold}}</td>
-                                            <td>{{$job->quantity - $job->sold}}</td>
+                                            <td>{{(float) $job->quantity - (float) $job->sold}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}
