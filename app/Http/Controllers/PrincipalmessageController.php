@@ -48,7 +48,9 @@ class PrincipalmessageController extends Controller
             } else {
                 $fee = Principalmessage::where('id',$request->id)->first();
                 $fee->name = $request->name;
-                $fee->photo = $request->photo;
+                if($request->photo){
+                    $fee->photo = $request->photo;
+                }
                 $fee->description = $request->description;
                 // $fee->status = 0;
                 $fee->save();
