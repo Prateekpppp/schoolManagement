@@ -460,7 +460,7 @@ class StudentController extends Controller
         // dd($student->id);
         // $studentFeeInvoice = Feeinvoice::withSum('transactions','transaction_amount')->where('student_id',$student->id)->where('status','!=',2);
 
-        $studentFeeInvoice = Feeinvoice::join('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        $studentFeeInvoice = Feeinvoice::leftJoin('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
         ->where('feeinvoices.student_id',$student->id)->where('feeinvoices.status','!=',2)
         ->select('feeinvoices.*','transactions.transaction_amount');
         
@@ -469,7 +469,7 @@ class StudentController extends Controller
         $paidAmount = $studentFeeInvoice->sum('transactions.transaction_amount');
 
         $dueAmount = $totalAmount - $paidAmount;
-        dd($dueAmount);
+        // dd($studentFeeInvoice);
         $studentFeeInvoice = $studentFeeInvoice->first();
         return view('admin.pages.studentDetail',compact('student','paidAmount','dueAmount','studentFeeInvoice'));
     }

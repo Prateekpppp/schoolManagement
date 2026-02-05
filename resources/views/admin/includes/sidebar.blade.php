@@ -149,6 +149,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.salary')}}" class="nav-link"><i class="fas fa-angle-right"></i>Salary</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.expanse')}}" class="nav-link"><i class="fas fa-angle-right"></i>Expense</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">

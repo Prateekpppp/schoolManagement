@@ -99,6 +99,8 @@ class FeeinvoiceController extends Controller
             $fee = $fee->whereNull('allTransactions.total_transaction_amount');
         }
 
+        $fee = $fee->where('feeinvoices.session_id',session('session_id'));
+
         $totalInvoiceAmount = $fee->sum('feeinvoices.total_amount');
         $totalPaidAmount = $fee->sum('allTransactions.total_transaction_amount');
         $totalDueAmount = $totalInvoiceAmount - $totalPaidAmount;

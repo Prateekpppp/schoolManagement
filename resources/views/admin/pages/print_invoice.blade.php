@@ -158,11 +158,11 @@
             <div class="flex flex-row justify-between signature-section">
                 <div class="w-50 flex flex-col gap-2">
                     <span>Authorised By</span>
-                    <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px">
+                    {{-- <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px"> --}}
                 </div>
                 <div class="w-50 flex flex-col gap-2 items-end">
                     <span>Receiver's Signature</span>
-                    <img src="{{asset('/').$appdata->signature}}" alt="logo" width="150px">
+                    {{-- <img src="{{asset('/').$appdata->signature}}" alt="logo" width="150px"> --}}
                 </div>
             </div>
 

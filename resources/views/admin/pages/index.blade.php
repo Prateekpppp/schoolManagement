@@ -312,6 +312,23 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.expanse')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-yellow">
+                                        <i class="fa fa-cash-register text-orange"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Total Expanse</div>
+                                        <div class="item-number"><span></span><span class="counter" data-num="{{$expanse}}">{{$expanse}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 <!-- Dashboard summery End Here -->
                 <!-- Dashboard Content Start Here -->

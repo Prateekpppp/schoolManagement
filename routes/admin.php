@@ -32,6 +32,7 @@ use App\Http\Controllers\StudenthomeworkController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\DriverRouteController;
+use App\Http\Controllers\ExpanseController;
 use App\Http\Controllers\ScRouteController;
 use App\Http\Controllers\StudentRouteController;
 use App\Http\Controllers\InventoryController;
@@ -66,12 +67,17 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
           
+        // Expanse Module
+        Route::get('/expanse', [ExpanseController::class,'read'])->name('admin.pages.expanse');
+
+        Route::post('/createExpanse', [ExpanseController::class,'create'])->name('admin.post.createExpanse')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateExpanse', [ExpanseController::class,'update'])->name('admin.pages.updateExpanse');
+
         // Applicationletter Module
         Route::get('/applicationletter', [ApplicationletterController::class,'read'])->name('admin.pages.applicationletter');
 
         Route::post('/createApplicationletter', [ApplicationletterController::class,'create'])->name('admin.post.createApplicationletter')->withoutMiddleware([VerifyCsrfToken::class]);
-
-        Route::get('/updateTaskStatus', [TaskController::class,'updateStatus'])->name('admin.get.updateTaskStatus');
 
         Route::get('/updateApplicationletter', [ApplicationletterController::class,'updateApplicationletter'])->name('admin.pages.updateApplicationletter');
 
@@ -94,7 +100,7 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         Route::post('/updateTask', [TaskController::class,'updateTask'])->name('admin.post.updateTask')->withoutMiddleware([VerifyCsrfToken::class]);
 
-        Route::get('/updateStatus', [TaskController::class,'updateStatus'])->name('admin.get.updateStatus');
+        Route::get('/updateTaskStatus', [TaskController::class,'updateStatus'])->name('admin.get.updateTaskStatus');
 
         Route::get('/createTask', [TaskController::class,'createTask'])->name('admin.pages.createTask');
 

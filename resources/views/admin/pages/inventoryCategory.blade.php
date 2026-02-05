@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class </label>
-                                    <select name="class_id" class="select2 required">
+                                    <select name="class_id" class="select2">
                                         <option value="">Please Select Class *</option>
                                         @foreach($globalClasses as $class)
                                             <option value="{{$class->id}}">{{$class->class}}</option>
@@ -107,6 +107,7 @@
                                         <th>Category</th>
                                         <th>Quantity</th>
                                         <th>Sold</th>
+                                        <th>Remaining</th>
                                         <th>Class</th>
                                         <th>Amount</th>
                                         <th>Action</th>
@@ -116,6 +117,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($data) || count($data) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
@@ -134,6 +136,7 @@
                                             <td>{{$job->category}}</td>
                                             <td>{{$job->quantity}}</td>
                                             <td>{{$job->sold}}</td>
+                                            <td>{{$job->quantity - $job->sold}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->amount}}</td>
                                             {{-- <td>{{$key}}</td> --}}

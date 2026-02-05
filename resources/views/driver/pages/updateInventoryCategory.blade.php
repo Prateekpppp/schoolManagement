@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class </label>
-                                    <select name="class_id" class="select2 required">
+                                    <select name="class_id" class="select2">
                                         <option value="">Please Select Class *</option>
                                         @foreach($globalClasses as $class)
                                             <option {{ $data->class_id == $class->id ? 'selected' : '' }} value="{{$class->id}}">{{$class->class}}</option>

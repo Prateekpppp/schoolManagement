@@ -2,53 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Applicationletter;
+use App\Models\Expanse;
 use Illuminate\Http\Request;
 
-class ApplicationletterController extends Controller
+class ExpanseController extends Controller
 {
     //
     public function read(Request $request){
-        $data = Applicationletter::leftJoin('staff','applicationletters.admin_username','=','staff.phone')
-        ->select('applicationletters.*','staff.name as staff_name');
+        $data = Expanse::leftJoin('staff','expanses.admin_username','=','staff.phone')
+        ->select('expanses.*','staff.name as staff_name');
         if($this->currentUser->status > 3){
-            $data = $data->where('applicationletters.admin_username',$this->currentUser->username);
+            $data = $data->where('expanses.admin_username',$this->currentUser->username);
         }
-        $data = $data->orderBy('applicationletters.id','desc')->get();
+        $data = $data->orderBy('expanses.id','desc')->get();
         // dd($data);
-        return view('admin.pages.applicationletter',compact('data'));
+        return view('admin.pages.expanse',compact('data'));
     }
 
     public function allTask(){
-        $data = Applicationletter::all();
+        $data = Expanse::all();
         return response()->json([
             'data'=>$data,
             'response_code'=> '200'
         ]);
     }
 
-    public function updateApplicationletter(Request $request){
-        $data = Applicationletter::where('id',$request->id)->first();
+    public function update(Request $request){
+        $data = Expanse::where('id',$request->id)->first();
         
-        return view('admin.pages.updateApplicationletter',compact('data'));
+        return view('admin.pages.updateExpanse',compact('data'));
     }
 
     public function create(Request $request) {
         try{
 
             if(!$request->id){
-                $fee = new Applicationletter();
+                $fee = new Expanse();
                 $fee->title = $request->title;
                 $fee->description = $request->description;
                 $fee->date = $request->date;
+                $fee->amount = $request->amount;
                 $fee->admin_username = $this->currentUser->username;
                 $fee->status = 0;
                 $fee->save();
             } else {
-                $fee = Applicationletter::where('id',$request->id)->first();
+                $fee = Expanse::where('id',$request->id)->first();
                 $fee->title = $request->title;
                 $fee->description = $request->description;
                 $fee->date = $request->date;
+                $fee->amount = $request->amount;
                 // $fee->status = 0;
                 $fee->save();
             }

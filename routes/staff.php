@@ -31,6 +31,7 @@ use App\Http\Controllers\StudenthomeworkController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\DriverRouteController;
+use App\Http\Controllers\ExpanseController;
 use App\Http\Controllers\ScRouteController;
 use App\Http\Controllers\StudentRouteController;
 use App\Http\Controllers\InventoryController;
@@ -45,10 +46,16 @@ use Illuminate\Support\Facades\Cookie;
 
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
     
-
     Route::prefix('staff')->group(function () {
         
         Route::get('/dashboard', [AdminDataController::class,'index'])->name('staff.index');
+
+        // Expanse Module
+        Route::get('/expanse', [ExpanseController::class,'read'])->name('staff.pages.expanse');
+
+        Route::post('/createExpanse', [ExpanseController::class,'create'])->name('staff.post.createExpanse')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateExpanse', [ExpanseController::class,'update'])->name('staff.pages.updateExpanse');
 
         // Applicationletter Module
         Route::get('/applicationletter', [ApplicationletterController::class,'read'])->name('staff.pages.applicationletter');

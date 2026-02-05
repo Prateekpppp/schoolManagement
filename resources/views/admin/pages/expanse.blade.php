@@ -3,14 +3,12 @@
 @section('inner_body')
 
                 <!-- Add New Teacher Area Start Here -->
+
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add Inventory Category</h3>
-                            </div>
-                            <div>
-                                <a href="{{route('admin.pages.inventoryCategory')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>
+                                <h3>Add Expanse</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -28,22 +26,21 @@
                         </div>
                         <form class="new-added-form">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Category Name *</label>
-                                    <input name="category" type="text" placeholder="" class="form-control required">
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Title </label>
+                                    <input name="title" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class </label>
-                                    <select name="class_id" class="select2">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>Date *</label>
+                                    <input name="date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Amount *</label>
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Amount </label>
                                     <input name="amount" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Description *</label>
+                                    <textarea name="description" placeholder="" class="form-control required !h-48"></textarea>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -59,7 +56,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Inventory Category List</h3>
+                                <h3>Expanse List</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -75,36 +72,18 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.inventoryCategoryFilter')}}">
-                            <div class="row gutters-8 items-center">
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <label class="hidden">Name </label>
-                                    <input name="name" type="text" placeholder="Search by Name ..." class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="hidden">Class </label>
-                                    <select name="class_id" class="select2 changeClass">
-                                        <option value="">Please Select Class</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                </div>
-                            </div>
-                        </form>
+                        
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
-                                        <th>Category</th>
-                                        <th>Class</th>
+                                        <th>Applied By</th>
+                                        <th>Title</th>
+                                        <th>Date</th>
                                         <th>Amount</th>
+                                        <th>Description</th>
                                         <th>Action</th>
-                                        {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -112,7 +91,9 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td colspan="11" class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
 
@@ -123,15 +104,19 @@
                                     @endphp
                                     @foreach ($data as $key=>$job)
                                         <tr>
-                                            <td>{{$sn1=+1}}</td>
-                                            <td>{{$job->category}}</td>
-                                            <td>{{$job->class}}</td>
+                                            <td>{{$sn1+=1}}</td>
+                                            <td>{{$job->staff_name}}</td>
+                                            <td>{{$job->title}}</td>
+                                            <td>{{$job->date}}</td>
                                             <td>{{$job->amount}}</td>
-                                            {{-- <td>{{$key}}</td> --}}
+                                            <td>{{$job->description}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                    <a href="{{route('admin.pages.updateInventoryCategory', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
-                                                    <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="InventoryCategory" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                    @if($currentUser->status < 3)
+                                                    <a href="{{route('staff.pages.updateExpanse', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    @else
+                                                    --
+                                                    @endif
 
                                                 </div>
                                             </td>
@@ -155,16 +140,8 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createInventoryCategory')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createExpanse')}}",data,ajaxResponseModal);
     }
-
-    // $('.remove_feeHead').on('click', function(){
-    //     data = {};
-    //     data['class_id'] = $(this).attr('class_id');
-    //     data['section_id'] = $(this).attr('section_id');
-    //     callApi('post',"{{route('admin.post.remove_cSection')}}",data,ajaxResponseModal);
-    // });
-    
 
 </script>
 

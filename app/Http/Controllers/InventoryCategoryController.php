@@ -9,7 +9,7 @@ class InventoryCategoryController extends Controller
 {
     //
     public function inventoryCategory(){
-        $data = InventoryCategory::join('classes','inventory_categories.class_id','classes.id')
+        $data = InventoryCategory::leftJoin('classes','inventory_categories.class_id','classes.id')
         // ->leftJoin('inventories','inventory_categories.id','inventories.category_id')
         ->select('inventory_categories.*','classes.class',
             \DB::raw('(select count(*) from inventories where inventories.category_id = inventory_categories.id) as sold')
@@ -19,7 +19,7 @@ class InventoryCategoryController extends Controller
     }
 
     public function inventoryCategoryFilter(Request $request){
-        $data = InventoryCategory::join('classes','inventory_categories.class_id','classes.id')
+        $data = InventoryCategory::leftJoin('classes','inventory_categories.class_id','classes.id')
         ->select('inventory_categories.*','classes.class')
         ->where('inventory_categories.class_id',$request->class_id)->get();
         return view('admin.pages.inventoryCategory',compact('data'));

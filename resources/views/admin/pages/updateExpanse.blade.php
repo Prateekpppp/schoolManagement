@@ -7,10 +7,10 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Inventory Category</h3>
+                                <h3>Update Expanse</h3>
                             </div>
-                            <div>
-                                <a href="{{route('admin.pages.inventoryCategory')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">View All</a>
+                            <div class="">
+                                <a href="{{route('staff.pages.expanse')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -29,26 +29,21 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <input type="hidden" name="id" value="{{$data->id}}">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Category Name *</label>
-                                    <input name="category" value="{{$data->category}}" type="text" placeholder="" class="form-control required">
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Title </label>
+                                    <input name="title" value="{{$data->title}}" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Quantity *</label>
-                                    <input name="quantity" value="{{$data->quantity}}" type="text" placeholder="" class="form-control required">
+                                    <label>Date *</label>
+                                    <input name="date" value="{{$data->date}}" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class </label>
-                                    <select name="class_id" class="select2">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($globalClasses as $class)
-                                            <option {{ $data->class_id == $class->id ? 'selected' : '' }} value="{{$class->id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
                                     <label>Amount *</label>
                                     <input name="amount" value="{{$data->amount}}" type="text" placeholder="" class="form-control required">
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                    <label>Description *</label>
+                                    <textarea name="description" placeholder="" class="form-control required !h-48">{{$data->description}}</textarea>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -72,7 +67,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createInventoryCategory')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createExpanse')}}",data,ajaxResponseModal);
     }
 
     // $('.remove_feeHead').on('click', function(){

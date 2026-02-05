@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Task</h3>
+                                <h3>Update Application</h3>
                             </div>
                             <div class="">
                                 <a href="{{route('staff.pages.applicationletter')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">View All</a>

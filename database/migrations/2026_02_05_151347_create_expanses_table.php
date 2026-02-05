@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_categories', function (Blueprint $table) {
-            // crud
+        Schema::create('expanses', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
-            $table->string('class_id')->nullable();
-            $table->string('quantity');
+            $table->string('title')->nullable();
+            $table->text('description');
+            $table->string('date')->nullable();
             $table->string('amount');
             $table->string('admin_username')->nullable();
-            $table->tinyInteger('status')->default(1);
+            // status => 0 = under review, 1 = Approved, 2 = Rejected
+            $table->tinyInteger('status')->default(0);
             $table->string('session_id')->nullable();
             $table->json('additional_data')->nullable();
             $table->timestamps();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_categories');
+        Schema::dropIfExists('expanses');
     }
 };

@@ -24,6 +24,7 @@ use App\Models\Student;
 use App\Models\StudentFee;
 use App\Models\Transaction;
 use App\Models\Driver;
+use App\Models\Expanse;
 use App\Models\Vehicle;
 use App\Models\ScRoute;
 use App\Models\StaffAttendance;
@@ -70,13 +71,14 @@ class AdminDataController extends Controller
         $driver = Driver::where('status',1)->count();
         $vehicle = Vehicle::where('status',1)->count();
         $routes = ScRoute::where('status',1)->count();
+        $expanse = Expanse::sum('amount');
 
         // staff data
 
 
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
        if($user->status == 1 || $user->status == 2){
-           return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes'));
+           return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes','expanse'));
         } elseif($user->status < 5){
             return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
 
