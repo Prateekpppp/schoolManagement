@@ -168,6 +168,10 @@
                                     <a href="{{route('admin.pages.applicants')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Applicants</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.principalmessage')}}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Principal Message</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
@@ -204,7 +208,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.pages.setting')}}" class="nav-link"><i
-                                    class="flaticon-settings"></i><span>Account</span></a>
+                                    class="flaticon-settings"></i><span>Setting</span></a>
                         </li>
                     </ul>
                 </div>

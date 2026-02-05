@@ -39,6 +39,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\PrincipalmessageController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StudentAttendanceController;
 use App\Http\Controllers\TaskController;
@@ -67,6 +68,13 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
           
+        // Principalmessage Module
+        Route::get('/principalmessage', [PrincipalmessageController::class,'read'])->name('admin.pages.principalmessage');
+
+        Route::post('/createPrincipalmessage', [PrincipalmessageController::class,'create'])->name('admin.post.createPrincipalmessage')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updatePrincipalmessage', [ExpanseController::class,'update'])->name('admin.pages.updatePrincipalmessage');
+
         // Expanse Module
         Route::get('/expanse', [ExpanseController::class,'read'])->name('admin.pages.expanse');
 

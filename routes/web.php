@@ -17,6 +17,8 @@ Route::middleware(['custom_session_middleware'])->group(function () {
 
     Route::get('/', [AppController::class,'index'])->name('user.index');
 
+    Route::get('/ourteam', [AppController::class,'ourteam'])->name('user.ourteam');
+
     Route::get('/about', function () {
         return view('pages.about');
     })->name('user.about');
@@ -29,9 +31,9 @@ Route::middleware(['custom_session_middleware'])->group(function () {
         return view('pages.mission');
     })->name('user.mission');
 
-    Route::get('/ourteam', function () {
-        return view('pages.ourteam');
-    })->name('user.ourteam');
+    // Route::get('/ourteam', function () {
+    //     return view('pages.ourteam');
+    // })->name('user.ourteam');
 
     Route::get('/testimonial', function () {
         return view('pages.testimonial');

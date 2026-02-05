@@ -826,6 +826,46 @@
       </div>
       <!-- faq-area-end -->
       
+      <!-- pricipal-area-start -->
+      <div id="pricipalMessage" class="it-about-2-area p-relative pt-30 pb-50">
+         <div class="it-about-2-shape-2 d-none d-xxl-block">
+            <img src="assets/img/about/shape-2-2.png" alt="">
+         </div>
+
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-md-4 ">
+                  <div class="it-about-2-thumb-wrap d-flex justify-content-between">
+                     <div class="it-about-2-thumb p-relative ">
+                        <img src="{{asset('/').$message->photo}}" alt="" width="100%">
+
+                        <div class="it-about-2-shape-1 d-none d-xxl-block">
+                           <img src="assets/img/about/shape-2-1.png" alt="">
+                        </div>
+                     </div>
+                     <!-- <div class="it-about-2-thumb">
+                        <img src="assets/img/about/thumb-2-2.jpg" alt="">
+                     </div> -->
+                  </div>
+               </div>
+               <div class="col-md-7">
+                  <div class="it-about-2-right">
+                     <div class="it-about-2-title-box pb-25">
+                        {{-- <span class="it-section-subtitle-2">our about us</span> --}}
+                        <h4 class="it-section-title">{{$message->name}}
+                        </h4>
+                     </div>
+                     <div class="it-about-2-text pb-5">
+                        <p>{{$message->description}}</p>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      <!-- pricipal-area-end -->
 
 @endsection
 
