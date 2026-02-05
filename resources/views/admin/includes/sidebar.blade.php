@@ -66,13 +66,19 @@
                             <a href="#" class="nav-link"><i class="fa fa-users"></i><span>Member</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pages.staff')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Member</a>
+                                    <a href="{{route('admin.pages.staff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Active Member</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.staff',['status'=>0])}}" class="nav-link"><i class="fas fa-angle-right"></i>Inactive Member</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.addStaff')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Member</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i>Attendance</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.applicationletter')}}" class="nav-link"><i class="fas fa-angle-right"></i>Application Letter</a>
                                 </li>
                             </ul>
                         </li>

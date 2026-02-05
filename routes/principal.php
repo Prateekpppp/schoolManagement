@@ -63,7 +63,7 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
         Route::post('/createTask', [TaskController::class,'createTask'])->name('principal.post.createTask')->withoutMiddleware([VerifyCsrfToken::class]);
         
-        Route::get('/updateStatus', [TaskController::class,'updateStatus'])->name('principal.get.updateStatus');
+        Route::get('/updateTaskStatus', [TaskController::class,'updateStatus'])->name('principal.get.updateTaskStatus');
 
         Route::get('/updateTask', [TaskController::class,'updateTask'])->name('principal.pages.updateTask');
 

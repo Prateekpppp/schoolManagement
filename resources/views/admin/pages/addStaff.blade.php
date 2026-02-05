@@ -68,6 +68,7 @@
                                         <option value="2">Co-Admin</option>
                                         <option value="3">Principal</option>
                                         <option value="4">Teacher</option>
+                                        <option value="7">Accountant</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">

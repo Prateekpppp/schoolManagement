@@ -62,32 +62,14 @@
                             </div>
                         </form>
                         @if($currentUser->status > 2)
-                        <form class="mg-b-20">
+                        <div class="mg-b-20">
                             <div class="row gutters-8">
-                                {{-- <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <label class="hidden">Date </label>
-                                    <input name="search" type="text" placeholder="Search by Date ..." class="form-control">
-                                </div> --}}
-
+                                <div class="col-lg-3 col-12 form-group">
                                 <input type="hidden" name="date" value="{{now()}}">
-                                <input type="hidden" name="location" value="">
-                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label class="">Make Attendance </label>
-                                    <select name="status" class="select2 hidden" readonly>
-                                        <option value="1" selected>Present</option>
-                                    </select>
-                                </div> --}}
-                                {{-- @if(strtotime($appdata->late_time) > strtotime(now()))
-                                <div class="col-md-3 col-12 form-group self-end">
-                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Check In</button>
-                                </div> 
-                                @else
-                                <div class="col-md-3 col-12 form-group self-end">
-                                    <button class="submitForm fw-btn-fill btn-gradient-yellow">Check Out</button>
+                                <input class="form-control" type="text" name="location" readonly>
                                 </div>
-                                @endif --}}
                             </div>
-                        </form>
+                        </div>
                         <div class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-lg-3 col-12 form-group">
@@ -180,7 +162,9 @@
     }
 
     function success(pos){
+        $('input[name=location]').val('');
         data['location'] =  JSON.stringify(pos.coords);
+        $('input[name=location]').val(pos.coords.latitude + ', ' + pos.coords.longitude);
         callApi('post',"{{route('staff.post.createAttendance')}}",data,responseFunc);
         
     }

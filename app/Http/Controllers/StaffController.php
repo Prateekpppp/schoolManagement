@@ -12,15 +12,20 @@ use Illuminate\Http\Request;
 class StaffController extends Controller
 {
     //
-    public function staff(){
+    public function staff(Request $request){
         $staff = Staff::join('classes','staff.class','=','classes.id')
         ->join('sections','staff.section','=','sections.id')
         ->get(['staff.*','classes.class','sections.section']);
 
         $data = Staff::join('subjects','subjects.id','staff.subject')
-        ->select('staff.*','subjects.subject')
-        ->where('staff.status','!=',0)->get();
-        // dd($staff);
+        ->select('staff.*','subjects.subject');
+        if(isset($request->status)){
+            $data = $data->where('staff.status',$request->status);
+        } else{
+            $data = $data->where('staff.status','!=',0);
+        }
+        $data = $data->get();
+        
         return view('admin.pages.staff',compact('data'));
     }
 
@@ -40,6 +45,9 @@ class StaffController extends Controller
         // dd($data->get());
         if($request->section_id){
             $data = $data->where('sections.id',$request->section_id);
+        }
+        if($request->status){
+            $data = $data->where('staff.status',$request->status);
         }
         $data = $data->get();
 

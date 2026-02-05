@@ -184,6 +184,20 @@
 
     });
 
+    $('.updateStatus').on('click',function(){
+        let data = {};
+
+        data['id'] = $(this).attr('data-id');
+        data['status'] = $(this).attr('data-status');
+        data['model'] = $(this).attr('data-model');
+        let url = $(this).attr('data-href');
+        if(!url){
+            url = '{{route('admin.post.updateStatus')}}';
+        }
+        callApi('post',url,data,ajaxResponse);
+
+    });
+
     $('.passwordType').on('click',function(){
         // $(this).find('i').toggleClass('fa-eye');
         let $passwordField = $(this).parent().find('input');

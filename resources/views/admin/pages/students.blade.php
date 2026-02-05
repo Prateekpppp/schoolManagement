@@ -60,13 +60,13 @@
                                         <th>S. No.</th>
                                         <th>Photo</th>
                                         <th>Enrollment No.</th>
-                                        <th>Admission No.</th>
+                                        {{-- <th>Admission No.</th> --}}
                                         <th>Name</th>
-                                        <th>Date Of birth</th>
+                                        {{-- <th>Date Of birth</th>
                                         <th>Gender</th>
-                                        <th>City</th>
+                                        <th>City</th> --}}
                                         <th>Phone</th>
-                                        <th>E-mail</th>
+                                        {{-- <th>E-mail</th> --}}
                                         <th>Father's Name</th>
                                         <th>Class</th>
                                         <th>Section</th>
@@ -81,16 +81,16 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            {{-- <td></td> --}}
+                                            {{-- <td></td> --}}
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
+                                            {{-- <td></td> --}}
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -103,18 +103,18 @@
                                                 <img src="{{asset('/').$job->photo}}" alt="photo" width="50px" height="50px">
                                             </td>
                                             <td>{{$job->enrollment_no}}</td>
-                                            <td>{{$job->admission_no}}</td>
+                                            {{-- <td>{{$job->admission_no}}</td> --}}
                                             <td>{{$job->name}}</td>
-                                            <td>{{$job->dob}}</td>
+                                            {{-- <td>{{$job->dob}}</td>
                                             <td>{{$job->gender ? 'Male' : 'Female'}}</td>
-                                            <td>{{$job->city}}</td>
+                                            <td>{{$job->city}}</td> --}}
                                             <td>{{$job->phone}}</td>
-                                            <td>{{$job->parent_email}}</td>
+                                            {{-- <td>{{$job->parent_email}}</td> --}}
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
                                             <td>
-                                                <img src="{{asset('/').$job->qrcode}}" alt="photo" width="100px" height="100px">
+                                                <img src="{{asset('/').$job->qrcode}}" alt="photo" width="70px">
                                             </td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>

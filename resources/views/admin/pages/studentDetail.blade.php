@@ -130,6 +130,14 @@
                                                 </td>
                                             </tr>
                                             @endif
+                                            <tr>
+                                                <td>Total Dues:</td>
+                                                <td class="font-medium text-dark-medium">{{$dueAmount ?? '--'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Paid:</td>
+                                                <td class="font-medium text-dark-medium">{{$paidAmount ?? '--'}}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

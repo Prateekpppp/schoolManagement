@@ -113,10 +113,8 @@
 
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨️ Print Admit Card</button>
-
-<div class="admit-card">
-
+<div class="admit-card relative">
+    <img src="{{asset('/').$appdata->logo}}" alt="logo" class="w-full h-full opacity-10 absolute top-0 left-0">
     <div class="header">
         <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
         <h1>{{$appdata->title}}</h1>
@@ -126,11 +124,6 @@
     </div>
 
     <table>
-        {{-- <tr>
-            <th colspan="8" class="section-title">
-                PERIODIC ASSESSMENT – II (2025-26)
-            </th>
-        </tr> --}}
 
         <tr class="details">
             <td>Admission No.</td><td>{{$students->admission_no}}</td>
@@ -177,15 +170,10 @@
             <td>Class Teacher Sign</td>
             <td>Exam Controller Sign</td>
             <td>
-                <div class="flex flex-col justify-center items-center">
-                    <img src="{{asset('/').$appdata->signature}}" alt="logo" width="150px">
-                    <span>Principal Sign</span>
-                </div>
-            </td>
-            <td>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center relaive">
                     <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px">
-                    <span>School Seal</span>
+                    <img class="absolute" src="{{asset('/').$appdata->signature}}" alt="logo" width="150px">
+                    <span>Principal Sign</span>
                 </div>
             </td>
         </tr>
@@ -201,6 +189,8 @@
     </div>
 
 </div>
+<button class="print-btn" onclick="window.print()">🖨️ Print Admit Card</button>
+
 
 </body>
 </html>

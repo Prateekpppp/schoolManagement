@@ -76,6 +76,17 @@ class AppdataController extends Controller
         }
     }
 
+    public function updateStatus(Request $request){
+        $model = 'App\\Models\\' . $request->model;
+        $model = app($model);
+        $item = $model->where('id',$request->id)->update(['status'=>$request->status]);
+        return response()->json([
+            'redirect'=> $request->header('referer'),
+            'message'=> 'Data updated successfully',
+            'response_code'=> '200',
+        ]);
+    }
+
     public function inactive(Request $request){
         $model = 'App\\Models\\' . $request->model;
         $model = app($model);

@@ -85,7 +85,10 @@ class StudentController extends Controller
         $sections = ClassSection::where('status',1)->get();
         $fees = Fee::where('status',1)->get();
         $scRoutes = ScRoute::where('status',1)->get();
-        return view('admin.pages.addStudent',compact('classes','sections','fees','scRoutes'));
+        $students = Student::join('classes','students.class','classes.id')
+        ->select('students.*','classes.class')
+        ->where('students.status',1)->get();
+        return view('admin.pages.addStudent',compact('classes','sections','fees','scRoutes','students'));
     }
 
     public function updateStudent(Request $request){
@@ -455,8 +458,20 @@ class StudentController extends Controller
             $student = $student->where('students.enrollment_no',$this->currentUser->username)->first();
         }
         // dd($student->id);
-        $studentFeeInvoice = Feeinvoice::where('student_id',$student->id)->where('status','!=',2)->first();
-        return view('admin.pages.studentDetail',compact('student','studentFeeInvoice'));
+        // $studentFeeInvoice = Feeinvoice::withSum('transactions','transaction_amount')->where('student_id',$student->id)->where('status','!=',2);
+
+        $studentFeeInvoice = Feeinvoice::join('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        ->where('feeinvoices.student_id',$student->id)->where('feeinvoices.status','!=',2)
+        ->select('feeinvoices.*','transactions.transaction_amount');
+        
+        $totalAmount = $studentFeeInvoice->sum('feeinvoices.total_amount');
+
+        $paidAmount = $studentFeeInvoice->sum('transactions.transaction_amount');
+
+        $dueAmount = $totalAmount - $paidAmount;
+        dd($dueAmount);
+        $studentFeeInvoice = $studentFeeInvoice->first();
+        return view('admin.pages.studentDetail',compact('student','paidAmount','dueAmount','studentFeeInvoice'));
     }
     
     public function studentIdcard(Request $request){

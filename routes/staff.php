@@ -14,6 +14,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\ApplicationletterController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\SectionController;
@@ -48,6 +49,11 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     Route::prefix('staff')->group(function () {
         
         Route::get('/dashboard', [AdminDataController::class,'index'])->name('staff.index');
+
+        // Applicationletter Module
+        Route::get('/applicationletter', [ApplicationletterController::class,'read'])->name('staff.pages.applicationletter');
+
+        Route::get('/updateApplicationletter', [ApplicationletterController::class,'updateApplicationletter'])->name('staff.pages.updateApplicationletter');
 
         // Staff Attendance Module
         Route::post('/createAttendance', [StaffAttendanceController::class,'create'])->name('staff.post.createAttendance')->withoutMiddleware([VerifyCsrfToken::class]);

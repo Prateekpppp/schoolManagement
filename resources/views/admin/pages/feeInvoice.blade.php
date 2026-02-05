@@ -141,7 +141,7 @@
                                             <td>{{$job->total_amount-$job->total_transaction_amount}}</td>
                                             <td>
                                                 <b class='{{$job->total_amount == $job->total_transaction_amount ? "text-green-700" : 'text-red-700'}}'>
-                                                {{$job->total_amount == $job->total_transaction_amount ? "Paid" : 'Partially Paid'}}
+                                                {{$job->total_amount == $job->total_transaction_amount ? "Paid" : ($job->total_transaction_amount > 0 ? "Partially Paid" : "Unpaid")}}
                                                 </b>
                                             </td>
                                             <td>

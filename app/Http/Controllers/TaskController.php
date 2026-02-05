@@ -10,8 +10,8 @@ class TaskController extends Controller
     //
     public function task(Request $request){
         $data = Task::all();
-        // dd($data);
-        return view('principal.pages.task',compact('data'));
+        // dd($this->currentUser,$data);
+        return view('admin.pages.task',compact('data'));
     }
 
     public function allTask(){

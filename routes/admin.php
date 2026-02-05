@@ -15,6 +15,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\ApplicationletterController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\SectionController;
@@ -65,6 +66,15 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
     
     Route::prefix('admin')->group(function () {
           
+        // Applicationletter Module
+        Route::get('/applicationletter', [ApplicationletterController::class,'read'])->name('admin.pages.applicationletter');
+
+        Route::post('/createApplicationletter', [ApplicationletterController::class,'create'])->name('admin.post.createApplicationletter')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::get('/updateTaskStatus', [TaskController::class,'updateStatus'])->name('admin.get.updateTaskStatus');
+
+        Route::get('/updateApplicationletter', [ApplicationletterController::class,'updateApplicationletter'])->name('admin.pages.updateApplicationletter');
+
         // Student Attendance Module
         Route::post('/createStudentAttendance', [StudentAttendanceController::class,'create'])->name('admin.post.createStudentAttendance')->withoutMiddleware([VerifyCsrfToken::class]);
         
@@ -431,7 +441,9 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
 
         // delete operation
-        Route::post('/delete', [AppdataController::class,'delete'])->name('admin.post.delete')->withoutMiddleware([VerifyCsrfToken::class]);        
+        Route::post('/delete', [AppdataController::class,'delete'])->name('admin.post.delete')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::post('/updateStatus', [AppdataController::class,'updateStatus'])->name('admin.post.updateStatus')->withoutMiddleware([VerifyCsrfToken::class]);        
         
         Route::post('/inactive', [AppdataController::class,'inactive'])->name('admin.post.inactive')->withoutMiddleware([VerifyCsrfToken::class]);        
         

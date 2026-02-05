@@ -34,6 +34,9 @@
                         <li class="nav-item">
                             <a href="{{route('principal.pages.staffSalary')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Salary Report</span></a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('staff.pages.applicationletter')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Application Letter</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

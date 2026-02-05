@@ -112,7 +112,11 @@
                                             <td>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStaff', ['id' => $job->id])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.staffDetail',$job->id)}}">Details</a>
-                                                <a href="javascript:void(0)" data-model="Staff" data-id="{{$job->id}}" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                @if($job->status == 1)
+                                                <a href="javascript:void(0)" data-model="Staff" data-id="{{$job->id}}" data-status="0" class="updateStatus btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                @else
+                                                <a href="javascript:void(0)" data-model="Staff" data-id="{{$job->id}}" data-status="1" class="updateStatus btn fw-btn-fill btn-gradient-yellow !bg-green-600 !max-w-min" href="javascript:void(0)">Restore</a>
+                                                @endif
                                             </td>
                                         </tr>
                                         

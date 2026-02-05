@@ -346,7 +346,7 @@
     }
     
     $('.searchSibling').on('click', function(){
-        callApi('post',"{{route('admin.post.studentDetailByEnrollNo')}}",{enrollment_no:$('input[name=enrollment_no]').val()},searchSibling);
+        callApi('post',"{{route('admin.post.studentDetailByEnrollNo')}}",{enrollment_no:$('select[name=enrollment_no]').val()},searchSibling);
     });
     
     function submitForm(form){
