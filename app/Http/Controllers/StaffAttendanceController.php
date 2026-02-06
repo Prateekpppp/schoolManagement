@@ -220,7 +220,7 @@ class StaffAttendanceController extends Controller
             $year = Carbon::parse($request->salary_date)->year;
             
             $data = StaffAttendance::join('staff','staff.id','staff_attendances.staff_id')
-            ->where('staff_id',$request->staff_id)
+            ->where('staff.phone',$request->staff_id)
             ->whereMonth('date',$month)
             ->whereYear('date',$year)
             ->select(

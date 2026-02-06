@@ -93,6 +93,101 @@ class TransactionController extends Controller
 
     }
 
+    function print_invoice_by_id($id){
+
+        $data = Feeinvoice::where('id',$id)
+        // ->join('transactions','transactions.invoice_id','feeinvoices.feeinvoice_no')
+        // ->select(\DB::raw('select sum(transaction_amount) from transactions as transaction_amount where transactions.invoice_id=feeinvoices.feeinvoice_no'))
+        ->first();
+
+        $currentPaid = Transaction::where('invoice_id',$data->feeinvoice_no)->sum('transaction_amount');
+
+        $date = Carbon::parse($data->invoice_date);
+        
+        $invoice_date = $date->format('d-M-Y');
+        $invoice_date = Carbon::parse($data->invoice_date)->format('d-M-Y');
+
+        $month = $date->format('m');
+        
+        $previous_invoices = Feeinvoice::where('month','<',$month)->where('student_id',$data->student_id)->get();
+
+        $previous_amount = Feeinvoice::where('month','<',$month)->where('student_id',$data->student_id)->sum('total_amount');
+        
+        $total_paid = 0;
+
+        foreach ($previous_invoices as $key => $value) {
+            
+            $total_paid += Transaction::where('invoice_id',$value->feeinvoice_no)->where('student_id',$data->student_id)->sum('transaction_amount');
+        }
+        
+        $previous_due_amount = $previous_amount - $total_paid;
+        
+        $student = Student::join('classes','classes.id','students.class')
+        ->join('sections','sections.id','students.section')
+        ->select('students.*','classes.class','sections.section')
+        ->where('students.id',$data->student_id)
+        ->first();
+
+        $studentFee = StudentFee::where('student_id',$data->student_id);
+
+        $fees = Fee::joinSub($studentFee,'studentFee',function($join){
+            $join->on('studentFee.fee_id','fees.id');
+        })
+        ->select('fees.*')
+        ->get();
+
+        $invoiceMonth = $data->month;
+        
+        $scRoute = StudentRoute::where('student_id',$data->student_id)->first();
+
+        if($scRoute){
+            $scRoute = ScRoute::where('id',$scRoute->sc_route_id)->first();
+        }
+        
+        $allData = [
+            'data' => $data,
+            'currentPaid' => $currentPaid,
+            'date' => $date,
+            'invoice_date' => $invoice_date,
+            'month' => $month,
+            'previous_amount' => $previous_amount,
+            'total_paid' => $total_paid,
+            'previous_due_amount' => $previous_due_amount,
+            'student' => $student,
+            'fees' => $fees,
+            'invoiceMonth' => $invoiceMonth,
+            'scRoute' => $scRoute,
+        ];
+        $allData = (object)$allData;
+
+        return $allData;
+
+    }
+
+    function print_allInvoice(Request $request){
+        $request->invoices = json_decode($request->invoices);
+        $invoices = [];
+        foreach($request->invoices as $key => $id){
+            $invoices[] = $this->print_invoice_by_id($id);
+        }
+        
+        // return response()->json([
+        //     // 'redirect'=> $request->previous_url,
+        //     'response_code'=>'200',
+        //     'message'=>'Data updated successfully'
+        // ]);
+
+        return view('admin.pages.print_allInvoice',compact('invoices'));
+    }
+
+    // function print_allInvoice(Request $request){
+    //     $invoices = [];
+    //     foreach($request->invoices as $key => $id){
+    //         $invoices[] = $this->print_invoice_by_id($id);
+    //     }
+    //     return view('admin.pages.print_allInvoice',compact('invoices'));
+    // }
+
     function print_receipt(Request $request){
 
         $data = Transaction::where('id',$request->id)->first();

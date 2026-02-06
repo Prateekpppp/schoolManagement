@@ -154,6 +154,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @if($currentUser->status == 1)
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-globe"></i><span>Frontend</span></a>
                             <ul class="nav sub-group-menu">
@@ -210,6 +211,7 @@
                             <a href="{{route('admin.pages.setting')}}" class="nav-link"><i
                                     class="flaticon-settings"></i><span>Setting</span></a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

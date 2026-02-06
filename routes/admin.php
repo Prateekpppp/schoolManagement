@@ -66,6 +66,10 @@ Route::middleware(['admin_auth_middleware','custom_admin_session_middleware'])->
 
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
     
+    Route::prefix('account')->group(function () {
+        Route::get('/dashboard', [AdminDataController::class,'accountant'])->name('account.pages.dashboard');
+    });
+
     Route::prefix('admin')->group(function () {
           
         // Principalmessage Module
@@ -386,6 +390,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::get('/paymentHistory', [TransactionController::class,'paymentHistory'])->name('admin.pages.paymentHistory');
        
         Route::get('/print_invoice', [TransactionController::class,'print_invoice'])->name('admin.pages.print_invoice');
+
+        Route::get('/print_allInvoice', [TransactionController::class,'print_allInvoice'])->name('admin.get.print_allInvoice');
 
         Route::get('/print_receipt', [TransactionController::class,'print_receipt'])->name('admin.pages.print_receipt');
 

@@ -94,6 +94,12 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">All</label>
+                                            </div>
+                                        </th>
                                         <th>S.NO.</th>
                                         <th>Student</th>
                                         <th>Father's Name</th>
@@ -116,6 +122,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
                                             <td></td>
                                             <td></td>
@@ -127,6 +134,12 @@
                                     @else
                                     @foreach ($fee as $k=>$job)
                                         <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input data-value="{{$job->id}}" type="checkbox" name="invoices[]" class="form-check-input checkOne">
+                                                    <label class="form-check-label">Check</label>
+                                                </div>
+                                            </td>
                                             <td>{{$k+1}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->father_name}}</td>
@@ -158,6 +171,10 @@
                                     @endif
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="flex flex-row gap-2 justify-center py-2">
+                            <a href="javascript:void(0)" class="modal-trigger generateInvoices" >Bulk Invoices</a>
+
                         </div>
                     </div>
                 </div>
@@ -228,6 +245,55 @@
         callAjaxFormData('post',"{{route('admin.post.collectFee')}}",data,ajaxResponseModal);
     }
 
+    // Bulk print
+    let data = [];
+
+    $('.checkAll').on('click', function(){
+        data = [];
+        console.log('check status',$('.checkAll').is(':checked'));
+        
+        let $checkboxes = $(this).parents('table').find('tbody').find('input[type=checkbox]');
+        // $checkboxes.prop('checked', $('.checkAll').is(':checked'));
+        
+
+        if($(this).is(':checked')){
+            $(this).parents('.table').find('.checkOne').prop('checked', this.checked);
+            $checkboxes.map(function(){
+                data.push($(this).attr('data-value'));
+            });
+
+        } else{
+            data = [];
+        }
+        
+    });
+
+    $('.checkOne').on('click',function(){
+        if($(this).is(':checked')){
+            data.push($(this).attr('data-value'));
+
+        } else{
+            data = data.filter(item => item != $(this).attr('data-value'));
+        }
+        
+    });
+
+    $('.generateInvoices').on('click',function(e){
+        
+        $(this).addClass('disabled');
+        if(data.length == 0){
+            responseToast('Please Select Invoice', 'bg-warning');
+            // $('.closeModel').click();
+            $(this).removeClass('disabled');
+            return;
+        }
+
+        data = JSON.stringify(data);
+
+        window.location.href = "{{route('admin.get.print_allInvoice')}}?invoices="+data;
+        
+        // callApi('get',"{{route('admin.get.print_allInvoice')}}",{invoices:data},ajaxResponseModal);
+    });
 </script>
 
 @endsection

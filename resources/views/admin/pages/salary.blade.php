@@ -34,10 +34,19 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Staff </label>
-                                    <select name="staff_id" class="select2 required">
+                                    <select name="staff_id" class="select2">
                                         <option value="">Please Select Staff *</option>
                                         @foreach($staff as $class)
-                                            <option value="{{$class->id}}">{{$class->name}}</option>
+                                            <option value="{{$class->phone}}">{{$class->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Driver </label>
+                                    <select name="driver_id" class="select2">
+                                        <option value="">Please Select Driver *</option>
+                                        @foreach($drivers as $driver)
+                                            <option value="{{$driver->phone}}">{{$driver->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -177,7 +186,7 @@
                                         <tr>
                                             <td>{{$sn1+=1}}</td>
                                             <td>{{date('d-M-Y',strtotime($job->salary_date))}}</td>
-                                            <td>{{$job->name}}</td>
+                                            <td>{{$job->name ?? $job->driver_name ?? 'N/A'}}</td>
                                             <td>{{$job->total_present}}</td>
                                             <td>{{$job->total_half_day}}</td>
                                             <td>{{$job->total_leave}}</td>

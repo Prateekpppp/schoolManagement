@@ -7,6 +7,9 @@
                </div>
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+                        <li class="nav-item">
+                            <a href="{{route('account.pages.dashboard')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
+                        </li>
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-coins"></i><span>Fee Collection</span></a>
                             <ul class="nav sub-group-menu">
@@ -36,6 +39,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.salary')}}" class="nav-link"><i class="fas fa-angle-right"></i>Salary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.expanse')}}" class="nav-link"><i class="fas fa-angle-right"></i>Expense</a>
                                 </li>
                             </ul>
                         </li>

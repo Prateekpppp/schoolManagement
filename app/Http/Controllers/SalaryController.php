@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\Salary;
@@ -13,17 +14,19 @@ class SalaryController extends Controller
     //
 
     public function inventory(){
-        $data = Salary::join('staff','salaries.staff_id','staff.id')
-        ->select('salaries.*','staff.name')
+        $data = Salary::leftJoin('staff','salaries.staff_id','staff.phone')
+        ->leftJoin('drivers','salaries.staff_id','drivers.phone')
+        ->select('salaries.*','staff.name','drivers.name as driver_name')
         ->where('salaries.status',1)->get();
-
+        
         $staff = Staff::where('status','!=',0)->get();
+        $drivers = Driver::where('status','!=',0)->get();
         // dd($data);
-        return view('admin.pages.salary',compact('data','staff'));
+        return view('admin.pages.salary',compact('data','staff','drivers'));
     }
 
     public function staffSalary(Request $request){
-        $data = Salary::join('staff','salaries.staff_id','staff.id')
+        $data = Salary::join('staff','salaries.staff_id','staff.phone')
         ->select('salaries.*','staff.name')
         ->where('staff.phone',$this->currentUser->username)
         ->where('salaries.status',1)
@@ -63,7 +66,12 @@ class SalaryController extends Controller
         try{
             if(!$request->id){
                 $fee = new Salary();
-                $fee->staff_id = $request->staff_id;
+                if($request->staff_id){
+                    $fee->staff_id = $request->staff_id;
+                } else{
+                        $fee->staff_id = $request->driver_id;
+                        
+                }
                 $fee->total_present = $request->total_present;
                 $fee->total_half_day = $request->total_half_day;
                 $fee->total_late = $request->total_late;

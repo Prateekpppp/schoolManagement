@@ -144,6 +144,10 @@
 
                     </tr>
                     <tr>
+                        <td colspan="2" class="fw-bold text-end">Previous Paid</td>
+                        <td class="fw-bold">{{$currentPaid}} /-</td>
+                    </tr>
+                    <tr>
                         <td colspan="2" class="fw-bold text-end">Previous Dues</td>
                         <td class="fw-bold">{{$previous_due_amount}} /-</td>
                     </tr>

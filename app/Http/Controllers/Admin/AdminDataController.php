@@ -25,6 +25,8 @@ use App\Models\StudentFee;
 use App\Models\Transaction;
 use App\Models\Driver;
 use App\Models\Expanse;
+use App\Models\Inventory;
+use App\Models\Salary;
 use App\Models\Vehicle;
 use App\Models\ScRoute;
 use App\Models\StaffAttendance;
@@ -38,6 +40,54 @@ class AdminDataController extends Controller
     //     return new 'App'.'\\'.studly_case(strtolower(str_singular($tableName)));
     // }
 
+    public function accountant(){
+        $user = $this->currentUser;
+
+        $allTransactions = Transaction::select(
+            'invoice_id',
+            \DB::raw('sum(transaction_amount) as total_transaction_amount')
+        )->groupBy('invoice_id');
+
+        $fee = \DB::table('feeinvoices')
+        ->join('students','students.id','feeinvoices.student_id')
+        ->join('classes','students.class','classes.id')
+        ->join('sections','students.section','sections.id')
+        ->leftJoinSub($allTransactions,'allTransactions',function($join){
+            $join->on('feeinvoices.feeinvoice_no','allTransactions.invoice_id');
+        })
+        ->select(
+            'feeinvoices.id',
+            'feeinvoices.invoice_date',
+            'feeinvoices.month',
+            'feeinvoices.total_amount',
+            'feeinvoices.status',
+            'students.name',
+            'students.father_name',
+            'students.admission_no',
+            'classes.class',
+            'sections.section',
+            'allTransactions.total_transaction_amount'
+        )
+        ->orderBy('feeinvoices.id','desc');
+
+        $fee = $fee->where('feeinvoices.session_id',session('session_id'));
+
+        $totalInvoiceAmount = $fee->sum('feeinvoices.total_amount');
+        $totalPaidAmount = $fee->sum('allTransactions.total_transaction_amount');
+        $totalDueAmount = $totalInvoiceAmount - $totalPaidAmount;
+
+        // dd($totalDueAmount,$totalPaidAmount);
+        $fee = $fee->get();
+
+        $expanse = Expanse::sum('amount');
+        $inventory = Inventory::sum('total_amount');
+
+        $total_salary = Salary::sum('total_salary');
+        $security_deposit = Salary::sum('security_deposit');
+
+        return view('account.pages.index',compact('totalDueAmount','totalPaidAmount','expanse','inventory','total_salary','security_deposit'));
+    }
+
     public function checkMasterPassword($masterPassword){
             
         $user = User::getCurrentUser();
@@ -49,6 +99,10 @@ class AdminDataController extends Controller
     
     public function index(){
         $user = User::getCurrentUser();
+        if ($user->status == 7) {
+            return redirect()->route('account.pages.dashboard');
+            
+        }
         $classes = Classes::where('status',1)->count();
         $sections = Section::where('status',1)->count();
         $students = Student::where('status',1)->where('session_id',session('session_id'))->count();
@@ -98,10 +152,6 @@ class AdminDataController extends Controller
 
         if ($user->status == 6) {
             return view('driver.pages.index',compact('classes','sections','students','present','absent'));
-            
-        }
-        if ($user->status == 7) {
-            return redirect()->route('admin.pages.feeHead');
             
         }
         
