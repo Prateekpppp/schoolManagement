@@ -21,6 +21,7 @@ use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
@@ -72,6 +73,12 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
     Route::prefix('admin')->group(function () {
           
+        // Certificates Module
+        
+        Route::get('/certificate', [CertificateController::class,'certificate'])->name('admin.pages.certificate');
+
+        Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
+
         // Principalmessage Module
         Route::get('/principalmessage', [PrincipalmessageController::class,'read'])->name('admin.pages.principalmessage');
 

@@ -118,9 +118,23 @@
                                             </td>
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
-                                                <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                <div class="flex flex-row gap-2 justify-center items-center">
+                                                    <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.updateStudent', ['id' => $job->id])}}">Edit</a>
+                                                    <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
+                                                    <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
+                                                    
+                                                    <div class="dropdown !inline-block">
+                                                        <span class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                            <a class="dropdown-item btn fw-btn-fill btn-gradient-yellow !max-w-min" href="#">More</a>
+                                                        </span>
+    
+                                                        <div class="dropdown-menu dropdown-menu-right p-0">
+                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'tc'])}}"><i class="fa fa-docs text-orange-red"></i>Transfer Certificate</a>
+                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'mg'])}}"><i class="fa fa-docs text-orange-red"></i>Migration Certificate</a>
+                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'cc'])}}"><i class="fa fa-docs text-orange-red"></i>Character Certificate</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         

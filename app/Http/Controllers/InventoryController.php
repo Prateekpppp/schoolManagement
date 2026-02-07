@@ -10,7 +10,7 @@ use App\Models\Student;
 class InventoryController extends Controller
 {
     //
-    public function inventory(){
+    public function inventory(Request $request){
         $inventoryCategory = InventoryCategory::join('classes','inventory_categories.class_id','classes.id')
         ->select('inventory_categories.*','classes.class')
         ->where('inventory_categories.status',1)->get();
@@ -20,9 +20,17 @@ class InventoryController extends Controller
         $data = Inventory::join('inventory_categories','inventories.category_id','inventory_categories.id')
         ->join('classes','inventories.class_id','classes.id')
         ->join('students','inventories.student_id','students.id')
-        ->select('inventories.*','inventory_categories.category','classes.class','students.name as student_name','students.admission_no')
+        ->select('inventories.*','inventory_categories.category','classes.class','students.name as student_name','students.admission_no');
+
+        if($request->name){
+            $data = $data->where('inventory_categories.category','like','%'.$request->name.'%');
+        }
+        if($request->class_id){
+            $data = $data->where('inventories.class_id',$request->class_id);
+        }
+
         // ->where('inventories.status',1)
-        ->get();
+        $data = $data->get();
         // dd($data);
         return view('admin.pages.inventory',compact('data','inventoryCategory','students'));
     }
@@ -53,6 +61,15 @@ class InventoryController extends Controller
 
     public function createInventory(Request $request){
         try{
+            $inventoryCount = InventoryCategory::where('id',$request->category_id)->first();
+            $inventoryCount = $inventoryCount->quantity;
+            $inventoryCount = $inventoryCount - 1;
+            if($inventoryCount == 0){
+                return response()->json([
+                    'message' => 'Out of Stock',
+                    'response_code' => '306'
+                ]);
+            }
             if(!$request->id){
                 $fee = new Inventory();
                 $fee->invoice_no = $request->invoice_no;

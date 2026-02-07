@@ -72,6 +72,10 @@ class AdminDataController extends Controller
 
         $fee = $fee->where('feeinvoices.session_id',session('session_id'));
 
+        $todayInvoiceAmount = $fee->whereDate('feeinvoices.created_at', today())->sum('feeinvoices.total_amount');
+        $todayPaidAmount = $fee->whereDate('feeinvoices.created_at', today())->sum('allTransactions.total_transaction_amount');
+        $todayDueAmount = $todayInvoiceAmount - $todayPaidAmount;
+
         $totalInvoiceAmount = $fee->sum('feeinvoices.total_amount');
         $totalPaidAmount = $fee->sum('allTransactions.total_transaction_amount');
         $totalDueAmount = $totalInvoiceAmount - $totalPaidAmount;
@@ -80,12 +84,13 @@ class AdminDataController extends Controller
         $fee = $fee->get();
 
         $expanse = Expanse::sum('amount');
+        $todayExpanse = Expanse::whereDate('created_at', today())->sum('amount');
         $inventory = Inventory::sum('total_amount');
 
         $total_salary = Salary::sum('total_salary');
         $security_deposit = Salary::sum('security_deposit');
 
-        return view('account.pages.index',compact('totalDueAmount','totalPaidAmount','expanse','inventory','total_salary','security_deposit'));
+        return view('account.pages.index',compact('totalDueAmount','totalPaidAmount','expanse','inventory','total_salary','security_deposit','todayExpanse','todayPaidAmount','todayDueAmount'));
     }
 
     public function checkMasterPassword($masterPassword){
@@ -152,6 +157,11 @@ class AdminDataController extends Controller
 
         if ($user->status == 6) {
             return view('driver.pages.index',compact('classes','sections','students','present','absent'));
+            
+        }
+
+        if ($user->status == 7) {
+            return view('account.pages.index',compact('classes','sections','students','present','absent'));
             
         }
         

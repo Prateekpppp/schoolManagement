@@ -113,15 +113,15 @@
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                     @if($currentUser->status < 3)
-                                                    <a href="javascript:void(0)" data-id="{{$job->id}}" data-status="1" data-model="Applicationletter" class="updateStatus btn fw-btn-fill btn-gradient-yellow !max-w-min">Approve</a>
-                                                    <a href="javascript:void(0)" data-id="{{$job->id}}" data-status="2" data-model="Applicationletter" class="updateStatus btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min">Reject</a>
+                                                    <a href="javascript:void(0)" data-id="{{$job->id}}" data-status="1" data-model="Applicationletter" class="updateStatus btn fw-btn-fill btn-gradient-yellow !max-w-min {{$job->status == 1 ? 'hidden' : '' }}">Approve</a>
+                                                    <a href="javascript:void(0)" data-id="{{$job->id}}" data-status="2" data-model="Applicationletter" class="updateStatus btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min {{$job->status == 1 ? 'hidden' : '' }}">Reject</a>
                                                     @else
-                                                    <a href="{{route('staff.pages.updateApplicationletter', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min">Edit</a>
+                                                    <a href="{{route('staff.pages.updateApplicationletter', ['id' => $job->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min {{$job->status == 1 ? 'hidden' : '' }}">Edit</a>
                                                     @endif
 
-                                                    {{-- @if($job->status == 1 && $currentUser->status < 3)
+                                                    @if($job->status == 1 && $currentUser->status < 3)
                                                     <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->id}}" data-model="Applicationletter" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
-                                                    @endif --}}
+                                                    @endif
 
                                                 </div>
                                             </td>

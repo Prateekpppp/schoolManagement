@@ -13,8 +13,8 @@
                @foreach($data as $staff)
                <div class="col-xl-3 col-lg-4 col-md-6 mb-30">
                   <div class="it-team-3-item text-center">
-                     <div class="it-team-3-thumb fix">
-                        <img src="{{ asset($staff->photo) }}" alt="">
+                     <div class="it-team-3-thumb fix h-[300px]" style="background: url({{ asset($staff->photo) }}); background-size:cover; background-position: center center">
+                        {{-- <img src="{{ asset($staff->photo) }}" alt=""> --}}
                      </div>
                      <div class="it-team-3-content">
                         
