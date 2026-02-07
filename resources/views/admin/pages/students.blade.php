@@ -129,9 +129,9 @@
                                                         </span>
     
                                                         <div class="dropdown-menu dropdown-menu-right p-0">
-                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'tc'])}}"><i class="fa fa-docs text-orange-red"></i>Transfer Certificate</a>
-                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'mg'])}}"><i class="fa fa-docs text-orange-red"></i>Migration Certificate</a>
-                                                            <a class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'cc'])}}"><i class="fa fa-docs text-orange-red"></i>Character Certificate</a>
+                                                            <a target="_blank" class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'tc'])}}"><i class="fa fa-docs text-orange-red"></i>Transfer Certificate</a>
+                                                            <a target="_blank" class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'mg'])}}"><i class="fa fa-docs text-orange-red"></i>Migration Certificate</a>
+                                                            <a target="_blank" class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'cc'])}}"><i class="fa fa-docs text-orange-red"></i>Character Certificate</a>
                                                         </div>
                                                     </div>
                                                 </div>

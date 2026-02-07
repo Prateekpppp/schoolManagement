@@ -24,7 +24,9 @@
         font-size: 13px;
     }
     .school-name {
-        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
         margin-top: 10px;
     }
     .school-name h2 {
@@ -84,20 +86,21 @@
     </div> --}}
 
     <div class="school-name">
-        <h2>SIMPTION TECH PVT LTD</h2>
-        <p>B-32 plot no. , IT PARK near abbas nagar, gandhi nagar, bhopal - M.P.</p>
+        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+        <h2>{{$appdata->title}}</h2>
+        <p>{{$appdata->address}}</p>
         <p>Ph: {{$appdata->phone}} &nbsp; Email: {{$appdata->email}}</p>
     </div>
 
     <div class="meta">
-        <div><strong>Sr. No. :</strong> 371</div>
+        {{-- <div><strong>Sr. No. :</strong> 371</div> --}}
         <div><strong>Date :</strong> {{date('d-m-Y')}}</div>
     </div>
 
     <div class="title">TRANSFER CERTIFICATE</div>
 
     <div class="meta">
-        <div><strong>TC No. :</strong> 47</div>
+        {{-- <div><strong>TC No. :</strong> 47</div> --}}
         <div><strong>Admission No. :</strong> {{$data->admission_no}}</div>
     </div>
 

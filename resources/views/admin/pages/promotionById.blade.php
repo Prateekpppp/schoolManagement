@@ -1,0 +1,86 @@
+@extends('admin.inner_master')
+
+@section('inner_body')
+
+                <!-- Add New Teacher Area Start Here -->
+
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>Student Promotion</h3>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                    aria-expanded="false">...</a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="new-added-form">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Name </label>
+                                    <input type="hidden" name="promotion_id" value="{{$data->promotion_id ?? ''}}">
+                                    <input type="hidden" name="student_id" value="{{$data->id}}">
+                                    <input name="name" type="text" value="{{$data->name}}" class="form-control" readonly>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Current Session </label>
+                                    <input name="from_session_id" value="{{$studentSessions->session_name}}" type="text" placeholder="" class="form-control" readonly>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Promote To Session </label>
+                                    <select name="to_session_id" class="select2 changeClass required">
+                                        <option value="">Please Select Session *</option>
+                                        @foreach($allSessions as $class)
+                                            <option value="{{$class->id}}">{{$class->session_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Current Class </label>
+                                    <input name="from_class_id" type="text" value="{{$StudentClasses->class}}" class="form-control" readonly>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Promote To Class </label>
+                                    <select name="to_class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 form-group mg-t-8">
+                                    <button type="submit"
+                                        class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                    <button type="reset"
+                                        class="reset_form btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+@endsection
+
+
+@section('inner_js')
+
+<script>
+
+    function submitForm(form){
+        let data = new FormData($(form)[0]);
+        callAjaxFormData('post',"{{route('admin.post.createApplicationletter')}}",data,ajaxResponseModal);
+    }
+
+</script>
+
+@endsection

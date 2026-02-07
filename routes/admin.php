@@ -41,6 +41,7 @@ use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
 use App\Http\Controllers\PrincipalmessageController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StudentAttendanceController;
 use App\Http\Controllers\TaskController;
@@ -73,10 +74,21 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
     Route::prefix('admin')->group(function () {
           
+        // Promotion Module
+        
+        Route::get('/promote', [PromotionController::class,'index'])->name('admin.pages.promote');
+
+        Route::get('/promotionById', [PromotionController::class,'promotionById'])->name('admin.pages.promotionById');
+        
+        Route::post('/promoteStudent', [PromotionController::class,'create'])->name('admin.post.promoteStudent')->withoutMiddleware([VerifyCsrfToken::class]);
+
+        Route::post('/promoteStudents', [PromotionController::class,'promoteStudents'])->name('admin.post.promoteStudents')->withoutMiddleware([VerifyCsrfToken::class]);
+        
         // Certificates Module
         
         Route::get('/certificate', [CertificateController::class,'certificate'])->name('admin.pages.certificate');
 
+        Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
         Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
 
         // Principalmessage Module

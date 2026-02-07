@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string('from_student_id')->nullable();
-            $table->string('to_student_id')->nullable();
+            $table->string('student_id')->nullable();
+            $table->string('from_session_id')->nullable();
+            $table->string('to_session_id')->nullable();
+            $table->string('from_class_id')->nullable();
+            $table->string('to_class_id')->nullable();
             $table->string('note')->nullable();
             $table->string('admin_username')->nullable();
             $table->tinyInteger('status')->default(1);

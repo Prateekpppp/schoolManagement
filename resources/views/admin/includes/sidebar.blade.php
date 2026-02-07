@@ -22,6 +22,17 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="fa fa-calendar"></i><span>Promote Student</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.promote')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.promotionById')}}" class="nav-link"><i class="fas fa-angle-right"></i>One Student</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-school"></i><span>Academics</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">

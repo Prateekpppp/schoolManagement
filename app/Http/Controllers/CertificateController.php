@@ -9,13 +9,13 @@ class CertificateController extends Controller
 {
     //
 
-    public function transferCertificate(Request $request){
+    public function certificate(Request $request){
         $data = Student::join('classes','students.class','classes.id')
         ->join('sections','students.section','sections.id')
         ->select('students.*','classes.class','sections.section');
 
         $data = $data->where('students.id',$request->id)->first();
-
+        // dd($request->type);
         if($request->type == 'tc'){
             return view('admin.pages.transferCertificate',compact('data'));
         } elseif ($request->type == 'cc'){

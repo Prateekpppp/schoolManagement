@@ -27,7 +27,6 @@ class StudentController extends Controller
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',1)
         ->orderBy('students.id','desc');
-        // dd(session('session_id'));
         $students = $students->where('students.session_id',session('session_id'));
         $students = $students->get(['students.*','classes.class','sections.section']);
         // dd($students);
@@ -63,6 +62,39 @@ class StudentController extends Controller
         // ->get(['students.*','classes.class']);
         // dd($students);
         return view('admin.pages.students',compact('students'));
+    }
+
+    public function studentFilterData(Request $request){
+        $students = Student::join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->where('students.status',1)
+        ->orderBy('students.id','desc')
+        ->where('students.session_id',session('session_id'))
+        ->select('students.*','classes.class','sections.section');
+        
+        if($request->student_id){
+            $students = $students->where('students.id',$request->student_id);
+        }
+        if($request->name){
+            $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if($request->class_id){
+            $students = $students->where('students.class',$request->class_id);
+        } 
+        if($request->section_id){
+            $students = $students->where('students.section',$request->section_id);
+        }
+        if($request->student_id){
+            $students = $students->where('students.id',$request->student_id);
+        $students = $students->first();
+        } else{
+            $students = $students->get();
+        }
+        
+        return response()->json([
+            'data'=>$students,
+            'response_code'=>'200'
+        ]);
     }
 
     public function allStudents(){

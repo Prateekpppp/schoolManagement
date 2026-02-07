@@ -106,39 +106,35 @@
 
 <div class="certificate">
 
-    <div class="top-row">
-        <div><strong>School Code :</strong> 456456</div>
-        <div><strong>Affiliated to CBSE :</strong> —</div>
-    </div>
-
     <div class="school-header">
-        <h1>SIMPTION TECH PVT LTD</h1>
-        <p>32 plot no., IT PARK near abbas nagar, gandhi nagar, Bhopal - Madhya Pradesh</p>
-        <p>Ph.: 9074825242 &nbsp; | &nbsp; E-mail: simptionsales@gmail.com</p>
+        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+        <h2>{{$appdata->title}}</h2>
+        <p>{{$appdata->address}}</p>
+        <p>Ph: {{$appdata->phone}} &nbsp; Email: {{$appdata->email}}</p>
     </div>
 
     <div class="divider"></div>
 
     <div class="meta">
-        <div><strong>Sr. No. :</strong> 54</div>
-        <div><strong>Date :</strong> 06-02-2026</div>
+        <div><strong>Admission No. :</strong> {{$data->admission_no}}</div>
+        <div><strong>Date :</strong> {{date('d-m-Y')}}</div>
     </div>
 
     <div class="title">CHARACTER CERTIFICATE</div>
 
     <div class="content">
-        This is to certify that Master/Miss
-        <span class="line">Abc</span><br>
+        This is to certify that Mister/Miss
+        <span class="line">{{$data->name}}</span><br>
 
         Son / daughter of Mr.
-        <span class="line">BC</span>
+        <span class="line">{{$data->father_name}}</span>
         and Mrs.
-        <span class="line">CD</span><br>
+        <span class="line">{{$data->mother_name}}</span><br>
 
         during the year from
-        <span class="line">425</span>
+        <span class="line">{{date('Y', strtotime($data->created_at))}}</span>
         to
-        <span class="line">2026</span>
+        <span class="line">{{date('Y')}}</span>
         his / her character and conduct were
         <span class="line">Very Good</span>
         during his / her stay in this school.
