@@ -34,7 +34,9 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Current Session </label>
-                                    <input name="from_session_id" value="{{$studentSessions->session_name}}" type="text" placeholder="" class="form-control" readonly>
+                                    <select name="from_session_id" class="select2 changeClass" readonly>
+                                            <option value="{{$studentSessions->id}}" selected>{{$studentSessions->session_name}}</option>
+                                    </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Promote To Session </label>
@@ -47,7 +49,9 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Current Class </label>
-                                    <input name="from_class_id" type="text" value="{{$StudentClasses->class}}" class="form-control" readonly>
+                                    <select name="from_class_id" class="select2 changeClass" readonly>
+                                            <option value="{{$StudentClasses->id}}">{{$StudentClasses->class}}</option>
+                                    </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label class="hidden">Promote To Class </label>
@@ -78,7 +82,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createApplicationletter')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.promoteStudent')}}",data,ajaxResponseModal);
     }
 
 </script>

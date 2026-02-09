@@ -78,9 +78,9 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::get('/promote', [PromotionController::class,'index'])->name('admin.pages.promote');
 
-        Route::get('/promotionById', [PromotionController::class,'promotionById'])->name('admin.pages.promotionById');
+        Route::get('/promotionById/{student_id}', [PromotionController::class,'promotionById'])->name('admin.pages.promotionById');
         
-        Route::post('/promoteStudent', [PromotionController::class,'create'])->name('admin.post.promoteStudent')->withoutMiddleware([VerifyCsrfToken::class]);
+        Route::post('/promoteStudent', [PromotionController::class,'promoteStudent'])->name('admin.post.promoteStudent')->withoutMiddleware([VerifyCsrfToken::class]);
 
         Route::post('/promoteStudents', [PromotionController::class,'promoteStudents'])->name('admin.post.promoteStudents')->withoutMiddleware([VerifyCsrfToken::class]);
         

@@ -9,9 +9,6 @@
                             <div class="item-title">
                                 <h3>Promote Students</h3>
                             </div>
-                            <div class="">
-                                <a href="{{route('admin.pages.filterGenerateFee')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Promote One</a>
-                            </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
@@ -30,7 +27,7 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-12 form-group">
                                     <label class="hidden">Class </label>
-                                    <select name="class_id" class="select2 changeClass">
+                                    <select name="class_id" class="select2 changeClass required" required>
                                         <option value="">Please Select Class</option>
                                         @foreach($globalClasses as $class)
                                             <option {{isset($request->class_id) && $request->class_id == $class->id?'selected':''}} value="{{$class->id}}">{{$class->class}}</option>
@@ -47,32 +44,7 @@
                                     <label class="hidden">Select Month *</label>
                                     <input name="month" value="{{isset($request->month)?$request->month:''}}" type="text" placeholder="Select Month" class="form-control air-datepicker required" required>
                                 </div> --}}
-                                <div class="col-xl-2 col-lg-2 col-12 form-group">
-                                    <label class="hidden">Select Month *</label>
-                                    <select name="month" class="select2 required">
-                                        <option value="">Please Select Month</option>
-                                        <option {{isset($request->month) && $request->month == '01'?'selected':''}} value="01">Jan</option>
-                                        <option {{isset($request->month) && $request->month == '02'?'selected':''}} value="02">Feb</option>
-                                        <option {{isset($request->month) && $request->month == '03'?'selected':''}} value="03">Mar</option>
-                                        <option {{isset($request->month) && $request->month == '04'?'selected':''}} value="04">Apr</option>
-                                        <option {{isset($request->month) && $request->month == '05'?'selected':''}} value="05">May</option>
-                                        <option {{isset($request->month) && $request->month == '06'?'selected':''}} value="06">Jun</option>
-                                        <option {{isset($request->month) && $request->month == '07'?'selected':''}} value="07">Jul</option>
-                                        <option {{isset($request->month) && $request->month == '08'?'selected':''}} value="08">Aug</option>
-                                        <option {{isset($request->month) && $request->month == '09'?'selected':''}} value="09">Sep</option>
-                                        <option {{isset($request->month) && $request->month == '10'?'selected':''}} value="10">Oct</option>
-                                        <option {{isset($request->month) && $request->month == '11'?'selected':''}} value="11">Nov</option>
-                                        <option {{isset($request->month) && $request->month == '12'?'selected':''}} value="12">Dec</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-2 col-lg-2 col-12 form-group">
-                                    <label class="hidden">Invoice Type</label>
-                                    <select name="invoiceType" class="select2">
-                                        <option value="">Please Select Type</option>
-                                        <option {{isset($request->invoiceType) && $request->invoiceType == '0'?'selected':''}} value="0">All</option>
-                                        <option {{isset($request->invoiceType) && $request->invoiceType == '1'?'selected':''}} value="1">Dues</option>
-                                    </select>
-                                </div>
+                                
                                 <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                                 </div>
@@ -114,7 +86,9 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -135,7 +109,7 @@
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
                                             <td>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.promotionById', ['student_id' => $job->id])}}">Promote</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.promotionById', $job->id)}}">Promote</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -208,7 +182,7 @@
 
         // window.location.href = "{{route('admin.get.print_allInvoice')}}?invoices="+data;
         
-        callApi('get',"{{route('admin.get.print_allInvoice')}}",{ids:data,to_class_id:$('select[name=class_id]').val()},ajaxResponseModal);
+        callApi('post',"{{route('admin.post.promoteStudents')}}",{ids:data,from_class_id:$('select[name=class_id]').val()},ajaxResponseModal);
     });
 </script>
 

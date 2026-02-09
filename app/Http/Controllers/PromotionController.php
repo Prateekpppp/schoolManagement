@@ -17,7 +17,7 @@ class PromotionController extends Controller
 
         $data = $data->getData()->data;
 
-        return view('admin.pages.promote',compact('data'));
+        return view('admin.pages.promote',compact('data','request'));
 
 
     }
@@ -47,25 +47,142 @@ class PromotionController extends Controller
     }
 
     public function create(Request $request){
-
-        // check the related data if present or not before creation
-        $student = Student::where('id',$request->student_id)->first();
-        $to_session_id = $student->session_id;
-        $promotion = Promotion::where('student_id',$request->student_id)->where('to_session_id',$to_session_id)->first();
         
-        if($request->id){
-            $promotion = Promotion::where('id',$request->id)->first();
+        try{
+            // check the related data if present or not before creation
+            $student = Student::where('id',$request->student_id)->first();
+            
+            $promotion = Promotion::where('student_id',$request->student_id)->where('to_session_id',$request->to_session_id)->first();
+            
+            if($request->id){
+                $promotion = Promotion::where('id',$request->id)->first();
+                $promotion->student_id = $request->student_id;
+                $promotion->from_session_id = $request->from_session_id;
+                $promotion->to_session_id = $request->to_session_id;
+                $promotion->from_class_id = $request->from_class_id;
+                $promotion->to_class_id = $request->to_class_id;
+                $promotion->session_id = $request->session_id;
+                $promotion->save();
 
-        } else{
-            if($promotion){
+
+            } else{
+                if(!$promotion){
+                    $promotion = Promotion::where('student_id',$request->student_id)->delete();
+                    $promotion = new Promotion();
+                    $promotion->student_id = $request->student_id;
+                    $promotion->from_session_id = $request->from_session_id;
+                    $promotion->to_session_id = $request->to_session_id;
+                    $promotion->from_class_id = $request->from_class_id;
+                    $promotion->to_class_id = $request->to_class_id;
+                    $promotion->session_id = $request->session_id;
+                    $promotion->save();
+                } else{
+                    return 'Already Promoted to this session!';
+                }
+
+            }
+
+            $student->class = $request->to_class_id;
+            $student->session_id = $request->to_session_id;
+            $student->save();
+            
+            return True;
+
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500',
+            ]);
+        }
+    }
+
+    public function promoteStudent(Request $request){
+
+        try{
+            $promote = $this->create($request);
+            if($promote == True){
                 return response()->json([
-                    'message' => 'Already Promoted!',
-                    'response_code' => '402'
+                    'redirect'=> route('admin.pages.promote'),
+                    'message' => 'Student has been Promoted Successfully',
+                    'response_code' => '200'
+                ]);
+            } else{
+                return response()->json([
+                    'message' => $promote,
+                    'response_code' => '407'
                 ]);
             }
 
-            $promotion = new Promotion();
-
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500',
+            ]);
         }
+    }
+    
+    public function promoteStudents(Request $request){
+
+        try{
+            if(!$request->from_class_id){
+                return response()->json([
+                    'message' => 'Please filter students first based on class!',
+                    'response_code' => '405'
+                ]);
+            }
+            $to_session_id = Datasession::where('id','>',session('session_id'))->first();
+            
+            if(!$to_session_id){
+                return response()->json([
+                    'message' => 'Next Session not Found, Please Add!',
+                    'response_code' => '405'
+                ]);
+            }
+
+            $to_class_id = Classes::where('id','>',$request->from_class_id)->first();
+            
+            if(!$to_class_id){
+                return response()->json([
+                    'message' => 'Next Class not Found',
+                    'response_code' => '405'
+                ]);
+            }
+
+            $to_session_id = $to_session_id->id;
+            $to_class_id = $to_class_id->id;
+            $from_session_id = session('session_id');
+            $session_id = session('session_id');
+
+            $request->merge([
+                'to_class_id' => $to_class_id,
+                'from_session_id' => $from_session_id,
+                'to_session_id' => $to_session_id,
+                'session_id' => $session_id,
+            ]);
+
+            foreach($request->ids as $id){
+                
+                $request->merge([
+                    'student_id' => $id,
+                ]);
+
+                if(!$this->create($request)){
+                    continue;
+                }
+
+            }
+
+            return response()->json([
+                'message' => 'Selected students are Promoted Successfully',
+                'response_code' => '200'
+            ]);
+
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500',
+            ]);
+        }
+        
     }
 }
