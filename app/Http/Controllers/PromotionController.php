@@ -173,6 +173,7 @@ class PromotionController extends Controller
             }
 
             return response()->json([
+                'redirect'=> $request->header('referer'),
                 'message' => 'Selected students are Promoted Successfully',
                 'response_code' => '200'
             ]);
