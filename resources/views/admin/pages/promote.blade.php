@@ -166,11 +166,14 @@
             return;
         }
 
-        // data = JSON.stringify(data);
+        function responseFunc(response){
+            ajaxResponseModal(response);
+            if(response.response_code != 200){
+                $('.generateIds').removeClass('disabled');
+            }
+        }
 
-        // window.location.href = "{{route('admin.get.print_allInvoice')}}?invoices="+data;
-        
-        callApi('post',"{{route('admin.post.promoteStudents')}}",{ids:data,from_class_id:$('select[name=class_id]').val()},ajaxResponseModal);
+        callApi('post',"{{route('admin.post.promoteStudents')}}",{ids:data,from_class_id:$('select[name=class_id]').val()},responseFunc);
     });
 </script>
 
