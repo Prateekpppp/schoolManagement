@@ -108,7 +108,7 @@
                             </table>
                         </div>
                         <div class="flex flex-row gap-2 justify-center py-2">
-                            <a href="javascript:void(0)" class="modal-trigger generateIds" >Promote</a>
+                            <a href="javascript:void(0)" class="modal-trigger generateIds" >Promote All</a>
 
                         </div>
                     </div>
