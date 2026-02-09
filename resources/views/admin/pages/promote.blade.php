@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Fee Invoice</h3>
+                                <h3>Promote Students</h3>
                             </div>
                             <div class="">
                                 <a href="{{route('admin.pages.filterGenerateFee')}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Promote One</a>
@@ -106,6 +106,7 @@
                                         <th>Admission No.</th>
                                         <th>Class</th>
                                         <th>Section</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
@@ -133,6 +134,10 @@
                                             <td>{{$job->admission_no}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td>
+                                            <td>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.promotionById', ['student_id' => $job->id])}}">Promote</a>
+                                                </div>
+                                            </td>
                                         </tr>
                                         
                                     @endforeach

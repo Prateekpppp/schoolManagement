@@ -70,11 +70,8 @@ class StudentController extends Controller
         ->where('students.status',1)
         ->orderBy('students.id','desc')
         ->where('students.session_id',session('session_id'))
-        ->select('students.*','classes.class','sections.section');
+        ->select('students.*','students.class as class_id','students.section as section_id','classes.class','sections.section');
         
-        if($request->student_id){
-            $students = $students->where('students.id',$request->student_id);
-        }
         if($request->name){
             $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
         } 
@@ -84,9 +81,10 @@ class StudentController extends Controller
         if($request->section_id){
             $students = $students->where('students.section',$request->section_id);
         }
+        
         if($request->student_id){
             $students = $students->where('students.id',$request->student_id);
-        $students = $students->first();
+            $students = $students->first();
         } else{
             $students = $students->get();
         }

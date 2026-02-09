@@ -28,16 +28,19 @@ class PromotionController extends Controller
 
         $data = $data->getData()->data;
         if($request->promotion_id){
-            $data['promotion_id'] = $request->promotion_id;
+            $data->promotion_id  = $request->promotion_id;
         } else{
-            $data['promotion_id'] = null;
+            $data->promotion_id = null;
             
         }
+
+        // dd($data);
+
         $allSessions = Datasession::all();
 
         $studentSessions = Datasession::where('id',$data->session_id)->first();
 
-        $StudentClasses = Classes::where('id',$data->class)->first();
+        $StudentClasses = Classes::where('id',$data->class_id)->first();
 
         return view('admin.pages.promotionById',compact('data','allSessions','studentSessions','StudentClasses'));
 

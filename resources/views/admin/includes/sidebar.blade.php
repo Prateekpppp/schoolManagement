@@ -27,9 +27,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.promote')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.promotionById')}}" class="nav-link"><i class="fas fa-angle-right"></i>One Student</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
