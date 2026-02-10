@@ -40,6 +40,12 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="navbar-item dropdown header-admin">
+                        <a class="mx-2" href="{{route('admin.pages.qrcodeReader')}}">
+                            <i class="fa fa-qrcode"></i>
+                            QR Reader
+                        </a>
+                    </li>
+                    <li class="navbar-item dropdown header-admin">
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">

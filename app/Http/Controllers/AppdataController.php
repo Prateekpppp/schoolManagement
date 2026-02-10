@@ -191,4 +191,8 @@ class AppdataController extends Controller
     //         'response_code'=> '200',
     //     ]);
     // }
+
+    public function qrcodeReader(Request $request){
+        return view('admin.pages.qrcodeReader');
+    }
 }

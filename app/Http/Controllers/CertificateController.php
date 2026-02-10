@@ -23,6 +23,9 @@ class CertificateController extends Controller
         } elseif($request->type == 'mg'){
             return view('admin.pages.migrationCertificate',compact('data'));
                 
+        } elseif($request->type == 'ev'){
+            return view('admin.pages.eventCertificate',compact('data'));
+                
         }
     }
 }

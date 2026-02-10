@@ -127,7 +127,9 @@ class StaffAttendanceController extends Controller
 
     public function read(Request $request){
         try{
+            $monthFlag = true;
             if(!$request->month){
+                $monthFlag = 0;
                 $request->month = Carbon::now()->month;
             }
 
@@ -140,7 +142,9 @@ class StaffAttendanceController extends Controller
                 $data = $data->whereDate('date',$request->date);
             } else{
                 $data = $data->whereMonth('date',$request->month);
-                $data = $data->whereDate('date',Carbon::today()->format('Y-m-d'));
+                if(!$monthFlag){
+                    $data = $data->whereDate('date',Carbon::today()->format('Y-m-d'));
+                }
             }
 
             $present = 0;
@@ -166,7 +170,7 @@ class StaffAttendanceController extends Controller
 
             $data = $data->orderBy('staff_attendances.id','desc')->get();
 
-            return view('admin.pages.staffAttendance',compact('data','present','absent','late'));
+            return view('admin.pages.staffAttendance',compact('data','present','absent','late','request'));
             
         } catch (\Exception $e){
             return view('staff.pages.staffAttendance');

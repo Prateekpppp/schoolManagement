@@ -45,6 +45,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StudentAttendanceController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TransfercertificateController;
 use Illuminate\Support\Facades\Cookie;
 
 
@@ -76,6 +77,8 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
           
         // Promotion Module
         
+        Route::get('/qrcodeReader', [AppdataController::class,'qrcodeReader'])->name('admin.pages.qrcodeReader');
+        
         Route::get('/promote', [PromotionController::class,'index'])->name('admin.pages.promote');
 
         Route::get('/promotionById/{student_id}', [PromotionController::class,'promotionById'])->name('admin.pages.promotionById');
@@ -88,7 +91,10 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         Route::get('/certificate', [CertificateController::class,'certificate'])->name('admin.pages.certificate');
 
-        Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
+        Route::get('/tc', [TransfercertificateController::class,'index'])->name('admin.pages.tc');
+
+        Route::post('/createTc', [TransfercertificateController::class,'create'])->name('admin.post.createTc')->withoutMiddleware([VerifyCsrfToken::class]);
+
         Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
 
         // Principalmessage Module

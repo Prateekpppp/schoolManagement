@@ -94,6 +94,23 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="fa fa-graduation-cap"></i><span>Certificates</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.tc')}}" class="nav-link"><i class="fas fa-angle-right"></i>Transfer Certificate</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a href="{{route('admin.pages.addStudent')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.inactiveStudents')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inactive Students</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.studentAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i>Attendance</a>
+                                </li> --}}
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-graduation-cap"></i><span>Students</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
