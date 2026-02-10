@@ -43,8 +43,14 @@ class StaffAttendanceController extends Controller
         try{
             $ScLatitude = $this->appdata->latitude;
             $ScLongitute = $this->appdata->altitude;
-            // dd($request->location);
             $request->location = json_decode($request->location);
+            dd((array)$request->location,count((array)$request->location));
+            if(!count((array)$request->location)){
+                return response()->json([
+                    'message'=>'Not under the required school area!',
+                    'response_code'=> '405'
+                ]);
+            }
             $distance = $this->haversine_distance($ScLatitude, $ScLongitute, $request->location->latitude, $request->location->longitude,'m');
 
             // dd($distance);
