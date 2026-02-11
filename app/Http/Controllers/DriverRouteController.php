@@ -43,6 +43,20 @@ class DriverRouteController extends Controller
                     'response_code'=>'200'
                 ]);
             }
+            $driverRoute = DriverRoute::where('driver_id',$request->driver_id)
+            ->where('sc_route_id',$request->sc_route_id)
+            ->first();
+            if($driverRoute){
+                $driverRoute->vehicle_no = $request->vehicle_no;
+                $driverRoute->status = 1;
+                $driverRoute->save();
+
+                return response()->json([
+                    'redirect'=> $request->header('referer'),
+                    'message'=>'Route and Vehicle updated for Driver successfully',
+                    'response_code'=>'200'
+                ]);
+            }
             $driverRoute = new DriverRoute();
             $driverRoute->driver_id = $request->driver_id;
             $driverRoute->vehicle_no = $request->vehicle_no;

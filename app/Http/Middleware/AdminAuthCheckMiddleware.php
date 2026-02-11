@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Appdata;
 use App\Models\Datasession;
 use App\Models\Classes;
+use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Student;
 
@@ -36,6 +37,9 @@ class AdminAuthCheckMiddleware
             View::share('currentLogin',$currentLogin);
         }elseif($currentUser->status == 5){
             $currentLogin = Student::where('enrollment_no',$currentUser->username)->first();
+            View::share('currentLogin',$currentLogin);
+        }elseif($currentUser->status == 6){
+            $currentLogin = Driver::where('phone',$currentUser->username)->first();
             View::share('currentLogin',$currentLogin);
         }
 

@@ -27,6 +27,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DriveractivityController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\HomeworkController;
@@ -71,13 +72,16 @@ Route::middleware(['admin_auth_middleware','custom_admin_session_middleware'])->
 });
 
 Route::middleware(['admin_auth_check_middleware','custom_admin_session_middleware'])->group(function () {
-    
+
     Route::prefix('account')->group(function () {
         Route::get('/dashboard', [AdminDataController::class,'accountant'])->name('account.pages.dashboard');
     });
 
     Route::prefix('admin')->group(function () {
           
+
+        Route::get('/driverRoutes', [DriveractivityController::class,'driverRoutes'])->name('admin.pages.driverRoutes');
+
         // Promotion Module
         
         Route::get('/qrcodeReader', [AppdataController::class,'qrcodeReader'])->name('admin.pages.qrcodeReader');

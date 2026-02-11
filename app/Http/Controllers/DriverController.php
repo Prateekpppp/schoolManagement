@@ -20,33 +20,21 @@ class DriverController extends Controller
 
     public function staffFilter(Request $request){
 
-        $data = Driver::join('subjects','subjects.id','staff.subject')
-        ->leftJoin('classes','staff.class','=','classes.id')
-        ->leftJoin('sections','staff.section','=','sections.id')
-        ->select('staff.*','subjects.subject','classes.id as class_id','sections.id as section_id');
+        $data = Driver::where('status',1);
         
         if($request->name){
-            $data = $data->where('staff.name', 'LIKE','%'.$request->name.'%');
-        } 
-        if($request->class_id){
-            $data = $data->where('classes.id',$request->class_id);
-        } 
-        // dd($data->get());
-        if($request->section_id){
-            $data = $data->where('sections.id',$request->section_id);
+            $data = $data->where('name', 'LIKE','%'.$request->name.'%');
         }
         $data = $data->get();
 
         // dd($data);
-        return view('admin.pages.staff',compact('data'));
+        return view('admin.pages.driver',compact('data'));
     }
 
     public function allDriver(){
         try {
             
-            $staff = Driver::join('classes','staff.class','=','classes.id')
-            ->join('sections','staff.section','=','sections.id')
-            ->get(['staff.*','classes.class','sections.section']);
+            $staff = Driver::where('status',1)->get();
             return response()->json([
                 'data'=>$staff,
                 'response_code'=>'200'
@@ -232,5 +220,4 @@ class DriverController extends Controller
         return view('admin.pages.driverDetail',compact('student'));
     }
 
-    
 }

@@ -154,6 +154,9 @@
                             <a href="#" class="nav-link"><i class="fa fa-car"></i><span>Transport</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
+                                    <a href="{{route('admin.pages.driverRoutes')}}" class="nav-link"><i class="fas fa-angle-right"></i>Driver Status</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('admin.pages.driver')}}" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
                                 </li>
                                 <li class="nav-item">

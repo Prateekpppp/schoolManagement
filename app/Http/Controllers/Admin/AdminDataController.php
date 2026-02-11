@@ -24,6 +24,7 @@ use App\Models\Student;
 use App\Models\StudentFee;
 use App\Models\Transaction;
 use App\Models\Driver;
+use App\Models\DriverRoute;
 use App\Models\Expanse;
 use App\Models\Inventory;
 use App\Models\Salary;
@@ -156,6 +157,9 @@ class AdminDataController extends Controller
         }
 
         if ($user->status == 6) {
+
+            return $this->driver();
+
             return view('driver.pages.index',compact('classes','sections','students','present','absent'));
             
         }
@@ -168,6 +172,13 @@ class AdminDataController extends Controller
         
     }
     
+    public function driver(){
+
+        $student = Driver::where('id',$this->currentLogin->id)->first();
+        $routes = DriverRoute::where('driver_id',$this->currentLogin->id)->count();
+        return view('driver.pages.driverDetail',compact('student','routes'));
+    }
+
     public function createData(Request $request){
 
         // $tableName = (new User())->getTable();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appdata;
+use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
@@ -24,6 +25,8 @@ abstract class Controller
                 $this->currentLogin = Staff::where('phone',$this->currentUser->username)->first();
             }elseif($this->currentUser->status == 5){
                 $this->currentLogin = Student::where('enrollment_no',$this->currentUser->username)->first();
+            }elseif($this->currentUser->status == 6){
+                $this->currentLogin = Driver::where('phone',$this->currentUser->username)->first();
             }
         }
     }
