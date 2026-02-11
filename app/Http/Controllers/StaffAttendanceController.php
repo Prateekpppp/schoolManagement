@@ -47,7 +47,7 @@ class StaffAttendanceController extends Controller
             $request->location = json_decode($request->location);
             if(!isset($request->location->latitude) || !isset($request->location->longitude)){
                 return response()->json([
-                    'message'=>'Issue with location access!',
+                    'message'=>'Unable to get the location access!',
                     'response_code'=> '405'
                 ]);
             }
