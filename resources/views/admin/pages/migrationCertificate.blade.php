@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Migration Certificate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{{ asset('js') }}/tailwind.min.js"></script>
 
 <style>
     body {
@@ -72,7 +74,6 @@
     .content {
         font-size: 20px;
         line-height: 1.9;
-        text-align: center;
     }
 
     .line {
@@ -106,6 +107,14 @@
             margin: 0;
         }
     }
+    .print-btn {
+        background-color: #28a745;
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
 </style>
 </head>
 
@@ -114,18 +123,14 @@
 <div class="certificate">
 
 
-    <div class="school-header">
-        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-        <h2>{{$appdata->title}}</h2>
-        <p>{{$appdata->address}}</p>
-        <p>Ph: {{$appdata->phone}} &nbsp; Email: {{$appdata->email}}</p>
-    </div>
+        @include('admin.includes.print_header')
+
 
     <div class="divider"></div>
 
     <div class="meta">
-        <div><strong>Sr. No. :</strong> 7</div>
-        <div><strong>Date :</strong> {{date('d-m-Y')}}</div>
+        <div><strong>Mg. No. :</strong>{{$data->mg_no}}</div>
+        <div><strong>Date :</strong> {{$data->issue_date}}</div>
     </div>
 
     <div class="title">MIGRATION CERTIFICATE</div>
@@ -142,11 +147,11 @@
         is/was a student of
         <span class="line">{{$appdata->title}}</span>
         studying in class
-        <span class="line small-line">{{$data->class}}</span>
+        <span class="line small-line">{{$data->class_name}}</span>
         under admission no
         <span class="line small-line">{{$data->admission_no}}</span>
         during the academic year
-        <span class="line small-line">{{date('Y', strtotime($data->created_at))}} - {{date('Y')}}</span>.
+        <span class="line small-line">{{date('Y', strtotime($data->from_date))}} - {{date('Y', strtotime($data->to_date))}}</span>.
 
         <br><br>
 
@@ -163,6 +168,9 @@
     </div>
 
 </div>
+
+        @include('admin.includes.print_btn')
+
 
 </body>
 </html>

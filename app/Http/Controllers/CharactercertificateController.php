@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Charactercertificate;
 use App\Models\Student;
-use App\Models\Transfercertificate;
 use Illuminate\Http\Request;
 
-class TransfercertificateController extends Controller
+class CharactercertificateController extends Controller
 {
     //
 
     public function index(Request $request){
 
-        $tcList = Transfercertificate::where('transfercertificates.session_id',session('session_id'));
+        $tcList = Charactercertificate::where('charactercertificates.session_id',session('session_id'));
 
         $allstudents = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
@@ -21,52 +21,42 @@ class TransfercertificateController extends Controller
         ->select('students.*','classes.class as class_name','sections.section as section_name');
         
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
-            $join->on('transfercertificates.student_id','allstudents.id');
+            $join->on('charactercertificates.student_id','allstudents.id');
         })
-        ->select('transfercertificates.tc_no','transfercertificates.id as tc_id','allstudents.*');
+        ->select('charactercertificates.cc_no','charactercertificates.id as cc_id','allstudents.*');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();
 
-        if($request->tc_no){
-            $data = Transfercertificate::where('tc_no',$request->tc_no)->first();
+        if($request->cc_no){
+            $data = Charactercertificate::where('cc_no',$request->cc_no)->first();
             if($data){
-                return view('admin.pages.tc', compact('data','students','tcList'));
+                return view('admin.pages.cc', compact('data','students','tcList'));
             }
         }
-        return view('admin.pages.tc', compact('students','tcList'));
+        return view('admin.pages.cc', compact('students','tcList'));
     }
 
     public function create(Request $request){
         try{
-            $data = Transfercertificate::where('tc_no',$request->tc_no)->first();
+            $data = Charactercertificate::where('cc_no',$request->cc_no)->first();
 
             if(!$data){
-                $data = new Transfercertificate();
+                $data = new Charactercertificate();
             }
             
-            $data->tc_no = $request->tc_no;
+            $data->cc_no = $request->cc_no;
             $data->application_date = $request->application_date;
             $data->issue_date = $request->issue_date;
             $data->student_id = $request->student_id;
-            $data->start_class = $request->start_class;
-            $data->end_class = $request->end_class;
-            $data->ncc = $request->ncc;
-            $data->game_played = $request->game_played;
-            $data->feedue = $request->feedue;
-            $data->concession = $request->concession;
-            $data->failed_last_class = $request->failed_last_class;
-            $data->reason = $request->reason;
-            $data->behaviour = $request->behaviour;
-            $data->remark = $request->remark;
-            $data->nationality = $request->nationality;
-            $data->last_exam = $request->last_exam;
-            $data->status = 1;
+            $data->from_date = $request->from_date;
+            $data->to_date = $request->to_date;
+            $data->character = $request->character;
             $data->session_id = session('session_id');
             $data->save();
 
             return response()->json([
-                'message'=> 'TC Updated Successfully',
+                'message'=> 'CC Updated Successfully',
                 'response_code'=> '200',
             ]);
 
@@ -78,9 +68,9 @@ class TransfercertificateController extends Controller
         }
     }
 
-    public function printTC(Request $request){
+    public function printCc(Request $request){
 
-        $data = Transfercertificate::where('transfercertificates.session_id',session('session_id'));
+        $data = Charactercertificate::where('charactercertificates.session_id',session('session_id'));
 
         $allstudents = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
@@ -89,10 +79,10 @@ class TransfercertificateController extends Controller
         ->select('students.id AS student_id','students.*','classes.class as class_name','sections.section as section_name');
         
         $data = $data->joinSub($allstudents,'allstudents',function($join){
-            $join->on('transfercertificates.student_id','allstudents.id');
+            $join->on('charactercertificates.student_id','allstudents.id');
         })
         ->select(
-        'transfercertificates.*',
+        'charactercertificates.*',
         'allstudents.name',
         'allstudents.father_name',
         'allstudents.mother_name',
@@ -105,7 +95,7 @@ class TransfercertificateController extends Controller
         'allstudents.created_at',
         );
 
-        $data = $data->where('transfercertificates.tc_no',$request->tc_no)->first();
-        return view('admin.pages.transferCertificate',compact('data'));
+        $data = $data->where('charactercertificates.cc_no',$request->cc_no)->first();
+        return view('admin.pages.characterCertificate',compact('data'));
     }
 }

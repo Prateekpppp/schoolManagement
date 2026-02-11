@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Generate TC</h3>
+                                <h3>Generate CC</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -27,8 +27,8 @@
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>TC No. </label>
-                                    <input name="tc_no" type="text" placeholder="" class="form-control required" value="{{isset($data->tc_no) ? $data->tc_no : 'TC_'.substr(time(),5)}}">
+                                    <label>CC No. </label>
+                                    <input name="cc_no" type="text" placeholder="" class="form-control required" value="{{isset($data->cc_no) ? $data->cc_no : 'CC_'.substr(time(),5)}}">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Select Student </label>
@@ -40,85 +40,24 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>TC Application Date *</label>
+                                    <label>CC Application Date *</label>
                                     <input name="application_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->application_date : ''}}">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>TC Issue Date *</label>
+                                    <label>CC Issue Date *</label>
                                     <input name="issue_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->issue_date : ''}}">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Start Class </label>
-                                    <select name="start_class" class="select2 required">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}" {{isset($data) && $data->start_class == $class->id ? 'selected' : ''}}>{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>Character  *</label>
+                                    <input name="character" value="{{isset($data) ? $data->character : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>End Class </label>
-                                    <select name="end_class" class="select2 required">
-                                        <option value="">Please Select Class *</option>
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}" {{isset($data) && $data->end_class == $class->id ? 'selected' : ''}}>{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>From *</label>
+                                    <input name="from_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->from_date : ''}}">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Wheather Ncc/Scout/Guide *</label>
-                                    <select name="ncc" class="select2 required">
-                                        <option {{isset($data) && $data->ncc == '0' ? 'selected' : ''}} value="No">No</option>
-                                        <option {{isset($data) && $data->ncc == '1' ? 'selected' : ''}} value="Yes">Yes</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Games Played Or Extra Activity *</label>
-                                    <select name="game_played" class="select2 required">
-                                        <option {{isset($data) && $data->game_played == '0' ? 'selected' : ''}} value="No">No</option>
-                                        <option {{isset($data) && $data->game_played == '1' ? 'selected' : ''}} value="Yes">Yes</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Fees Dues if Any  *</label>
-                                    <input name="feedue" value="{{isset($data) ? $data->feedue : ''}}" type="text" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Any Conecession  *</label>
-                                    <input name="concession" value="{{isset($data) ? $data->concession : ''}}" type="text" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Failed in Previous Classes *</label>
-                                    <select name="failed_last_class" class="select2 required">
-                                        <option {{isset($data) && $data->failed_last_class == '0' ? 'selected' : ''}} value="No">No</option>
-                                        <option {{isset($data) && $data->failed_last_class == '1' ? 'selected' : ''}} value="Yes">Yes</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Last Examintion Taken *</label>
-                                    <select name="last_exam" class="select2 changeClass required">
-                                        <option value="">Please Select Exam *</option>
-                                        {{-- $globalClasses -> $exams --}}
-                                        @foreach($globalClasses as $class)
-                                            <option value="{{$class->id}}" {{isset($data) && $data->last_exam == $class->id ? 'selected' : ''}}>{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Reason For Leaving *</label>
-                                    <input name="reason" value="{{isset($data) ? $data->reason : ''}}" type="text" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>General Conduct/Behaviour *</label>
-                                    <input name="behaviour" value="{{isset($data) ? $data->behaviour : ''}}" type="text" class="form-control required">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Any Remark </label>
-                                    <input name="remark" value="{{isset($data) ? $data->remark : ''}}" type="text" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Nationality </label>
-                                    <input name="nationality" value="{{isset($data) ? $data->nationality : ''}}" type="text" class="form-control" value="Indian">
+                                    <label>To *</label>
+                                    <input name="to_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->to_date : ''}}">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -134,7 +73,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>TC List</h3>
+                                <h3>CC List</h3>
                             </div>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -156,7 +95,7 @@
                                 <thead>
                                     <tr>
                                         <th>S.NO.</th>
-                                        <th>Tc No.</th>
+                                        <th>Cc No.</th>
                                         <th>Student</th>
                                         <th>Father's Name</th>
                                         <th>Admission No.</th>
@@ -181,7 +120,7 @@
                                     @foreach ($tcList as $key=>$job)
                                         <tr>
                                             <td>{{$key+1}}</td>
-                                            <td>{{$job->tc_no}}</td>
+                                            <td>{{$job->cc_no}}</td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->father_name}}</td>
                                             <td>{{$job->admission_no}}</td>
@@ -189,9 +128,9 @@
                                             <td>{{$job->section_name}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printTC', ['tc_no'=>$job->tc_no])}}">Print</a>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.tc', ['tc_no'=>$job->tc_no])}}">Edit</a>
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-700" data-model="Transfercertificate" href="{{route('admin.post.updateStatus', ['id'=>$job->tc_id, 'status'=>0])}}">Remove</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printCc', ['cc_no'=>$job->cc_no])}}">Print</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.cc', ['cc_no'=>$job->cc_no])}}">Edit</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-700" data-model="Charactercertificate" href="{{route('admin.post.updateStatus', ['id'=>$job->cc_id, 'status'=>0])}}">Remove</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -214,7 +153,7 @@
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createTc')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createCc')}}",data,ajaxResponseModal);
     }
 
 </script>

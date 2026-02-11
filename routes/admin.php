@@ -22,6 +22,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CharactercertificateController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\StudenthomeworkController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\DriverRouteController;
+use App\Http\Controllers\EventcertificateController;
 use App\Http\Controllers\ExpanseController;
 use App\Http\Controllers\ScRouteController;
 use App\Http\Controllers\StudentRouteController;
@@ -40,6 +42,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FeeinvoiceController;
+use App\Http\Controllers\MigratecertificateController;
 use App\Http\Controllers\PrincipalmessageController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\StaffAttendanceController;
@@ -88,12 +91,32 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         Route::post('/promoteStudents', [PromotionController::class,'promoteStudents'])->name('admin.post.promoteStudents')->withoutMiddleware([VerifyCsrfToken::class]);
         
         // Certificates Module
-        
-        Route::get('/certificate', [CertificateController::class,'certificate'])->name('admin.pages.certificate');
+       
+        Route::get('/ev', [EventcertificateController::class,'index'])->name('admin.pages.ev');
+
+        Route::post('/createEv', [EventcertificateController::class,'create'])->name('admin.post.createEv')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/printEv', [EventcertificateController::class,'printEv'])->name('admin.pages.printEv');
+
+        Route::get('/mg', [MigratecertificateController::class,'index'])->name('admin.pages.mg');
+
+        Route::post('/createMg', [MigratecertificateController::class,'create'])->name('admin.post.createMg')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/printMg', [MigratecertificateController::class,'printMg'])->name('admin.pages.printMg');
+
+        Route::get('/cc', [CharactercertificateController::class,'index'])->name('admin.pages.cc');
+
+        Route::post('/createCc', [CharactercertificateController::class,'create'])->name('admin.post.createCc')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/printCc', [CharactercertificateController::class,'printCc'])->name('admin.pages.printCc');
 
         Route::get('/tc', [TransfercertificateController::class,'index'])->name('admin.pages.tc');
 
         Route::post('/createTc', [TransfercertificateController::class,'create'])->name('admin.post.createTc')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/printTC', [TransfercertificateController::class,'printTC'])->name('admin.pages.printTC');
+
+        Route::get('/certificate', [CertificateController::class,'certificate'])->name('admin.pages.certificate');
 
         Route::get('/transferCertificate', [CertificateController::class,'transferCertificate'])->name('admin.pages.transferCertificate');
 

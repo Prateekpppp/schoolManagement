@@ -99,10 +99,16 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.tc')}}" class="nav-link"><i class="fas fa-angle-right"></i>Transfer Certificate</a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{route('admin.pages.addStudent')}}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.cc')}}" class="nav-link"><i class="fas fa-angle-right"></i>Character Certificate</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{route('admin.pages.mg')}}" class="nav-link"><i class="fas fa-angle-right"></i>Migration Certificate</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.ev')}}" class="nav-link"><i class="fas fa-angle-right"></i>Event Certificate</a>
+                                </li>
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.inactiveStudents')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inactive Students</a>
                                 </li>
                                 <li class="nav-item">

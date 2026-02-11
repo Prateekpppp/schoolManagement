@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Event Certificate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{{ asset('js') }}/tailwind.min.js"></script>
 
 <style>
     body {
@@ -53,7 +55,7 @@
     }
 
     .content {
-        margin-top: 40px;
+        margin-top: 5px;
         font-size: 22px;
         line-height: 45px;
     }
@@ -83,6 +85,14 @@
         display: inline-block;
         width: 300px;
     }
+
+    .print-btn {
+        background-color: #28a745;
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
 </style>
 </head>
 
@@ -91,28 +101,23 @@
 <div class="certificate">
     <div class="inner-border">
 
-        <div class="header-title">{{$appdata->title}}</div>
-        <div class="sub-header">
-            {{$appdata->address}} |
-            Phone No.: {{$appdata->phone}}<br>
-            Email: {{$appdata->email}}
-        </div>
+        @include('admin.includes.print_header')
 
         <div class="event-title">EVENT CERTIFICATE</div>
-        <div class="sports">SPORTS (2026-27)</div>
+        <div class="sports">{{$data->event}}</div>
 
         <div class="content">
             This is to certify that
-            <span class="line fill">{{$data->name}} ({{$data->class}})</span><br>
+            <span class="line fill">{{$data->name}} ({{$data->class_name}})</span><br>
 
             has earned this certificate for outstanding achievement in<br>
 
-            <span class="line fill">HHH</span><br>
+            <span class="line fill">{{$data->achievment_in}}</span><br>
 
             on the date
-            <span class="line fill">{{date('d-m-Y')}}</span>
+            <span class="line fill">{{$data->issue_date}}</span>
             with
-            <span class="line fill"></span>
+            <span class="line fill">{{$data->rank}}</span>
             rank.
         </div>
 
@@ -125,5 +130,6 @@
     </div>
 </div>
 
+        @include('admin.includes.print_btn')
 </body>
 </html>

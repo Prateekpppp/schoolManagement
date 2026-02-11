@@ -99,6 +99,14 @@
             margin: 0;
         }
     }
+    .print-btn {
+        background-color: #28a745;
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
 </style>
 </head>
 
@@ -106,18 +114,13 @@
 
 <div class="certificate">
 
-    <div class="school-header">
-        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-        <h2>{{$appdata->title}}</h2>
-        <p>{{$appdata->address}}</p>
-        <p>Ph: {{$appdata->phone}} &nbsp; Email: {{$appdata->email}}</p>
-    </div>
+        @include('admin.includes.print_header')
 
     <div class="divider"></div>
 
     <div class="meta">
         <div><strong>Admission No. :</strong> {{$data->admission_no}}</div>
-        <div><strong>Date :</strong> {{date('d-m-Y')}}</div>
+        <div><strong>Date :</strong> {{$data->issue_date}}</div>
     </div>
 
     <div class="title">CHARACTER CERTIFICATE</div>
@@ -132,11 +135,11 @@
         <span class="line">{{$data->mother_name}}</span><br>
 
         during the year from
-        <span class="line">{{date('Y', strtotime($data->created_at))}}</span>
+        <span class="line">{{$data->from_date}}</span>
         to
-        <span class="line">{{date('Y')}}</span>
+        <span class="line">{{$data->to_date}}</span>
         his / her character and conduct were
-        <span class="line">Very Good</span>
+        <span class="line">{{$data->character}}</span>
         during his / her stay in this school.
     </div>
 
@@ -149,6 +152,6 @@
     </div>
 
 </div>
-
+        @include('admin.includes.print_btn')
 </body>
 </html>
