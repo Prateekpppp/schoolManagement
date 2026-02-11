@@ -43,11 +43,11 @@ class StaffAttendanceController extends Controller
         try{
             $ScLatitude = $this->appdata->latitude;
             $ScLongitute = $this->appdata->altitude;
+            // dd($request->location);
             $request->location = json_decode($request->location);
-            dd((array)$request->location,count((array)$request->location));
-            if(!count((array)$request->location)){
+            if(!isset($request->location->latitude) || !isset($request->location->longitude)){
                 return response()->json([
-                    'message'=>'Not under the required school area!',
+                    'message'=>'Issue with location access!',
                     'response_code'=> '405'
                 ]);
             }
@@ -125,8 +125,8 @@ class StaffAttendanceController extends Controller
             ]);
         } catch (\Exception $e){
             return response()->json([
-                'message'=> 'Something went wrong: '.$e->getMessage(),
-                'response_code'=> '500'
+                'message'=>'Issue with location access!',
+                'response_code'=> '405'
             ]);
         }
     }
