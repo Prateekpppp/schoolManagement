@@ -45,6 +45,12 @@ class StaffAttendanceController extends Controller
             $ScLongitute = $this->appdata->altitude;
             // dd($request->location);
             $request->location = json_decode($request->location);
+            if(!isset($request->location->latitude) || !isset($request->location->longitude)){
+                return response()->json([
+                    'message'=>'Unable to get the location access!',
+                    'response_code'=> '405'
+                ]);
+            }
             $distance = $this->haversine_distance($ScLatitude, $ScLongitute, $request->location->latitude, $request->location->longitude,'m');
 
             // dd($distance);
@@ -119,8 +125,8 @@ class StaffAttendanceController extends Controller
             ]);
         } catch (\Exception $e){
             return response()->json([
-                'message'=> 'Something went wrong: '.$e->getMessage(),
-                'response_code'=> '500'
+                'message'=>'Issue with location access!',
+                'response_code'=> '405'
             ]);
         }
     }

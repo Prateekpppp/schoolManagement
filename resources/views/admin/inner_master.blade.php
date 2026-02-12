@@ -2,7 +2,7 @@
 
 @section('body')
     <!-- Preloader Start Here -->
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
     <!-- Preloader End Here -->
     
     <div id="wrapper" class="wrapper bg-ash">
