@@ -69,6 +69,7 @@
                                         <option {{ $data->status == 3 ? 'selected' : '' }} value="3">Principal</option>
                                         <option {{ $data->status == 4 ? 'selected' : '' }} value="4">Teacher</option>
                                         <option {{ $data->status == 7 ? 'selected' : '' }} value="7">Accountant</option>
+                                        <option {{ $data->status == 8 ? 'selected' : '' }} value="8">Staff</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">

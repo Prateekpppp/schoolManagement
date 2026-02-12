@@ -280,7 +280,7 @@ class StaffController extends Controller
             // $staff->class = json_encode($request->class);
             $staff->section = $request->section;
             $staff->subject = $request->subject;
-            $staff->status = 1;
+            $staff->status = $request->status;
 
             if($request->password){
                 $staff->password = $request->password;

@@ -36,9 +36,13 @@
             @include('driver.includes.navbar')
             <!-- Sidebar Area End Here -->
             @elseif($currentUser->status == 7)
-            {{-- 5 = parent --}}
+            {{-- 7 = account --}}
             <!-- Sidebar Area Start Here -->
             @include('account.includes.navbar')
+            <!-- Sidebar Area End Here -->
+            {{-- 8 = otherStaff --}}
+            <!-- Sidebar Area Start Here -->
+            @include('otherStaff.includes.navbar')
             <!-- Sidebar Area End Here -->
             @endif
         
@@ -76,6 +80,11 @@
             {{-- 7 = account --}}
             <!-- Sidebar Area Start Here -->
             @include('account.includes.sidebar')
+            <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 8)
+            {{-- 8 = otherStaff --}}
+            <!-- Sidebar Area Start Here -->
+            @include('otherStaff.includes.sidebar')
             <!-- Sidebar Area End Here -->
             @endif
 
@@ -115,6 +124,11 @@
                 {{-- 7 = account --}}
                 <!-- Breadcubs Area Start Here -->
                 @include('account.includes.breadcrumb')
+                <!-- Breadcubs Area End Here -->
+                @elseif($currentUser->status == 7)
+                {{-- 8 = otherStaff --}}
+                <!-- Breadcubs Area Start Here -->
+                @include('otherStaff.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 @endif
                 
