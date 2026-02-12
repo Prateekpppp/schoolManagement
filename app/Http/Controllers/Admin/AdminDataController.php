@@ -139,7 +139,7 @@ class AdminDataController extends Controller
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
        if($user->status == 1 || $user->status == 2){
            return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes','expanse'));
-        } elseif($user->status < 5){
+        } elseif($user->status < 5 || $user->status == 8){
             return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
 
         }
@@ -160,8 +160,6 @@ class AdminDataController extends Controller
 
             return $this->driver();
 
-            return view('driver.pages.index',compact('classes','sections','students','present','absent'));
-            
         }
 
         if ($user->status == 7) {

@@ -40,6 +40,7 @@
             <!-- Sidebar Area Start Here -->
             @include('account.includes.navbar')
             <!-- Sidebar Area End Here -->
+            @elseif($currentUser->status == 8)
             {{-- 8 = otherStaff --}}
             <!-- Sidebar Area Start Here -->
             @include('otherStaff.includes.navbar')

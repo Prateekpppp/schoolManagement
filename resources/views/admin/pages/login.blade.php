@@ -44,7 +44,7 @@
             </div>
             {{-- <div class="sign-up cursor-pointer">Forgot Password ?</div> --}}
             <div class="alert alert-warning forgot_alert hidden" role="alert">
-                <div class="">Please contact customer support - <a href="tel:+919386591568">9386591568</a></div>
+                <div class="">Please contact customer support - <a href="tel:+91{{$appdata->phone}}">{{$appdata->phone}}</a></div>
             </div>
         </div>
     </div>
@@ -59,10 +59,13 @@
         $('.forgot_alert').toggleClass('hidden');
     });
   </script>
-@if (request()->session()->get('code')=='304')
 
-  <script>
-    responseToast(request()->session()->get('message'));
-  </script>
-@endif
+    @if (session('code')=='304')
+
+    <script>
+            responseToast("{{session('message')}}",'bg-success');
+    </script>
+
+    @endif
+
 @endsection
