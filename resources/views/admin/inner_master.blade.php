@@ -126,10 +126,10 @@
                 <!-- Breadcubs Area Start Here -->
                 @include('account.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
-                @elseif($currentUser->status == 7)
+                @elseif($currentUser->status == 8)
                 {{-- 8 = otherStaff --}}
                 <!-- Breadcubs Area Start Here -->
-                @include('otherStaff.includes.breadcrumb')
+                @include('staff.includes.breadcrumb')
                 <!-- Breadcubs Area End Here -->
                 @endif
                 

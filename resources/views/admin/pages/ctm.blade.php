@@ -1,5 +1,11 @@
 @extends('admin.inner_master')
 
+@section('admin_head')
+
+<link rel="stylesheet" href="{{ asset('css') }}/summernote-bs5.min.css">
+
+@endsection
+
 @section('inner_body')
 
                 <!-- Add New Teacher Area Start Here -->
@@ -28,12 +34,16 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Ctm No. </label>
-                                    <input name="ctm_no" type="text" placeholder="" class="form-control required" value="{{isset($data->ctm_no) ? $data->ctm_no : 'EV_'.substr(time(),5)}}">
+                                    <input name="ctm_no" type="text" placeholder="" class="form-control required" value="{{isset($data->ctm_no) ? $data->ctm_no : 'CTM_'.substr(time(),5)}}">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Event Name </label>
-                                    <input name="event" type="text" placeholder="" class="form-control required" value="{{isset($data->event) ? $data->event : ''}}">
+                                    <label>Title </label>
+                                    <input name="title" type="text" placeholder="" class="form-control required" value="{{isset($data) ? $data->title : ''}}">
                                 </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Name </label>
+                                    <input name="name" type="text" placeholder="" class="form-control required" value="{{isset($data) ? $data->name : ''}}">
+                                </div> --}}
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Issue Date *</label>
                                     <input name="issue_date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->issue_date : ''}}">
@@ -47,13 +57,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Achievement In </label>
-                                    <input name="achievment_in" type="text" placeholder="" class="form-control required" value="{{isset($data) ? $data->achievment_in : ''}}">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Rank </label>
-                                    <input name="rank" type="text" placeholder="" class="form-control required" value="{{isset($data) ? $data->rank : ''}}">
+                                <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
+                                    <label>Description </label>
+                                    <textarea id="summernote" name="description" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
@@ -124,7 +130,7 @@
                                             <td>{{$job->section_name}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
-                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printEv', ['ctm_no'=>$job->ctm_no])}}">Print</a>
+                                                <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printCtm', ['ctm_no'=>$job->ctm_no])}}">Print</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.ev', ['ctm_no'=>$job->ctm_no])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-700" data-model="CustomCertificate" href="{{route('admin.post.updateStatus', ['id'=>$job->ctm_id, 'status'=>0])}}">Remove</a>
                                                 </div>
@@ -145,11 +151,28 @@
 
 @section('inner_js')
 
+    <script src="{{ asset('js') }}/summernote-bs5.min.js"></script>
 <script>
+
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: "Write your content here",
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    });
 
     function submitForm(form){
         let data = new FormData($(form)[0]);
-        callAjaxFormData('post',"{{route('admin.post.createEv')}}",data,ajaxResponseModal);
+        callAjaxFormData('post',"{{route('admin.post.createCtm')}}",data,ajaxResponseModal);
     }
 
 </script>

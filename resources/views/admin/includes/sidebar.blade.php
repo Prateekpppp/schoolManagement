@@ -108,6 +108,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.ev')}}" class="nav-link"><i class="fas fa-angle-right"></i>Event Certificate</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.ctm')}}" class="nav-link"><i class="fas fa-angle-right"></i>Custom Certificate</a>
+                                </li>
                                 {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.inactiveStudents')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inactive Students</a>
                                 </li>

@@ -31,10 +31,10 @@ class CustomCertificateController extends Controller
         if($request->ctm_no){
             $data = CustomCertificate::where('ctm_no',$request->ctm_no)->first();
             if($data){
-                return view('admin.pages.tc', compact('data','students','tcList'));
+                return view('admin.pages.ctm', compact('data','students','tcList'));
             }
         }
-        return view('admin.pages.tc', compact('students','tcList'));
+        return view('admin.pages.ctm', compact('students','tcList'));
     }
 
     public function create(Request $request){
@@ -48,13 +48,13 @@ class CustomCertificateController extends Controller
             $data->ctm_no = $request->ctm_no;
             $data->title = $request->title;
             $data->issue_date = $request->issue_date;
-            $data->name = $request->name;
+            $data->student_id = $request->student_id;
             $data->description = $request->description;
             $data->session_id = session('session_id');
             $data->save();
 
             return response()->json([
-                'message'=> 'Certificated Updated Successfully',
+                'message'=> 'Certificate Updated Successfully',
                 'response_code'=> '200',
             ]);
 
@@ -66,7 +66,7 @@ class CustomCertificateController extends Controller
         }
     }
 
-    public function printTC(Request $request){
+    public function printCtm(Request $request){
 
         $data = CustomCertificate::where('custom_certificates.session_id',session('session_id'));
 
@@ -94,6 +94,6 @@ class CustomCertificateController extends Controller
         );
 
         $data = $data->where('custom_certificates.ctm_no',$request->ctm_no)->first();
-        return view('admin.pages.transferCertificate',compact('data'));
+        return view('admin.pages.customCertificate',compact('data'));
     }
 }

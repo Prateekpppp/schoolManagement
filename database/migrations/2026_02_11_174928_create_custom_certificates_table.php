@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ctm_no')->nullable();
             $table->string('title')->nullable();
             $table->string('issue_date')->nullable();
-            $table->string('name')->nullable();
+            $table->string('student_id')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();

@@ -27,6 +27,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CustomCertificateController;
 use App\Http\Controllers\DriveractivityController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TransactionController;
@@ -96,6 +97,12 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
         
         // Certificates Module
        
+        Route::get('/ctm', [CustomCertificateController::class,'index'])->name('admin.pages.ctm');
+
+        Route::post('/createCtm', [CustomCertificateController::class,'create'])->name('admin.post.createCtm')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/printCtm', [CustomCertificateController::class,'printCtm'])->name('admin.pages.printCtm');
+
         Route::get('/ev', [EventcertificateController::class,'index'])->name('admin.pages.ev');
 
         Route::post('/createEv', [EventcertificateController::class,'create'])->name('admin.post.createEv')->withoutMiddleware([VerifyCsrfToken::class]);
