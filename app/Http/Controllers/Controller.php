@@ -24,7 +24,7 @@ abstract class Controller
             if($this->currentUser->status == 3 || $this->currentUser->status == 4 || $this->currentUser->status == 8){
                 $this->currentLogin = Staff::where('phone',$this->currentUser->username)->first();
             }elseif($this->currentUser->status == 5){
-                $this->currentLogin = Student::where('enrollment_no',$this->currentUser->username)->first();
+                $this->currentLogin = Student::where('father_phone',$this->currentUser->username)->first();
             }elseif($this->currentUser->status == 6){
                 $this->currentLogin = Driver::where('phone',$this->currentUser->username)->first();
             }

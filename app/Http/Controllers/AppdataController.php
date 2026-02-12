@@ -153,6 +153,16 @@ class AppdataController extends Controller
         try {
             
             $user = User::where('username',$request->username)->first();
+
+            if(!$user){
+                
+                $this->addUser($request);
+                return response()->json([
+                    'message'=> 'User added successfully',
+                    'response_code'=> '200',
+                ]);
+            }
+
             $user->name = $request->name;
             if(isset($request->email)){
                 $user->email = $request->email;
@@ -162,7 +172,7 @@ class AppdataController extends Controller
             $user->status = $request->status;
             $user->save();
             return response()->json([
-                'message'=> 'User added successfully',
+                'message'=> 'User updated successfully',
                 'response_code'=> '200',
             ]);
         } catch (\Exception $e) {

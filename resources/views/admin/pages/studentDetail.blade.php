@@ -31,7 +31,7 @@
                             <div class="item-img flex flex-col justify-center items-center gap-3 col-md-4">
                                 <img src="{{asset('/')}}{{$student->photo ?? '--'}}" alt="student" width="300px">
                                 <div class="flex flex-row gap-3 justify-center items-center flex-wrap">
-                                    @if($studentFeeInvoice)
+                                    @if($studentFeeInvoice && $currentUser->status < 3)
                                     <a href="{{route('admin.pages.updateFeeInvoice',['id'=>$studentFeeInvoice->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-500" href="javascript:void(0)"> <i class="fa fa-credit-card"></i> Pay Fee</a>
                                     
                                     <a href="{{route('admin.pages.feeInvoice',['student_id'=>$student->id])}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-blue-500" href="javascript:void(0)"> <i class="fa fa-calculator"></i> View Dues</a>

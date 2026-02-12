@@ -74,16 +74,11 @@
 
 
             <!-- School Info -->
-            <div class="text-center">
-                    <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-                <h5 class="fw-bold mb-1">{{$appdata->title}}</h5>
-                <p class="mb-0 info-text">
-                    Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | Website: www.germinationschool.com
-                </p>
-                <p class="info-text">
-                    {{$appdata->address}}
-                </p>
-            </div>
+                <div class="text-center flex justify-center items-center">
+                    @include('admin.includes.print_header')
+
+
+                </div>
 
             <!-- Expense Title -->
             <div class="expense-box text-center">

@@ -62,6 +62,9 @@
         .modal {
             display: block !important;
         }
+        @media print {
+            .printSection {break-after: always;}
+        }
     </style>
 </head>
 <body>
@@ -71,21 +74,16 @@
 <div class="modal d-block p-3" tabindex="-1">
         @if(isset($invoices) && count($invoices) > 0)
         @foreach($invoices as $allData)
-        <div class="w-75 mx-auto my-3">
+        <div class="w-75 mx-auto my-3 printSection">
             <div class="modal-content p-3">
 
 
 
                 <!-- School Info -->
-                <div class="text-center">
-                        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-                    <h5 class="fw-bold mb-1">{{$appdata->title}}</h5>
-                    <p class="mb-0 info-text">
-                        Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | Website: www.germinationschool.com
-                    </p>
-                    <p class="info-text">
-                        {{$appdata->address}}
-                    </p>
+                <div class="text-center flex justify-center items-center">
+                    @include('admin.includes.print_header')
+
+
                 </div>
 
                 <!-- Expense Title -->

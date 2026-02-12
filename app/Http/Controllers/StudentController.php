@@ -259,8 +259,8 @@ class StudentController extends Controller
             // create user
             $userData = new \stdClass();
             $userData->name = $request->name;
-            // $userData->username = $request->father_phone;
-            $userData->username = $student->enrollment_no;
+            $userData->username = $request->father_phone;
+            // $userData->username = $student->enrollment_no;
             $userData->password = $request->password;
             $userData->status = 5;
             $user = (new AppdataController)->addUser($userData);
@@ -431,7 +431,17 @@ class StudentController extends Controller
             $student->id_proof_front = $request->id_proof_front;
             $student->id_proof_back = $request->id_proof_back;
             $student->other_document = $request->other_document;
-            $student->status = 1;
+            $student->password = $request->password;
+            $student->status = 5;
+            
+            $userData = new \stdClass();
+            $userData->name = $student->name;
+            $userData->username = $student->father_phone;
+            $userData->password = $student->password;
+            $userData->status = $student->status;
+            $user = (new AppdataController)->updateUser($userData);
+
+
             $student->save();  
 
             if(isset($request->fee)){
@@ -485,7 +495,7 @@ class StudentController extends Controller
         if($request->id){
             $student = $student->where('students.id',$request->id)->first();
         } else{
-            $student = $student->where('students.enrollment_no',$this->currentUser->username)->first();
+            $student = $student->where('students.father_phone',$this->currentUser->username)->first();
         }
         // dd($student->id);
         // $studentFeeInvoice = Feeinvoice::withSum('transactions','transaction_amount')->where('student_id',$student->id)->where('status','!=',2);

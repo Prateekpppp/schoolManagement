@@ -107,11 +107,11 @@
                             <label>E-Mail *</label>
                             <input name="email" value="{{$data->email ?? ''}}" type="email" placeholder="" class="form-control required">
                         </div> --}}
-                        {{-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Password </label>
                             <input name="password" type="password" placeholder="Leave empty if want to use old password" class="form-control">
                             <div class="float-right passwordType"> <i class="fa fa-eye-slash"></i> </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

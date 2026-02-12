@@ -145,6 +145,7 @@ class AdminDataController extends Controller
         }
         
         if ($user->status == 5){
+            return $this->student();
             return redirect()->route('student.pages.studentDetail',$this->currentLogin->id);
             $present = StudentAttendance::where('student_id',$this->currentLogin->id)
             ->where('status',1)->count();
@@ -170,6 +171,14 @@ class AdminDataController extends Controller
         
     }
     
+    public function student(){
+
+        $data = Student::where('father_phone',$this->currentUser->username)->get();
+        return view('student.pages.index',compact('data'));
+               
+    }
+
+
     public function driver(){
 
         $student = Driver::where('id',$this->currentLogin->id)->first();

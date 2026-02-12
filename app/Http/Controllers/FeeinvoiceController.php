@@ -106,13 +106,15 @@ class FeeinvoiceController extends Controller
         $totalDueAmount = $totalInvoiceAmount - $totalPaidAmount;
 
         // dd($totalDueAmount,$totalPaidAmount);
-        $fee = $fee->get();
 
         if($this->currentUser->status == 5){
+            $fee = $fee->where('students.father_phone',$this->currentUser->username);
+            $fee = $fee->get();
             
             return view('student.pages.feeInvoice',compact('fee','request','totalInvoiceAmount','totalPaidAmount','totalDueAmount'));
         }
 
+        $fee = $fee->get();
         // dd($fee);
         return view('admin.pages.feeInvoice',compact('fee','request','totalInvoiceAmount','totalPaidAmount','totalDueAmount'));
     }

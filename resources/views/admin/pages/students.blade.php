@@ -123,7 +123,7 @@
                                                     <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.studentDetail',$job->id)}}">Details</a>
                                                     <a data-href="{{route('admin.post.inactive')}}" data-id="{{$job->id}}" data-model="Student" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                                     
-                                                    <div class="dropdown !inline-block">
+                                                    {{-- <div class="dropdown !inline-block">
                                                         <span class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                                             <a class="dropdown-item btn fw-btn-fill btn-gradient-yellow !max-w-min" href="#">More</a>
                                                         </span>
@@ -134,7 +134,7 @@
                                                             <a target="_blank" class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'cc'])}}"><i class="fa fa-docs text-orange-red"></i>Character Certificate</a>
                                                             <a target="_blank" class="dropdown-item p-1" href="{{route('admin.pages.certificate',['id'=>$job->id,'type'=>'ev'])}}"><i class="fa fa-docs text-orange-red"></i>Event Certificate</a>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </td>
                                         </tr>
