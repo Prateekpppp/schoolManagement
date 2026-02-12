@@ -32,7 +32,8 @@ class AdminAuthCheckMiddleware
         $currentUser = User::getCurrentUser();
         View::share('currentUser',$currentUser);
     
-        if($currentUser->status > 2 && $currentUser->status < 5){
+        // if($currentUser->status > 2 && $currentUser->status < 5){
+        if($currentUser->status == 3 || $currentUser->status == 4 || $currentUser->status == 8){
             $currentLogin = Staff::where('phone',$currentUser->username)->first();
             View::share('currentLogin',$currentLogin);
         }elseif($currentUser->status == 5){
