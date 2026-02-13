@@ -45,7 +45,7 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Subject </label>
                                     <select name="subject" class="select2 required">
-                                        <option class="subAfter" value="">Please Subject Class *</option>
+                                        <option class="subAfter" value="">Please Select Subject *</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
