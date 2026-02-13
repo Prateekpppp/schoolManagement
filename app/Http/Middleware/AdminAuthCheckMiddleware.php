@@ -45,8 +45,8 @@ class AdminAuthCheckMiddleware
             View::share('currentLogin',$currentLogin);
         }
 
-        $notification = Notification::where('status',0)->where('role',$currentUser->status)->count();
-        View::share('notification',$notification);
+        // $notification = Notification::where('status',0)->where('role',$currentUser->status)->count();
+        // View::share('notification',$notification);
     
 
         return $next($request);
