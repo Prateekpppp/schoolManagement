@@ -47,8 +47,10 @@ use App\Http\Controllers\FeeinvoiceController;
 use App\Http\Controllers\MigratecertificateController;
 use App\Http\Controllers\PrincipalmessageController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StudentAttendanceController;
+use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TransfercertificateController;
 use Illuminate\Support\Facades\Cookie;
@@ -80,6 +82,22 @@ Route::middleware(['admin_auth_check_middleware','custom_admin_session_middlewar
 
     Route::prefix('admin')->group(function () {
           
+        // Syllabus Module
+       
+        Route::get('/syllabus', [SyllabusController::class,'index'])->name('admin.pages.syllabus');
+
+        Route::post('/createSyllabus', [SyllabusController::class,'create'])->name('admin.post.createSyllabus')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/syllabi', [SyllabusController::class,'view'])->name('admin.pages.syllabi');
+
+        // Routine Module
+       
+        Route::get('/routines', [RoutineController::class,'index'])->name('admin.pages.routines');
+
+        Route::post('/createRoutine', [RoutineController::class,'create'])->name('admin.post.createRoutine')->withoutMiddleware([VerifyCsrfToken::class]);
+ 
+        Route::get('/routine', [RoutineController::class,'view'])->name('admin.pages.routine');
+
 
         Route::get('/driverRoutes', [DriveractivityController::class,'driverRoutes'])->name('admin.pages.driverRoutes');
 

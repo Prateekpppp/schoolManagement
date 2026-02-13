@@ -71,6 +71,12 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.task')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Task</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.routines')}}" class="nav-link"><i class="fas fa-angle-right"></i>Routine</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pages.syllabus')}}" class="nav-link"><i class="fas fa-angle-right"></i>Syllabus</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">

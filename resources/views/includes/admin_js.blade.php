@@ -45,8 +45,11 @@
             $('select[name=section]').val("{{$data->section}}").trigger('change');
             @endif
         @endif
-        @if(isset($data) && isset($data->subject_id))
+        @if(isset($data) && (isset($data->subject_id) || isset($data->subject)))
             $('select[name=subject]').val("{{$data->subject_id}}").change();
+            @if($data->subject)
+            $('select[name=subject]').val("{{$data->subject}}").trigger('change');
+            @endif
         @endif
     }
 
