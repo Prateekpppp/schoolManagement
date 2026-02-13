@@ -101,6 +101,7 @@
                                         <th>Topic</th>
                                         <th>Date</th>
                                         <th>Description</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -114,6 +115,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                         </tr>
                                     @else
                                     @foreach ($tcList as $key=>$job)
@@ -124,6 +126,17 @@
                                             <td>{{$job->topic}}</td>
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->description}}</td>
+                                            {{-- <td>{{!$job->status ? 'Absent' : ($job->status == 1 ? 'Present' : 'Late')}}</td> --}}
+                                            <td>
+                                                <div class="flex flex-row gap-2">
+                                                    <select data-model="Syllabus" data-id="{{$job->id}}" name="status" class="select2">
+                                                        <option value="">Change Status</option>
+                                                        <option {{$job->status == 0 ? 'selected':''}} value="0">Pending</option>
+                                                        <option {{$job->status == 1 ? 'selected':''}} value="1">Ongoing</option>
+                                                        <option {{$job->status == 2 ? 'selected':''}} value="2">Completed</option>
+                                                    </select>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                 {{-- <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printCtm', ['id'=>$job->id])}}">View</a> --}}
@@ -155,6 +168,13 @@
         callAjaxFormData('post',"{{route('admin.post.createSyllabus')}}",data,ajaxResponseModal);
     }
 
+    $('select[name=status]').on('change',function(){
+        let data = {};
+        data['id'] = $(this).attr('data-id');
+        data['status'] = $(this).val();
+        data['model'] = $(this).attr('data-model');
+        callApi('post',"{{route('admin.post.updateStatus')}}",data,ajaxResponseModal);
+    });
 </script>
 
 @endsection

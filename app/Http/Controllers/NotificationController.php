@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Syllabus;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class SyllabusController extends Controller
+class NotificationController extends Controller
 {
     //
 
     public function index(Request $request){
 
-        $tcList = Syllabus::where('syllabi.session_id',session('session_id'));
+        $tcList = Notification::where('status',0);
 
         $tcList = $tcList->join('classes','classes.id','syllabi.class')
         ->join('subjects','subjects.id','syllabi.subject')
@@ -30,23 +30,18 @@ class SyllabusController extends Controller
 
     public function create(Request $request){
         try{
-            if($request->id){
-                $data = Syllabus::where('id',$request->id)->first();
-            } else{
-                $data = new Syllabus();
-            }
-            
-            $data->class = $request->class;
-            $data->subject = $request->subject;
-            $data->topic = $request->topic;
-            $data->date = $request->date;
+
+            $data = new Notification();
+            $data->title = $request->title;
             $data->description = $request->description;
+            $data->date = $request->date;
+            $data->role = $this->currentUser->status;
             $data->status = 0;
             $data->session_id = session('session_id');
             $data->save();
 
             return response()->json([
-                'message'=> 'Syllabus Updated Successfully',
+                'message'=> 'Notification Created Successfully',
                 'response_code'=> '200',
             ]);
 
