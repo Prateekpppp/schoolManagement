@@ -55,7 +55,7 @@ class StaffAttendanceController extends Controller
 
             // dd($distance);
 
-            if($distance > 30){
+            if($distance > 100){
                 return response()->json([
                     'message'=>'Not under the required school area!',
                     'response_code'=> '405'
