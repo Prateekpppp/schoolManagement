@@ -13,6 +13,40 @@ class StudentAttendanceController extends Controller
     public function create(Request $request){
         try{
 
+            $request->date = Carbon::parse($request->date)->format('d-m-Y');
+            dd($request->all());
+
+            foreach ($request->data as $k => $value) {
+                $data = StudentAttendance::updateOrCreate(
+                    [
+                        'student_id'=>$k,
+                        'date'=>$request->date
+                    ],
+                    [
+                        'student_id'=>$k,
+                        'status'=>$value,
+                        'date'=>$request->date,
+                        'session_id'=>session('session_id')
+                    ]
+                );
+            }
+            
+            return response()->json([
+                'redirect'=> $request->header('referer'),
+                'message'=>'Attendance Updated Successfully',
+                'response_code'=> '200'
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'message'=> 'Something went wrong: '.$e->getMessage(),
+                'response_code'=> '500'
+            ]);
+        }
+    }
+
+    public function createSingle(Request $request){
+        try{
+
             // dd($request->all());
 
             foreach ($request->data as $k => $value) {
@@ -50,7 +84,7 @@ class StudentAttendanceController extends Controller
             if(!$request->date){
                 return view('admin.pages.studentAttendance');
             }
-            $request->date = Carbon::parse($request->date)->format('d-m-y');
+            $request->date = Carbon::parse($request->date)->format('d-m-Y');
             $attendance = StudentAttendance::where('date',$request->date);
 
             $data = Student::join('classes','students.class','=','classes.id')

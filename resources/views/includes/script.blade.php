@@ -222,4 +222,16 @@
     $('input[name=employ_code]').on("input", function () {
         this.value = this.value.replace(/[^a-zA-Z0-9]/g, "");
     });
+
+    function formatdate(date){
+        const today = date;
+        const year = today.getFullYear();
+        // getMonth() returns 0-indexed values, so add 1
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        // console.log(formattedDate);
+        return formattedDate;
+    }
 </script>

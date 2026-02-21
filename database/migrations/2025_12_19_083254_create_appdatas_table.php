@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('altitude')->nullable();
+            $table->string('radius')->nullable();
             $table->string('school_hours')->nullable();
             $table->string('school_time')->nullable();
             // no checkout before min_time, no check in after min_time

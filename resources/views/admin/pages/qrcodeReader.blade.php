@@ -33,8 +33,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 
+    @include('includes.ajaxCalls')
+    @include('includes.script')
+
+<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script>
     let scanned = "";
     const video = $("#video")[0];
@@ -82,7 +85,15 @@
 
     // Confirm → Open new tab
     $("#confirm").on("click", function () {
-        window.open("view-student.php?id=" + encodeURIComponent(scanned), "_blank");
+
+        let student_id = scanned.split('/');
+        student_id = student_id[student_id.length - 1];
+
+        let data = {};
+        data[student_id] = 1;
+
+        callApi('post',"{{route('admin.post.createStudentAttendance')}}",{data:data,date:formatdate(new Date())},ajaxResponseModal);
+        // window.open("view-student.php?id=" + encodeURIComponent(scanned), "_blank");
     });
 
     // Change → Reset everything

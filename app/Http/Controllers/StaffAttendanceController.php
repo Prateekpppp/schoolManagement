@@ -43,6 +43,7 @@ class StaffAttendanceController extends Controller
         try{
             $ScLatitude = $this->appdata->latitude;
             $ScLongitute = $this->appdata->altitude;
+            $radius = $this->appdata->radius;
             // dd($request->location);
             $request->location = json_decode($request->location);
             if(!isset($request->location->latitude) || !isset($request->location->longitude)){
@@ -55,7 +56,7 @@ class StaffAttendanceController extends Controller
 
             // dd($distance);
 
-            if($distance > 100){
+            if($distance > $radius){
                 return response()->json([
                     'message'=>'Not under the required school area!',
                     'response_code'=> '405'

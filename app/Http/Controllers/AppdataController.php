@@ -27,6 +27,7 @@ class AppdataController extends Controller
                 $appdata->address = $request->address;                            
                 $appdata->latitude = $request->latitude;                            
                 $appdata->altitude = $request->altitude;                            
+                $appdata->radius = $request->radius;                            
                 $appdata->school_hours = $request->school_hours;                            
                 $appdata->school_time = $request->school_time;                            
                 $appdata->late_time = $request->late_time;                            
