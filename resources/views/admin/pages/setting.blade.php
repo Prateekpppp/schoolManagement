@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Radius </label>
-                                    <input value="{{$appdata->radius ?? '100'}}" name="altitude" type="text" placeholder="8" class="form-control">
+                                    <input value="{{$appdata->radius ?? '100'}}" name="radius" type="text" placeholder="8" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>School Hours </label>
