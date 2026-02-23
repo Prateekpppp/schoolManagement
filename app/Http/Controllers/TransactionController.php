@@ -162,7 +162,7 @@ class TransactionController extends Controller
             'fees' => $fees,
             'invoiceMonth' => $invoiceMonth,
             'scRoute' => $scRoute,
-            'back_dues'
+            'back_dues' => $back_dues
         ];
         $allData = (object)$allData;
 
