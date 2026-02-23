@@ -123,13 +123,13 @@
                     <tbody>
                         @foreach($allData->fees as $k => $fee)
                         @php
-                            $cnt = $k+1;
+                            $cnt += 1;
                             if($fee->month){
                                 if($fee->month != $allData->invoiceMonth) continue;
                             }
                         @endphp
                         <tr>
-                            <td>{{$k+1}}</td>
+                            <td>{{$cnt}}</td>
                             <td>{{$fee->name}}</td>
                             <td>{{$fee->amount}} /-</td>
                         </tr>
