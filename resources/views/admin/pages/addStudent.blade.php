@@ -159,7 +159,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Sibling </label>
-                            <select name="enrollment_no" class="select2 required">
+                            <select name="enrollment_no" class="select2">
                                 <option class="" value="">Please Select Student *</option>
                                 @foreach($students as $class)
                                     <option value="{{$class->enrollment_no}}">{{$class->admission_no}} | {{$class->roll_no}} | {{$class->name}} | {{$class->class}}</option>
