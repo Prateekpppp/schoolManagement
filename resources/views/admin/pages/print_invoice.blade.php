@@ -66,6 +66,9 @@
 </head>
 <body>
 
+    @php
+    $cnt = 0;
+    @endphp
 <!-- Modal -->
 <div class="modal show fade d-block p-3" tabindex="-1">
     <div class="w-75 mx-auto my-3">

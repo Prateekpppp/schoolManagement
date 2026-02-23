@@ -74,6 +74,10 @@
 <div class="modal d-block p-3" tabindex="-1">
         @if(isset($invoices) && count($invoices) > 0)
         @foreach($invoices as $allData)
+        
+    @php
+    $cnt = 0;
+    @endphp
         <div class="w-75 mx-auto my-3 printSection">
             <div class="modal-content p-3">
 
@@ -131,7 +135,7 @@
                         </tr>
                         @endforeach
 
-                        @if($back_dues)
+                        @if($allData->back_dues)
                         <tr>
                             <td>{{$cnt+1}}</td>
                             <td>Back Dues</td>
