@@ -131,6 +131,13 @@
                         </tr>
                         @endforeach
 
+                        @if($back_dues)
+                        <tr>
+                            <td>{{$cnt+1}}</td>
+                            <td>Back Dues</td>
+                            <td>{{$allData->back_dues}} /-</td>
+                        </tr>
+                        @endif
                         @if($allData->scRoute)
                         <tr>
                             <td>{{$cnt+1}}</td>

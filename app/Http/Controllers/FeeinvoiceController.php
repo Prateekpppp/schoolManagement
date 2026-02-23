@@ -129,6 +129,8 @@ class FeeinvoiceController extends Controller
         // dd($students);
         foreach ($students as $k=>$value) {
 
+            // Back Dues
+            $back_dues = Student::where('id',$value)->first()->back_dues ?? 0;
             // assigned fees data
 
             $feeInvoice = Feeinvoice::where('student_id',$value)
@@ -186,7 +188,7 @@ class FeeinvoiceController extends Controller
             // Transport Fee Module Part
 
             // dd($oneTimeFee,$annualFee,$monthlyFee );
-            $totalFee = $oneTimeFee + $monthlyFee + $annualFee + $transportFee;
+            $totalFee = $oneTimeFee + $monthlyFee + $annualFee + $transportFee + $back_dues;
 
             // dd($totalFee);
             

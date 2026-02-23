@@ -60,6 +60,8 @@ class TransactionController extends Controller
         ->where('students.id',$data->student_id)
         ->first();
 
+        $back_dues = $student->back_dues;
+
         $studentFee = StudentFee::where('student_id',$data->student_id);
 
         $fees = Fee::joinSub($studentFee,'studentFee',function($join){
@@ -88,7 +90,8 @@ class TransactionController extends Controller
             'student',
             'fees',
             'invoiceMonth',
-            'scRoute'
+            'scRoute',
+            'back_dues'
         ));
 
     }
@@ -128,6 +131,8 @@ class TransactionController extends Controller
         ->where('students.id',$data->student_id)
         ->first();
 
+        $back_dues = $student->back_dues;
+
         $studentFee = StudentFee::where('student_id',$data->student_id);
 
         $fees = Fee::joinSub($studentFee,'studentFee',function($join){
@@ -157,6 +162,7 @@ class TransactionController extends Controller
             'fees' => $fees,
             'invoiceMonth' => $invoiceMonth,
             'scRoute' => $scRoute,
+            'back_dues'
         ];
         $allData = (object)$allData;
 
