@@ -211,6 +211,7 @@ class StudentController extends Controller
             $student->blood_group = $request->blood_group;
             $student->caste = $request->caste;
             $student->phone = $request->phone;
+            $student->back_dues = $request->back_dues;
             // $student->email = $request->email;
             $student->city = $request->city;
             $student->state = $request->state;
@@ -397,6 +398,7 @@ class StudentController extends Controller
             $student->blood_group = $request->blood_group;
             $student->caste = $request->caste;
             $student->phone = $request->phone;
+            $student->back_dues = $request->back_dues;
             // $student->email = $request->email;
             $student->city = $request->city;
             $student->state = $request->state;
