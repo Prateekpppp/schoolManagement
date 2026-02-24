@@ -37,9 +37,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.inventory')}}" class="nav-link"><i class="fas fa-angle-right"></i>Inventory Invoice</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.pages.salary')}}" class="nav-link"><i class="fas fa-angle-right"></i>Salary</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{route('admin.pages.expanse')}}" class="nav-link"><i class="fas fa-angle-right"></i>Expense</a>
                                 </li>

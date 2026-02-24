@@ -13,11 +13,11 @@ class StaffController extends Controller
 {
     //
     public function staff(Request $request){
-        $staff = Staff::join('classes','staff.class','=','classes.id')
-        ->join('sections','staff.section','=','sections.id')
+        $staff = Staff::leftJoin('classes','staff.class','=','classes.id')
+        ->leftJoin('sections','staff.section','=','sections.id')
         ->get(['staff.*','classes.class','sections.section']);
 
-        $data = Staff::join('subjects','subjects.id','staff.subject')
+        $data = Staff::leftJoin('subjects','subjects.id','staff.subject')
         ->select('staff.*','subjects.subject');
         if(isset($request->status)){
             $data = $data->where('staff.status',$request->status);
@@ -25,13 +25,13 @@ class StaffController extends Controller
             $data = $data->where('staff.status','!=',0);
         }
         $data = $data->get();
-        
+        // dd($data);
         return view('admin.pages.staff',compact('data'));
     }
 
     public function staffFilter(Request $request){
 
-        $data = Staff::join('subjects','subjects.id','staff.subject')
+        $data = Staff::leftJoin('subjects','subjects.id','staff.subject')
         ->leftJoin('classes','staff.class','=','classes.id')
         ->leftJoin('sections','staff.section','=','sections.id')
         ->select('staff.*','subjects.subject','classes.id as class_id','sections.id as section_id');
@@ -200,7 +200,7 @@ class StaffController extends Controller
     }
 
     public function updateStaff(Request $request){
-        $data = Staff::join('classes','staff.class','=','classes.id')
+        $data = Staff::leftJoin('classes','staff.class','=','classes.id')
         ->leftJoin('sections','staff.section','=','sections.id')
         ->leftJoin('subjects','staff.subject','=','subjects.id')
         ->select('staff.*','classes.class','sections.section','classes.id as class_id','sections.id as section_id','subjects.subject','subjects.id as subject_id')

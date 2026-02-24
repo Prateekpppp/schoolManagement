@@ -209,7 +209,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Name *</label>
-                            <input name="mother_name" type="text" placeholder="" class="form-control required">
+                            <input name="mother_name" type="text" placeholder="" class="form-control">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Phone *</label>

@@ -20,6 +20,9 @@
                             <a href="{{route('staff.pages.homework')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>All Homework</span></a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('admin.pages.syllabus')}}" class="nav-link"><i class="fas fa-angle-right"></i>Syllabus</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('staff.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
                         </li>
                         <li class="nav-item">
