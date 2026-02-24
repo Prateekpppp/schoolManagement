@@ -39,6 +39,7 @@ class StudentController extends Controller
         $students = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',0)
+        ->where('students.session_id',session('session_id'))
         ->get(['students.*','classes.class','sections.section']);
         // dd($students);
         // $students = Student::where('status',1)->get();
@@ -58,10 +59,11 @@ class StudentController extends Controller
         if($request->section_id){
             $students = $students->where('students.section',$request->section_id);
         }
-        $students = $students->get(['students.*','classes.class']);
+        $students = $students->where('students.session_id',session('session_id'))
+        ->get(['students.*','classes.class']);
         // ->get(['students.*','classes.class']);
         // dd($students);
-        return view('admin.pages.students',compact('students'));
+        return view('admin.pages.students',compact('students','request'));
     }
 
     public function studentFilterData(Request $request){
