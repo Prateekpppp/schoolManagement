@@ -48,6 +48,15 @@ class ExamController extends Controller
         // dd($request->all());
         
         try{
+            if (!empty($request->allFiles())) {
+                $file = $request->file('upload');
+                $request->upload = 'exam/'.time().rand(000,111) . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('', $request->upload, 'public_uploads'); 
+
+            } else{
+                $request->upload = null;
+            }
+
             if(!isset($request->id)){
                 // $class = Classes::create(
                 //     $request->all()
@@ -60,6 +69,7 @@ class ExamController extends Controller
                 $class->room_code = $request->room_code;
                 $class->time = $request->time;
                 $class->exam_hours = $request->exam_hours;
+                $class->upload = $request->upload;
                 $class->session_id = session('session_id');
                 $class->status = 1;
                 $class->save();
@@ -72,6 +82,7 @@ class ExamController extends Controller
                 $class->room_code = $request->room_code;
                 $class->time = $request->time;
                 $class->exam_hours = $request->exam_hours;
+                $class->upload = $request->upload;
                 $class->session_id = session('session_id');
                 $class->save();
                 // $class = Classes::updateOrCreate(

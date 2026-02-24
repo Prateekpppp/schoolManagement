@@ -67,6 +67,10 @@
                                     <label>Exam Hours *</label>
                                     <input name="exam_hours" type="text" placeholder="" class="form-control required">
                                 </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="text-dark-medium">Upload Document</label>
+                                    <input name="upload" type="file" class="form-control-file">
+                                </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
                                         class="submitForm btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
@@ -120,7 +124,7 @@
                                         <th>Subject</th>
                                         <th>Class</th>
                                         <th>Date</th>
-                                        {{-- <th>Sections</th> --}}
+                                        <th>Questions</th>
                                         {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
@@ -128,6 +132,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($exam) || count($exam) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
@@ -144,6 +149,13 @@
                                             <td>{{$job->subject}}</td>
                                             <td>{{$job->class}}</td>
                                             <td>{{$job->date}}</td>
+                                            <td>
+                                                @if($job->upload)
+                                                <a href="{{asset('/').$job->upload}}" download>View</a>
+                                                @else
+                                                N/A
+                                                @endif
+                                            </td>
                                             {{-- <td>{{$job->sections}}</td> --}}
                                             {{-- <td>{{$job->status ? 'Active' : 'Inactive'}}</td> --}}
                                             <td>

@@ -122,13 +122,23 @@
 <div class="container">
     <button class="print-btn" onclick="window.print()">Print ID Cards</button>
 <div class="id-card">
-    <div class="header">
-        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="70px">
-            <h2>{{$appdata->title}}</h2>
-    </div>
-
-    <div class="photo">
-        <img src="{{asset('/')}}{{$data->photo ?? '--'}}" alt="Student Photo">
+    <style>
+        .school-header {
+            text-align: center;
+            margin-top: 10px;
+        }
+        img {
+            height: fit-content !important;
+        }
+    </style>
+    <div class="school-header">
+        <div class="flex flex-row gap-4">
+            <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+            <div>
+                <h2>{{$appdata->title}}</h2>
+                <p>{{$appdata->address}} - {{$appdata->phone}}</p>
+            </div>
+        </div>
     </div>
 
     <div class="details">

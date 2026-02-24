@@ -115,55 +115,64 @@
         font-size: 12px;
         padding: 10px;
     }
+    .school-header {
+        text-align: center;
+        margin-top: 10px;
+    }
+    img {
+        height: fit-content !important;
+    }
+
 </style>
 </head>
 <body>
 
 <div class="container">
     <button class="print-btn" onclick="window.print()">Print ID Cards</button>
-<div class="id-card">
-    <div class="header">
-        <img src="{{asset('/').$appdata->logo}}" alt="logo" width="70px">
-            <h2>{{$appdata->title}}</h2>
-    </div>
+    <div class="id-card">
+        <div class="school-header">
+            <div class="flex flex-row gap-4">
+                <div class="flex flex-row justify-around w-full">
+                    <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+                    <img src="{{asset('/').$student->qrcode}}" alt="QR Code">
+                </div>
+                <div>
+                    <h2>{{$appdata->title}}</h2>
+                    <p>{{$appdata->address}} - {{$appdata->phone}}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="details">
+            <div class="detail-row">
+                <div class="label">Admission Number</div><div class="value">{{$student->admission_no}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Student Name</div><div class="value">{{$student->name}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Father / Guardian</div><div class="value">{{$student->father_name}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Blood Group</div><div class="value">{{$student->blood_group}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Class</div><div class="value">{{$student->class}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Section</div><div class="value">{{$student->section}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Roll No.</div><div class="value">{{$student->roll_no}}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Phone</div><div class="value">{{$student->phone}}</div>
+            </div>
+        </div>
 
-    <div class="photo">
-        <img src="{{asset('/')}}{{$student->photo ?? '--'}}" alt="Student Photo">
-    </div>
-
-    <div class="details">
-        <div class="detail-row">
-            <div class="label">Admission Number</div><div class="value">{{$student->admission_no}}</div>
+        <div class="footer">
+                {{$student->address}}
         </div>
-        <div class="detail-row">
-            <div class="label">Student Name</div><div class="value">{{$student->name}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Father / Guardian</div><div class="value">{{$student->father_name}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Class</div><div class="value">{{$student->class}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Section</div><div class="value">{{$student->section}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Roll No.</div><div class="value">{{$student->roll_no}}</div>
-        </div>
-        <div class="detail-row">
-            <div class="label">Phone</div><div class="value">{{$student->phone}}</div>
-        </div>
-    </div>
-
-    <div class="codes">
-        <!-- QR Code -->
-        <div class="qr">
-            <img src="{{asset('/').$student->qrcode}}" alt="QR Code">
-        </div>
-    </div>
-
-    <div class="footer">
-            {{$student->address}}
     </div>
 </div>
 
