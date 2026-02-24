@@ -133,7 +133,7 @@
     <button class="print-btn" onclick="window.print()">Print ID Cards</button>
     <div class="id-card">
         <div class="school-header">
-            <div class="flex flex-row gap-4">
+            <div class="flex flex-row gap-4 flex-wrap">
                 <div class="flex flex-row justify-around w-full">
                     <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
                     <img src="{{asset('/').$student->qrcode}}" alt="QR Code" width="80px">

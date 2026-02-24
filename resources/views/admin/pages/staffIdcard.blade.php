@@ -38,7 +38,7 @@
     }
 
     .header {
-        background: #f57c00;
+        background: #286605;
         color: #fff;
         text-align: center;
         padding: 25px 10px 65px;
@@ -60,7 +60,7 @@
         width: 95px;
         height: 95px;
         border-radius: 50%;
-        border: 5px solid #f57c00;
+        border: 5px solid #286605;
         overflow: hidden;
         margin: -48px auto 10px;
         background: #fff;
@@ -111,7 +111,7 @@
     }
 
     .footer {
-        background: #f57c00;
+        background: #286605;
         color: #fff;
         text-align: center;
         font-size: 12px;
@@ -134,7 +134,7 @@
         }
     </style>
     <div class="school-header">
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-row gap-4 flex-wrap justify-center">
             <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
             <div>
                 <h2>{{$appdata->title}}</h2>
