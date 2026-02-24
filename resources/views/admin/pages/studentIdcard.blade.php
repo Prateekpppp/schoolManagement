@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>School ID Card</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{{ asset('js') }}/tailwind.min.js"></script>
 
 <style>
     body {
@@ -134,7 +136,7 @@
             <div class="flex flex-row gap-4">
                 <div class="flex flex-row justify-around w-full">
                     <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-                    <img src="{{asset('/').$student->qrcode}}" alt="QR Code">
+                    <img src="{{asset('/').$student->qrcode}}" alt="QR Code" width="80px">
                 </div>
                 <div>
                     <h2>{{$appdata->title}}</h2>

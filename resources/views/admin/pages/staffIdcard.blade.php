@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>School ID Card</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{{ asset('js') }}/tailwind.min.js"></script>
 
 <style>
     body {
