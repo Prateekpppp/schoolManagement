@@ -153,8 +153,30 @@
         <div class="detail-row">
             <div class="label">Phone</div><div class="value">{{$data->phone}}</div>
         </div>
+        @php
+            $role = '';
+            switch ($data->status) {
+                case "2":
+                    $role = "Co-Admin";
+                    break;
+                case "3":
+                    $role = "Principal";
+                    break;
+                case "4":
+                    $role = "Teacher";
+                    break;
+                case "7":
+                    $role = "Accountant";
+                    break;
+                case "8":
+                    $role = "Staff";
+                    break;
+                default:
+                    $role = "Staff";
+            }
+        @endphp
         <div class="detail-row">
-            <div class="label">Class Teacher</div><div class="value">{{$data->class}}</div>
+            <div class="label">Role</div><div class="value">{{$role}}</div>
         </div>
         <div class="detail-row">
             <div class="label">Subject</div><div class="value">{{$data->subject}}</div>
