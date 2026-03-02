@@ -52,8 +52,6 @@ class TransactionController extends Controller
             $total_paid += Transaction::where('invoice_id',$value->feeinvoice_no)->where('student_id',$data->student_id)->sum('transaction_amount');
         }
         
-        $previous_due_amount = $previous_amount - $total_paid;
-        
         $student = Student::join('classes','classes.id','students.class')
         ->join('sections','sections.id','students.section')
         ->select('students.*','classes.class','sections.section')
@@ -62,6 +60,8 @@ class TransactionController extends Controller
 
         $back_dues = $student->back_dues;
 
+        $previous_due_amount = $previous_amount + $back_dues - $total_paid;
+        
         $studentFee = StudentFee::where('student_id',$data->student_id);
 
         $fees = Fee::joinSub($studentFee,'studentFee',function($join){

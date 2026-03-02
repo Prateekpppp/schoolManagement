@@ -151,7 +151,7 @@
                                             {{-- <td>{{date('M',strtotime($job->created_at))}}</td> --}}
                                             {{-- <td>{{$job->total_amount}}</td> --}}
                                             <td>{{$job->total_transaction_amount}}</td>
-                                            <td>{{$job->total_amount-$job->total_transaction_amount-$job->back_dues}}</td>
+                                            <td>{{$job->total_amount-($job->total_transaction_amount-$job->back_dues)}}</td>
                                             <td>
                                                 <b class='{{$job->total_amount == $job->total_transaction_amount+$job->back_dues ? "text-green-700" : 'text-red-700'}}'>
                                                 {{$job->total_amount == $job->total_transaction_amount ? "Paid" : ($job->total_transaction_amount > 0 ? "Partially Paid" : "Unpaid")}}
