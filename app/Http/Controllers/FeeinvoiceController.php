@@ -72,6 +72,7 @@ class FeeinvoiceController extends Controller
             'feeinvoices.total_amount',
             'feeinvoices.status',
             'students.name',
+            'students.back_dues',
             'students.father_name',
             'students.admission_no',
             'classes.class',
