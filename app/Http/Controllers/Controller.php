@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 abstract class Controller
 {
@@ -29,6 +30,16 @@ abstract class Controller
                 $this->currentLogin = Driver::where('phone',$this->currentUser->username)->first();
             }
         }
+    }
+
+    public function logoutUser($message){ 
+        Session::flush();
+        // session('message',$message);
+        return redirect()->route('admin.login')->with([
+            'message'=> $message,
+            'code'=> '304'
+        ]);
+        // return redirect()->route('admin.login');
     }
 
 }

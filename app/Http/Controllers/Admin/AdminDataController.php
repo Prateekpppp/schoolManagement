@@ -140,6 +140,9 @@ class AdminDataController extends Controller
        if($user->status == 1 || $user->status == 2){
            return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes','expanse'));
         } elseif($user->status < 5 || $user->status == 8){
+            if(!$this->currentLogin){
+                return $this->logoutUser('User Not Active');
+            }
             return redirect()->route('staff.pages.staffDetail',$this->currentLogin->id);
 
         }

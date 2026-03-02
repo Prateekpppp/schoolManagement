@@ -1,0 +1,31 @@
+1. Promote student, student not showing 
+2. Exam time
+3. Admit card generation 
+4. Question photo upload in exam option
+5. Admit card 
+7. Teacher side syllabus, status, remove btn
+8. Remove front id, and document from teacher side
+9. Id card teacher role
+10. Color of id card
+11. Staff list show all
+12. Co-admin
+13. Application letter
+14. Tc student not showing 
+15. Generate custom certificate description CSS
+16. Session not working 
+17. Remove mother phone no.  mandatory 
+18. All options in student list
+19. Id card student design and blood group 
+20. Permission taken from images
+21. Name in topbar
+22. Salary report not to be show in accountant
+23. Bulk action
+24. Attendance report 
+25. Student section not showing 
+26. Check dashboard 
+27. Today collection and expense
+28. To do list in co admin 
+29. Attendance features in all roe
+
+
+6. Period drop down, subject, Teacher add and day

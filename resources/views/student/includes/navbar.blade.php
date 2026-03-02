@@ -52,7 +52,7 @@
                         {{-- @if($sessions) --}}
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">{{$appdata->admin_username ?? 'Admin'}}</h6>
+                                <h6 class="item-title">{{$currentUser->name ?? 'Admin'}}</h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">

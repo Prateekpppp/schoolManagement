@@ -139,9 +139,13 @@
                                             </td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
+                                                @if($currentUser->status < 2)
                                                 {{-- <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printCtm', ['id'=>$job->id])}}">View</a> --}}
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.syllabus', ['id'=>$job->id])}}">Edit</a>
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min !bg-red-700" data-model="Syllabus" href="{{route('admin.post.updateStatus', ['id'=>$job->id, 'status'=>0])}}">Remove</a>
+                                                @else
+                                                --
+                                                @endif
                                                 </div>
                                             </td>
                                         </tr>

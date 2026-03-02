@@ -63,7 +63,7 @@
     @if (session('code')=='304')
 
     <script>
-            responseToast("{{session('message')}}",'bg-success');
+            responseToast("{{session('message')}}",'bg-danger');
     </script>
 
     @endif

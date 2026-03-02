@@ -69,6 +69,8 @@
                                                 <td>Joining Date:</td>
                                                 <td class="font-medium text-dark-medium">{{$student->joining_date ?? '--'}}</td>
                                             </tr>
+                                            
+                                            @if($currentUser->status < 4)
                                             <tr>
                                                 <td>Front Id:</td>
                                                 <td class="font-medium text-dark-medium">
@@ -87,6 +89,7 @@
                                                     <a href="{{asset('/').$student->other_document}}" target="_blank" rel="noopener noreferrer">View</a>
                                                 </td>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td>ID Card:</td>
                                                 <td class="font-medium text-dark-medium">
