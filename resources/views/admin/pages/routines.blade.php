@@ -115,6 +115,35 @@
                                 </div>
                             </div>
                         </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.routines')}}">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Class </label>
+                                    <select name="class_id" class="select2 changeClass">
+                                        <option value="">Please Select Class</option>
+                                        @foreach($globalClasses as $class)
+                                            <option value="{{$class->id}}">{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="hidden">Subject </label>
+                                    <select name="subject" class="select2 required">
+                                        <option value="">Please Select Subject *</option>
+                                        @foreach($subjects as $class)
+                                            <option value="{{$class->id}}" {{isset($data->subject) && $data->subject == $class->id ? 'selected' : ''}}>{{$class->subject}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <label class="hidden">Period </label>
+                                    <input name="period" type="text" placeholder="Search by Exam ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
                         
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">

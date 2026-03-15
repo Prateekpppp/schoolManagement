@@ -17,8 +17,16 @@ class RoutineController extends Controller
 
         $tcList = $tcList->join('classes','classes.id','routines.class')
         ->join('sections','sections.id','routines.section')
-        ->select('routines.*','classes.class as class_name','sections.section as section_name');
+        ->join('subjects','subjects.id','routines.subject')
+        ->select('routines.*','classes.class as class_name','sections.section as section_name','subjects.subject');
 
+        if(isset($request->subject) && $request->subject){
+            $tcList = $tcList->where('subjects.id',$request->subject);
+        }
+        
+        if(isset($request->class_id) && $request->class_id){
+            $tcList = $tcList->where('classes.id',$request->class_id);
+        }
         $tcList = $tcList->get();
 
         if($request->id){
