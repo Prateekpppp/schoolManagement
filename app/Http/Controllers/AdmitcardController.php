@@ -93,9 +93,9 @@ class AdmitcardController extends Controller
         // $data = Admitcard::joinSub($students,'students',function($join){
         //     $join->on('admitcards.student_id','students.id');
         // })
-        // ->join('classes','students.class','=','classes.id')
-        // ->join('sections','students.section','=','sections.id')
-        // ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
+        $students = $students->join('classes','students.class','=','classes.id')
+        ->join('sections','students.section','=','sections.id')
+        ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
 
         $students = $students->whereHas('admitcards');
 
