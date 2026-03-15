@@ -103,12 +103,14 @@
                                         <th>Admission No.</th>
                                         <th>Class</th>
                                         <th>Section</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
                                     @if(!isset($tcList) || count($tcList) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -128,6 +130,7 @@
                                             <td>{{$job->admission_no}}</td>
                                             <td>{{$job->class_name}}</td>
                                             <td>{{$job->section_name}}</td>
+                                            <td>{{$job->issue_date}}</td>
                                             <td>
                                                 <div class="flex flex-row gap-2">
                                                 <a class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="{{route('admin.pages.printCtm', ['ctm_no'=>$job->ctm_no])}}">Print</a>
