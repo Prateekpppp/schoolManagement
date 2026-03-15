@@ -99,7 +99,7 @@
                                             <td>{{$job->status ? 'Active' : 'Inactive'}}</td>
                                             <td>
                                                 <a target="_blank" href="{{route('admin.pages.print_admitcard',['id'=>$job->id,'month'=>$job->month])}}" data-id="{{$job->id}}" class="btn fw-btn-fill btn-gradient-yellow !max-w-min" href="javascript:void(0)">Print</a>
-                                                {{-- <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->card_id}}" data-model="AdmitCard" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a> --}}
+                                                <a data-href="{{route('admin.post.delete')}}" data-id="{{$job->card_id}}" data-model="AdmitCard" class="delete btn fw-btn-fill btn-gradient-yellow !bg-red-700 !max-w-min" href="javascript:void(0)">Remove</a>
                                             </td>
                                         </tr>
                                         
