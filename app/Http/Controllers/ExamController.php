@@ -13,8 +13,16 @@ class ExamController extends Controller
     public function exam(){
         $exam = Exam::join('classes','exams.class','classes.id')
         ->join('subjects','exams.subject','subjects.id')
-        ->select('exams.*','classes.class','subjects.subject')
-        ->where('exams.status',1)->get();
+        ->select('exams.*','classes.class','subjects.subject');
+        
+        if(isset($request->exam_code)){
+            $exam = $exam->where('exams.name', 'LIKE','%'.$request->exam_code.'%');
+        } 
+        if(isset($request->class_id)){
+            $exam = $exam->where('exams.class',$request->class_id);
+        }
+
+        $exam = $exam->where('exams.status',1)->get();
         $classes = Classes::where('status',1)->get();
         $subject = Subject::where('status',1)->get();
         
