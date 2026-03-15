@@ -112,6 +112,21 @@
                                 </div>
                             </div>
                         </div>
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.salary')}}">
+                            <div class="row gutters-8 items-center">
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <label class="hidden">Staff </label>
+                                    <input name="staff" type="text" placeholder="Search by Staff ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <label class="hidden">Driver </label>
+                                    <input name="driver" type="text" placeholder="Search by Staff ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
                         {{-- <form class="mg-b-20" type='GET' action="{{route('admin.pages.inventoryFilter')}}"> --}}
                         <form class="mg-b-20">
                             <div class="row gutters-8 items-center">
