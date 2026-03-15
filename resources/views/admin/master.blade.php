@@ -41,7 +41,7 @@
             anchor.parents('ul').addClass('sub-group-active');
         });
         
-        let table = new DataTable('#myTable', {
+        let table = new DataTable('table', {
             responsive: true
         });
     </script>
