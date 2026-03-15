@@ -81,6 +81,13 @@
         border-radius: 4px;
         font-size: 14px;
     }
+
+    .signatures td {
+        height: 60px;
+        vertical-align: bottom;
+        text-align: center;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -129,9 +136,19 @@
         <tr><td class="label">18. Remark</td><td class="value"> {{$data->remark}}</td></tr>
     </table>
     
-    <div class="signature">
-        <strong>Principal</strong>
-    </div>
+    <table class="signatures">
+        <tr>
+            <td>Account Sign</td>
+            <td>Office Sign</td>
+            <td>
+                <div class="flex flex-col justify-center items-center relaive">
+                    <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px">
+                    <img class="absolute" src="{{asset('/').$appdata->signature}}" alt="logo" width="150px">
+                    <span>Principal Sign</span>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
         @include('admin.includes.print_btn')
 </body>
