@@ -200,12 +200,12 @@
                             </select>
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Mother Name *</label>
+                            <label>Mother Name </label>
                             <input name="mother_name" value="{{$data->mother_name ?? ''}}" type="text" placeholder="" class="form-control">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
-                            <label>Mother Phone *</label>
-                            <input name="mother_phone" value="{{$data->mother_phone ?? ''}}" type="text" minlength="10" maxlength="10" placeholder="" class="form-control required">
+                            <label>Mother Phone </label>
+                            <input name="mother_phone" value="{{$data->mother_phone ?? ''}}" type="text" minlength="10" maxlength="10" placeholder="" class="form-control">
                         </div>
                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                             <label>Mother Occupation *</label>
