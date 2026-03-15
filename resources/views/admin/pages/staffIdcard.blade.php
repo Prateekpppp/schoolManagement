@@ -134,11 +134,16 @@
         }
     </style>
     <div class="school-header">
-        <div class="flex flex-row gap-4 flex-wrap justify-center">
-            <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+        <div class="flex flex-row gap-4 flex-wrap">
+            <div class="flex flex-row justify-center w-full">
+                <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
+            </div>
             <div>
                 <h2>{{$appdata->title}}</h2>
                 <p>{{$appdata->address}} - {{$appdata->phone}}</p>
+            </div>
+            <div class="flex flex-row justify-center w-full">
+                <img src="{{asset('/').$data->photo}}" alt="logo" width="100px">
             </div>
         </div>
     </div>

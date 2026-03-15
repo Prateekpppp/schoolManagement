@@ -134,13 +134,16 @@
     <div class="id-card">
         <div class="school-header">
             <div class="flex flex-row gap-4 flex-wrap">
-                <div class="flex flex-row justify-around w-full">
+                <div class="flex flex-row justify-center w-full">
                     <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-                    <img src="{{asset('/').$student->qrcode}}" alt="QR Code" width="80px">
                 </div>
                 <div>
                     <h2>{{$appdata->title}}</h2>
                     <p>{{$appdata->address}} - {{$appdata->phone}}</p>
+                </div>
+                <div class="flex flex-row justify-around w-full">
+                    <img src="{{asset('/').$student->photo}}" alt="logo" width="100px">
+                    <img src="{{asset('/').$student->qrcode}}" alt="QR Code" width="80px">
                 </div>
             </div>
         </div>
