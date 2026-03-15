@@ -23,7 +23,7 @@ class EventcertificateController extends Controller
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
             $join->on('eventcertificates.student_id','allstudents.id');
         })
-        ->select('eventcertificates.ev_no','eventcertificates.id as ev_id','allstudents.*');
+        ->select('eventcertificates.ev_no','eventcertificates.issue_date','eventcertificates.id as ev_id','allstudents.*');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();

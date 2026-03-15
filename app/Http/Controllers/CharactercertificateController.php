@@ -23,7 +23,7 @@ class CharactercertificateController extends Controller
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
             $join->on('charactercertificates.student_id','allstudents.id');
         })
-        ->select('charactercertificates.cc_no','charactercertificates.id as cc_id','allstudents.*');
+        ->select('charactercertificates.cc_no','charactercertificates.issue_date','charactercertificates.id as cc_id','allstudents.*');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();

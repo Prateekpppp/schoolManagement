@@ -23,7 +23,7 @@ class TransfercertificateController extends Controller
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
             $join->on('transfercertificates.student_id','allstudents.id');
         })
-        ->select('transfercertificates.tc_no','transfercertificates.id as tc_id','allstudents.*');
+        ->select('transfercertificates.tc_no','transfercertificates.issue_date','transfercertificates.id as tc_id','allstudents.*');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();

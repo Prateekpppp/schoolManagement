@@ -23,7 +23,7 @@ class MigratecertificateController extends Controller
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
             $join->on('migratecertificates.student_id','allstudents.id');
         })
-        ->select('migratecertificates.mg_no','migratecertificates.id as mg_id','allstudents.*');
+        ->select('migratecertificates.mg_no','migratecertificates.issue_date','migratecertificates.id as mg_id','allstudents.*','migratecertificates.issue_date');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();

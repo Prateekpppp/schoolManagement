@@ -23,7 +23,7 @@ class CustomCertificateController extends Controller
         $tcList = $tcList->joinSub($allstudents,'allstudents',function($join){
             $join->on('custom_certificates.student_id','allstudents.id');
         })
-        ->select('custom_certificates.ctm_no','custom_certificates.id as ctm_id','allstudents.*');
+        ->select('custom_certificates.ctm_no','custom_certificates.id as ctm_id','custom_certificates.issue_date','allstudents.*');
         $tcList = $tcList->get();
 
         $students = $allstudents->get();
