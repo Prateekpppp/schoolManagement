@@ -5,6 +5,40 @@
                 <!-- Dashboard summery Start Here -->
                 <div class="row gutters-20">
                     <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.expanse')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue ">
+                                        <i class="fa fa-file-invoice text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Today Expense</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$todayexpanse}}">{{$todayexpanse}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <a href="{{route('admin.pages.receipt')}}" class="dashboard-summery-one mg-b-20">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="item-icon bg-light-blue ">
+                                        <i class="fa fa-file-invoice text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="item-content">
+                                        <div class="item-title">Today Collection</div>
+                                        <div class="item-number"><span class="counter" data-num="{{$todaytransactions}}">{{$todaytransactions}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
                         <a href="{{route('admin.pages.classes')}}" class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
                                 <div class="col-6">

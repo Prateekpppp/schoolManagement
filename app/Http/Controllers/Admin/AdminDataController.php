@@ -132,13 +132,15 @@ class AdminDataController extends Controller
         $vehicle = Vehicle::where('status',1)->count();
         $routes = ScRoute::where('status',1)->count();
         $expanse = Expanse::sum('amount');
+        $todayexpanse = Expanse::whereDate('created_at', today())->sum('amount');
+        $todaytransactions = Transaction::where('session_id',session('session_id'))->whereDate('created_at', today())->sum('transaction_amount');
 
         // staff data
 
 
         // $totalSiblings = Student::whereNotNull('sibling_id')->count();
        if($user->status == 1 || $user->status == 2){
-           return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes','expanse'));
+           return view('admin.pages.index',compact('classes','sections','students','teachers','staff','totalInvoice','paidInvoice','totalDue','transactions','inactiveStudents','totalSiblings','female','males','jobs','contactEnquiries','sliders','gallery','notice','driver','vehicle','routes','expanse','todayexpanse','todaytransactions'));
         } elseif($user->status < 5 || $user->status == 8){
             if(!$this->currentLogin){
                 return $this->logoutUser('User Not Active');
