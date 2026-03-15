@@ -29,6 +29,7 @@
     <script src="{{ asset('js') }}/fullcalendar.min.js"></script>
     <script src="{{ asset('js') }}/Chart.min.js"></script>
     <script src="{{ asset('js') }}/main.js"></script>
+    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -38,6 +39,10 @@
             
             anchor.addClass('menu-active');
             anchor.parents('ul').addClass('sub-group-active');
+        });
+        
+        let table = new DataTable('#myTable', {
+            responsive: true
         });
     </script>
 

@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="{{ asset('css') }}/style.css">
 <link rel="stylesheet" href="{{ asset('css') }}/app_style.css">
 <link rel="stylesheet" href="{{ asset('css') }}/admin_css.css">
-
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />
 <!-- Google Fonts: Montserrat -->
 {{-- <link rel="stylesheet" href="{{ asset('css') }}/Montserrat_font.css"> --}}
 

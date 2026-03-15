@@ -91,7 +91,7 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table display data-table text-nowrap">
+                            <table id="myTable" class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>
