@@ -10,15 +10,15 @@ use App\Models\Subject;
 class ExamController extends Controller
 {
     //
-    public function exam(){
+    public function exam(Request $request){
         $exam = Exam::join('classes','exams.class','classes.id')
         ->join('subjects','exams.subject','subjects.id')
         ->select('exams.*','classes.class','subjects.subject');
         
-        if(isset($request->exam_code)){
-            $exam = $exam->where('exams.name', 'LIKE','%'.$request->exam_code.'%');
+        if(isset($request->exam_code) && $request->exam_code){
+            $exam = $exam->where('exams.exam_code', 'LIKE','%'.$request->exam_code.'%');
         } 
-        if(isset($request->class_id)){
+        if(isset($request->class_id) && $request->class_id){
             $exam = $exam->where('exams.class',$request->class_id);
         }
 
