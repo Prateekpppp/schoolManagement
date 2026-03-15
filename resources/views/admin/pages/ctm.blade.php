@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
                                     <label>Description </label>
-                                    <textarea id="summernote" name="description" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
+                                    <textarea id="" name="description" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit"
