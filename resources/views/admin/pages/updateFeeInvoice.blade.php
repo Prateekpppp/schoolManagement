@@ -134,6 +134,10 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Transaction Id</label>
+                                    <input name="transaction_id" value="" type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Payment Date *</label>
                                     <input name="date" value="" type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker required">
                                 </div>
