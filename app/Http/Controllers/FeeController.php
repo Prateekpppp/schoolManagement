@@ -263,6 +263,12 @@ class FeeController extends Controller
         $data = $data->join('classes','classes.id','students.class')
         ->select('transactions.*','classes.class','students.name');
 
+        if(isset($request->name) && $request->name){
+            $data = $data->where('students.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if(isset($request->class_id) && $request->class_id){
+            $data = $data->where('students.class',$request->class_id);
+        }
         $data = $data->get();
         return view('admin.pages.receipt',compact('data'));
     }
