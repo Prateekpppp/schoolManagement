@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Time *</label>
-                                    <input name="time" type="text" placeholder="" class="form-control required">
+                                    <input name="time" type="time" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Exam Hours *</label>
