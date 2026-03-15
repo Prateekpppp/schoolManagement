@@ -27,7 +27,7 @@ class RoutineController extends Controller
                 return view('admin.pages.routines', compact('data','tcList','subjects'));
             }
         }
-        return view('admin.pages.routines', compact('tcList'));
+        return view('admin.pages.routines', compact('tcList','subjects'));
     }
 
     public function create(Request $request){
