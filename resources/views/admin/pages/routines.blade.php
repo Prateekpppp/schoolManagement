@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section </label>
-                                    <select name="section" class="select2 required">
+                                    <select name="section" class="select2">
                                         <option class="secAfter" value="">Please Select Section *</option>
                                     </select>
                                 </div>
@@ -65,7 +65,7 @@
                                     <select name="subject" class="select2 required">
                                         <option value="">Please Select Subject *</option>
                                         @foreach($subjects as $class)
-                                            <option value="{{$class->id}}" {{isset($data->class) && $data->subject == $class->id ? 'selected' : ''}}>{{$class->class}}</option>
+                                            <option value="{{$class->id}}" {{isset($data->subject) && $data->subject == $class->id ? 'selected' : ''}}>{{$class->subject}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -73,11 +73,11 @@
                                     <label>Date *</label>
                                     <input name="date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->date : ''}}">
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group mb-5 pb-5">
                                     <label>Teacher *</label>
                                     <input id="teacher" name="teacher" value="{{isset($data) ? $data->description : ''}}" type="text" placeholder="" class="form-control required">
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group mb-5 pb-5">
                                     <label>Day </label>
                                     <textarea id="day" name="day" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
                                 </div>
@@ -123,6 +123,10 @@
                                         <th>S.NO.</th>
                                         <th>Class</th>
                                         <th>Section</th>
+                                        <th>Subject</th>
+                                        <th>Period</th>
+                                        <th>Day</th>
+                                        <th>Teacher</th>
                                         <th>Date</th>
                                         <th>Description</th>
                                         <th>Action</th>
@@ -133,7 +137,11 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -144,6 +152,10 @@
                                             <td>{{$key+1}}</td>
                                             <td>{{$job->class_name}}</td>
                                             <td>{{$job->section_name}}</td>
+                                            <td>{{$job->subject}}</td>
+                                            <td>{{$job->period}}</td>
+                                            <td>{{$job->day}}</td>
+                                            <td>{{$job->teacher}}</td>
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->description}}</td>
                                             <td>
