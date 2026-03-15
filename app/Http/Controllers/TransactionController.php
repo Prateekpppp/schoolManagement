@@ -60,7 +60,8 @@ class TransactionController extends Controller
 
         $back_dues = $student->back_dues;
 
-        $previous_due_amount = $previous_amount + $back_dues - $total_paid;
+        $previous_due_amount = $previous_amount - $total_paid;
+        // $previous_due_amount = $previous_amount + $back_dues - $total_paid;
         
         $studentFee = StudentFee::where('student_id',$data->student_id);
 
