@@ -93,7 +93,10 @@
                                 <thead>
                                     <tr>
                                         <th>Receipt No.</th>
+                                        <th>Student</th>
+                                        <th>Class</th>
                                         <th>Amount</th>
+                                        <th>Dues</th>
                                         <th>Payment Method</th>
                                         <th>Transaction ID</th>
                                         <th>Date</th>
@@ -106,7 +109,9 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="text-center">No Data Found</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -118,6 +123,8 @@
                                     @foreach ($data as $key=>$job)
                                         <tr>
                                             <td>{{$job->receipt_no}}</td>
+                                            <td>{{$job->name}}</td>
+                                            <td>{{$job->due_amount}}</td>
                                             <td>{{$job->transaction_amount}}</td>
                                             <td>{{$job->payment_method}}</td>
                                             <td>{{$job->transaction_id}}</td>

@@ -259,7 +259,11 @@ class FeeController extends Controller
     }
 
     public function receipt(Request $request){
-        $data = Transaction::all();
+        $data = Transaction::join('students','students.id','=','transactions.student_id');
+        $data = $data->join('classes','classes.id','students.class')
+        ->select('transactions.*','classes.class','students.name');
+
+        $data = $data->get();
         return view('admin.pages.receipt',compact('data'));
     }
 
