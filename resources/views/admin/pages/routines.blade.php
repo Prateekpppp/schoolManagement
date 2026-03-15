@@ -49,8 +49,31 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Period </label>
+                                    <select name="period" class="select2 required">
+                                        <option class="" value="">Please Select Period *</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Select Subject </label>
+                                    <select name="subject" class="select2 required">
+                                        <option value="">Please Select Subject *</option>
+                                        @foreach($subjects as $class)
+                                            <option value="{{$class->id}}" {{isset($data->class) && $data->subject == $class->id ? 'selected' : ''}}>{{$class->class}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Date *</label>
                                     <input name="date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->date : ''}}">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
+                                    <label>Teacher </label>
+                                    <textarea id="teacher" name="teacher" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
+                                    <label>Day </label>
+                                    <textarea id="day" name="day" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
                                     <label>Description </label>
