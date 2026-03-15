@@ -52,6 +52,12 @@
                                     <label>Period </label>
                                     <select name="period" class="select2 required">
                                         <option class="" value="">Please Select Period *</option>
+                                        <option class="" value="1st">1st</option>
+                                        <option class="" value="2nd">2nd</option>
+                                        <option class="" value="3rd">3rd</option>
+                                        <option class="" value="4th">4th</option>
+                                        <option class="" value="5th">5th</option>
+                                        <option class="" value="6th">6th</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -68,8 +74,8 @@
                                     <input name="date" type="text" placeholder="dd-mm-yyyy" class="form-control air-datepicker required" value="{{isset($data) ? $data->date : ''}}">
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
-                                    <label>Teacher </label>
-                                    <textarea id="teacher" name="teacher" type="text" placeholder="" class="form-control required">{{isset($data) ? $data->description : ''}}</textarea>
+                                    <label>Teacher *</label>
+                                    <input id="teacher" name="teacher" value="{{isset($data) ? $data->description : ''}}" type="text" placeholder="" class="form-control required">
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-12 form-group mb-5 pb-5">
                                     <label>Day </label>
