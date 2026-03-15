@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
                                     <label class="hidden">Driver </label>
-                                    <input name="driver" type="text" placeholder="Search by Staff ..." class="form-control">
+                                    <input name="driver" type="text" placeholder="Search by Driver ..." class="form-control">
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
                                     <button class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
