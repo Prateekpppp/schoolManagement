@@ -97,8 +97,26 @@ class AdmitcardController extends Controller
         // ->join('sections','students.section','=','sections.id')
         // ->select('students.*','admitcards.id as card_id','classes.class','sections.section');
 
-        $data = $students->whereHas('admitcards');
-        $data = $data->get();
+        $students = $students->whereHas('admitcards');
+
+        if(isset($request->name)){
+            $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if(isset($request->class_id)){
+            $students = $students->where('students.class',$request->class_id);
+        } 
+        if(isset($request->section_id)){
+            $students = $students->where('students.section',$request->section_id);
+        }
+        
+        if(isset($request->student_id)){
+            $students = $students->where('students.id',$request->student_id);
+            $students = $students->first();
+        } else{
+            $data = $students->get();
+        }
+
+        // $data = $data->get();
 
         return view('admin.pages.admitCard',compact('data','request'));
     }
