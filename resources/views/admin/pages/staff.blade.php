@@ -66,9 +66,9 @@
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Phone</th>
-                                        <th>E-mail</th>
+                                        {{-- <th>E-mail</th> --}}
                                         <th>Gender</th>
-                                        <th>Address</th>
+                                        {{-- <th>Address</th> --}}
                                         {{-- <th>Class</th>
                                         <th>Section</th> --}}
                                         <th>Subject</th>
@@ -83,9 +83,9 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
                                             <td class="text-center">No Data Found</td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -101,9 +101,9 @@
                                             </td>
                                             <td>{{$job->name}}</td>
                                             <td>{{$job->phone}}</td>
-                                            <td>{{$job->email}}</td>
+                                            {{-- <td>{{$job->email}}</td> --}}
                                             <td>{{$job->gender ? 'Male' : 'Female'}}</td>
-                                            <td>{{$job->address}}</td>
+                                            {{-- <td>{{$job->address}}</td> --}}
                                             {{-- <td>{{$job->class}}</td>
                                             <td>{{$job->section}}</td> --}}
                                             <td>{{$job->subject}}</td>

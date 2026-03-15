@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('class')->nullable();
             $table->string('section')->nullable();
             $table->string('date')->nullable();
+            $table->string('period')->nullable();
+            $table->string('subject')->nullable();
+            $table->string('teacher')->nullable();
+            $table->string('day')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('session_id')->nullable();
