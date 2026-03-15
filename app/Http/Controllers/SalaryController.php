@@ -13,17 +13,17 @@ class SalaryController extends Controller
 {
     //
 
-    public function inventory(){
+    public function inventory(Request $request){
         $data = Salary::leftJoin('staff','salaries.staff_id','staff.phone')
         ->leftJoin('drivers','salaries.staff_id','drivers.phone')
         ->select('salaries.*','staff.name','drivers.name as driver_name');
 
         
         if(isset($request->staff) && $request->staff){
-            $exam = $exam->where('staff.name', 'LIKE','%'.$request->staff.'%');
+            $data = $data->where('staff.name', 'LIKE','%'.$request->staff.'%');
         }
         if(isset($request->driver) && $request->driver){
-            $exam = $exam->where('drivers.name', 'LIKE','%'.$request->driver.'%');
+            $data = $data->where('drivers.name', 'LIKE','%'.$request->driver.'%');
         }
         
         $data = $data->where('salaries.status',1)->get();
