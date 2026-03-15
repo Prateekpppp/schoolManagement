@@ -124,6 +124,7 @@
                                         <tr>
                                             <td>{{$job->receipt_no}}</td>
                                             <td>{{$job->name}}</td>
+                                            <td>{{$job->class}}</td>
                                             <td>{{$job->due_amount}}</td>
                                             <td>{{$job->transaction_amount}}</td>
                                             <td>{{$job->payment_method}}</td>
