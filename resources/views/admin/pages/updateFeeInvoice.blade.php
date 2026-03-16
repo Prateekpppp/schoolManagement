@@ -47,7 +47,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Amount:</td>
-                                                <td class="font-medium text-dark-medium">{{$data->total_amount ?? '--'}}</td>
+                                                <td class="font-medium text-dark-medium">{{$data->total_amount - $data->transaction_amount}}</td>
                                             </tr>
                                             <tr>
                                                 <td>E-mail:</td>
