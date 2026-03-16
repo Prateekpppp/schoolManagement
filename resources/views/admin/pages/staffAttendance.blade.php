@@ -63,6 +63,7 @@
                                         {{-- <th>S.NO.</th> --}}
                                         <th>Date</th>
                                         <th>Staff</th>
+                                        <th>Role</th>
                                         <th>Check In</th>
                                         <th>Check Out</th>
                                         {{-- <th>Remark</th> --}}
@@ -73,6 +74,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($data) || count($data) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">No Data Found</td>
@@ -89,6 +91,10 @@
                                             {{-- <td>{{$sn1+=1}}</td> --}}
                                             <td>{{date('d-m-Y',strtotime($job->date))}}</td>
                                             <td>{{$job->name}}</td>
+                                            <td>{{
+                                                $job->status == 3 ? 'Principal' : 
+                                                ($job->status == 4 ? 'Teacher': 'Staff')
+                                                }}</td>
                                             <td>{{$job->date}}</td>
                                             <td>{{$job->checkout}}</td>
                                             {{-- <td>{{$job->name}}</td> --}}

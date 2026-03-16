@@ -436,7 +436,7 @@ class StudentController extends Controller
             $student->id_proof_back = $request->id_proof_back;
             $student->other_document = $request->other_document;
             $student->password = $request->password;
-            $student->status = 5;
+            $student->status = 1;
             
             $userData = new \stdClass();
             $userData->name = $student->name;
