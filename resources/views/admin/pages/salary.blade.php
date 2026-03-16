@@ -164,6 +164,7 @@
                                         <th>S.NO.</th>
                                         <th>Salary Date</th>
                                         <th>Staff</th>
+                                        <th>Role</th>
                                         <th>Total Present</th>
                                         <th>Total Half Day</th>
                                         <th>Total Late</th>
@@ -179,6 +180,7 @@
                                 <tbody class="tdata">
                                     @if(!isset($data) || count($data) == 0)
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -202,6 +204,7 @@
                                             <td>{{$sn1+=1}}</td>
                                             <td>{{date('d-M-Y',strtotime($job->salary_date))}}</td>
                                             <td>{{$job->name ?? $job->driver_name ?? 'N/A'}}</td>
+                                            <td>{{$job->name ? 'Staff' : 'Driver'}}</td>
                                             <td>{{$job->total_present}}</td>
                                             <td>{{$job->total_half_day}}</td>
                                             <td>{{$job->total_leave}}</td>
