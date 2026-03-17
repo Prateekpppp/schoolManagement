@@ -25,7 +25,7 @@
   .top-shape {
     width: 100%;
     height: 140px;
-    background: maroon; /* same orange */
+    background: navy; /* same orange */
     /* clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); */
     color: white;
     text-align: center;
