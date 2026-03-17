@@ -59,7 +59,7 @@ class StudentController extends Controller
         if($request->section_id){
             $students = $students->where('students.section',$request->section_id);
         }
-        $students = $students->where('students.session_id',session('session_id'))
+        $students = $students->where('students.status',1)->where('students.session_id',session('session_id'))
         ->get(['students.*','classes.class']);
         // ->get(['students.*','classes.class']);
         // dd($students);
