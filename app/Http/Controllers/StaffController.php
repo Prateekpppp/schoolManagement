@@ -48,7 +48,10 @@ class StaffController extends Controller
         }
         if($request->status){
             $data = $data->where('staff.status',$request->status);
+        } else{
+            $data = $data->where('staff.status','!=',0);
         }
+        
         $data = $data->get();
 
         // dd($data);
