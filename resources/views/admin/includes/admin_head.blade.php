@@ -22,15 +22,31 @@
 <link rel="stylesheet" href="{{ asset('css') }}/flaticon.css">
 <link rel="stylesheet" href="{{ asset('css') }}/fullcalendar.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/animate.min.css">
-<link rel="stylesheet" href="{{ asset('css') }}/jquery.dataTables.min.css">
+<!--<link rel="stylesheet" href="{{ asset('css') }}/jquery.dataTables.min.css">-->
 <link rel="stylesheet" href="{{ asset('css') }}/select2.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/datepicker.min.css">
 <link rel="stylesheet" href="{{ asset('css') }}/style.css">
 <link rel="stylesheet" href="{{ asset('css') }}/app_style.css">
 <link rel="stylesheet" href="{{ asset('css') }}/admin_css.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />-->
 <!-- Google Fonts: Montserrat -->
 {{-- <link rel="stylesheet" href="{{ asset('css') }}/Montserrat_font.css"> --}}
+
+<!-- DataTables CSS -->
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet"/>
+
+<style>
+.dataTables_filter {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+.dataTables_filter label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+</style>
 
 
     
