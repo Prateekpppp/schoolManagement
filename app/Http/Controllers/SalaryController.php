@@ -120,7 +120,7 @@ class SalaryController extends Controller
     }
 
     public function updateInventory(Request $request){
-        $data = Salary::join('staff','salaries.staff_id','staff.id')
+        $data = Salary::join('staff','salaries.staff_id','staff.phone')
         ->select('salaries.*','staff.name')
         ->where('salaries.id',$request->id)->first();
 
