@@ -45,6 +45,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
