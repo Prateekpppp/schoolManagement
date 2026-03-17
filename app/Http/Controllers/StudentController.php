@@ -39,8 +39,17 @@ class StudentController extends Controller
         $students = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',0)
-        ->where('students.session_id',session('session_id'))
-        ->get(['students.*','classes.class','sections.section']);
+        ->where('students.session_id',session('session_id'));
+        if($request->name){
+            $students = $students->where('students.name', 'LIKE','%'.$request->name.'%');
+        } 
+        if($request->class_id){
+            $students = $students->where('students.class',$request->class_id);
+        } 
+        if($request->section_id){
+            $students = $students->where('students.section',$request->section_id);
+        }
+        $students = $students->get(['students.*','classes.class','sections.section']);
         // dd($students);
         // $students = Student::where('status',1)->get();
         $fees = Fee::all();
