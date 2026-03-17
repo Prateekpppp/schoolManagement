@@ -1,157 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Print Fee Receipt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Receipt</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background-color: #f0f2f5;
+            background: #f5f5f5;
         }
 
-        .modal-header {
-            border-bottom: none;
+        /* Receipt Container */
+        .receipt-box {
+            width: 793px;
+            height: 450px;
+            
+            /*width: 210mm;*/
+            /*height: 148mm;*/
+            /* 50% of A4 (297mm / 2) */
+            background: #fff;
+            margin: auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
-        .print-btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-size: 14px;
+        /* Header */
+        .school-header {
+            display: flex;
+            align-items: center;
         }
 
-        .school-logo {
+        .logo {
             width: 60px;
+            margin-right: 10px;
         }
 
-        .expense-box {
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-            margin: 15px 0;
-        }
-
-        .info-text {
-            font-size: 14px;
-        }
-
-        table th, table td {
-            border: 1px solid #dee2e6 !important;
-            padding: 12px;
-            font-size: 14px;
-        }
-
-        table th {
-            text-align: center;
-            background-color: #f8f9fa;
-        }
-
-        .signature-section {
-            margin-top: 50px;
+        .school-title {
             font-weight: 600;
+            font-size: 20px;
         }
 
-        .modal-content {
-            border-radius: 6px;
+        .school-info {
+            font-size: 12px;
+        }
+
+        /* Fee Title */
+        .fee-title {
+            background: #dfead8;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+
+        /* Info rows */
+        .info-row {
+            font-size: 13px;
+        }
+
+        /* Table */
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #000 !important;
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        .table-custom th {
+            background: #dfead8;
+        }
+
+        /* Footer text */
+        .footer-text {
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        /* Signature */
+        .signature {
+            /*text-align: right;*/
+            /*margin-top: 30px;*/
+        }
+
+        /* PRINT SETTINGS */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .receipt-box {
+               width: 793px;
+            height: 450px;
+                /* Half A4 */
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<!-- Modal -->
-<div class="modal show fade d-block p-3" tabindex="-1">
-    <div class="w-75 mx-auto my-3">
-        <div class="modal-content p-3">
+    <div class="receipt-box">
 
-
-
-            <!-- School Info -->
-            <div class="text-center">
-                    <img src="{{asset('/').$appdata->logo}}" alt="logo" width="100px">
-                <h5 class="fw-bold mb-1">{{$appdata->title}}</h5>
-                <p class="mb-0 info-text">
-                    Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | Website: www.germinationschool.com
-                </p>
-                <p class="info-text">
+        <!-- Header -->
+        <div class="school-header">
+            <img src="{{asset('/').$appdata->logo}}" class="logo" alt="Logo">
+            <div>
+                <div class="school-title">{{$appdata->title}}</div>
+                <div class="school-info">
+                     Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | <br>
                     {{$appdata->address}}
-                </p>
-            </div>
-
-            <!-- Expense Title -->
-            <div class="expense-box text-center">
-                <h6 class="fw-bold">
-                    Receipt:
-                    <span class="fw-normal"> {{$payment_date}}</span>
-                </h6>
-            </div>
-
-            <!-- Expense Info -->
-            <div class="row mb-3 info-text">
-                <div class="col-md-6">
-                    <p class="mb-0"><strong>Receipt No:</strong> {{$data->receipt_no}}</p>
-                    <p class="mb-0"><strong>Payment Date:</strong> {{$data->date}}</p>
-                    <p class="mb-0"><strong>Total Amount:</strong>  ₹{{$feeInvoice}} /-</p>
-                    <p class="mb-0"><strong>Total Paid:</strong>  ₹{{$total_transaction}} /-</p>
-                    <p class="mb-0"><strong>Due Date:</strong> {{$data->due_date }}</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
-                    <p class="mb-0"><strong>Class Name:</strong> {{$student->class}} ({{$student->section}}) - ({{$student->roll_no}})</p>
-                    <p class="mb-0"><strong>Admission No:</strong> {{$student->admission_no}}</p>
-                    <p class="mb-0"><strong>Due Amount:</strong> ₹{{$feeInvoice - $total_transaction}} /-</p>
                 </div>
             </div>
-
-            <!-- Table -->
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                        <th style="width: 10%;">Sr. No</th>
-                        <th>Title</th>
-                        <th style="width: 20%;">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>{{$data->title}}</td>
-                        <td>₹{{$data->transaction_amount}} /-</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="fw-bold text-end">Total</td>
-                        <td class="fw-bold">₹{{$data->transaction_amount}} /-</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- Signature -->
-            <div class="row signature-section">
-                <div class="col-md-6">
-                    Authorised By
-                </div>
-                <div class="col-md-6 text-end">
-                    Receiver's Signature
-                </div>
-            </div>
-
         </div>
-    </div>
-    <!-- Print Button -->
-    <div class="printbtn text-center mb-3">
-    <button class="print-btn">Print Expense</button>
-    </div>
-</div>
 
-<script>
-    let printbtn = document.getElementsByClassName('printbtn')[0];
-    printbtn.onclick = function() {
-        printbtn.style.display = 'none';
-        window.print();
-    };
-</script>
+        <!-- Title -->
+        <div class="fee-title">FEE RECEIPT - {{$payment_date}}</div>
+
+        <!-- Info -->
+        <div class="row info-row">
+            <div class="col-6">
+                <p class="mb-0"><strong>Receipt No:</strong> {{$data->receipt_no}}</p>
+                <p class="mb-0"><strong>Payment Date:</strong> {{$data->date}}</p>
+                <p class="mb-0"><strong>Total Amount:</strong> ₹{{$feeInvoice}} /-</p>
+                <p class="mb-0"><strong>Total Paid:</strong> ₹{{$total_transaction}} /-</p>
+                <p class="mb-0"><strong>Due Date:</strong> {{$data->due_date }}</p>
+            </div>
+            <div class="col-6 text-end">
+                <p class="mb-0"><strong>Student Name:</strong> {{$student->name}}</p>
+                <p class="mb-0"><strong>Class Name:</strong> {{$student->class}} ({{$student->section}}) -
+                    ({{$student->roll_no}})</p>
+                <p class="mb-0"><strong>Admission No:</strong> {{$student->admission_no}}</p>
+                <p class="mb-0"><strong>Due Amount:</strong> ₹{{$feeInvoice - $total_transaction}} /-</p>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-custom mt-2 table-striped">
+            <thead>
+                <tr>
+                    <th>S.No.</th>                    
+                    <th>Fees Head</th>
+					<th>Total Amount</th>
+                    <th>Paid</th>
+                    <th>Due Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td>
+                    <td>{{$data->title}}</td>
+                    <td>₹{{$feeInvoice}} /-</td>
+                    <td>₹{{$data->transaction_amount}} /-</td>
+                    <td>₹100.00</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Grand Total</b></td>
+                    <td><b>₹{{$feeInvoice}} /-</b></td>
+                    <td><b>₹{{$data->transaction_amount}} /-</b></td>
+                    <td><b>₹{{$feeInvoice - $total_transaction}} /-</b></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="row">
+             <div class="col-6">
+             <!-- Signature -->
+        <div class="signature text-start">
+            <br><br>
+            ___________________<br>
+            Authorised By
+        </div>
+        </div>
+        
+        <div class="col-6">
+        <div class="signature text-end">
+            <br><br>
+            ___________________<br>
+            Receiver's Signature
+        </div>
+        </div>
+        </div>
+       
+       
+
+    </div>
+
 </body>
+
 </html>
