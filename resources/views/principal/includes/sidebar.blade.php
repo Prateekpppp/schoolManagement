@@ -25,8 +25,11 @@
                         <li class="nav-item">
                             <a href="{{route('principal.pages.task')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>All Task</span></a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{route('principal.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a href="{{route('staff.pages.staffAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Attendance</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('principal.pages.studentAttendance')}}" class="nav-link"><i class="fas fa-angle-right"></i><span>Student Attendance</span></a>

@@ -159,7 +159,7 @@ class StaffAttendanceController extends Controller
             $halfday = 0;
             $late = 0;
 
-            if($this->currentUser->status > 3){
+            if($this->currentUser->status > 2){
                 $data = $data->where('staff_attendances.staff_id',$this->currentLogin->id)->orderBy('staff_attendances.id','desc');
                 
                 $data = $data->get();
