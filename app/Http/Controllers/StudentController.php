@@ -35,7 +35,7 @@ class StudentController extends Controller
         return view('admin.pages.students',compact('students','fees'));
     }
 
-    public function inactiveStudents(){
+    public function inactiveStudents(Request $request){
         $students = Student::join('classes','students.class','=','classes.id')
         ->join('sections','students.section','=','sections.id')
         ->where('students.status',0)
