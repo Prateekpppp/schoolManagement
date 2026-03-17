@@ -14,7 +14,7 @@ class StudentAttendanceController extends Controller
         try{
 
             $request->date = Carbon::parse($request->date)->format('d-m-Y');
-            dd($request->all());
+            // dd($request->all());
 
             foreach ($request->data as $k => $value) {
                 $data = StudentAttendance::updateOrCreate(
