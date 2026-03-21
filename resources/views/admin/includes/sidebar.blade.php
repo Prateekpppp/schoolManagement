@@ -10,6 +10,7 @@
                         <li class="nav-item">
                             <a href="{{route('admin.index')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
                         </li>
+                        @if(in_array($currentUser->status,$adminToCoadminUsers))
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-calendar"></i><span>Session</span></a>
                             <ul class="nav sub-group-menu">
@@ -142,6 +143,9 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
+                        
+                        @if(in_array($currentUser->status,$adminUsers))
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-coins"></i><span>Fee Collection</span></a>
                             <ul class="nav sub-group-menu">
@@ -200,6 +204,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         @if($currentUser->status == 1)
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fa fa-globe"></i><span>Frontend</span></a>

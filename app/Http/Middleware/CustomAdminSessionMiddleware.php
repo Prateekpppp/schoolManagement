@@ -34,6 +34,13 @@ class CustomAdminSessionMiddleware
         $globalClasses = Classes::where('status',1)->get();
         View::share('globalClasses',$globalClasses);
 
+        $adminUsers = [1];
+        $adminToCoadminUsers = [1,2];
+        $adminToCoadminUsers = [1,2,10];
+
+        View::share('adminUsers',$adminUsers);
+        View::share('adminToCoadminUsers',$adminToCoadminUsers);
+        View::share('adminToCoadminUsers',$adminToCoadminUsers);
 
         return $next($request);
     }
