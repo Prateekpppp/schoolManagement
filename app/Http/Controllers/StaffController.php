@@ -46,10 +46,11 @@ class StaffController extends Controller
         if($request->section_id){
             $data = $data->where('sections.id',$request->section_id);
         }
-        dd('stsredfg',$request->status);
         if($request->status){
+            dd('0--',$request->status);
             $data = $data->where('staff.status',$request->status);
         } else{
+            dd('1--',$request->status);
             $data = $data->where('staff.status','!=',0);
         }
         
