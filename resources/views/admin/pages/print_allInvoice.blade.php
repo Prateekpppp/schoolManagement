@@ -1,205 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Print Fee Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Invoice</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="{{ asset('js') }}/tailwind.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background-color: #f0f2f5;
+            background: #f5f5f5;
         }
 
-        .modal-header {
-            border-bottom: none;
+        /* Receipt Container */
+        .receipt-box {
+            width: 793px;
+            height: 460px; /* half page A4 approx */
+            background: #fff;
+            margin: auto 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            line-height: 18px;
         }
 
-        .print-btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-size: 14px;
+        /* Header */
+        .school-header {
+            display: flex;
+            align-items: center;
         }
 
-        .school-logo {
+        .logo {
             width: 60px;
+            margin-right: 10px;
         }
 
-        .expense-box {
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-            margin: 15px 0;
-        }
-
-        .info-text {
-            font-size: 14px;
-        }
-
-        table th, table td {
-            border: 1px solid #dee2e6 !important;
-            padding: 12px;
-            font-size: 14px;
-        }
-
-        table th {
-            text-align: center;
-            background-color: #f8f9fa;
-        }
-
-        .signature-section {
-            margin-top: 50px;
+        .school-title {
             font-weight: 600;
+            font-size: 20px;
         }
 
-        .modal-content {
-            border-radius: 6px;
+        .school-info {
+            font-size: 12px;
         }
-        .modal {
-            display: block !important;
+
+        /* Fee Title */
+        .fee-title {
+            background: #dfead8;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 5px;
+            margin: 10px 0;
         }
+
+        /* Info rows */
+        .info-row {
+            font-size: 13px;
+        }
+
+        /* Table */
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #000 !important;
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        .table-custom th {
+            background: #dfead8;
+        }
+
+        /* Signature */
+        .signature {
+        }
+
+        /* PRINT SETTINGS */
         @media print {
-            .printSection {break-after: always;}
+            body {
+                background: none;
+            }
+
+            .receipt-box {
+                width: 100%;
+                height: 48vh; /* half page */
+                page-break-inside: avoid;
+            }
+
+            .page-break {
+                page-break-after: always;
+            }
         }
     </style>
 </head>
+
 <body>
+@if(isset($invoices) && count($invoices) > 0)
+    @foreach($invoices as $index => $allData)
+    @php $cnt = 0; @endphp
 
-<!-- Modal -->
+    <div class="receipt-box mb-3">
 
-<div class="modal d-block p-3" tabindex="-1">
-        @if(isset($invoices) && count($invoices) > 0)
-        @foreach($invoices as $allData)
-        
-    @php
-    $cnt = 0;
-    @endphp
-        <div class="w-75 mx-auto my-3 printSection">
-            <div class="modal-content p-3">
-
-
-
-                <!-- School Info -->
-                <div class="text-center flex justify-center items-center">
-                    @include('admin.includes.print_header')
-
-
+        <!-- Header -->
+        <div class="school-header">
+            <img src="{{asset('/').$appdata->logo}}" class="logo" alt="Logo">
+            <div>
+                <div class="school-title">{{$appdata->title}}</div>
+                <div class="school-info">
+                    Phone: {{$appdata->phone}} | Email: {{$appdata->email}} | <br>
+                    {{$appdata->address}}
                 </div>
-
-                <!-- Expense Title -->
-                <div class="expense-box text-center">
-                    <h6 class="fw-bold">
-                        Invoice:
-                        <span class="fw-normal"> {{$allData->invoice_date}}</span>
-                    </h6>
-                </div>
-
-                <!-- Expense Info -->
-                <div class="row mb-3 info-text">
-                    <div class="col-md-6">
-                        <p class="mb-0"><strong>Invoice No:</strong> {{$allData->data->feeinvoice_no}}</p>
-                        <p class="mb-0"><strong>Invoice Date:</strong> {{$allData->data->invoice_date}}</p>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <p class="mb-0"><strong>Student Name:</strong> {{$allData->student->name}}</p>
-                        <p class="mb-0"><strong>Class Name:</strong> {{$allData->student->class}} ({{$allData->student->section}}) - ({{$allData->student->roll_no}})</p>
-                        <p class="mb-0"><strong>Admission No:</strong> {{$allData->student->admission_no}}</p>
-                    </div>
-                </div>
-
-                <!-- Table -->
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%;">Sr. No</th>
-                            <th>Title</th>
-                            <th style="width: 20%;">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($allData->fees as $k => $fee)
-                        @php
-                            $cnt += 1;
-                            if($fee->month){
-                                if($fee->month != $allData->invoiceMonth) continue;
-                            }
-                        @endphp
-                        <tr>
-                            <td>{{$cnt}}</td>
-                            <td>{{$fee->name}}</td>
-                            <td>{{$fee->amount}} /-</td>
-                        </tr>
-                        @endforeach
-
-                        @if($allData->back_dues)
-                        <tr>
-                            <td>{{$cnt+1}}</td>
-                            <td>Back Dues</td>
-                            <td>{{$allData->back_dues}} /-</td>
-                        </tr>
-                        @endif
-                        @if($allData->scRoute)
-                        <tr>
-                            <td>{{$cnt+1}}</td>
-                            <td>Transport Fee</td>
-                            <td>{{$allData->scRoute->route_fare}} /-</td>
-                        </tr>
-                        @endif
-                        <tr>
-                            <td colspan="2" class="fw-bold text-end">This Month</td>
-                            {{-- <td class="fw-bold">{{$currentTransactions}} /-</td> --}}
-                            <td class="fw-bold">{{$allData->data->total_amount - $allData->currentPaid}} /-</td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="fw-bold text-end">Previous Paid</td>
-                            <td class="fw-bold">{{$allData->currentPaid}} /-</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="fw-bold text-end">Previous Dues</td>
-                            <td class="fw-bold">{{$allData->previous_due_amount}} /-</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="fw-bold text-end">Total</td>
-                            <td class="fw-bold">{{$allData->data->total_amount - $allData->currentPaid + $allData->previous_due_amount}} /-</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Signature -->
-                <div class="flex flex-row justify-between signature-section">
-                    <div class="w-50 flex flex-col gap-2">
-                        <span>Authorised By</span>
-                        {{-- <img src="{{asset('/').$appdata->stamp}}" alt="logo" width="150px"> --}}
-                    </div>
-                    <div class="w-50 flex flex-col gap-2 items-end">
-                        <span>Receiver's Signature</span>
-                        {{-- <img src="{{asset('/').$appdata->signature}}" alt="logo" width="150px"> --}}
-                    </div>
-                </div>
-
             </div>
         </div>
-        
-        
-        @endforeach
-        @endif
-        <!-- Print Button -->
-        <div class="printbtn text-center mb-3">
-        <button class="print-btn">Print Expense</button>
+
+        <!-- Title -->
+        <div class="fee-title">INVOICE - {{$allData->invoice_date}}</div>
+
+        <!-- Info -->
+        <div class="row info-row">
+            <div class="col-6">
+                <p class="mb-0"><strong>Invoice No:</strong> {{$allData->data->feeinvoice_no}}</p>
+                <p class="mb-0"><strong>Invoice Date:</strong> {{$allData->data->invoice_date}}</p>
+            </div>
+            <div class="col-6 text-end">
+                <p class="mb-0"><strong>Student Name:</strong> {{$allData->student->name}}</p>
+                <p class="mb-0"><strong>Class Name:</strong> {{$allData->student->class}} ({{$allData->student->section}}) - ({{$allData->student->roll_no}})</p>
+                <p class="mb-0"><strong>Admission No:</strong> {{$allData->student->admission_no}}</p>
+            </div>
         </div>
+
+        <!-- Table -->
+        <table class="table table-custom mt-2 table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Sr. No</th>
+                    <th>Title</th>
+                    <th style="width: 20%;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($allData->fees as $k => $fee)
+                    @php
+                        $cnt += 1;
+                        if($fee->month && $fee->month != $allData->invoiceMonth) continue;
+                    @endphp
+                    <tr>
+                        <td>{{$cnt}}</td>
+                        <td>{{$fee->name}}</td>
+                        <td>{{$fee->amount}} /-</td>
+                    </tr>
+                @endforeach
+
+                @if($allData->back_dues)
+                    <tr>
+                        <td>{{$cnt+1}}</td>
+                        <td>Back Dues</td>
+                        <td>{{$allData->back_dues}} /-</td>
+                    </tr>
+                @endif
+                @if($allData->scRoute)
+                    <tr>
+                        <td>{{$cnt+1}}</td>
+                        <td>Transport Fee</td>
+                        <td>{{$allData->scRoute->route_fare}} /-</td>
+                    </tr>
+                @endif
+                <tr>
+                    <td colspan="2" class="fw-bold text-end">This Month</td>
+                    <td class="fw-bold">{{$allData->data->total_amount - $allData->currentPaid}} /-</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="fw-bold text-end">Previous Paid</td>
+                    <td class="fw-bold">{{$allData->currentPaid}} /-</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="fw-bold text-end">Previous Dues</td>
+                    <td class="fw-bold">{{$allData->previous_due_amount}} /-</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="fw-bold text-end">Total</td>
+                    <td class="fw-bold">{{$allData->data->total_amount - $allData->currentPaid + $allData->previous_due_amount}} /-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Signature -->
+        <div class="row">
+            <div class="col-6">
+                <div class="signature text-start">
+                    <br><br>
+                    ___________________<br>
+                    Authorised By
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="signature text-end">
+                    <br><br>
+                    ___________________<br>
+                    Receiver's Signature
+                </div>
+            </div>
+        </div>
+
     </div>
 
-<script>
-    let printbtn = document.getElementsByClassName('printbtn')[0];
-    printbtn.onclick = function() {
-        printbtn.style.display = 'none';
-        window.print();
-    };
-</script>
+    <!-- Page break every 2 receipts -->
+    @if(($index + 1) % 2 == 0)
+        <div class="page-break"></div>
+    @endif
+
+    @endforeach
+@endif
+
 </body>
+
 </html>

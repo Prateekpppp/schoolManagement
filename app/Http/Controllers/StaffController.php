@@ -26,7 +26,7 @@ class StaffController extends Controller
         }
         $data = $data->get();
         // dd($data);
-        return view('admin.pages.staff',compact('data'));
+        return view('admin.pages.staff',compact('data','request'));
     }
 
     public function staffFilter(Request $request){
@@ -55,7 +55,7 @@ class StaffController extends Controller
         $data = $data->get();
 
         // dd($data);
-        return view('admin.pages.staff',compact('data'));
+        return view('admin.pages.staff',compact('data','request'));
     }
 
     public function allStaff(){
