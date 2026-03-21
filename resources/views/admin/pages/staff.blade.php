@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.staffFilter')}}">
+                        <form class="mg-b-20" type='GET' action="{{route('admin.pages.staff')}}">
                             <input type="hidden" name="status" value="{{$request->status}}">
                             <div class="row gutters-8 items-center">
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
