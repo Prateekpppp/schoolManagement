@@ -13,23 +13,8 @@
         @yield('body')
     @include('includes.app_toast')
     
-    <script src="{{ asset('js') }}/jquery-3.7.1.min.js"></script>
-    <script src="{{ asset('js') }}/plugins.js"></script>
-    <script src="{{ asset('js') }}/popper.min.js"></script>
-    <script src="{{ asset('js') }}/bootstrap.min.js"></script>
-    <script src="{{ asset('js') }}/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js') }}/jquery.counterup.min.js"></script>
-    <script src="{{ asset('js') }}/tailwind.min.js"></script>
-    <script src="{{ asset('js') }}/select2.min.js"></script>
-    <script src="{{ asset('js') }}/moment.min.js"></script>
-    <script src="{{ asset('js') }}/jquery.waypoints.min.js"></script>
-    <script src="{{ asset('js') }}/datepicker.min.js"></script>
-    <script src="{{ asset('js') }}/jquery.scrollUp.min.js"></script>
-    <!--<script src="{{ asset('js') }}/jquery.dataTables.min.js"></script>-->
-    <script src="{{ asset('js') }}/fullcalendar.min.js"></script>
-    <script src="{{ asset('js') }}/Chart.min.js"></script>
-    <script src="{{ asset('js') }}/main.js"></script>
-    <!--<script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>-->
+
+    
 
 <!-- JS Libraries -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -42,6 +27,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<script src="{{ asset('js') }}/plugins.js"></script>
+    <script src="{{ asset('js') }}/popper.min.js"></script>
+    <script src="{{ asset('js') }}/bootstrap.min.js"></script>
+    <script src="{{ asset('js') }}/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js') }}/jquery.counterup.min.js"></script>
+    <script src="{{ asset('js') }}/tailwind.min.js"></script>
+    <script src="{{ asset('js') }}/select2.min.js"></script>
+    <script src="{{ asset('js') }}/moment.min.js"></script>
+    <script src="{{ asset('js') }}/jquery.waypoints.min.js"></script>
+    <script src="{{ asset('js') }}/datepicker.min.js"></script>
+    <script src="{{ asset('js') }}/jquery.scrollUp.min.js"></script>
+    <script src="{{ asset('js') }}/fullcalendar.min.js"></script>
+    <script src="{{ asset('js') }}/Chart.min.js"></script>
+    <script src="{{ asset('js') }}/main.js"></script>
 
 <script>
 $(document).ready(function () {
