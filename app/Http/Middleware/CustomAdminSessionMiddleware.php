@@ -36,7 +36,7 @@ class CustomAdminSessionMiddleware
 
         $adminUsers = [1];
         $adminToCoadminUsers = [1,2];
-        $adminToCoadminUsers = [1,2,10];
+        $adminToCoadminUsers = [1,2,8];
 
         View::share('adminUsers',$adminUsers);
         View::share('adminToCoadminUsers',$adminToCoadminUsers);
