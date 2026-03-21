@@ -10,7 +10,7 @@ class DatasessionController extends Controller
 {
     //
     public function dataSession(){
-        $data = Datasession::where('status',1)->get();
+        $data = Datasession::all();
         return view('admin.pages.dataSession',compact('data'));
     }
 
@@ -59,7 +59,12 @@ class DatasessionController extends Controller
 
     public function changeSession(Request $request){
 
+        $data = Datasession::where('session_name','!=',$request->session_name)->update([
+            'status'=>0
+        ]);
         $data = Datasession::where('session_name',$request->session_name)->first();
+        $data->status = 1;
+        $data->save();
         session(['session_name'=>$request->session_name]);
         session(['session_id'=>$data->id]);
         return redirect()->back();

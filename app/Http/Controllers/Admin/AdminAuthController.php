@@ -37,7 +37,7 @@ class AdminAuthController extends Controller
                 Cookie::queue('admin_username', $user->username, 21900);
             }
             // $currentDate
-            $data = Datasession::latest()->first();
+            $data = Datasession::where('status',1)->first();
             session(['session_name'=>$data->session_name]);
             session(['session_id'=>$data->id]);
             return redirect()->route('admin.index');

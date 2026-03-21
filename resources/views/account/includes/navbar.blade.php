@@ -70,6 +70,7 @@
                             <div class="item-header">
                                 <h6 class="item-title">All Sessions</h6>
                             </div>
+                            @if($currentUser->status == 1)
                             <div class="item-content">
                                 <ul class="settings-list">
                                     @foreach($dataSession as $data)
@@ -77,6 +78,7 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            @endif
                         </div>
                     </li>
                     <li class="navbar-item dropdown header-message">
